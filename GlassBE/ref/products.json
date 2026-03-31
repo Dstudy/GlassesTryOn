@@ -1,0 +1,802 @@
+[
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/st-michel-multicolor-l-27699",
+    "name": "St Michel Glasses",
+    "subtitle": "Round Multicolor Eyeglasses",
+    "price": "$49",
+    "material": "Metal",
+    "shape": "Round",
+    "size": "Size Large ( 52 19 - 145 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Adjustable Nose Pads",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-nosepads.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Golden": "https://img.ebdcdn.com/product/frame/gray/mt6513_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black": "https://img.ebdcdn.com/product/frame/gray/mt6512_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Rose Gold": "https://img.ebdcdn.com/product/frame/gray/mt6827_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Silver": "https://img.ebdcdn.com/product/frame/gray/mt6283_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Gunmetal": "https://img.ebdcdn.com/product/frame/gray/mt6282_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Frost Blue": "https://img.ebdcdn.com/product/frame/gray/mt6617_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Bronze": "https://img.ebdcdn.com/product/frame/gray/mt6563_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Starlight Yellow": "https://img.ebdcdn.com/product/frame/gray/mt6616_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "The contrast between sleek metal and retro shaped lenses makes these full-rim eyeglasses uniquely trendy. The smooth, streamlined design is complemented by a fine nose bridge and tortoise temple tips to create a frame that gives an instant, edgy style boost. Holiday Limited Edition. For a short time only, these glasses are also available in Rose Gold and Frost Blue."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/ember-silver-l-18901",
+    "name": "Ember Glasses",
+    "subtitle": "Square Silver Eyeglasses",
+    "price": "$23",
+    "material": "Metal",
+    "shape": "Square",
+    "size": "Size Large ( 52 18 - 140 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Adjustable Nose Pads",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-nosepads.svg"
+      },
+      {
+        "title": "Lightweight",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-lightweight.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Matte Black": "https://img.ebdcdn.com/product/frame/gray/mt6507_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Silver": "https://img.ebdcdn.com/product/frame/gray/mt6508_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "The metallic Silver finish of this frame adds a futuristic touch. The oversized, full rimmed shape of the lens frames make them bold and noticeable, while the narrow design of the frame mean they are lightweight and easy to wear."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/vinyl-clear-yellow-s-29611",
+    "name": "Vinyl Glasses",
+    "subtitle": "Square Clear Yellow Eyeglasses",
+    "price": "$59",
+    "material": "Acetate, Metal",
+    "shape": "Square",
+    "size": "Size Small ( 49 19 - 140 )",
+    "features": [],
+    "imagesByColor": {
+      "Clear Light Brown": "https://img.ebdcdn.com/product/frame/gray/pm1628_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pm0550_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pm0982_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black": "https://img.ebdcdn.com/product/frame/gray/pm0548_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear Yellow": "https://img.ebdcdn.com/product/frame/gray/pm1668_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear Mint": "https://img.ebdcdn.com/product/frame/gray/pm1629_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Orange": "https://img.ebdcdn.com/product/frame/gray/pm0892_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Grab an old record, and turn up the tunes...Vinyl is putting a new spin on a classic shape with a limited-edition summer color. The fun and funky orange acetate frames, and uniquely embossed metal arms, will keep you groovin’ to the beat of your own drum all season long."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/romy-clear-green-l-27989",
+    "name": "Romy Glasses",
+    "subtitle": "Square Clear Green Eyeglasses",
+    "price": "$59",
+    "material": "Acetate",
+    "shape": "Square",
+    "size": "Size Large ( 49 22 - 150 )",
+    "features": [],
+    "imagesByColor": {
+      "Ivory Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl7771_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black": "https://img.ebdcdn.com/product/frame/gray/pl7485_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl7486_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear Green": "https://img.ebdcdn.com/product/frame/gray/pl9830_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pl7487_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Burgundy": "https://img.ebdcdn.com/product/frame/gray/pl7772_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Orange": "https://img.ebdcdn.com/product/frame/gray/pl10016_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Bold and stylish, this full-rim frame is designed for the everyday eyeglass wearer who appreciates fashion. Romy elevates the classic square shape with its chunky acetate build and rich orange hue. The timeless silhouette is complemented by double stud rivets, adding a touch of refinement that ensures this look stands the test of time."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/amity-orange-l-21330",
+    "name": "Amity Glasses",
+    "subtitle": "Round Orange Eyeglasses",
+    "price": "$33",
+    "material": "Plastic-Metal",
+    "shape": "Round",
+    "size": "Size Large ( 52 18 - 145 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Lightweight",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-lightweight.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pm0571_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Blue": "https://img.ebdcdn.com/product/frame/gray/pm0570_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Rose Gold": "https://img.ebdcdn.com/product/frame/gray/pm0569_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear Purple": "https://img.ebdcdn.com/product/frame/gray/pm0601_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Orange": "https://img.ebdcdn.com/product/frame/gray/pm0905_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Can you hear that? It’s this new limited-edition summer color calling to you. We absolutely amore Amity, a modern mixed-material frame, featuring a translucent plastic face front in a friendly orange hue. The exposed metal arms and round lenses exude femininity for a look that’s fit for any face, regardless of shape or size."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/coexist-tortoise-s-19143",
+    "name": "Coexist Glasses",
+    "subtitle": "Browline Tortoise Eyeglasses",
+    "price": "$26",
+    "material": "Plastic-Metal",
+    "shape": "Browline",
+    "size": "Size Small ( 50 18 - 135 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Adjustable Nose Pads",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-nosepads.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Black & Silver": "https://img.ebdcdn.com/product/frame/gray/pl5316_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pm0294_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "This bold browline style frame is perfectly complemented by the warm Tortoiseshell finish. The full-sized lenses and decorative hinge studs help this classy frame to stand out even further. Coexist is great for anyone looking for a modern twist on a classic style of frame."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/jasmine-black-s-22401",
+    "name": "Jasmine Glasses",
+    "subtitle": "Cat Eye Black Eyeglasses",
+    "price": "$53",
+    "material": "Acetate, Metal",
+    "shape": "Cat Eye",
+    "size": "Size Small ( 47 15 - 135 )",
+    "features": [
+      {
+        "title": "Spring Hinges",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-spring.svg"
+      }
+    ],
+    "imagesByColor": {
+      "White": "https://img.ebdcdn.com/product/frame/gray/pl5847_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black": "https://img.ebdcdn.com/product/frame/gray/pl5845_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Ivory Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl7777_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pl7778_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Gray Floral": "https://img.ebdcdn.com/product/frame/gray/pl5851_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Navy": "https://img.ebdcdn.com/product/frame/gray/pl5846_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "A Navy Blue finish and Golden temple segments lend this frame a classy and adaptable style. Trapezoid-shaped lens frames in this color are perfect for becoming the centerpiece of any outfit. Spring hinges make this frame flexible and comfortable."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/tower-clear-l-22208",
+    "name": "Tower Glasses",
+    "subtitle": "Square Clear Eyeglasses",
+    "price": "$59",
+    "material": "Acetate",
+    "shape": "Square",
+    "size": "Size Large ( 53 20 - 148 )",
+    "features": [
+      {
+        "title": "Spring Hinges",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-spring.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl7171_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black": "https://img.ebdcdn.com/product/frame/gray/pl7170_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pl7783_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Green Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl7169_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Gray": "https://img.ebdcdn.com/product/frame/gray/pl7173_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Blood Orange": "https://img.ebdcdn.com/product/frame/gray/pl7172_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "You’ll radiate with self-confidence and exude stylishness in the super chic and fashion-forward Tower. The vivid Blood Orange finish perfectly complements the classic full-rim frame shape for a look that’s both daring and practical. They are crafted from acetate with spring hinges for durable flexibility and versatility to wear everywhere."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/attitude-ivory-tortoise-m-29612",
+    "name": "Attitude Glasses",
+    "subtitle": "Cat Eye Ivory Tortoise Eyeglasses",
+    "price": "$66",
+    "material": "Acetate, Metal",
+    "shape": "Cat Eye",
+    "size": "Size Medium ( 50 17 - 140 )",
+    "features": [],
+    "imagesByColor": {
+      "Pink Ivory Tortoise": "https://img.ebdcdn.com/product/frame/gray/pm0990_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Ivory Tortoise": "https://img.ebdcdn.com/product/frame/gray/pm0643_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black": "https://img.ebdcdn.com/product/frame/gray/pm0641_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pm0642_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear Melon": "https://img.ebdcdn.com/product/frame/gray/pm0896_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Coral": "https://img.ebdcdn.com/product/frame/gray/pm0895_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Time for an Attitude check. This mixed-material frame is making itself seen in a new limited-edition summer color. The modern silhouette features lightweight acetate, a deep-cut nose bridge, and slim gold arms with flared acetate temple tips. Rosy and ready for summer, the petal pink face front adds a welcome pop of color."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/octave-golden-m-29714",
+    "name": "Octave Glasses",
+    "subtitle": "Geometric Golden Eyeglasses",
+    "price": "$53",
+    "material": "Metal",
+    "shape": "Geometric",
+    "size": "Size Medium ( 49 18 - 140 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Adjustable Nose Pads",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-nosepads.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Golden": "https://img.ebdcdn.com/product/frame/gray/mt7924_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Rose Gold": "https://img.ebdcdn.com/product/frame/gray/mt6834_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Silver": "https://img.ebdcdn.com/product/frame/gray/mt6833_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Reach new heights with Octave's sleek Silver finish. This modern frame's sophisticated square lenses, adjustable nose pads, and striking temple arms combine to create a style that transcends time and trends."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/quill-ivory-tortoise-m-29597",
+    "name": "Quill Glasses",
+    "subtitle": "Round Ivory Tortoise Eyeglasses",
+    "price": "$59",
+    "material": "Acetate, Metal",
+    "shape": "Round",
+    "size": "Size Medium ( 46 17 - 135 )",
+    "features": [],
+    "imagesByColor": {
+      "Ivory Tortoise": "https://img.ebdcdn.com/product/frame/gray/pm1666_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pm0560_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Red": "https://img.ebdcdn.com/product/frame/gray/pm0562_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "In vogue Red, Quill's sensual silhouette give it a passionate but classy aura. This masterful combination of metal and lightweight acetate make it a must-have for the urban scene and beyond."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/hepburn-clear-blue-s-28098",
+    "name": "Hepburn Glasses",
+    "subtitle": "Cat Eye Clear Blue Eyeglasses",
+    "price": "$59",
+    "material": "Acetate",
+    "shape": "Cat Eye",
+    "size": "Size Small ( 53 15 - 140 )",
+    "features": [
+      {
+        "title": "Spring Hinges",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-spring.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pl5370_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Tortoise Green": "https://img.ebdcdn.com/product/frame/gray/pl7794_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Ivory & Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl5157_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear Blue": "https://img.ebdcdn.com/product/frame/gray/pl9825_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Gray & Floral": "https://img.ebdcdn.com/product/frame/gray/pl5371_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl5156_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Sophisticated and classy, these Tortoiseshell eyeglasses are also mesmerizingly chic. This horn-rimmed style features a semi-transparent acetate finish that makes them perfect for any occasion . Double stud accents on the temples add subtle detail while flexible spring hinges means you won??t to sacrifice comfort for style."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/palo-alto-golden-m-19748",
+    "name": "Palo Alto Glasses",
+    "subtitle": "Round Golden Eyeglasses",
+    "price": "$53",
+    "material": "Metal",
+    "shape": "Round",
+    "size": "Size Medium ( 46 20 - 140 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Adjustable Nose Pads",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-nosepads.svg"
+      },
+      {
+        "title": "Lightweight",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-lightweight.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Silver": "https://img.ebdcdn.com/product/frame/gray/rm0787_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Golden": "https://img.ebdcdn.com/product/frame/gray/rm3048_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black": "https://img.ebdcdn.com/product/frame/gray/rm0786_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Bronze": "https://img.ebdcdn.com/product/frame/gray/rm3047_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "This rimless metal frame features a bronze finish and perfectly round lenses. The slender metal arms are completed with tortoise arm tips and spring hinges, making this frame a simple yet fashionable choice."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/claudia-black-m-12737",
+    "name": "Claudia Glasses",
+    "subtitle": "Rectangle Black Eyeglasses",
+    "price": "$59",
+    "material": "Acetate",
+    "shape": "Rectangle",
+    "size": "Size Medium ( 53 17 - 140 )",
+    "features": [
+      {
+        "title": "Spring Hinges",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-spring.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl4728_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black": "https://img.ebdcdn.com/product/frame/gray/pl4729_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "This Black acetate frame is classy and sophisticated. The full-rimmed, rectangular lens frames and unadorned hinges make them perfect for someone looking for a stylish, no-nonsense set of eyeglasses. The acetate constructions means they are comfortable and durable, while the spring hinges allow Claudia to adapt to any head shape."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/hubris-black-floral-s-19043",
+    "name": "Hubris Glasses",
+    "subtitle": "Round Black Floral Eyeglasses",
+    "price": "$33",
+    "material": "Plastic",
+    "shape": "Round",
+    "size": "Size Small ( 48 21 - 137 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Lightweight",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-lightweight.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Clear Copper": "https://img.ebdcdn.com/product/frame/gray/pl6451_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black Floral": "https://img.ebdcdn.com/product/frame/gray/pl6453_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Matte Black": "https://img.ebdcdn.com/product/frame/gray/pl6449_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear Blue": "https://img.ebdcdn.com/product/frame/gray/pl6452_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Matte Clear": "https://img.ebdcdn.com/product/frame/gray/pl6450_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "The fact that you look too cool for school isn't your fault, you can blame it on Hubris. In frosted crystal, these frames are so fresh that they leave every other style struggling to catch up. Day or night, work or play, wherever you go, your glasses will make the scene."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/nala-clear-melon-m-21303",
+    "name": "Nala Glasses",
+    "subtitle": "Cat Eye Clear Melon Eyeglasses",
+    "price": "$49",
+    "material": "Acetate",
+    "shape": "Cat Eye",
+    "size": "Size Medium ( 54 16 - 140 )",
+    "features": [],
+    "imagesByColor": {
+      "Clear Melon": "https://img.ebdcdn.com/product/frame/gray/pl7537_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear Pink": "https://img.ebdcdn.com/product/frame/gray/pl7140_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pl7138_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear Purple": "https://img.ebdcdn.com/product/frame/gray/pl7141_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear Blue": "https://img.ebdcdn.com/product/frame/gray/pl7142_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Open your eyes. It's time to look sharp with Nala's sophisticated curves and Clear Blue hue. This full-rimmed acetate frame is a must-have for modern fans of the classic cat eye style. Perfect for any occasion."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/fame-rose-gold-l-20227",
+    "name": "Fame Glasses",
+    "subtitle": "Aviator Rose Gold Eyeglasses",
+    "price": "$59",
+    "material": "Metal",
+    "shape": "Aviator",
+    "size": "Size Large ( 53 19 - 145 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Adjustable Nose Pads",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-nosepads.svg"
+      },
+      {
+        "title": "Lightweight",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-lightweight.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Golden": "https://img.ebdcdn.com/product/frame/gray/mt6809_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black": "https://img.ebdcdn.com/product/frame/gray/mt6811_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Silver": "https://img.ebdcdn.com/product/frame/gray/mt6810_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Rose Gold": "https://img.ebdcdn.com/product/frame/gray/mt6812_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Fame comes in all sorts of different ways. Some of those being Pink Golden. This playfully classy aviator style packs more character than you could ever want in an accessory. With its unique double nose bridge, slim temple arms, and adjustable nose pads, you can bet that this will be your next favorite."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/aroma-emerald-green-l-21328",
+    "name": "Aroma Glasses",
+    "subtitle": "Cat Eye Emerald Green Eyeglasses",
+    "price": "$79",
+    "material": "Acetate-Metal",
+    "shape": "Cat Eye",
+    "size": "Size Large ( 54 18 - 145 )",
+    "features": [
+      {
+        "title": "Spring Hinges",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-spring.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Raspberry": "https://img.ebdcdn.com/product/frame/gray/pm0635_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Tortoise Green": "https://img.ebdcdn.com/product/frame/gray/pm0637_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Pink": "https://img.ebdcdn.com/product/frame/gray/pm0634_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Emerald Green": "https://img.ebdcdn.com/product/frame/gray/pm0894_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Purple": "https://img.ebdcdn.com/product/frame/gray/pm0636_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Coral": "https://img.ebdcdn.com/product/frame/gray/pm0893_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "An all-around favorite, Aroma is now available in an additional limited-edition summer color. This full-rim cat-eye frame features lightweight acetate with a pop of peachy pink, and slim arms for an airy look that's as subtle as it is stylish. Plus spring hinges for extra comfort that you can count on."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/notting-hill-clear-s-22402",
+    "name": "Notting Hill Glasses",
+    "subtitle": "Cat Eye Clear Eyeglasses",
+    "price": "$49",
+    "material": "Acetate",
+    "shape": "Cat Eye",
+    "size": "Size Small ( 49 19 - 140 )",
+    "features": [
+      {
+        "title": "Spring Hinges",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-spring.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Ivory & Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl4962_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pl7785_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Blue Floral": "https://img.ebdcdn.com/product/frame/gray/pl6731_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl4961_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Add some glamour and sophistication with tortoise eyeglasses. This luxurious frame comes in a semi-transparent tortoiseshell acetate finish throughout and features rounded trapezoid-shaped lenses. A keyhole nose bridge and double stud accents add a vintage feel. Flexible spring hinges means you won’t have to sacrifice comfort for style."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/sebastian-purple-l-21347",
+    "name": "Sebastian Glasses",
+    "subtitle": "Square Purple Eyeglasses",
+    "price": "$59",
+    "material": "Acetate-Metal",
+    "shape": "Square",
+    "size": "Size Large ( 52 17 - 145 )",
+    "features": [
+      {
+        "title": "Lightweight",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-lightweight.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Rose Gold": "https://img.ebdcdn.com/product/frame/gray/pl6811_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl6809_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Purple": "https://img.ebdcdn.com/product/frame/gray/pm0898_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Burgundy": "https://img.ebdcdn.com/product/frame/gray/pl6810_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Say hello to Sebastian, a unisex frame cloaked in Raspberry acetate. This classic style's unique Gold temple arms are a testament to European fashion."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/morning-warm-tortoise-s-29600",
+    "name": "Morning Glasses",
+    "subtitle": "Round Warm Tortoise Eyeglasses",
+    "price": "$53",
+    "material": "Acetate",
+    "shape": "Round",
+    "size": "Size Small ( 47 18 - 135 )",
+    "features": [
+      {
+        "title": "Spring Hinges",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-spring.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Gray Clear": "https://img.ebdcdn.com/product/frame/gray/pl6683_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Warm Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl7732_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pl5291_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl5293_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "These tortoise eyeglasses are stylishly sharp. This timeless design is colorized with a soft semi-transparent tortoiseshell acetate composition, boasting a keyhole nose bridge, double stud accents, and rounded lenses. Flexible spring hinges makes this perfectly complementary look adaptable for both men and women."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/nebulous-clear-purple-l-21548",
+    "name": "Nebulous Glasses",
+    "subtitle": "Cat Eye Clear Purple Eyeglasses",
+    "price": "$59",
+    "material": "Acetate-Metal",
+    "shape": "Cat Eye",
+    "size": "Size Large ( 55 15 - 145 )",
+    "features": [
+      {
+        "title": "Lightweight",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-lightweight.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Clear Brown": "https://img.ebdcdn.com/product/frame/gray/pm0881_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pm0883_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black": "https://img.ebdcdn.com/product/frame/gray/pm0882_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear Purple": "https://img.ebdcdn.com/product/frame/gray/pm0884_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Need a new frame with a forward-thinking, yet vintage feel? Nebulous fits the bill. The translucent purple face front is reminiscent of retro styles, while the slim metal arms and end pieces make a case for a more modern look. The matching purple temple tips complete the look with a comfortable fit."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/movement-gold-s-29609",
+    "name": "Movement Glasses",
+    "subtitle": "Square Golden Eyeglasses",
+    "price": "$49",
+    "material": "Metal",
+    "shape": "Square",
+    "size": "Size Small ( 47 14 - 135 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Adjustable Nose Pads",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-nosepads.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Golden": "https://img.ebdcdn.com/product/frame/gray/mt7926_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Rose Gold": "https://img.ebdcdn.com/product/frame/gray/mt6690_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Red": "https://img.ebdcdn.com/product/frame/gray/mt7215_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "White": "https://img.ebdcdn.com/product/frame/gray/mt7853_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Look no further than Movement, a striking metal frame, boasting an unconventional square silhouette. The milky white finish offers a blend of vintage charm and contemporary flair, effortlessly adding sophistication to any ensemble. Complete with adjustable nose pads for a custom fit."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/follow-black-golden-l-20401",
+    "name": "Follow Glasses",
+    "subtitle": "Square Black Golden Eyeglasses",
+    "price": "$79",
+    "material": "Acetate",
+    "shape": "Square",
+    "size": "Size Large ( 52 20 - 148 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Adjustable Nose Pads",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-nosepads.svg"
+      },
+      {
+        "title": "Lightweight",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-lightweight.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl7212_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black Golden": "https://img.ebdcdn.com/product/frame/gray/pl7213_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black Silver": "https://img.ebdcdn.com/product/frame/gray/pl7211_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Follow the fashion leader! This frame embraces all of the great things about modern eyewear style, from its pair of double studded accents to its gunmetal engraved temple arms. In Black, this square lens frame carries huge personality and a great silhouette."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/theory-cognac-m-15873",
+    "name": "Theory Glasses",
+    "subtitle": "Round Cognac Eyeglasses",
+    "price": "$93",
+    "material": "Acetate",
+    "shape": "Round",
+    "size": "Size Medium ( 48 21 - 143 )",
+    "features": [],
+    "imagesByColor": {
+      "Translucent": "https://img.ebdcdn.com/product/frame/gray/pl5415_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Cognac": "https://img.ebdcdn.com/product/frame/gray/pl5416_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Warm Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl5414_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Striped Granite": "https://img.ebdcdn.com/product/frame/gray/pl5417_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Answer London's call with these indulgent striped granite eyeglasses. This intellectual frame is hand crafted from a premium acetate in a banded gray finish. Dainty double stud accents, classic keyhole nose bridge, and high quality construction create an ultimately timeless piece that is both art and fashion."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/amore-red-m-22247",
+    "name": "Amore Glasses",
+    "subtitle": "Heart Red Eyeglasses",
+    "price": "$43",
+    "material": "Metal",
+    "shape": "Heart",
+    "size": "Size Medium ( 53 16 - 142 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Adjustable Nose Pads",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-nosepads.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Gold": "https://img.ebdcdn.com/product/frame/gray/rm3121_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Silver": "https://img.ebdcdn.com/product/frame/gray/rm3123_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Rose Gold": "https://img.ebdcdn.com/product/frame/gray/rm3122_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Red": "https://img.ebdcdn.com/product/frame/gray/rm3124_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "It’s easy to fall for Amore. These rimless heart-shaped lenses will add a little bit more love to any look. The vibrant red details stand out against the clear lenses, while the dark tortoiseshell temple tips add a touch of sophistication to this playful style. Plus, they offer adjustable nose pads for added comfort."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/absolutely-gray-floral-s-19183",
+    "name": "Absolutely Glasses",
+    "subtitle": "Square Gray Floral Eyeglasses",
+    "price": "$66",
+    "material": "Acetate",
+    "shape": "Square",
+    "size": "Size Small ( 52 17 - 140 )",
+    "features": [
+      {
+        "title": "Spring Hinges",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-spring.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl6493_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Gray Floral": "https://img.ebdcdn.com/product/frame/gray/pl6496_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Black": "https://img.ebdcdn.com/product/frame/gray/pl6492_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "The large lenses and bold Black finish on this frame really makes it stand out. The subtle accents of the studs on the hinges add a little something extra to this frame, while the spring hinges keep them from hugging your head too tightly, making them comfortable if you're wearing them for a long time."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/primrose-matte-clear-m-20081",
+    "name": "Primrose Glasses",
+    "subtitle": "Round Matte Clear Eyeglasses",
+    "price": "$49",
+    "material": "Acetate",
+    "shape": "Round",
+    "size": "Size Medium ( 50 19 - 140 )",
+    "features": [],
+    "imagesByColor": {
+      "Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl5871_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Ivory Tortoise": "https://img.ebdcdn.com/product/frame/gray/pl5874_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Floral": "https://img.ebdcdn.com/product/frame/gray/pl5870_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Clear": "https://img.ebdcdn.com/product/frame/gray/pl5873_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Matte Clear": "https://img.ebdcdn.com/product/frame/gray/pl7040_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Gray Clear": "https://img.ebdcdn.com/product/frame/gray/pl6684_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "These gray clear eyeglasses are fantastically delightful. This crystalline frame comes in a glossy transparent acetate, bordering square shaped lenses. Unadorned and polished, this uncompromising look is perfect for both men and women."
+      }
+    ]
+  },
+  {
+    "url": "https://www.eyebuydirect.com/eyeglasses/frames/intense-matte-silver-tortoise-m-22237",
+    "name": "Intense Glasses",
+    "subtitle": "Rectangle Matte Silver Tortoise Eyeglasses",
+    "price": "$73",
+    "material": "Acetate-Metal",
+    "shape": "Rectangle",
+    "size": "Size Medium ( 53 16 - 140 )",
+    "features": [
+      {
+        "title": "Low Nose Bridge",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-low-nose-bridge.svg"
+      },
+      {
+        "title": "Adjustable Nose Pads",
+        "image": "https://img.ebdcdn.com/static/images/icons/tag-nosepads.svg"
+      }
+    ],
+    "imagesByColor": {
+      "Matte Black & Golden": "https://img.ebdcdn.com/product/frame/gray/mt6186_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Matte Black": "https://img.ebdcdn.com/product/frame/gray/mt6185_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Navy Blue & Tortoise": "https://img.ebdcdn.com/product/frame/gray/mt7053_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Matte Gold Tortoise": "https://img.ebdcdn.com/product/frame/gray/pm0988_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Matte Silver Tortoise": "https://img.ebdcdn.com/product/frame/gray/pm0989_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0",
+      "Coral & Tortoise": "https://img.ebdcdn.com/product/frame/gray/mt7052_0.jpg?q=85&im=Resize,width=640,height=320,aspect=fill;UnsharpMask,sigma=1.0,gain=1.0"
+    },
+    "descriptions": [
+      {
+        "text": "Show up and stand out in a new limited-edition summer color. We call it Intense for a reason, with flaming coral frames and contrasting tortoiseshell arms. Classically square-shaped, featuring a stand-out browline and mixed material construction with metal and acetate. The adjustable nose pads make this style suitable for any face shape or size."
+      }
+    ]
+  }
+]
