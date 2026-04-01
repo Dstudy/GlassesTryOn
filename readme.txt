@@ -1,0 +1,1 @@
+Tạo file .env và cop bên .envexample sang
