@@ -23,7 +23,7 @@ import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingCart, Heart, ArrowLeft, Loader2 } from "lucide-react";
+import { ShoppingCart, Heart, ArrowLeft, Loader2, Camera } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import {
@@ -38,6 +38,10 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Lens } from "@/components/ui/lens";
 import StarRating from "@/components/ui/star-rating";
+
+import FaceShapeModal from "@/components/FaceShapeModal";
+import FaceShapeSidebar from "@/components/FaceShapeSidebar";
+import { FaceShape } from "@/utils/faceShapeClassifier";
 
 // Helper function to optimize Cloudinary image URLs for performance
 const optimizeImageUrl = (url: string): string => {
@@ -69,6 +73,9 @@ export default function ProductDetailPage() {
   const router = useRouter();
 
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showFaceModal, setShowFaceModal] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [detectedShape, setDetectedShape] = useState<FaceShape | null>(null);
 
   const [productRating, setProductRating] = useState(0); // Mặc định là 0 sao
 
@@ -189,7 +196,7 @@ export default function ProductDetailPage() {
   }
 
   const isFavorite = favorites.includes(product.id);
-  const modelUrl = product?.modelUrl || product?.url || null;
+  const modelUrl = product?.modelUrl || null;
   const has3DModel = Boolean(modelUrl);
   const selectedVariant =
     variants.find((v) => v.id === selectedVariantId) || null;
@@ -439,6 +446,12 @@ export default function ProductDetailPage() {
                   <span className="font-semibold">Hình dáng:</span>
                   <span className="text-muted-foreground">{product.shape}</span>
                 </div>
+                {product.face_suitable && product.face_suitable.trim() !== '' && (
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold">Phù hợp khuôn mặt:</span>
+                    <span className="text-muted-foreground">{product.face_suitable}</span>
+                  </div>
+                )}
                 <div className="flex items-center gap-2">
                   <span className="font-semibold">Thương hiệu:</span>
                   <span className="bg-primary/10 text-primary px-2 py-1 rounded text-sm">
@@ -558,6 +571,15 @@ export default function ProductDetailPage() {
                     )}
                   />
                   {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+                </Button>
+              </div>
+              <div className="mt-4">
+                <Button
+                  size="lg"
+                  className="w-full flex tracking-wide items-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-medium shadow-md shadow-blue-500/20"
+                  onClick={() => setShowFaceModal(true)}
+                >
+                  <Camera className="w-5 h-5 shrink-0" /> AI Face Shape Try-On
                 </Button>
               </div>
             </div>
@@ -681,6 +703,21 @@ export default function ProductDetailPage() {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
+
+        <FaceShapeModal
+          isOpen={showFaceModal}
+          onClose={() => setShowFaceModal(false)}
+          onShapeDetected={(shape) => {
+            setDetectedShape(shape);
+            setShowSidebar(true);
+          }}
+        />
+
+        <FaceShapeSidebar
+          shape={detectedShape}
+          isOpen={showSidebar}
+          onClose={() => setShowSidebar(false)}
+        />
       </main>
       <Footer />
     </div>

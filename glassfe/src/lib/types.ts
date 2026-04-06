@@ -19,6 +19,7 @@ export interface Product {
   rating: number;
   isFeatured: boolean;
   color: string; // Color: Red, black, black blue, purple, ...
+  face_suitable: string; // "Round face", "Square face", "Oval face", "Long face", "Diamond face", "Heart face"
   features?: Array<{ id?: number; name: string; img?: string }>;
   // Optional fields that might come from API
   reviews: Review[];

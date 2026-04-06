@@ -128,6 +128,7 @@ module.exports = {
               category_id: categoryId,
               price: toPrice(item.price),
               size: item.size || null,
+              face_suitable: item.face_suitable || null,
               // If size string contains numbers, parse real dimensions; otherwise fallback to random
               ...(() => {
                 const dims = parseDimensions(item.size);

@@ -11,6 +11,7 @@ export interface ApiResponse<T> {
 export interface ProductFilters {
   shape?: string | string[];
   color?: string | string[];
+  face_suitable?: string | string[];
   brand?: string | string[];
   material?: string | string[];
   category?: string | string[];
@@ -90,6 +91,7 @@ function mapApiProduct(raw: any): Product {
     rating: Number(raw?.rating ?? 0),
     isFeatured: Boolean(raw?.isFeatured ?? false),
     color: String(raw?.color ?? ''),
+    face_suitable: typeof raw?.face_suitable === 'string' ? raw.face_suitable : '',
     features: Array.isArray(raw?.ProductFeatures ?? raw?.features)
       ? (raw.ProductFeatures ?? raw.features).map((f: any) => ({
           id: Number(f?.id ?? 0) || undefined,
@@ -123,10 +125,17 @@ export const productApi = {
     const params = new URLSearchParams();
     
     if (filters?.search) params.append('search', filters.search);
-    if (filters?.shape) params.append('shape', filters.shape);
-    if (filters?.color) params.append('color', filters.color);
-    if (filters?.brand) params.append('brand', filters.brand);
-    if (filters?.material) params.append('material', filters.material);
+    const appendParam = (key: string, val: string | string[] | undefined) => {
+      if (Array.isArray(val)) val.forEach(v => params.append(key, v));
+      else if (val) params.append(key, val);
+    };
+
+    appendParam('shape', filters?.shape);
+    appendParam('color', filters?.color);
+    appendParam('face_suitable', filters?.face_suitable);
+    appendParam('brand', filters?.brand);
+    appendParam('material', filters?.material);
+    appendParam('category', filters?.category);
     if (filters?.sortBy) params.append('sortBy', filters.sortBy);
 
     if (filters?.page) params.append('page', filters.page.toString());

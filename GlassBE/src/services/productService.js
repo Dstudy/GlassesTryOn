@@ -26,6 +26,7 @@ const getAllProducts = async (queryParams) => {
       shape,
       material,
       color,
+      face_suitable,
       search,
       sortBy,
     } = queryParams;
@@ -94,6 +95,12 @@ const getAllProducts = async (queryParams) => {
     applyFilter(Brand, brand);
     applyFilter(Shape, shape);
     applyFilter(Material, material);
+
+    if (face_suitable) {
+      commonOptions.where.face_suitable = {
+        [Op.in]: Array.isArray(face_suitable) ? face_suitable : [face_suitable],
+      };
+    }
 
     if (color) {
       const variationInclude = commonOptions.include.find(

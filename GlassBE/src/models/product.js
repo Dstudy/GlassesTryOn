@@ -28,6 +28,7 @@ export default (sequelize) => {
       rating: { type: DataTypes.FLOAT, defaultValue: 0 },
       review_count: { type: DataTypes.INTEGER, defaultValue: 0 },
       url: { type: DataTypes.STRING },
+      face_suitable: { type: DataTypes.STRING },
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
     },
