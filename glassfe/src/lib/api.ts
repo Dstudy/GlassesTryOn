@@ -9,10 +9,11 @@ export interface ApiResponse<T> {
 }
 
 export interface ProductFilters {
-  shape?: string;
-  color?: string;
-  brand?: string;
-  material?: string;
+  shape?: string | string[];
+  color?: string | string[];
+  brand?: string | string[];
+  material?: string | string[];
+  category?: string | string[];
   search?: string;
   sortBy?: 'featured' | 'price-asc' | 'price-desc' | 'rating';
   page?: number;
@@ -68,6 +69,7 @@ function mapApiProduct(raw: any): Product {
   const shapeName = sanitizeName(raw?.Shape?.name ?? (typeof raw?.shape === 'string' ? raw?.shape : ''));
   const brandName = sanitizeName(raw?.Brand?.name ?? (typeof raw?.brand === 'string' ? raw?.brand : ''));
   const materialName = sanitizeName(raw?.Material?.name ?? (typeof raw?.material === 'string' ? raw?.material : ''));
+  const categoryName = sanitizeName(raw?.Category?.name ?? (typeof raw?.category === 'string' ? raw?.category : ''));
 
   const firstUrl = raw?.ProductVariations?.[0]?.ProductImages?.[0]?.pic_url;
 
@@ -84,6 +86,7 @@ function mapApiProduct(raw: any): Product {
     shape: shapeName,
     brand: brandName,
     material: materialName,
+    category: categoryName,
     rating: Number(raw?.rating ?? 0),
     isFeatured: Boolean(raw?.isFeatured ?? false),
     color: String(raw?.color ?? ''),
@@ -94,11 +97,18 @@ function mapApiProduct(raw: any): Product {
           img: typeof f?.img === 'string' ? f.img : typeof f?.image === 'string' ? f.image : undefined,
         })).filter((f: any) => f.name.length > 0)
       : undefined,
-    reviews: Array.isArray(raw?.reviews) ? raw.reviews : [], // Giữ nguyên mảng reviews từ API
+    modelUrl:
+      typeof raw?.url === 'string' && raw.url.trim()
+        ? raw.url.trim()
+        : typeof raw?.modelUrl === 'string' && raw.modelUrl.trim()
+        ? raw.modelUrl.trim()
+        : typeof raw?.['3DUrl'] === 'string' && raw['3DUrl'].trim()
+        ? raw['3DUrl'].trim()
+        : undefined,
+    reviews: Array.isArray(raw?.reviews) ? raw.reviews : [], // Keep reviews array from API as is
     createdAt: raw?.createdAt,
     updatedAt: raw?.updatedAt,
     stock: raw?.stock,
-    category: raw?.category,
   } as Product;
 }
 
@@ -265,18 +275,20 @@ export const productApi = {
     return withImages;
   },
 
-  // Get filter options (shapes, brands, materials, colors)
+  // Get filter options (shapes, brands, materials, colors, categories)
   async getFilterOptions(): Promise<{
     shapes: string[];
     brands: string[];
     materials: string[];
     colors: string[];
+    categories: string[];
   }> {
-    const [brandsRes, shapesRes, colorsRes, materialsRes] = await Promise.all([
+    const [brandsRes, shapesRes, colorsRes, materialsRes, categoriesRes] = await Promise.all([
       fetchApi<any>('/api/brands'),
       fetchApi<any>('/api/shapes'),
       fetchApi<any>('/api/colors'),
       fetchApi<any>('/api/materials'),
+      fetchApi<any>('/api/categories'),
     ]);
 
     const toNames = (input: any): string[] => {
@@ -295,6 +307,7 @@ export const productApi = {
       shapes: toNames(shapesRes),
       colors: toNames(colorsRes),
       materials: toNames(materialsRes),
+      categories: toNames(categoriesRes),
     };
   },
 
@@ -339,6 +352,19 @@ export const productApi = {
   },
   async adminGetMaterials(): Promise<Array<{ id: number; name: string }>> {
     const res = await fetchApi<any>('/api/materials');
+    const arr = Array.isArray(res) ? res : Array.isArray(res?.data) ? res.data : [];
+    return arr.map((x: any) => ({
+      id: Number(x?.id ?? 0),
+      name: typeof x === 'string' ? x : String(x?.name ?? ''),
+    })).filter((item: any) => item.id > 0 && item.name.length > 0);
+  },
+  async getCategories(): Promise<string[]> {
+    const res = await fetchApi<any>('/api/categories');
+    const arr = Array.isArray(res) ? res : Array.isArray(res?.data) ? res.data : [];
+    return arr.map((x: any) => (typeof x === 'string' ? x : x?.name)).filter((s: any) => typeof s === 'string' && s.length > 0);
+  },
+  async adminGetCategories(): Promise<Array<{ id: number; name: string }>> {
+    const res = await fetchApi<any>('/api/categories');
     const arr = Array.isArray(res) ? res : Array.isArray(res?.data) ? res.data : [];
     return arr.map((x: any) => ({
       id: Number(x?.id ?? 0),

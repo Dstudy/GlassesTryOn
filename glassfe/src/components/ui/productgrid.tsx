@@ -1,9 +1,9 @@
 "use client";
 
-// 1. Cập nhật import React
-import React from "react"; // Xóa useState, useEffect, useMemo
+// 1. Update React import
+import React from "react"; // Remove useState, useEffect, useMemo
 
-// 2. Import component Select của bạn
+// 2. Import your Select component
 import {
   Select,
   SelectContent,
@@ -12,11 +12,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-// 3. XÓA import API - Component cha sẽ làm việc này
+// 3. REMOVE API import - Parent component will handle this
 // import * as api from "@/lib/api";
 
-// --- Thêm TypeScript Interface ---
-// 4. Định nghĩa interface cho Product
+// --- Add TypeScript Interface ---
+// 4. Define interface for Product
 interface Product {
   id: string | number;
   name: string;
@@ -24,28 +24,28 @@ interface Product {
   rating: number | string;
 }
 
-// 5. Định nghĩa kiểu cho các lựa chọn sắp xếp
+// 5. Define type for sort options
 type SortOrder = "featured" | "price-asc" | "price-desc" | "rating";
 
-// --- Hết phần TypeScript Interface ---
+// --- End of TypeScript Interface ---
 
-// 6. Định nghĩa Props cho ProductGrid
+// 6. Define Props for ProductGrid
 interface ProductGridProps {
-  products: Product[]; // Nhận sản phẩm đã được lọc và sắp xếp từ cha
+  products: Product[]; // Receive filtered and sorted products from parent
   loading: boolean;
   sortOrder: SortOrder;
-  onSortChange: (newValue: SortOrder) => void; // Hàm để báo cho cha biết thay đổi
+  onSortChange: (newValue: SortOrder) => void; // Callback to notify parent of changes
 }
 
-// Component Card sản phẩm (đã thêm type cho props)
+// Product Card component (added type for props)
 function ProductCard({ product }: { product: Product }) {
-  // Chuyển đổi an toàn sang số để hiển thị
+  // Safely convert to number for display
   const displayPrice = parseFloat(String(product.price)) || 0;
   const displayRating = parseFloat(String(product.rating)) || 0;
 
   return (
     <div className="flex w-full max-w-sm flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md">
-      {/* Giả lập hình ảnh sản phẩm */}
+      {/* Mock product image */}
       <div className="flex h-48 w-full items-center justify-center bg-gray-100 text-gray-400"></div>
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
@@ -61,7 +61,7 @@ function ProductCard({ product }: { product: Product }) {
 }
 
 /**
- * Component chính - SỬA LẠI ĐỂ NHẬN PROPS
+ * Main component - MODIFIED TO RECEIVE PROPS
  */
 export default function ProductGrid({
   products,
@@ -69,7 +69,7 @@ export default function ProductGrid({
   sortOrder,
   onSortChange,
 }: ProductGridProps) {
-  // 7. XÓA BỎ TẤT CẢ STATE, USEEFFECT, USEMEMO
+  // 7. REMOVE ALL STATE, USEEFFECT, USEMEMO
   // const [allProducts, setAllProducts] = useState<Product[]>([]);
   // const [loading, setLoading] = useState<boolean>(true);
   // const [sortOrder, setSortOrder] = useState<SortOrder>("featured");
@@ -85,9 +85,9 @@ export default function ProductGrid({
         </span>
 
         <Select
-          value={sortOrder} // Dùng sortOrder từ props
-          onValueChange={(newValue) => onSortChange(newValue as SortOrder)} // Gọi hàm từ props
-          disabled={loading} // Dùng loading từ props
+          value={sortOrder} // Use sortOrder from props
+          onValueChange={(newValue) => onSortChange(newValue as SortOrder)} // Call function from props
+          disabled={loading} // Use loading from props
         >
           <SelectTrigger className="w-[200px] rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             <SelectValue placeholder="Sort by" />
@@ -105,7 +105,7 @@ export default function ProductGrid({
         <div className="text-center py-10">Loading products...</div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* SỬA: Dùng `products` từ props */}
+          {/* FIX: Use `products` from props */}
           {products.map((product) => (
             <ProductCard key={product.id || product.name} product={product} />
           ))}

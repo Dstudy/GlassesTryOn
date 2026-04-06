@@ -11,6 +11,7 @@ export default (sequelize) => {
       brand_id: { type: DataTypes.INTEGER },
       shape_id: { type: DataTypes.INTEGER },
       material_id: { type: DataTypes.INTEGER },
+      category_id: { type: DataTypes.INTEGER },
       price: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
@@ -26,28 +27,27 @@ export default (sequelize) => {
       active: { type: DataTypes.BOOLEAN, defaultValue: true },
       rating: { type: DataTypes.FLOAT, defaultValue: 0 },
       review_count: { type: DataTypes.INTEGER, defaultValue: 0 },
+      url: { type: DataTypes.STRING },
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
     },
     {
       tableName: "products",
       timestamps: false,
-    }
+    },
   );
 
   Product.associate = (models) => {
-    Product.belongsToMany(
-      models.Feature,
-      {
-        through: models.ProductFeature,
-        foreignKey: "product_id",
-        otherKey: "feature_id",
-      },
-      Product.hasMany(models.Review, {
-        foreignKey: "product_id",
-      })
-    );
+    Product.belongsToMany(models.Feature, {
+      through: models.ProductFeature,
+      foreignKey: "product_id",
+      otherKey: "feature_id",
+    });
+    Product.hasMany(models.Review, {
+      foreignKey: "product_id",
+    });
   };
 
+  // This must be INSIDE the export default function
   return Product;
 };

@@ -9,8 +9,14 @@ module.exports = {
     try {
       const jsonPath = path.join(__dirname, "..", "..", "ref", "products.json");
       const file = fs.readFileSync(jsonPath, "utf8");
-      /** @type {Array<any>} */
-      const items = JSON.parse(file);
+      const data = JSON.parse(file);
+
+      // Combine all products from different categories
+      const allItems = [
+        ...data.glasses.map((item) => ({ ...item, category: "glasses" })),
+        ...data.necklaces.map((item) => ({ ...item, category: "necklaces" })),
+        ...data.earrings.map((item) => ({ ...item, category: "earrings" })),
+      ];
 
       // Helpers
       const now = new Date();
@@ -36,29 +42,36 @@ module.exports = {
           .toUpperCase();
 
       // Lookup maps
-      const [brands, shapes, materials, colors] = await Promise.all([
-        queryInterface.sequelize.query("SELECT id, name FROM brands", {
-          type: Sequelize.QueryTypes.SELECT,
-          transaction: t,
-        }),
-        queryInterface.sequelize.query("SELECT id, name FROM shapes", {
-          type: Sequelize.QueryTypes.SELECT,
-          transaction: t,
-        }),
-        queryInterface.sequelize.query("SELECT id, name FROM materials", {
-          type: Sequelize.QueryTypes.SELECT,
-          transaction: t,
-        }),
-        queryInterface.sequelize.query(
-          "SELECT id, name, hex_code FROM colors",
-          { type: Sequelize.QueryTypes.SELECT, transaction: t }
-        ),
-      ]);
+      const [brands, shapes, materials, colors, categories] = await Promise.all(
+        [
+          queryInterface.sequelize.query("SELECT id, name FROM brands", {
+            type: Sequelize.QueryTypes.SELECT,
+            transaction: t,
+          }),
+          queryInterface.sequelize.query("SELECT id, name FROM shapes", {
+            type: Sequelize.QueryTypes.SELECT,
+            transaction: t,
+          }),
+          queryInterface.sequelize.query("SELECT id, name FROM materials", {
+            type: Sequelize.QueryTypes.SELECT,
+            transaction: t,
+          }),
+          queryInterface.sequelize.query(
+            "SELECT id, name, hex_code FROM colors",
+            { type: Sequelize.QueryTypes.SELECT, transaction: t },
+          ),
+          queryInterface.sequelize.query("SELECT id, name FROM categories", {
+            type: Sequelize.QueryTypes.SELECT,
+            transaction: t,
+          }),
+        ],
+      );
       const brandIds = brands.map((b) => b.id);
       const shapeByName = new Map(shapes.map((s) => [s.name, s.id]));
       const materialByName = new Map(materials.map((m) => [m.name, m.id]));
       const colorByName = new Map(colors.map((c) => [c.name, c.id]));
       const brandByName = new Map(brands.map((b) => [b.name, b.id]));
+      const categoryByName = new Map(categories.map((c) => [c.name, c.id]));
       const randomFrom = (arr) =>
         arr && arr.length ? arr[Math.floor(Math.random() * arr.length)] : null;
 
@@ -76,7 +89,7 @@ module.exports = {
         return { lens_width, bridge, length, width, lens_height };
       };
 
-      for (const item of items) {
+      for (const item of allItems) {
         // Prefer JSON-provided values when available
         let shapeId = item.shape ? shapeByName.get(item.shape) || null : null;
         let materialKey = normalizeMaterial(item.material);
@@ -95,6 +108,9 @@ module.exports = {
             ? brandByName.get(brandName)
             : randomFrom(brandIds);
 
+        // Category
+        const categoryId = categoryByName.get(item.category) || null;
+
         // Insert product (MySQL bulkInsert returns undefined; no returning)
         await queryInterface.bulkInsert(
           "products",
@@ -109,6 +125,7 @@ module.exports = {
               brand_id: brandId || null,
               shape_id: shapeId,
               material_id: materialId,
+              category_id: categoryId,
               price: toPrice(item.price),
               size: item.size || null,
               // If size string contains numbers, parse real dimensions; otherwise fallback to random
@@ -133,17 +150,18 @@ module.exports = {
               })(),
               isFeatured: false,
               active: true,
+              url: item.url || null,
               createdAt: now,
               updatedAt: now,
             },
           ],
-          { transaction: t }
+          { transaction: t },
         );
 
         // Retrieve inserted product id within the same transaction
         const row = await queryInterface.sequelize.query(
           "SELECT id FROM products ORDER BY id DESC LIMIT 1",
-          { type: Sequelize.QueryTypes.SELECT, transaction: t }
+          { type: Sequelize.QueryTypes.SELECT, transaction: t },
         );
         const newProductId = row && row[0] ? row[0].id : null;
 
@@ -159,7 +177,7 @@ module.exports = {
               replacements: { names: featureTitles },
               type: Sequelize.QueryTypes.SELECT,
               transaction: t,
-            }
+            },
           );
           // Map features to junction rows
           const junctionRows = featureRows.map((row, idx) => ({
@@ -178,7 +196,7 @@ module.exports = {
         // Insert variations and images by color
         if (item.imagesByColor && typeof item.imagesByColor === "object") {
           for (const [colorName, imageUrl] of Object.entries(
-            item.imagesByColor
+            item.imagesByColor,
           )) {
             let colorId = colorByName.get(colorName) || null;
             if (!colorId) {
@@ -186,7 +204,7 @@ module.exports = {
               await queryInterface.bulkInsert(
                 "colors",
                 [{ name: colorName, hex_code: null }],
-                { transaction: t }
+                { transaction: t },
               );
               const created = await queryInterface.sequelize.query(
                 "SELECT id FROM colors WHERE name = :name LIMIT 1",
@@ -194,7 +212,7 @@ module.exports = {
                   type: Sequelize.QueryTypes.SELECT,
                   transaction: t,
                   replacements: { name: colorName },
-                }
+                },
               );
               if (created && created[0]) {
                 colorId = created[0].id;
@@ -217,7 +235,7 @@ module.exports = {
                   updatedAt: now,
                 },
               ],
-              { transaction: t }
+              { transaction: t },
             );
           }
         }

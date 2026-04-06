@@ -48,7 +48,7 @@ const getProductsByShape = async (req, res) => {
     const { shapeName } = req.params;
     const result = await productService.getProductsByShape(
       shapeName,
-      req.query
+      req.query,
     );
     return res.status(200).json({
       errCode: 0,
@@ -69,7 +69,7 @@ const getProductsByColor = async (req, res) => {
     const { colorName } = req.params;
     const result = await productService.getProductsByColor(
       colorName,
-      req.query
+      req.query,
     );
     return res.status(200).json({
       errCode: 0,
@@ -108,7 +108,7 @@ const getFeaturedProducts = async (req, res) => {
     const featuredProducts = await productService.getFeaturedProducts();
     console.log(
       "[CONTROLLER-TRY] Data received from service:",
-      featuredProducts
+      featuredProducts,
     );
     return res.status(200).json({
       errCode: 0,
@@ -192,6 +192,21 @@ const getAllMaterials = async (_req, res) => {
     return res.status(500).json({
       errCode: 1,
       message: "Error getting materials",
+      error: error.message,
+    });
+  }
+};
+
+const getAllCategories = async (_req, res) => {
+  try {
+    const categories = await productService.getAllCategories();
+    return res
+      .status(200)
+      .json({ errCode: 0, message: "OK", data: categories });
+  } catch (error) {
+    return res.status(500).json({
+      errCode: 1,
+      message: "Error getting categories",
       error: error.message,
     });
   }
@@ -293,7 +308,7 @@ const createProductReview = async (req, res) => {
       userId,
       productId,
       rating,
-      reviewText
+      reviewText,
     );
 
     return res.status(201).json({
@@ -344,7 +359,7 @@ const updateProductReview = async (req, res) => {
       reviewId,
       userId,
       rating,
-      reviewText
+      reviewText,
     );
 
     return res.status(200).json({
@@ -418,6 +433,7 @@ export default {
   getAllShapes,
   getAllColors,
   getAllMaterials,
+  getAllCategories,
   getAllFeatures,
   getProductFeatures,
   getFeature,

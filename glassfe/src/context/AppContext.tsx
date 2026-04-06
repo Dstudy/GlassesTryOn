@@ -34,7 +34,7 @@ export const AppContext = createContext<AppContextType>({
   favorites: [],
   toggleFavorite: () => {},
   user: null,
-  login: () => {}, // THAY ĐỔI: (id, name, roleID) => {} cũng được, nhưng () => {} là đủ cho giá trị mặc định
+  login: () => {}, // CHANGE: (id, name, roleID) => {} is fine, but () => {} is enough for default value
   register: () => {},
   logout: () => {},
   isAdmin: () => false,
@@ -45,7 +45,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [favorites, setFavorites] = useState<number[]>([]);
   const [user, setUser] = useState<{
-    id: number; // THAY ĐỔI: Thêm 'id'
+    id: number; // CHANGE: Add 'id'
     name: string;
     roleID?: number;
   } | null>(null);
@@ -78,7 +78,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   // Sync favorites from backend when user is present
   useEffect(() => {
-    if (!user?.id) return; // Chỉ đồng bộ khi user đăng nhập và có ID
+    if (!user?.id) return; // Only sync when user is logged in and has an ID
 
     (async () => {
       try {
@@ -100,7 +100,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   // Load cart from backend when user is available
   useEffect(() => {
-    if (!user?.id) return; // Chỉ tải khi user đăng nhập và có ID
+    if (!user?.id) return; // Only load when user is logged in and has an ID
 
     (async () => {
       try {
@@ -206,7 +206,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  // THAY ĐỔI: Thêm 'id' vào hàm login
+  // CHANGE: Add 'id' to the login function
   const login = (id: number, name: string, roleID?: number) => {
     setUser({ id, name, roleID });
   };

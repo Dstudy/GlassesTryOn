@@ -10,6 +10,7 @@ const {
   Shape,
   Color,
   Material,
+  Category,
   Feature,
   ProductFeature,
   Review,
@@ -41,6 +42,7 @@ const getAllProducts = async (queryParams) => {
         { model: Brand, attributes: ["id", "name"] },
         { model: Shape, attributes: ["id", "name"] },
         { model: Material, attributes: ["id", "name"] },
+        { model: Category, attributes: ["id", "name"] },
 
         {
           model: ProductVariation,
@@ -67,7 +69,7 @@ const getAllProducts = async (queryParams) => {
     if (search) {
       commonOptions.where.name = sequelize.where(
         sequelize.fn("LOWER", sequelize.col("Product.name")),
-        { [Op.like]: `%${search.toLowerCase()}%` }
+        { [Op.like]: `%${search.toLowerCase()}%` },
       );
     }
 
@@ -75,7 +77,7 @@ const getAllProducts = async (queryParams) => {
       if (!filterValues || filterValues.length === 0) return;
 
       const include = commonOptions.include.find(
-        (i) => i.model === includeModel
+        (i) => i.model === includeModel,
       );
       if (include) {
         include.where = {
@@ -95,10 +97,10 @@ const getAllProducts = async (queryParams) => {
 
     if (color) {
       const variationInclude = commonOptions.include.find(
-        (i) => i.model === ProductVariation
+        (i) => i.model === ProductVariation,
       );
       const colorInclude = variationInclude.include.find(
-        (i) => i.model === Color
+        (i) => i.model === Color,
       );
 
       colorInclude.where = {
@@ -183,6 +185,14 @@ const getAllMaterials = async () => {
   return materials;
 };
 
+const getAllCategories = async () => {
+  const categories = await Category.findAll({
+    attributes: ["id", "name"],
+    order: [["name", "ASC"]],
+  });
+  return categories;
+};
+
 const getAllFeatures = async () => {
   const features = await Feature.findAll({
     attributes: ["id", "name", "img"],
@@ -220,6 +230,7 @@ const getProductById = async (id) => {
       { model: Brand },
       { model: Shape },
       { model: Material },
+      { model: Category },
       {
         model: ProductVariation,
         attributes: { exclude: ["price"] },
@@ -435,7 +446,7 @@ const _updateProductRating = async (productId, transaction) => {
   // 2. Cập nhật bảng Products
   await Product.update(
     { averageRating, totalReviews },
-    { where: { id: productId }, transaction }
+    { where: { id: productId }, transaction },
   );
 };
 
@@ -479,7 +490,7 @@ const createReview = async (userId, productId, rating, reviewText) => {
     "product:",
     productId,
     "reviewText:",
-    reviewText
+    reviewText,
   );
   try {
     // 1. Create the review
@@ -490,7 +501,7 @@ const createReview = async (userId, productId, rating, reviewText) => {
         rating,
         review_text: reviewText,
       },
-      { transaction: t }
+      { transaction: t },
     );
 
     // 2. Update the product's averageRating/totalReviews
@@ -583,6 +594,7 @@ export default {
   getAllShapes,
   getAllColors,
   getAllMaterials,
+  getAllCategories,
   getAllFeatures,
   getProductFeatures,
   getFeature,

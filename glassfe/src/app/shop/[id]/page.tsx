@@ -39,6 +39,16 @@ import {
 import { Lens } from "@/components/ui/lens";
 import StarRating from "@/components/ui/star-rating";
 
+// Helper function to optimize Cloudinary image URLs for performance
+const optimizeImageUrl = (url: string): string => {
+  if (!url || !url.includes("cloudinary.com")) return url;
+  const parts = url.split("/upload/");
+  if (parts.length === 2) {
+    return `${parts[0]}/upload/f_auto,q_auto,w_800/${parts[1]}`;
+  }
+  return url;
+};
+
 export default function ProductDetailPage() {
   const { id } = useParams();
   const productId = parseInt(id as string, 10);
@@ -46,7 +56,7 @@ export default function ProductDetailPage() {
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [variants, setVariants] = useState<ProductVariant[]>([]);
   const [selectedVariantId, setSelectedVariantId] = useState<number | null>(
-    null
+    null,
   );
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
   const [show3DModel, setShow3DModel] = useState<boolean>(false);
@@ -79,10 +89,11 @@ export default function ProductDetailPage() {
 
         const productData = productDataRaw as Product;
         setProduct(productData);
+        setShow3DModel(false); // default to image view; 3D view only when modelUrl exists and user toggles
 
         // Fetch related products by shape (smaller payload than getAllProducts)
         const relatedByShape = await productApi.getProductsByShape(
-          productData.shape
+          productData.shape,
         );
         const relatedSource = Array.isArray(relatedByShape)
           ? relatedByShape
@@ -91,7 +102,8 @@ export default function ProductDetailPage() {
             : [];
         const related = relatedSource
           .filter(
-            (p: any) => p && typeof p.id === "number" && p.id !== productData.id
+            (p: any) =>
+              p && typeof p.id === "number" && p.id !== productData.id,
           )
           .slice(0, 4);
         setRelatedProducts(related);
@@ -110,18 +122,18 @@ export default function ProductDetailPage() {
             : [];
           const first =
             (initialVariantImages[0] || fallback[0]) ?? "/placeholder.svg";
-          setSelectedImageUrl(first);
+          setSelectedImageUrl(optimizeImageUrl(first));
         } else {
           const fallback = Array.isArray(productData.picUrl)
             ? productData.picUrl
             : [];
           const first = fallback[0] ?? "/placeholder.svg";
-          setSelectedImageUrl(first);
+          setSelectedImageUrl(optimizeImageUrl(first));
         }
       } catch (err) {
         console.error("Failed to load product:", err);
         setError(
-          err instanceof ApiError ? err.message : "Failed to load product"
+          err instanceof ApiError ? err.message : "Failed to load product",
         );
       } finally {
         setLoading(false);
@@ -177,27 +189,37 @@ export default function ProductDetailPage() {
   }
 
   const isFavorite = favorites.includes(product.id);
+  const modelUrl = product?.modelUrl || product?.url || null;
+  const has3DModel = Boolean(modelUrl);
   const selectedVariant =
     variants.find((v) => v.id === selectedVariantId) || null;
 
   // Aggregate all variant images (fallback to product images)
   const allVariantImages: string[] = Array.isArray(variants)
     ? Array.from(
-      new Set(
-        variants
-          .flatMap((v) => (Array.isArray(v.images) ? v.images : []))
-          .filter((u) => typeof u === "string" && u.length > 0)
+        new Set(
+          variants
+            .flatMap((v) => (Array.isArray(v.images) ? v.images : []))
+            .filter((u) => typeof u === "string" && u.length > 0),
+        ),
       )
-    )
     : [];
   const fallbackImages = Array.isArray(product.picUrl) ? product.picUrl : [];
   const galleryImages =
     allVariantImages.length > 0 ? allVariantImages : fallbackImages;
 
+  // Optimize image URLs for performance
+  const optimizedGalleryImages = galleryImages.map(optimizeImageUrl);
+  const optimizedSelectedImageUrl = selectedImageUrl
+    ? optimizeImageUrl(selectedImageUrl)
+    : null;
+
   // Removed extra useEffect to avoid changing hook order; initial image is set in loadProduct
 
   const primaryImageUrl =
-    selectedImageUrl ?? galleryImages[0] ?? "/placeholder.svg";
+    optimizedSelectedImageUrl ??
+    optimizedGalleryImages[0] ??
+    "/placeholder.svg";
 
   const handleAddToCart = () => {
     const variant = selectedVariantId
@@ -221,8 +243,9 @@ export default function ProductDetailPage() {
       toggleFavorite(product.id);
       toast({
         title: isFavorite ? "Removed from Favorites" : "Added to Favorites",
-        description: `${product.name} has been ${isFavorite ? "removed from" : "added to"
-          } your favorites.`,
+        description: `${product.name} has been ${
+          isFavorite ? "removed from" : "added to"
+        } your favorites.`,
       });
     }
   };
@@ -308,10 +331,10 @@ export default function ProductDetailPage() {
           </Link>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-16">
             <div className="space-y-4">
-              <div className="rounded-lg overflow-hidden border shadow-lg relative aspect-square">
-                {show3DModel ? (
+              <div className="rounded-lg flex  overflow-hidden items-center border shadow-lg relative aspect-square">
+                {show3DModel && has3DModel ? (
                   <div className="w-full h-full bg-gradient-to-br from-gray-50 to-white absolute inset-0">
-                    <ThreeViewer modelUrl="https://res.cloudinary.com/dlwenphlw/image/upload/v1773397795/ray-ban_meta_smart_glasses_3d_model_trfbwy.glb" />
+                    <ThreeViewer modelUrl={modelUrl!} />
                   </div>
                 ) : (
                   <Lens
@@ -320,29 +343,34 @@ export default function ProductDetailPage() {
                     isStatic={false}
                     ariaLabel="Zoom Area"
                   >
-                    <Image
-                      src={primaryImageUrl}
-                      alt={product.name}
-                      width={600}
-                      height={600}
-                      className="w-full h-full object-cover"
-                      data-ai-hint="product photo"
-                    />
+                    <div className="flex items-center justify-center w-full h-full">
+                      <Image
+                        src={primaryImageUrl}
+                        alt={product.name}
+                        width={600}
+                        height={600}
+                        className="max-h-full w-auto object-contain"
+                        data-ai-hint="product photo"
+                      />
+                    </div>
                   </Lens>
                 )}
               </div>
-              {(galleryImages.length > 0) && (
+              {galleryImages.length > 0 && (
                 <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
-                  {galleryImages.map((url, index) => (
+                  {optimizedGalleryImages.map((url, index) => (
                     <button
                       key={`${url}-${index}`}
                       type="button"
-                      onClick={() => { setSelectedImageUrl(url); setShow3DModel(false); }}
+                      onClick={() => {
+                        setSelectedImageUrl(optimizeImageUrl(url));
+                        setShow3DModel(false);
+                      }}
                       className={cn(
                         "rounded-lg overflow-hidden border focus:outline-none",
                         selectedImageUrl === url && !show3DModel
                           ? "ring-2 ring-primary border-primary"
-                          : "hover:border-primary/50"
+                          : "hover:border-primary/50",
                       )}
                       aria-label={`View image ${index + 1}`}
                       title={`View image ${index + 1}`}
@@ -359,15 +387,23 @@ export default function ProductDetailPage() {
 
                   <button
                     type="button"
-                    onClick={() => setShow3DModel(true)}
+                    onClick={() => {
+                      if (!has3DModel) return;
+                      setShow3DModel((prev) => !prev);
+                    }}
+                    disabled={!has3DModel}
                     className={cn(
                       "rounded-lg overflow-hidden border focus:outline-none flex items-center justify-center transition-colors h-20",
-                      show3DModel
-                        ? "ring-2 ring-primary border-primary bg-primary text-primary-foreground"
-                        : "bg-gray-100 hover:border-primary/50 text-gray-700"
+                      !has3DModel
+                        ? "cursor-not-allowed bg-gray-200 text-gray-400"
+                        : show3DModel
+                          ? "ring-2 ring-primary border-primary bg-primary text-primary-foreground"
+                          : "bg-gray-100 hover:border-primary/50 text-gray-700",
                     )}
                     aria-label="View 3D Model"
-                    title="View 3D Model"
+                    title={
+                      has3DModel ? "View 3D Model" : "No 3D model available"
+                    }
                   >
                     <div className="text-center">
                       <svg
@@ -424,13 +460,14 @@ export default function ProductDetailPage() {
                         onClick={() => {
                           setSelectedVariantId(v.id);
                           const imgs = Array.isArray(v.images) ? v.images : [];
-                          if (imgs.length > 0) setSelectedImageUrl(imgs[0]);
+                          if (imgs.length > 0)
+                            setSelectedImageUrl(optimizeImageUrl(imgs[0]));
                         }}
                         className={cn(
                           "h-8 px-3 rounded-full border flex items-center gap-2 text-sm",
                           selectedVariantId === v.id
                             ? "border-primary bg-primary/10 text-primary"
-                            : "border-input bg-background text-foreground hover:bg-muted"
+                            : "border-input bg-background text-foreground hover:bg-muted",
                         )}
                         title={v.colorName}
                         aria-label={`Select color ${v.colorName}`}
@@ -517,7 +554,7 @@ export default function ProductDetailPage() {
                   <Heart
                     className={cn(
                       "mr-2 h-5 w-5",
-                      isFavorite && "fill-red-500 text-red-500"
+                      isFavorite && "fill-red-500 text-red-500",
                     )}
                   />
                   {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
@@ -544,7 +581,7 @@ export default function ProductDetailPage() {
                       rating: number;
                       review_text: string | null;
                     },
-                    index: Key | null | undefined
+                    index: Key | null | undefined,
                   ) => (
                     <div
                       key={review.User.id || index}
@@ -557,15 +594,16 @@ export default function ProductDetailPage() {
                         {Array.from({ length: 5 }, (_, starIndex) => {
                           const fillPercent = Math.max(
                             0,
-                            Math.min(1, review.rating - starIndex)
+                            Math.min(1, review.rating - starIndex),
                           );
                           return (
                             <span
                               key={starIndex}
                               className="text-sm"
                               style={{
-                                background: `linear-gradient(90deg, gold ${fillPercent * 100
-                                  }%, #ddd ${fillPercent * 100}%)`,
+                                background: `linear-gradient(90deg, gold ${
+                                  fillPercent * 100
+                                }%, #ddd ${fillPercent * 100}%)`,
                                 WebkitBackgroundClip: "text",
                                 WebkitTextFillColor: "transparent",
                               }}
@@ -579,7 +617,7 @@ export default function ProductDetailPage() {
                         {review.review_text}
                       </p>
                     </div>
-                  )
+                  ),
                 )}
               </div>
 

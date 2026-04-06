@@ -3,22 +3,22 @@ export interface Product {
   name: string;
   subtitle?: string;
   price: number;
-  picUrl: string[]; // Mảng ảnh, ảnh đầu tiên làm ảnh bìa
+  picUrl: string[]; // Array of images, the first one is the cover image
   description: string;
   size?: string;
   dimensions: {
-    width: number; // chiều ngang kính (mm)
-    length: number; // chiều dài kính (mm)
-    lensWidth: number; // độ rộng tròng (mm)
-    lensHeight: number; // độ cao tròng (mm)
-    bridge: number; // cầu mũi (mm)
+    width: number; // frame width (mm)
+    length: number; // frame length (mm)
+    lensWidth: number; // lens width (mm)
+    lensHeight: number; // lens height (mm)
+    bridge: number; // nose bridge (mm)
   };
   shape: string; // Made flexible to handle any shape from API
   brand: string; // Made flexible to handle any brand from API
   material: string; // Made flexible to handle any material from API
   rating: number;
   isFeatured: boolean;
-  color: string; // Màu sắc: Đỏ, đen, đen xanh, tím, ...
+  color: string; // Color: Red, black, black blue, purple, ...
   features?: Array<{ id?: number; name: string; img?: string }>;
   // Optional fields that might come from API
   reviews: Review[];
@@ -26,10 +26,11 @@ export interface Product {
   updatedAt?: string;
   stock?: number;
   category?: string;
+  modelUrl?: string; // 3D model URL from backend
 }
 
 export type Review = {
-  id?: number; // hoặc bất kỳ kiểu nào API trả về
+  id?: number; // or any type returned by API
   User: {
     id: number;
     fullname: string;

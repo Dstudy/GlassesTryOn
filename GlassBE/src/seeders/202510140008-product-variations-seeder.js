@@ -7,8 +7,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const jsonPath = path.join(__dirname, "..", "..", "ref", "products.json");
     const raw = fs.readFileSync(jsonPath, "utf8");
-    /** @type {Array<any>} */
-    const products = JSON.parse(raw);
+    const data = JSON.parse(raw);
+    const products = [...data.glasses, ...data.necklaces, ...data.earrings];
 
     const now = new Date();
     const slug = (s) =>
@@ -26,7 +26,10 @@ module.exports = {
       // Resolve product id by name
       const prodRows = await queryInterface.sequelize.query(
         "SELECT id FROM products WHERE name = :name LIMIT 1",
-        { type: Sequelize.QueryTypes.SELECT, replacements: { name: item.name } }
+        {
+          type: Sequelize.QueryTypes.SELECT,
+          replacements: { name: item.name },
+        },
       );
       if (!prodRows || !prodRows[0]) continue;
       const productId = prodRows[0].id;
@@ -38,21 +41,21 @@ module.exports = {
           {
             type: Sequelize.QueryTypes.SELECT,
             replacements: { name: colorName },
-          }
+          },
         );
         let colorId = colorRows && colorRows[0] ? colorRows[0].id : null;
         if (!colorId) {
           await queryInterface.bulkInsert(
             "colors",
             [{ name: colorName, hex_code: null }],
-            {}
+            {},
           );
           colorRows = await queryInterface.sequelize.query(
             "SELECT id FROM colors WHERE name = :name LIMIT 1",
             {
               type: Sequelize.QueryTypes.SELECT,
               replacements: { name: colorName },
-            }
+            },
           );
           colorId = colorRows && colorRows[0] ? colorRows[0].id : null;
         }
@@ -64,7 +67,7 @@ module.exports = {
           {
             type: Sequelize.QueryTypes.SELECT,
             replacements: { pid: productId, cid: colorId },
-          }
+          },
         );
         if (existing && existing[0]) continue;
 
@@ -80,7 +83,7 @@ module.exports = {
               updatedAt: now,
             },
           ],
-          {}
+          {},
         );
       }
     }

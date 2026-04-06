@@ -7,8 +7,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const jsonPath = path.join(__dirname, "..", "..", "ref", "products.json");
     const raw = fs.readFileSync(jsonPath, "utf8");
-    /** @type {Array<any>} */
-    const products = JSON.parse(raw);
+    const data = JSON.parse(raw);
+    const products = [...data.glasses, ...data.necklaces, ...data.earrings];
 
     const now = new Date();
     for (const item of products) {
@@ -17,7 +17,10 @@ module.exports = {
       // Find product id by name
       const prodRows = await queryInterface.sequelize.query(
         "SELECT id FROM products WHERE name = :name LIMIT 1",
-        { type: Sequelize.QueryTypes.SELECT, replacements: { name: item.name } }
+        {
+          type: Sequelize.QueryTypes.SELECT,
+          replacements: { name: item.name },
+        },
       );
       if (!prodRows || !prodRows[0]) continue;
       const productId = prodRows[0].id;
@@ -29,7 +32,7 @@ module.exports = {
           {
             type: Sequelize.QueryTypes.SELECT,
             replacements: { name: colorName },
-          }
+          },
         );
         if (!colorRows || !colorRows[0]) continue;
         const colorId = colorRows[0].id;
@@ -40,7 +43,7 @@ module.exports = {
           {
             type: Sequelize.QueryTypes.SELECT,
             replacements: { pid: productId, cid: colorId },
-          }
+          },
         );
         if (!varRows || !varRows[0]) continue;
         const variationId = varRows[0].id;
@@ -51,7 +54,7 @@ module.exports = {
           {
             type: Sequelize.QueryTypes.SELECT,
             replacements: { vid: variationId, url: imageUrl },
-          }
+          },
         );
         if (!existing || !existing[0]) {
           await queryInterface.bulkInsert(
@@ -63,7 +66,7 @@ module.exports = {
                 display_order: 1,
               },
             ],
-            {}
+            {},
           );
         }
       }

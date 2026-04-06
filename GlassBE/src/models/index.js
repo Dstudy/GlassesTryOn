@@ -18,9 +18,12 @@ import OrderItem from "./orderItem.js";
 import Favorite from "./favorite.js";
 import Analytics from "./analytics.js";
 import Reviews from "./review.js";
+import Category from "./category.js";
+const env = process.env.NODE_ENV || "development";
+const config = require(__dirname + "/../config/config.json")[env];
 
 // ✅ Initialize Sequelize
-const sequelize = new Sequelize("glasses", "root", "1", {
+const sequelize = new Sequelize("glasses", config.username, config.password, {
   host: "localhost",
   dialect: "mysql",
   logging: false,
@@ -47,6 +50,7 @@ const models = {
   Favorite: Favorite(sequelize),
   Analytics: Analytics(sequelize),
   Review: Reviews(sequelize),
+  Category: Category(sequelize),
 };
 
 // =================================================================
@@ -57,10 +61,12 @@ const models = {
 models.Brand.hasMany(models.Product, { foreignKey: "brand_id" });
 models.Shape.hasMany(models.Product, { foreignKey: "shape_id" });
 models.Material.hasMany(models.Product, { foreignKey: "material_id" });
+models.Category.hasMany(models.Product, { foreignKey: "category_id" });
 
 models.Product.belongsTo(models.Brand, { foreignKey: "brand_id" });
 models.Product.belongsTo(models.Shape, { foreignKey: "shape_id" });
 models.Product.belongsTo(models.Material, { foreignKey: "material_id" });
+models.Product.belongsTo(models.Category, { foreignKey: "category_id" });
 models.Product.hasMany(models.Review, { foreignKey: "product_id" });
 
 //Product Reviews

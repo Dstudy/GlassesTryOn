@@ -14,6 +14,16 @@ import { cn } from "@/lib/utils";
 // THAY ĐỔI: Import tệp CSS mới của bạn
 import "./ProductCard.css"; // Giả sử tệp CSS ở cùng thư mục
 
+// Helper function to optimize Cloudinary image URLs for performance
+const optimizeImageUrl = (url: string): string => {
+  if (!url || !url.includes("cloudinary.com")) return url;
+  const parts = url.split("/upload/");
+  if (parts.length === 2) {
+    return `${parts[0]}/upload/f_auto,q_auto,w_800/${parts[1]}`;
+  }
+  return url;
+};
+
 interface ProductCardProps {
   product: Product;
 }
@@ -27,7 +37,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [firstVariantId, setFirstVariantId] = useState<number | null>(null);
 
   const imageUrls = Array.isArray(product.picUrl) ? product.picUrl : [];
-  const primaryImageUrl = imageUrls[0] ?? "/placeholder.svg";
+  const primaryImageUrl = optimizeImageUrl(imageUrls[0] ?? "/placeholder.svg");
 
   useEffect(() => {
     let isCancelled = false;
@@ -107,7 +117,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {Array.from({ length: 5 }, (_, index) => {
               const fillPercent = Math.max(
                 0,
-                Math.min(1, product.rating - index)
+                Math.min(1, product.rating - index),
               );
               return (
                 <span
@@ -144,7 +154,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               className={cn(
                 "card__button",
                 // Thay đổi style khi được yêu thích
-                isFavorite && "bg-white hover:bg-red-100"
+                isFavorite && "bg-white hover:bg-red-100",
               )}
               onClick={handleToggleFavorite}
               aria-label="Toggle Favorite"
@@ -152,7 +162,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               <Heart
                 className={cn(
                   "h-4 w-4", // Kích thước icon từ ref.css là 16px
-                  isFavorite ? "fill-red-500 text-red-500" : "text-white" // Lớp .card__button sẽ đặt màu này
+                  isFavorite ? "fill-red-500 text-red-500" : "text-white", // Lớp .card__button sẽ đặt màu này
                 )}
               />
             </button>

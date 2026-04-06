@@ -1,4 +1,4 @@
-/* Nội dung đã được sao chép từ ref.css và đổi tên */
+/* Content copied from ref.css and renamed */
 .product-card-ref {
   --card-bg: #ffffff;
   --card-accent: #7c3aed;
@@ -70,7 +70,7 @@
 
 .product-card-ref .card__image {
   width: 100%;
-  height: 100px; /* Kích thước ảnh từ ref.css */
+  height: 100px; /* Image size from ref.css */
   background: linear-gradient(45deg, #a78bfa, #8b5cf6);
   border-radius: 12px;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -141,11 +141,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white; /* Sẽ tô màu cho SVG bên trong */
+  color: white; /* Will color the SVG inside */
   cursor: pointer;
   transition: all 0.3s ease;
   transform: scale(0.9);
-  /* Thêm border để tương thích với component Button cũ */
+  /* Add border for compatibility with old Button component */
   border: 1px solid transparent; 
 }
 
@@ -198,7 +198,7 @@
   box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
 }
 
-/* THAY ĐỔI: Chỉ nút giỏ hàng mới có hiệu ứng pulse */
+/* CHANGE: Only the cart button has pulse effect */
 .product-card-ref:hover .add-to-cart-button svg {
   animation: pulse 1.5s infinite;
 }
@@ -239,6 +239,6 @@
 }
 
 .product-card-ref .card__rating-star {
-  color: #ddd; /* màu sao rỗng */
+  color: #ddd; /* empty star color */
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 } 

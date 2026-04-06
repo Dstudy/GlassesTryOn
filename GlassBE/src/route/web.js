@@ -9,6 +9,7 @@ import adminProductImageController from "../controllers/admin.productImageContro
 import favoriteController from "../controllers/favoriteController.js";
 import cartController from "../controllers/cartController.js";
 import orderController from "../controllers/orderController.js";
+import categoryController from "../controllers/categoryController.js";
 
 const router = express.Router();
 
@@ -34,33 +35,33 @@ const initWebRoutes = (app) => {
   router.put("/api/admin/products/:id", adminProductController.updateProduct);
   router.delete(
     "/api/admin/products/:id",
-    adminProductController.deleteProduct
+    adminProductController.deleteProduct,
   );
   router.get(
     "/api/admin/products/:productId/variations",
-    adminProductController.getProductVariations
+    adminProductController.getProductVariations,
   );
   router.put(
     "/api/admin/products/:id/features",
-    adminProductController.setProductFeatures
+    adminProductController.setProductFeatures,
   );
   router.patch(
     "/api/admin/products/:id/toggle-active",
-    adminProductController.toggleProductActive
+    adminProductController.toggleProductActive,
   );
 
   // Product image management (admin)
   router.post(
     "/api/admin/product-variations/:variationId/images",
-    adminProductImageController.addImage
+    adminProductImageController.addImage,
   );
   router.put(
     "/api/admin/product-images/:id",
-    adminProductImageController.updateImage
+    adminProductImageController.updateImage,
   );
   router.delete(
     "/api/admin/product-images/:id",
-    adminProductImageController.deleteImage
+    adminProductImageController.deleteImage,
   );
 
   // Admin Orders
@@ -73,23 +74,23 @@ const initWebRoutes = (app) => {
   // Admin Analytics
   router.get(
     "/api/admin/analytics/dashboard",
-    adminAnalyticsController.getDashboardMetrics
+    adminAnalyticsController.getDashboardMetrics,
   );
   router.get(
     "/api/admin/analytics/monthly-revenue",
-    adminAnalyticsController.getMonthlyRevenue
+    adminAnalyticsController.getMonthlyRevenue,
   );
   router.get(
     "/api/admin/analytics/top-products",
-    adminAnalyticsController.getTopSellingProducts
+    adminAnalyticsController.getTopSellingProducts,
   );
   router.get(
     "/api/admin/analytics/summary",
-    adminAnalyticsController.getAnalyticsSummary
+    adminAnalyticsController.getAnalyticsSummary,
   );
   router.post(
     "/api/admin/analytics/update",
-    adminAnalyticsController.updateAnalytics
+    adminAnalyticsController.updateAnalytics,
   );
 
   //User Product routes
@@ -99,44 +100,44 @@ const initWebRoutes = (app) => {
   // Avoid collision with /api/products/:id by making shape a sub-path
   router.get(
     "/api/products/shape/:shapeName",
-    productController.getProductsByShape
+    productController.getProductsByShape,
   );
   router.get(
     "/api/products/color/:colorName",
-    productController.getProductsByColor
+    productController.getProductsByColor,
   );
   router.get(
     "/api/products/:productId/images",
-    productController.getAllProductImages
+    productController.getAllProductImages,
   );
   router.get(
     "/api/products/:productId/variants",
-    productController.getAllProductVariants
+    productController.getAllProductVariants,
   );
 
   //reviews
   router.get(
     "/api/products/:productId/reviews",
-    productController.getProductReviews
+    productController.getProductReviews,
   );
   router.post(
     "/api/products/:productId/reviews",
-    productController.createProductReview
+    productController.createProductReview,
   );
   router.put(
     "/api/products/:productId/reviews/:reviewId",
-    productController.updateProductReview
+    productController.updateProductReview,
   );
   router.delete(
     "/api/products/:productId/reviews/:reviewId",
-    productController.deleteProductReview
+    productController.deleteProductReview,
   );
 
   // Features
   router.get("/api/features", productController.getAllFeatures);
   router.get(
     "/api/products/:productId/features",
-    productController.getProductFeatures
+    productController.getProductFeatures,
   );
   router.get("/api/features/:id", productController.getFeature);
 
@@ -145,7 +146,7 @@ const initWebRoutes = (app) => {
   router.post("/api/favorites", favoriteController.add);
   router.delete(
     "/api/users/:userId/favorites/:productId",
-    favoriteController.remove
+    favoriteController.remove,
   );
 
   // Cart
@@ -154,7 +155,7 @@ const initWebRoutes = (app) => {
   router.put("/api/users/:userId/cart/items", cartController.updateItem);
   router.delete(
     "/api/users/:userId/cart/items/:productVariationId",
-    cartController.removeItem
+    cartController.removeItem,
   );
   router.delete("/api/users/:userId/cart", cartController.clearCart);
 
@@ -169,6 +170,13 @@ const initWebRoutes = (app) => {
   router.get("/api/shapes", productController.getAllShapes);
   router.get("/api/colors", productController.getAllColors);
   router.get("/api/materials", productController.getAllMaterials);
+  router.get("/api/categories", categoryController.getAllCategories);
+  router.get("/api/categories/:id", categoryController.getCategoryById);
+
+  // Admin Category routes
+  router.post("/api/admin/categories", categoryController.createCategory);
+  router.put("/api/admin/categories/:id", categoryController.updateCategory);
+  router.delete("/api/admin/categories/:id", categoryController.deleteCategory);
 
   return app.use("/", router);
 };

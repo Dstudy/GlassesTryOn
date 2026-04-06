@@ -135,7 +135,7 @@ export function Lens({
     >
       {children}
       {isStatic || defaultPosition ? (
-        // THAY ĐỔI: Thay thế Fragment bằng div
+        // CHANGE: Replace Fragment with div
         <div>
           {LensContent}
           {LensBorder}
@@ -143,7 +143,7 @@ export function Lens({
       ) : (
         <AnimatePresence mode="popLayout">
           {isHovering && (
-            // THAY ĐỔI: Thay thế Fragment bằng div
+            // CHANGE: Replace Fragment with div
             <div>
               {LensContent}
               {LensBorder}

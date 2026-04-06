@@ -51,12 +51,14 @@ export default function ShopPage() {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedMaterials, setSelectedMaterials] = useState<string[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   // State để điều khiển việc hiển thị đầy đủ hay giới hạn
   const [showAllShapes, setShowAllShapes] = useState(false);
   const [showAllBrands, setShowAllBrands] = useState(false);
   const [showAllMaterials, setShowAllMaterials] = useState(false);
   const [showAllColors, setShowAllColors] = useState(false);
+  const [showAllCategories, setShowAllCategories] = useState(false);
 
   // API state
   const [products, setProducts] = useState<Product[]>([]);
@@ -64,6 +66,7 @@ export default function ShopPage() {
   const [brands, setBrands] = useState<string[]>([]);
   const [materials, setMaterials] = useState<string[]>([]);
   const [colors, setColors] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [initialLoaded, setInitialLoaded] = useState(false);
@@ -74,14 +77,14 @@ export default function ShopPage() {
 
   const handleShapeChange = (shape: string) => {
     setSelectedShapes((prev) =>
-      prev.includes(shape) ? prev.filter((s) => s !== shape) : [...prev, shape]
+      prev.includes(shape) ? prev.filter((s) => s !== shape) : [...prev, shape],
     );
     setCurrentPage(1);
   };
 
   const handleBrandChange = (brand: string) => {
     setSelectedBrands((prev) =>
-      prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
+      prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand],
     );
     setCurrentPage(1);
   };
@@ -90,14 +93,23 @@ export default function ShopPage() {
     setSelectedMaterials((prev) =>
       prev.includes(material)
         ? prev.filter((m) => m !== material)
-        : [...prev, material]
+        : [...prev, material],
     );
     setCurrentPage(1);
   };
 
   const handleColorChange = (color: string) => {
     setSelectedColors((prev) =>
-      prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color]
+      prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color],
+    );
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category],
     );
     setCurrentPage(1);
   };
@@ -121,11 +133,13 @@ export default function ShopPage() {
         const filters: ProductFilters = {
           search: searchTerm || undefined,
           sortBy: sortOrder as any,
-          shape: selectedShapes.length > 0 ? selectedShapes[0] : undefined,
-          color: selectedColors.length > 0 ? selectedColors[0] : undefined,
-          brand: selectedBrands.length > 0 ? selectedBrands[0] : undefined,
+          shape: selectedShapes.length > 0 ? selectedShapes : undefined,
+          color: selectedColors.length > 0 ? selectedColors : undefined,
+          brand: selectedBrands.length > 0 ? selectedBrands : undefined,
           material:
-            selectedMaterials.length > 0 ? selectedMaterials[0] : undefined,
+            selectedMaterials.length > 0 ? selectedMaterials : undefined,
+          category:
+            selectedCategories.length > 0 ? selectedCategories : undefined,
           page: currentPage,
         };
 
@@ -147,12 +161,13 @@ export default function ShopPage() {
           setBrands(filterOptions.brands || []);
           setMaterials(filterOptions.materials || []);
           setColors(filterOptions.colors || []);
+          setCategories(filterOptions.categories || []);
           setInitialLoaded(true);
         }
       } catch (err) {
         console.error("Failed to load data:", err);
         setError(
-          err instanceof ApiError ? err.message : "Failed to load products"
+          err instanceof ApiError ? err.message : "Failed to load products",
         );
       } finally {
         setLoading(false);
@@ -167,6 +182,7 @@ export default function ShopPage() {
     selectedBrands,
     selectedMaterials,
     selectedColors,
+    selectedCategories,
     currentPage,
   ]);
 
@@ -295,11 +311,17 @@ export default function ShopPage() {
                   </div>
                   <Accordion
                     type="multiple"
-                    defaultValue={["shape", "brand", "material", "color"]}
+                    defaultValue={[
+                      "shape",
+                      "brand",
+                      "material",
+                      "color",
+                      "category",
+                    ]}
                     className="w-full"
                   >
                     <FilterSection
-                      title="Hình dáng"
+                      title="Shape"
                       items={shapes}
                       selectedItems={selectedShapes}
                       showAll={showAllShapes}
@@ -308,7 +330,7 @@ export default function ShopPage() {
                       value="shape"
                     />
                     <FilterSection
-                      title="Thương hiệu"
+                      title="Brand"
                       items={brands}
                       selectedItems={selectedBrands}
                       showAll={showAllBrands}
@@ -317,7 +339,7 @@ export default function ShopPage() {
                       value="brand"
                     />
                     <FilterSection
-                      title="Chất liệu"
+                      title="Material"
                       items={materials}
                       selectedItems={selectedMaterials}
                       showAll={showAllMaterials}
@@ -328,13 +350,24 @@ export default function ShopPage() {
                       value="material"
                     />
                     <FilterSection
-                      title="Màu sắc"
+                      title="Color"
                       items={colors}
                       selectedItems={selectedColors}
                       showAll={showAllColors}
                       onToggleShowAll={() => setShowAllColors(!showAllColors)}
                       onItemChange={handleColorChange}
                       value="color"
+                    />
+                    <FilterSection
+                      title="Category"
+                      items={categories}
+                      selectedItems={selectedCategories}
+                      showAll={showAllCategories}
+                      onToggleShowAll={() =>
+                        setShowAllCategories(!showAllCategories)
+                      }
+                      onItemChange={handleCategoryChange}
+                      value="category"
                     />
                   </Accordion>
                 </div>

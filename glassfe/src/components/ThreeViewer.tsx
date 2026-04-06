@@ -36,7 +36,7 @@ export default function ThreeViewer({ modelUrl }: Props) {
       new Uint8Array([255, 255, 255]),
       1,
       1,
-      THREE.RGBFormat
+      THREE.RGBFormat,
     );
     envTexture.needsUpdate = true;
     scene.environment = envTexture;
@@ -46,7 +46,7 @@ export default function ThreeViewer({ modelUrl }: Props) {
       45,
       mountRef.current.clientWidth / mountRef.current.clientHeight,
       0.1,
-      100
+      100,
     );
     camera.position.set(0, 0, 3);
 
@@ -57,7 +57,7 @@ export default function ThreeViewer({ modelUrl }: Props) {
     });
     renderer.setSize(
       mountRef.current.clientWidth,
-      mountRef.current.clientHeight
+      mountRef.current.clientHeight,
     );
     renderer.setPixelRatio(window.devicePixelRatio);
     mountRef.current.appendChild(renderer.domElement);
@@ -73,21 +73,21 @@ export default function ThreeViewer({ modelUrl }: Props) {
 
     /* Controls (rotate only) */
     const controls = new (OrbitControls as any)(camera, renderer.domElement);
-    controls.enableZoom = false;
+    controls.enableZoom = true;
     controls.enablePan = false;
-    controls.autoRotate = false;
-    // Mặc định tắt controls để tránh xoay khi click ra ngoài ngay từ đầu
-    controls.enabled = false;
+    controls.autoRotate = true;
+    // Default disable controls to avoid rotating on outside clicks initially
+    controls.enabled = true;
 
     /* Load GLTF */
     const loader = new GLTFLoader();
-    // Biến để lưu trữ tham chiếu đến model cho việc Raycasting
+    // Variable to store model reference for Raycasting
     let loadedModel: THREE.Object3D | null = null;
 
     loader.load(
       modelUrl,
       (gltf) => {
-        loadedModel = gltf.scene; // Lưu tham chiếu model
+        loadedModel = gltf.scene; // Store model reference
 
         /* 🔥 Auto-scale to fit */
         const box = new THREE.Box3().setFromObject(loadedModel);
@@ -100,7 +100,7 @@ export default function ThreeViewer({ modelUrl }: Props) {
           console.error("Model has 0 size. Check if it contains meshes.");
         }
 
-        loadedModel.position.set(0, -0.5, 0);
+        loadedModel.position.set(0, 0, 0);
         const scale = 1.5 / size || 1;
         loadedModel.scale.setScalar(scale);
 
@@ -113,39 +113,43 @@ export default function ThreeViewer({ modelUrl }: Props) {
       (error) => {
         console.error("An error happened loading the model:", error);
         setError("Error loading model: " + (error as Error).message);
-      }
+      },
     );
 
-    /* 🔥 LOGIC MỚI: Raycasting để kiểm tra click chuột */
+    /* 🔥 NEW LOGIC: Raycasting to check mouse click */
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
     const onPointerDown = (event: PointerEvent) => {
-      // Nếu chưa load xong model thì không làm gì cả
+      // If model is not loaded yet, do nothing
       if (!loadedModel) return;
 
-      // 1. Tính toán tọa độ chuột chuẩn hóa (Normalized Device Coordinates) (-1 đến +1)
+      // 1. Calculate normalized mouse coordinates (Normalized Device Coordinates) (-1 to +1)
       const rect = renderer.domElement.getBoundingClientRect();
       mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
       mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
-      // 2. Cập nhật tia chiếu từ camera
+      // 2. Update the raycaster from the camera
       raycaster.setFromCamera(mouse, camera);
 
-      // 3. Kiểm tra va chạm với model (recursive = true để kiểm tra tất cả mesh con)
+      // 3. Check for intersection with model (recursive = true to check all child meshes)
       const intersects = raycaster.intersectObject(loadedModel, true);
 
-      // 4. Nếu có va chạm -> Bật controls. Không thì tắt.
+      // 4. If intersection -> Enable controls. Otherwise disable.
       if (intersects.length > 0) {
-        controls.enabled = true;
-      } else {
-        controls.enabled = false;
+        controls.autoRotate = false;
+        //   controls.enabled = true;
+        // } else {
+        //   controls.enabled = false;
+        // }
       }
     };
 
-    // Lắng nghe sự kiện pointerdown (chuột nhấn xuống)
-    // Sử dụng { capture: true } để đảm bảo logic của ta chạy trước logic của OrbitControls
-    renderer.domElement.addEventListener("pointerdown", onPointerDown, { capture: true });
+    // Listen to pointerdown event (mouse down)
+    // Use { capture: true } to ensure our logic runs before OrbitControls logic
+    renderer.domElement.addEventListener("pointerdown", onPointerDown, {
+      capture: true,
+    });
 
     /* Animation */
     const animate = () => {
@@ -163,7 +167,7 @@ export default function ThreeViewer({ modelUrl }: Props) {
       camera.updateProjectionMatrix();
       renderer.setSize(
         mountRef.current.clientWidth,
-        mountRef.current.clientHeight
+        mountRef.current.clientHeight,
       );
     };
     window.addEventListener("resize", onResize);
@@ -171,9 +175,14 @@ export default function ThreeViewer({ modelUrl }: Props) {
     /* Cleanup */
     return () => {
       window.removeEventListener("resize", onResize);
-      renderer.domElement.removeEventListener("pointerdown", onPointerDown, { capture: true } as any);
+      renderer.domElement.removeEventListener("pointerdown", onPointerDown, {
+        capture: true,
+      } as any);
       renderer.dispose();
-      if (mountRef.current && renderer.domElement.parentNode === mountRef.current) {
+      if (
+        mountRef.current &&
+        renderer.domElement.parentNode === mountRef.current
+      ) {
         mountRef.current.removeChild(renderer.domElement);
       }
     };
