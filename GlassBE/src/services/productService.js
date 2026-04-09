@@ -25,6 +25,7 @@ const getAllProducts = async (queryParams) => {
       brand,
       shape,
       material,
+      category,
       color,
       face_suitable,
       search,
@@ -95,6 +96,7 @@ const getAllProducts = async (queryParams) => {
     applyFilter(Brand, brand);
     applyFilter(Shape, shape);
     applyFilter(Material, material);
+    applyFilter(Category, category);
 
     if (face_suitable) {
       commonOptions.where.face_suitable = {

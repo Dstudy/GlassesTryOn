@@ -27,31 +27,31 @@ export default function AdminReportsPage() {
   const reportTypes = [
     {
       id: "sales",
-      name: "Sales Report",
-      description: "Revenue and sales performance",
+      name: "Báo cáo doanh số",
+      description: "Doanh thu và hiệu quả bán hàng",
     },
     {
       id: "products",
-      name: "Product Report",
-      description: "Product performance and inventory",
+      name: "Báo cáo sản phẩm",
+      description: "Hiệu suất sản phẩm và tồn kho",
     },
     {
       id: "customers",
-      name: "Customer Report",
-      description: "Customer behavior and demographics",
+      name: "Báo cáo khách hàng",
+      description: "Hành vi và phân khúc khách hàng",
     },
     {
       id: "orders",
-      name: "Order Report",
-      description: "Order processing and fulfillment",
+      name: "Báo cáo đơn hàng",
+      description: "Xử lý đơn hàng và giao vận",
     },
   ];
 
   const periods = [
-    { value: "7", label: "Last 7 days" },
-    { value: "30", label: "Last 30 days" },
-    { value: "90", label: "Last 90 days" },
-    { value: "365", label: "Last year" },
+    { value: "7", label: "7 ngày gần nhất" },
+    { value: "30", label: "30 ngày gần nhất" },
+    { value: "90", label: "90 ngày gần nhất" },
+    { value: "365", label: "1 năm gần nhất" },
   ];
 
   const realData = {
@@ -100,7 +100,7 @@ export default function AdminReportsPage() {
                     <TrendingUp className="h-8 w-8 text-green-600" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-600">
-                        Total Revenue
+                        Tổng doanh thu
                       </p>
                       <p className="text-2xl font-bold">
                         ${realData.sales.totalRevenue.toLocaleString()}
@@ -112,10 +112,10 @@ export default function AdminReportsPage() {
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-center">
-                    <BarChart3 className="h-8 w-8 text-blue-600" />
+                    <BarChart3 className="h-8 w-8 text-primary" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-600">
-                        Total Orders
+                        Tổng đơn hàng
                       </p>
                       <p className="text-2xl font-bold">
                         {realData.sales.totalOrders}
@@ -127,10 +127,10 @@ export default function AdminReportsPage() {
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-center">
-                    <PieChart className="h-8 w-8 text-purple-600" />
+                    <PieChart className="h-8 w-8 text-accent" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-600">
-                        Avg Order Value
+                        Giá trị đơn hàng TB
                       </p>
                       <p className="text-2xl font-bold">
                         ${realData.sales.averageOrderValue}
@@ -142,7 +142,7 @@ export default function AdminReportsPage() {
             </div>
             <Card>
               <CardHeader>
-                <CardTitle>Top Products by Revenue</CardTitle>
+                <CardTitle>Sản phẩm doanh thu cao nhất</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -158,7 +158,7 @@ export default function AdminReportsPage() {
                         <div>
                           <p className="font-medium">{product.name}</p>
                           <p className="text-sm text-gray-500">
-                            {product.orders} orders
+                            {product.orders} đơn hàng
                           </p>
                         </div>
                       </div>
@@ -182,10 +182,10 @@ export default function AdminReportsPage() {
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-center">
-                    <BarChart3 className="h-8 w-8 text-blue-600" />
+                    <BarChart3 className="h-8 w-8 text-primary" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-600">
-                        Total Products
+                        Tổng sản phẩm
                       </p>
                       <p className="text-2xl font-bold">
                         {realData.products.totalProducts}
@@ -200,7 +200,7 @@ export default function AdminReportsPage() {
                     <TrendingUp className="h-8 w-8 text-yellow-600" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-600">
-                        Low Stock
+                        Sắp hết hàng
                       </p>
                       <p className="text-2xl font-bold">
                         {realData.products.lowStock}
@@ -215,7 +215,7 @@ export default function AdminReportsPage() {
                     <TrendingUp className="h-8 w-8 text-red-600" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-600">
-                        Out of Stock
+                        Hết hàng
                       </p>
                       <p className="text-2xl font-bold">
                         {realData.products.outOfStock}
@@ -227,7 +227,7 @@ export default function AdminReportsPage() {
             </div>
             <Card>
               <CardHeader>
-                <CardTitle>Top Selling Products</CardTitle>
+                <CardTitle>Sản phẩm bán chạy nhất</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -243,7 +243,7 @@ export default function AdminReportsPage() {
                         <div>
                           <p className="font-medium">{product.name}</p>
                           <p className="text-sm text-gray-500">
-                            {product.sales} sales
+                            {product.sales} lượt bán
                           </p>
                         </div>
                       </div>
@@ -267,10 +267,10 @@ export default function AdminReportsPage() {
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-center">
-                    <BarChart3 className="h-8 w-8 text-blue-600" />
+                    <BarChart3 className="h-8 w-8 text-primary" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-600">
-                        Total Customers
+                        Tổng khách hàng
                       </p>
                       <p className="text-2xl font-bold">
                         {realData.customers.totalCustomers}
@@ -285,7 +285,7 @@ export default function AdminReportsPage() {
                     <TrendingUp className="h-8 w-8 text-green-600" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-600">
-                        New Customers
+                        Khách hàng mới
                       </p>
                       <p className="text-2xl font-bold">
                         {realData.customers.newCustomers}
@@ -305,10 +305,10 @@ export default function AdminReportsPage() {
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-center">
-                    <BarChart3 className="h-8 w-8 text-blue-600" />
+                    <BarChart3 className="h-8 w-8 text-primary" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-600">
-                        Total Orders
+                        Tổng đơn hàng
                       </p>
                       <p className="text-2xl font-bold">
                         {realData.orders.totalOrders}
@@ -323,7 +323,7 @@ export default function AdminReportsPage() {
                     <TrendingUp className="h-8 w-8 text-green-600" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-600">
-                        Completed
+                        Hoàn tất
                       </p>
                       <p className="text-2xl font-bold">
                         {realData.orders.completedOrders}
@@ -337,7 +337,7 @@ export default function AdminReportsPage() {
         );
 
       default:
-        return <div>Select a report type to view data</div>;
+        return <div>Chọn loại báo cáo để xem dữ liệu</div>;
     }
   };
 
@@ -346,9 +346,9 @@ export default function AdminReportsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Reports</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Báo cáo</h1>
             <p className="text-gray-600">
-              Generate and download business reports
+              Tạo và tải xuống các báo cáo kinh doanh
             </p>
           </div>
         </div>
@@ -358,21 +358,21 @@ export default function AdminReportsPage() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <FileText className="h-5 w-5 mr-2" />
-              Report Configuration
+              Cấu hình báo cáo
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  Report Type
+                  Loại báo cáo
                 </label>
                 <Select
                   value={selectedReport}
                   onValueChange={setSelectedReport}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select report type" />
+                    <SelectValue placeholder="Chọn loại báo cáo" />
                   </SelectTrigger>
                   <SelectContent>
                     {reportTypes.map((type) => (
@@ -390,14 +390,14 @@ export default function AdminReportsPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  Time Period
+                  Khoảng thời gian
                 </label>
                 <Select
                   value={selectedPeriod}
                   onValueChange={setSelectedPeriod}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select period" />
+                    <SelectValue placeholder="Chọn khoảng thời gian" />
                   </SelectTrigger>
                   <SelectContent>
                     {periods.map((period) => (
@@ -411,7 +411,7 @@ export default function AdminReportsPage() {
               <div className="flex items-end">
                 <Button onClick={handleDownload} className="w-full">
                   <Download className="h-4 w-4 mr-2" />
-                  Download Report
+                  Tải báo cáo
                 </Button>
               </div>
             </div>

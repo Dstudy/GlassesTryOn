@@ -24,12 +24,12 @@ interface AdminLayoutProps {
 }
 
 const navigation = [
-  { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
-  { name: "Products", href: "/admin/products", icon: Package },
-  { name: "Orders", href: "/admin/orders", icon: ShoppingCart },
+  { name: "Bảng điều khiển", href: "/admin/dashboard", icon: LayoutDashboard },
+  { name: "Sản phẩm", href: "/admin/products", icon: Package },
+  { name: "Đơn hàng", href: "/admin/orders", icon: ShoppingCart },
   // { name: "Reports", href: "/admin/reports", icon: FileText },
   // { name: "Users", href: "/admin/users", icon: Users },
-  { name: "Settings", href: "/admin/settings", icon: Settings },
+  { name: "Cài đặt", href: "/admin/settings", icon: Settings },
 ];
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
@@ -55,7 +55,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-gray-600">
-            {!isUserLoaded ? "Loading..." : "Redirecting..."}
+            {!isUserLoaded ? "Đang tải..." : "Đang chuyển hướng..."}
           </p>
         </div>
       </div>
@@ -85,7 +85,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         }`}
       >
         <div className="flex items-center justify-between h-16 px-6 border-b">
-          <h1 className="text-xl font-bold text-primary">Admin Panel</h1>
+          <h1 className="text-xl font-bold text-primary">Trang quản trị</h1>
           <Button
             variant="ghost"
             size="sm"
@@ -155,7 +155,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 href="/"
                 className="text-sm text-gray-500 hover:text-gray-700"
               >
-                View Store
+                Xem cửa hàng
               </Link>
             </div>
           </div>

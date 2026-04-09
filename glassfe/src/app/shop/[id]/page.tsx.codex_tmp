@@ -29,6 +29,7 @@ import {
 import { Lens } from "@/components/ui/lens";
 import StarRating from "@/components/ui/star-rating";
 import FaceShapeModal from "@/components/FaceShapeModal";
+import FaceShapeSidebar from "@/components/FaceShapeSidebar";
 import { FaceShape } from "@/utils/faceShapeClassifier";
 
 // Tối ưu URL ảnh Cloudinary để tải nhanh hơn
@@ -317,7 +318,7 @@ export default function ProductDetailPage() {
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-16">
             <div className="space-y-4">
-              <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-lg border shadow-lg">
+              <div className="relative flex aspect-square items-center overflow-hidden rounded-lg border shadow-lg">
                 {show3DModel && has3DModel ? (
                   <div className="absolute inset-0 h-full w-full bg-gradient-to-br from-gray-50 to-white">
                     <ThreeViewer modelUrl={modelUrl!} />
@@ -329,13 +330,13 @@ export default function ProductDetailPage() {
                     isStatic={false}
                     ariaLabel="Khu vực phóng to"
                   >
-                    <div className="flex h-full w-full items-center justify-center p-3 sm:p-4">
+                    <div className="flex h-full w-full items-center justify-center">
                       <Image
                         src={primaryImageUrl}
                         alt={product.name}
                         width={600}
                         height={600}
-                        className="mx-auto h-full max-h-[92%] w-full max-w-[92%] object-contain"
+                        className="max-h-full w-auto object-contain"
                         data-ai-hint="product photo"
                       />
                     </div>
@@ -430,15 +431,14 @@ export default function ProductDetailPage() {
                   <span className="text-muted-foreground">{product.shape}</span>
                 </div>
 
-                {product.face_suitable &&
-                  product.face_suitable.trim() !== "" && (
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold">Phù hợp khuôn mặt:</span>
-                      <span className="text-muted-foreground">
-                        {product.face_suitable}
-                      </span>
-                    </div>
-                  )}
+                {product.face_suitable && product.face_suitable.trim() !== "" && (
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold">Phù hợp khuôn mặt:</span>
+                    <span className="text-muted-foreground">
+                      {product.face_suitable}
+                    </span>
+                  </div>
+                )}
 
                 <div className="flex items-center gap-2">
                   <span className="font-semibold">Thương hiệu:</span>
@@ -503,25 +503,19 @@ export default function ProductDetailPage() {
                 <h3 className="text-xl font-semibold">Thông số kỹ thuật</h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      Chiều ngang kính:
-                    </span>
+                    <span className="text-muted-foreground">Chiều ngang kính:</span>
                     <span className="font-medium">
                       {product.dimensions.width}mm
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      Chiều dài kính:
-                    </span>
+                    <span className="text-muted-foreground">Chiều dài kính:</span>
                     <span className="font-medium">
                       {product.dimensions.length}mm
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      Độ rộng tròng:
-                    </span>
+                    <span className="text-muted-foreground">Độ rộng tròng:</span>
                     <span className="font-medium">
                       {product.dimensions.lensWidth}mm
                     </span>
@@ -571,7 +565,7 @@ export default function ProductDetailPage() {
               <div className="mt-4">
                 <Button
                   size="lg"
-                  className="flex w-full items-center gap-2 bg-gradient-to-r from-primary to-accent font-medium tracking-wide text-primary-foreground shadow-md shadow-primary/20 hover:from-primary/95 hover:to-accent/90"
+                  className="flex w-full items-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-600 font-medium tracking-wide text-white shadow-md shadow-blue-500/20 hover:from-blue-600 hover:to-indigo-700"
                   onClick={() => setShowFaceModal(true)}
                 >
                   <Camera className="h-5 w-5 shrink-0" />
@@ -630,18 +624,14 @@ export default function ProductDetailPage() {
                         );
                       })}
                     </div>
-                    <p className="text-muted-foreground">
-                      {review.review_text}
-                    </p>
+                    <p className="text-muted-foreground">{review.review_text}</p>
                   </div>
                 ),
               )}
             </div>
 
             <div>
-              <h3 className="mb-4 mt-12 text-xl font-semibold">
-                Viết đánh giá
-              </h3>
+              <h3 className="mb-4 mt-12 text-xl font-semibold">Viết đánh giá</h3>
               <div>
                 <StarRating
                   rating={productRating}
@@ -671,10 +661,7 @@ export default function ProductDetailPage() {
               </h2>
               <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 {relatedProducts.map((relatedProduct) => (
-                  <ProductCard
-                    key={relatedProduct.id}
-                    product={relatedProduct}
-                  />
+                  <ProductCard key={relatedProduct.id} product={relatedProduct} />
                 ))}
               </div>
             </div>
@@ -700,10 +687,17 @@ export default function ProductDetailPage() {
 
         <FaceShapeModal
           isOpen={showFaceModal}
-          onClose={() => {
-            setShowFaceModal(false);
-            setDetectedShape(null);
+          onClose={() => setShowFaceModal(false)}
+          onShapeDetected={(shape) => {
+            setDetectedShape(shape);
+            setShowSidebar(true);
           }}
+        />
+
+        <FaceShapeSidebar
+          shape={detectedShape}
+          isOpen={showSidebar}
+          onClose={() => setShowSidebar(false)}
         />
       </main>
       <Footer />

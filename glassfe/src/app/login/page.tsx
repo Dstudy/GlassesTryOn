@@ -29,8 +29,8 @@ import { useToast } from "@/hooks/use-toast";
 import { authApi, ApiError } from "@/lib/api";
 
 const loginSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email." }),
-  password: z.string().min(1, { message: "Please enter your password." }),
+  email: z.string().email({ message: "Vui lòng nhập email hợp lệ." }),
+  password: z.string().min(1, { message: "Vui lòng nhập mật khẩu." }),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -59,8 +59,8 @@ export default function LoginPage() {
       login(userData.id, userData.name, userData.roleID);
 
       toast({
-        title: "Welcome back!",
-        description: "You've successfully logged in.",
+        title: "Chào mừng quay lại!",
+        description: "Bạn đã đăng nhập thành công.",
       });
 
       // 3. Chuyển hướng dựa trên roleID từ API
@@ -77,11 +77,11 @@ export default function LoginPage() {
       const message =
         error instanceof ApiError &&
         (error.status === 404 || error.status === 401)
-          ? "Invalid email or password."
-          : "An unexpected error occurred. Please try again.";
+          ? "Email hoặc mật khẩu không đúng."
+          : "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại.";
 
       toast({
-        title: "Login Failed",
+        title: "Đăng nhập thất bại",
         description: message,
         variant: "destructive",
       });
@@ -100,10 +100,10 @@ export default function LoginPage() {
         <Card className="shadow-lg">
           <CardHeader className="text-center">
             <CardTitle className="font-headline text-2xl">
-              Welcome Back
+              Chào mừng trở lại
             </CardTitle>
             <CardDescription>
-              Enter your credentials to access your account.
+              Nhập thông tin đăng nhập để truy cập tài khoản của bạn.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -135,7 +135,7 @@ export default function LoginPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>Mật khẩu</FormLabel>
                       <FormControl>
                         <Input
                           type="password"
@@ -153,19 +153,19 @@ export default function LoginPage() {
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Logging In..." : "Log In"}
+                  {isSubmitting ? "Đang đăng nhập..." : "Đăng nhập"}
                 </Button>
               </form>
             </Form>
           </CardContent>
           <CardFooter className="flex flex-col items-center gap-2 text-sm">
             <p className="text-muted-foreground">
-              Don't have an account?{" "}
+              Chưa có tài khoản?{" "}
               <Link
                 href="/register"
                 className="font-semibold text-primary hover:underline"
               >
-                Sign up
+                Đăng ký
               </Link>
             </p>
           </CardFooter>

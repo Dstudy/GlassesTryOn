@@ -127,7 +127,7 @@ export default function AdminEditProductPage() {
           .filter((f: any) => f.name)
       );
     } catch (e) {
-      setError("Failed to load product");
+      setError("Không thể tải sản phẩm");
     } finally {
       setLoading(false);
     }
@@ -162,12 +162,12 @@ export default function AdminEditProductPage() {
         material_id: form.material_id ? Number(form.material_id) : null,
       });
 
-      setSuccess("Product updated successfully!");
+      setSuccess("Cập nhật sản phẩm thành công!");
       setTimeout(() => {
         router.push("/admin/products");
       }, 1500);
     } catch (error) {
-      setError("Failed to save product");
+      setError("Không thể lưu sản phẩm");
     } finally {
       setSaving(false);
     }
@@ -183,28 +183,28 @@ export default function AdminEditProductPage() {
             onClick={() => router.push("/admin/products")}
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Products
+            Quay lại sản phẩm
           </Button>
           <div>
             <h1 className="text-3xl font-bold text-gray-900">
-              Edit Product #{productId}
+              Chỉnh sửa sản phẩm #{productId}
             </h1>
             <p className="text-gray-600">
-              Update product information and variations
+              Cập nhật thông tin sản phẩm và các biến thể
             </p>
           </div>
         </div>
 
         {loading ? (
           <div className="flex items-center justify-center h-64">
-            <div className="text-lg text-gray-500">Loading product...</div>
+            <div className="text-lg text-gray-500">Đang tải sản phẩm...</div>
           </div>
         ) : (
           <Tabs defaultValue="basic" className="space-y-6">
             <TabsList>
-              <TabsTrigger value="basic">Basic Info</TabsTrigger>
-              <TabsTrigger value="features">Features</TabsTrigger>
-              <TabsTrigger value="variations">Variations</TabsTrigger>
+              <TabsTrigger value="basic">Thông tin cơ bản</TabsTrigger>
+              <TabsTrigger value="features">Tính năng</TabsTrigger>
+              <TabsTrigger value="variations">Biến thể</TabsTrigger>
             </TabsList>
 
             <TabsContent value="basic">
@@ -212,35 +212,35 @@ export default function AdminEditProductPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Package className="h-5 w-5" />
-                    Product Information
+                    Thông tin sản phẩm
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Product Name *</Label>
+                      <Label htmlFor="name">Tên sản phẩm *</Label>
                       <Input
                         id="name"
                         value={form.name}
                         onChange={(e) =>
                           setForm({ ...form, name: e.target.value })
                         }
-                        placeholder="Enter product name"
+                        placeholder="Nhập tên sản phẩm"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="subtitle">Subtitle</Label>
+                      <Label htmlFor="subtitle">Phụ đề</Label>
                       <Input
                         id="subtitle"
                         value={form.subtitle}
                         onChange={(e) =>
                           setForm({ ...form, subtitle: e.target.value })
                         }
-                        placeholder="Short subtitle"
+                        placeholder="Phụ đề ngắn"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="price">Price *</Label>
+                      <Label htmlFor="price">Giá *</Label>
                       <div className="relative">
                         <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                         <Input
@@ -259,32 +259,32 @@ export default function AdminEditProductPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="description">Description</Label>
+                    <Label htmlFor="description">Mô tả</Label>
                     <Textarea
                       id="description"
                       value={form.description}
                       onChange={(e) =>
                         setForm({ ...form, description: e.target.value })
                       }
-                      placeholder="Enter product description"
+                      placeholder="Nhập mô tả sản phẩm"
                       rows={4}
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="size">Size</Label>
+                      <Label htmlFor="size">Kích thước</Label>
                       <Input
                         id="size"
                         value={form.size}
                         onChange={(e) =>
                           setForm({ ...form, size: e.target.value })
                         }
-                        placeholder="e.g. Small/Medium or 52-18-140"
+                        placeholder="Ví dụ: Nhỏ/Vừa hoặc 52-18-140"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="brand_id">Brand</Label>
+                      <Label htmlFor="brand_id">Thương hiệu</Label>
                       <select
                         id="brand_id"
                         value={form.brand_id}
@@ -293,7 +293,7 @@ export default function AdminEditProductPage() {
                         }
                         className="w-full border rounded px-2 py-1"
                       >
-                        <option value="">Select brand</option>
+                        <option value="">Chọn thương hiệu</option>
                         {brands.map((b) => (
                           <option key={b.id} value={b.id}>
                             {b.name}
@@ -302,7 +302,7 @@ export default function AdminEditProductPage() {
                       </select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="shape_id">Shape</Label>
+                      <Label htmlFor="shape_id">Dáng</Label>
                       <select
                         id="shape_id"
                         value={form.shape_id}
@@ -311,7 +311,7 @@ export default function AdminEditProductPage() {
                         }
                         className="w-full border rounded px-2 py-1"
                       >
-                        <option value="">Select shape</option>
+                        <option value="">Chọn dáng</option>
                         {shapes.map((s) => (
                           <option key={s.id} value={s.id}>
                             {s.name}
@@ -320,7 +320,7 @@ export default function AdminEditProductPage() {
                       </select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="material_id">Material</Label>
+                      <Label htmlFor="material_id">Chất liệu</Label>
                       <select
                         id="material_id"
                         value={form.material_id}
@@ -329,7 +329,7 @@ export default function AdminEditProductPage() {
                         }
                         className="w-full border rounded px-2 py-1"
                       >
-                        <option value="">Select material</option>
+                        <option value="">Chọn chất liệu</option>
                         {materials.map((m) => (
                           <option key={m.id} value={m.id}>
                             {m.name}
@@ -354,13 +354,13 @@ export default function AdminEditProductPage() {
                   <div className="flex items-center gap-2 pt-4">
                     <Button onClick={handleSave} disabled={saving}>
                       <Save className="h-4 w-4 mr-2" />
-                      {saving ? "Saving..." : "Save Changes"}
+                      {saving ? "Đang lưu..." : "Lưu thay đổi"}
                     </Button>
                     <Button
                       variant="outline"
                       onClick={() => router.push("/admin/products")}
                     >
-                      Cancel
+                      Hủy
                     </Button>
                   </div>
                 </CardContent>
@@ -372,7 +372,7 @@ export default function AdminEditProductPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Tag className="h-5 w-5" />
-                    Product Features
+                    Tính năng sản phẩm
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -383,7 +383,7 @@ export default function AdminEditProductPage() {
                         className="grid grid-cols-1 md:grid-cols-3 gap-3 items-end"
                       >
                         <div className="space-y-2">
-                          <Label>Name</Label>
+                          <Label>Tên</Label>
                           <Input
                             value={f.name}
                             onChange={(e) => {
@@ -394,11 +394,11 @@ export default function AdminEditProductPage() {
                               };
                               setFeatures(copy);
                             }}
-                            placeholder="Anti-scratch coating"
+                            placeholder="Lớp phủ chống trầy"
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label>Image URL</Label>
+                          <Label>URL hình ảnh</Label>
                           <Input
                             value={f.img ?? ""}
                             onChange={(e) => {
@@ -416,18 +416,18 @@ export default function AdminEditProductPage() {
                               setFeatures(features.filter((_, i) => i !== idx))
                             }
                           >
-                            <Trash2 className="h-4 w-4 mr-1" /> Remove
+                            <Trash2 className="h-4 w-4 mr-1" /> Xóa
                           </Button>
                         </div>
                       </div>
                     ))}
                   </div>
                   <div className="pt-4">
-                    <Label>Available Features</Label>
+                    <Label>Tính năng có sẵn</Label>
                     <div className="flex items-center gap-2 mt-2 flex-wrap">
                       {availableFeatures.length === 0 ? (
                         <div className="text-sm text-gray-500">
-                          No features available
+                          Không có tính năng nào
                         </div>
                       ) : (
                         availableFeatures.map((af) => {
@@ -510,7 +510,7 @@ export default function AdminEditProductPage() {
                         setFeatures([...features, { name: "", img: "" }])
                       }
                     >
-                      <Plus className="h-4 w-4 mr-1" /> Add Feature
+                      <Plus className="h-4 w-4 mr-1" /> Thêm tính năng
                     </Button>
                     <Button
                       onClick={async () => {
@@ -520,16 +520,16 @@ export default function AdminEditProductPage() {
                             productId,
                             features
                           );
-                          setSuccess("Features updated successfully!");
+                          setSuccess("Cập nhật tính năng thành công!");
                           await loadProduct();
                         } catch (e) {
-                          setError("Failed to update features");
+                          setError("Không thể cập nhật tính năng");
                         } finally {
                           setSaving(false);
                         }
                       }}
                     >
-                      <Save className="h-4 w-4 mr-1" /> Save Features
+                      <Save className="h-4 w-4 mr-1" /> Lưu tính năng
                     </Button>
                   </div>
                 </CardContent>
@@ -541,7 +541,7 @@ export default function AdminEditProductPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Palette className="h-5 w-5" />
-                    Product Variations & Images
+                    Biến thể sản phẩm & hình ảnh
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -566,7 +566,7 @@ export default function AdminEditProductPage() {
                                   {variation.Color?.name}
                                 </p>
                                 <p className="text-sm text-gray-500">
-                                  {variation.ProductImages?.length || 0} images
+                                  {variation.ProductImages?.length || 0} hình ảnh
                                 </p>
                               </div>
                             </div>
@@ -575,7 +575,7 @@ export default function AdminEditProductPage() {
                               {/* Allow admin to edit the single main image for this variation */}
                               <input
                                 type="text"
-                                placeholder="Image URL (single)"
+                                placeholder="URL hình ảnh (một ảnh)"
                                 value={
                                   variation.ProductImages &&
                                   variation.ProductImages[0]
@@ -633,18 +633,18 @@ export default function AdminEditProductPage() {
                                         body: JSON.stringify({ pic_url: url }),
                                       }
                                     );
-                                    setSuccess("Variation image updated");
+                                    setSuccess("Đã cập nhật ảnh biến thể");
                                     await loadProduct();
                                   } catch (e) {
                                     setError(
-                                      "Failed to update variation image"
+                                      "Không thể cập nhật ảnh biến thể"
                                     );
                                   } finally {
                                     setSaving(false);
                                   }
                                 }}
                               >
-                                Save Image
+                                Lưu ảnh
                               </Button>
 
                               {/* Reorder controls for images of this variation (move first image up/down within product images order) */}
@@ -664,7 +664,7 @@ export default function AdminEditProductPage() {
                                     const firstUrl =
                                       pv?.ProductImages?.[0]?.pic_url;
                                     if (!firstUrl)
-                                      return setError("No image to reorder");
+                                      return setError("Không có ảnh để sắp xếp lại");
                                     // best-effort endpoint; backend may support a product images reorder endpoint
                                     await fetch(
                                       `${
@@ -682,16 +682,16 @@ export default function AdminEditProductPage() {
                                         }),
                                       }
                                     );
-                                    setSuccess("Image order updated");
+                                    setSuccess("Đã cập nhật thứ tự ảnh");
                                     await loadProduct();
                                   } catch (e) {
-                                    setError("Failed to reorder images");
+                                    setError("Không thể sắp xếp lại ảnh");
                                   } finally {
                                     setSaving(false);
                                   }
                                 }}
                               >
-                                Move Up
+                                Chuyển lên
                               </Button>
 
                               <Button
@@ -709,7 +709,7 @@ export default function AdminEditProductPage() {
                                     const firstUrl =
                                       pv?.ProductImages?.[0]?.pic_url;
                                     if (!firstUrl)
-                                      return setError("No image to reorder");
+                                      return setError("Không có ảnh để sắp xếp lại");
                                     await fetch(
                                       `${
                                         process.env.NEXT_PUBLIC_API_URL ||
@@ -726,16 +726,16 @@ export default function AdminEditProductPage() {
                                         }),
                                       }
                                     );
-                                    setSuccess("Image order updated");
+                                    setSuccess("Đã cập nhật thứ tự ảnh");
                                     await loadProduct();
                                   } catch (e) {
-                                    setError("Failed to reorder images");
+                                    setError("Không thể sắp xếp lại ảnh");
                                   } finally {
                                     setSaving(false);
                                   }
                                 }}
                               >
-                                Move Down
+                                Chuyển xuống
                               </Button>
 
                               <Button
@@ -753,7 +753,7 @@ export default function AdminEditProductPage() {
                                     );
                                     const first = pv?.ProductImages?.[0];
                                     if (!first)
-                                      return setError("No image to remove");
+                                      return setError("Không có ảnh để xóa");
                                     await fetch(
                                       `${
                                         process.env.NEXT_PUBLIC_API_URL ||
@@ -771,10 +771,10 @@ export default function AdminEditProductPage() {
                                         }),
                                       }
                                     );
-                                    setSuccess("Image removed");
+                                    setSuccess("Đã xóa ảnh");
                                     await loadProduct();
                                   } catch (e) {
-                                    setError("Failed to remove image");
+                                    setError("Không thể xóa ảnh");
                                   } finally {
                                     setSaving(false);
                                   }
@@ -790,7 +790,7 @@ export default function AdminEditProductPage() {
                   ) : (
                     <div className="text-center py-8 text-gray-500">
                       <Palette className="h-12 w-12 mx-auto mb-4 text-gray-300" />
-                      <p>No variations found for this product.</p>
+                      <p>Không tìm thấy biến thể cho sản phẩm này.</p>
                     </div>
                   )}
                 </CardContent>

@@ -53,14 +53,14 @@ export default function AdminUsersPage() {
     return role === "Admin" ? (
       <Shield className="h-4 w-4 text-red-500" />
     ) : (
-      <User className="h-4 w-4 text-blue-500" />
+      <User className="h-4 w-4 text-accent" />
     );
   };
 
   const getRoleColor = (role: string) => {
     return role === "Admin"
       ? "bg-red-100 text-red-800"
-      : "bg-blue-100 text-blue-800";
+      : "bg-primary/10 text-primary";
   };
 
   const getStatusColor = (status: string) => {
@@ -80,7 +80,7 @@ export default function AdminUsersPage() {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
-          <div className="text-lg text-gray-500">Loading users...</div>
+          <div className="text-lg text-gray-500">Đang tải người dùng...</div>
         </div>
       </AdminLayout>
     );
@@ -91,9 +91,9 @@ export default function AdminUsersPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Users</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Người dùng</h1>
             <p className="text-gray-600">
-              Manage user accounts and permissions
+              Quản lý tài khoản và quyền người dùng
             </p>
           </div>
         </div>
@@ -103,10 +103,10 @@ export default function AdminUsersPage() {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center">
-                <Users className="h-8 w-8 text-blue-600" />
+                <Users className="h-8 w-8 text-primary" />
                 <div className="ml-3">
                   <p className="text-sm font-medium text-gray-600">
-                    Total Users
+                    Tổng người dùng
                   </p>
                   <p className="text-2xl font-bold">{stats.total}</p>
                 </div>
@@ -119,7 +119,7 @@ export default function AdminUsersPage() {
                 <User className="h-8 w-8 text-green-600" />
                 <div className="ml-3">
                   <p className="text-sm font-medium text-gray-600">
-                    Active Users
+                    Người dùng hoạt động
                   </p>
                   <p className="text-2xl font-bold">{stats.active}</p>
                 </div>
@@ -131,7 +131,7 @@ export default function AdminUsersPage() {
               <div className="flex items-center">
                 <Shield className="h-8 w-8 text-red-600" />
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-600">Admins</p>
+                  <p className="text-sm font-medium text-gray-600">Quản trị viên</p>
                   <p className="text-2xl font-bold">{stats.admins}</p>
                 </div>
               </div>
@@ -140,9 +140,9 @@ export default function AdminUsersPage() {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center">
-                <User className="h-8 w-8 text-purple-600" />
+                <User className="h-8 w-8 text-accent" />
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-600">Customers</p>
+                  <p className="text-sm font-medium text-gray-600">Khách hàng</p>
                   <p className="text-2xl font-bold">{stats.customers}</p>
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default function AdminUsersPage() {
           <div className="relative flex-1 max-w-sm">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
-              placeholder="Search users..."
+              placeholder="Tìm kiếm người dùng..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -168,7 +168,7 @@ export default function AdminUsersPage() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <Users className="h-5 w-5 mr-2" />
-              All Users ({filteredUsers.length})
+              Tất cả người dùng ({filteredUsers.length})
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -176,14 +176,14 @@ export default function AdminUsersPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="text-left border-b">
-                    <th className="py-3 pr-4 font-medium">User</th>
+                    <th className="py-3 pr-4 font-medium">Người dùng</th>
                     <th className="py-3 pr-4 font-medium">Email</th>
-                    <th className="py-3 pr-4 font-medium">Role</th>
-                    <th className="py-3 pr-4 font-medium">Status</th>
-                    <th className="py-3 pr-4 font-medium">Join Date</th>
-                    <th className="py-3 pr-4 font-medium">Orders</th>
-                    <th className="py-3 pr-4 font-medium">Total Spent</th>
-                    <th className="py-3 pr-4 font-medium">Actions</th>
+                    <th className="py-3 pr-4 font-medium">Vai trò</th>
+                    <th className="py-3 pr-4 font-medium">Trạng thái</th>
+                    <th className="py-3 pr-4 font-medium">Ngày tham gia</th>
+                    <th className="py-3 pr-4 font-medium">Đơn hàng</th>
+                    <th className="py-3 pr-4 font-medium">Tổng chi tiêu</th>
+                    <th className="py-3 pr-4 font-medium">Thao tác</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -233,7 +233,7 @@ export default function AdminUsersPage() {
                             <Mail className="h-4 w-4" />
                           </Button>
                           <Button size="sm" variant="outline">
-                            View
+                            Xem
                           </Button>
                         </div>
                       </td>

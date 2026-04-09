@@ -93,7 +93,7 @@ export default function AdminDashboardPage() {
         <div className="flex items-center justify-center h-64">
           <div className="flex items-center gap-2">
             <RefreshCw className="h-5 w-5 animate-spin" />
-            <div className="text-lg text-gray-500">Loading analytics...</div>
+            <div className="text-lg text-gray-500">Đang tải phân tích...</div>
           </div>
         </div>
       </AdminLayout>
@@ -106,9 +106,9 @@ export default function AdminDashboardPage() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Analytics</h1>
+              <h1 className="text-3xl font-bold text-gray-900">Phân tích</h1>
               <p className="text-gray-600">
-                Track your store performance and insights
+                Theo dõi hiệu suất cửa hàng và các số liệu quan trọng
               </p>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default function AdminDashboardPage() {
           <div className="flex gap-2">
             <Button onClick={loadAnalyticsData} variant="outline">
               <RefreshCw className="h-4 w-4 mr-2" />
-              Retry
+              Thử lại
             </Button>
             <Button onClick={handleUpdateAnalytics} disabled={updating}>
               {updating ? (
@@ -127,7 +127,7 @@ export default function AdminDashboardPage() {
               ) : (
                 <RefreshCw className="h-4 w-4 mr-2" />
               )}
-              Update Analytics
+              Cập nhật phân tích
             </Button>
           </div>
         </div>
@@ -139,28 +139,28 @@ export default function AdminDashboardPage() {
 
   const metrics = [
     {
-      title: "Total Revenue",
+      title: "Tổng doanh thu",
       value: `$${data.summary.total_revenue?.value?.toLocaleString() || "0"}`,
       icon: DollarSign,
       growth: data.summary.total_revenue?.growth_rate || 0,
       color: "text-green-600",
     },
     {
-      title: "Total Orders",
+      title: "Tổng đơn hàng",
       value: data.summary.total_orders?.value?.toString() || "0",
       icon: ShoppingCart,
       growth: data.summary.total_orders?.growth_rate || 0,
-      color: "text-blue-600",
+      color: "text-primary",
     },
     {
-      title: "Total Customers",
+      title: "Tổng khách hàng",
       value: data.summary.total_customers?.value?.toString() || "0",
       icon: Users,
       growth: data.summary.total_customers?.growth_rate || 0,
-      color: "text-purple-600",
+      color: "text-accent",
     },
     {
-      title: "Total Products",
+      title: "Tổng sản phẩm",
       value: data.summary.total_products?.value?.toString() || "0",
       icon: Package,
       growth: 0,
@@ -173,15 +173,15 @@ export default function AdminDashboardPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Analytics</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Phân tích</h1>
             <p className="text-gray-600">
-              Track your store performance and insights
+              Theo dõi hiệu suất cửa hàng và các số liệu quan trọng
             </p>
           </div>
           <div className="flex gap-2">
             <Button onClick={loadAnalyticsData} variant="outline">
               <RefreshCw className="h-4 w-4 mr-2" />
-              Refresh
+              Làm mới
             </Button>
             <Button onClick={handleUpdateAnalytics} disabled={updating}>
               {updating ? (
@@ -189,7 +189,7 @@ export default function AdminDashboardPage() {
               ) : (
                 <RefreshCw className="h-4 w-4 mr-2" />
               )}
-              Update Analytics
+              Cập nhật phân tích
             </Button>
           </div>
         </div>
@@ -209,7 +209,7 @@ export default function AdminDashboardPage() {
                 {metric.growth > 0 && (
                   <div className="flex items-center text-xs text-green-500 mt-1">
                     <TrendingUp className="h-3 w-3 mr-1" />
-                    <span>+{metric.growth}% from last month</span>
+                    <span>+{metric.growth}% so với tháng trước</span>
                   </div>
                 )}
               </CardContent>
@@ -224,7 +224,7 @@ export default function AdminDashboardPage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <BarChart3 className="h-5 w-5 mr-2" />
-                Monthly Revenue
+                Doanh thu theo tháng
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -267,7 +267,7 @@ export default function AdminDashboardPage() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Package className="h-5 w-5 mr-2" />
-                Top Selling Products
+                Sản phẩm bán chạy nhất
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -284,7 +284,7 @@ export default function AdminDashboardPage() {
                       <div>
                         <p className="font-medium">{product.product_name}</p>
                         <p className="text-sm text-gray-500">
-                          {product.sales} sales
+                          {product.sales} lượt bán
                         </p>
                       </div>
                     </div>
@@ -303,36 +303,36 @@ export default function AdminDashboardPage() {
         {/* Performance Summary */}
         <Card>
           <CardHeader>
-            <CardTitle>Performance Summary</CardTitle>
+            <CardTitle>Tóm tắt hiệu suất</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-4 bg-green-50 rounded-lg">
                 <TrendingUp className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-green-800">Revenue Growth</h3>
+                <h3 className="font-semibold text-green-800">Tăng trưởng doanh thu</h3>
                 <p className="text-2xl font-bold text-green-600">
                   +{(data.summary.total_revenue?.growth_rate || 0).toFixed(1)}%
                 </p>
-                <p className="text-sm text-green-600">vs last month</p>
+                <p className="text-sm text-green-600">so với tháng trước</p>
               </div>
-              <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <ShoppingCart className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-blue-800">Order Growth</h3>
-                <p className="text-2xl font-bold text-blue-600">
+              <div className="text-center p-4 bg-primary/10 rounded-lg">
+                <ShoppingCart className="h-8 w-8 text-primary mx-auto mb-2" />
+                <h3 className="font-semibold text-primary">Tăng trưởng đơn hàng</h3>
+                <p className="text-2xl font-bold text-primary">
                   +{(data.summary.total_orders?.growth_rate || 0).toFixed(1)}%
                 </p>
-                <p className="text-sm text-blue-600">vs last month</p>
+                <p className="text-sm text-primary">so với tháng trước</p>
               </div>
-              <div className="text-center p-4 bg-purple-50 rounded-lg">
-                <Users className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-purple-800">
-                  Customer Growth
+              <div className="text-center p-4 bg-accent/15 rounded-lg">
+                <Users className="h-8 w-8 text-accent mx-auto mb-2" />
+                <h3 className="font-semibold text-primary">
+                  Tăng trưởng khách hàng
                 </h3>
-                <p className="text-2xl font-bold text-purple-600">
+                <p className="text-2xl font-bold text-accent">
                   +{(data.summary.total_customers?.growth_rate || 0).toFixed(1)}
                   %
                 </p>
-                <p className="text-sm text-purple-600">vs last month</p>
+                <p className="text-sm text-accent">so với tháng trước</p>
               </div>
             </div>
           </CardContent>

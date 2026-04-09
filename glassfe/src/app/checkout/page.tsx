@@ -47,14 +47,14 @@ import {
 import { ArrowLeft, CreditCard } from "lucide-react";
 
 const checkoutSchema = z.object({
-  email: z.string().email({ message: "Invalid email address." }),
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  province: z.string().min(1, "Province/City is required"),
-  district: z.string().min(1, "District is required"),
-  ward: z.string().min(1, "Ward is required"),
-  address: z.string().min(1, "Address is required"),
-  deliveryDate: z.date({ required_error: "Please choose a delivery date." }),
+  email: z.string().email({ message: "Địa chỉ email không hợp lệ." }),
+  firstName: z.string().min(1, "Vui lòng nhập tên."),
+  lastName: z.string().min(1, "Vui lòng nhập họ."),
+  province: z.string().min(1, "Vui lòng nhập tỉnh/thành phố."),
+  district: z.string().min(1, "Vui lòng nhập quận/huyện."),
+  ward: z.string().min(1, "Vui lòng nhập phường/xã."),
+  address: z.string().min(1, "Vui lòng nhập địa chỉ."),
+  deliveryDate: z.date({ required_error: "Vui lòng chọn ngày giao hàng." }),
   paymentMethod: z.literal("Thanh toán khi nhận hàng"),
 });
 
@@ -128,12 +128,12 @@ export default function CheckoutPage() {
           className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-4"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to cart
+          Quay lại giỏ hàng
         </Link>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div className="order-2 md:order-1">
             <h1 className="font-headline text-3xl font-bold text-primary mb-6">
-              Shipping & Payment
+              Giao hàng & thanh toán
             </h1>
             <Form {...form}>
               <form
@@ -143,7 +143,7 @@ export default function CheckoutPage() {
                 <Card>
                   <CardHeader>
                     <CardTitle className="font-headline text-xl">
-                      Shipping Information
+                      Thông tin giao hàng
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -154,7 +154,7 @@ export default function CheckoutPage() {
                         <FormItem>
                           <FormLabel>Email</FormLabel>
                           <FormControl>
-                            <Input placeholder="you@example.com" {...field} />
+                            <Input placeholder="ban@example.com" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -166,9 +166,9 @@ export default function CheckoutPage() {
                         name="firstName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>First Name</FormLabel>
+                            <FormLabel>Tên</FormLabel>
                             <FormControl>
-                              <Input placeholder="John" {...field} />
+                              <Input placeholder="An" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -179,9 +179,9 @@ export default function CheckoutPage() {
                         name="lastName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Last Name</FormLabel>
+                            <FormLabel>Họ</FormLabel>
                             <FormControl>
-                              <Input placeholder="Doe" {...field} />
+                              <Input placeholder="Nguyễn" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -245,7 +245,7 @@ export default function CheckoutPage() {
                       name="deliveryDate"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Delivery Date</FormLabel>
+                          <FormLabel>Ngày giao hàng</FormLabel>
                           <div className="flex items-center gap-2">
                             <Dialog
                               open={isDateOpen}
@@ -255,13 +255,13 @@ export default function CheckoutPage() {
                                 <Button type="button" variant="outline">
                                   {field.value
                                     ? new Date(field.value).toLocaleDateString()
-                                    : "Choose date"}
+                                    : "Chọn ngày"}
                                 </Button>
                               </DialogTrigger>
                               <DialogContent>
                                 <DialogHeader>
                                   <DialogTitle>
-                                    Select Delivery Date
+                                    Chọn ngày giao hàng
                                   </DialogTitle>
                                 </DialogHeader>
                                 <div className="pt-2">
@@ -290,7 +290,7 @@ export default function CheckoutPage() {
                 <Card>
                   <CardHeader>
                     <CardTitle className="font-headline text-xl">
-                      Payment Method
+                      Phương thức thanh toán
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
@@ -299,7 +299,7 @@ export default function CheckoutPage() {
                       name="paymentMethod"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Selected Method</FormLabel>
+                          <FormLabel>Phương thức đã chọn</FormLabel>
                           <div className="flex items-center gap-2">
                             <Button type="button" variant="outline" disabled>
                               {field.value}
@@ -310,7 +310,7 @@ export default function CheckoutPage() {
                       )}
                     />
                     <p className="text-sm text-muted-foreground">
-                      You will pay in cash upon delivery.
+                      Bạn sẽ thanh toán bằng tiền mặt khi nhận hàng.
                     </p>
                   </CardContent>
                 </Card>
@@ -319,7 +319,7 @@ export default function CheckoutPage() {
                   size="lg"
                   className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
                 >
-                  <CreditCard className="w-5 h-5 mr-2" /> Pay $
+                  <CreditCard className="w-5 h-5 mr-2" /> Thanh toán $
                   {getCartTotal().toFixed(2)}
                 </Button>
               </form>
@@ -329,7 +329,7 @@ export default function CheckoutPage() {
             <Card className="sticky top-8">
               <CardHeader>
                 <CardTitle className="font-headline text-xl">
-                  Order Summary
+                  Tóm tắt đơn hàng
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -348,16 +348,16 @@ export default function CheckoutPage() {
                 ))}
                 <Separator />
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Subtotal</span>
+                  <span className="text-muted-foreground">Tạm tính</span>
                   <span>${getCartTotal().toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Shipping</span>
+                  <span className="text-muted-foreground">Vận chuyển</span>
                   <span>$0.00</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between font-bold text-lg">
-                  <span>Total</span>
+                  <span>Tổng cộng</span>
                   <span>${getCartTotal().toFixed(2)}</span>
                 </div>
               </CardContent>
@@ -368,15 +368,15 @@ export default function CheckoutPage() {
       <AlertDialog open={isSuccess} onOpenChange={setIsSuccess}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Payment Successful!</AlertDialogTitle>
+            <AlertDialogTitle>Thanh toán thành công!</AlertDialogTitle>
             <AlertDialogDescription>
-              Thank you for your order. A confirmation email has been sent. Your
-              glasses are on their way!
+              Cảm ơn bạn đã đặt hàng. Email xác nhận đã được gửi. Chiếc kính của
+              bạn đang trên đường đến!
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction asChild>
-              <Link href="/shop">Continue Shopping</Link>
+              <Link href="/shop">Tiếp tục mua sắm</Link>
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

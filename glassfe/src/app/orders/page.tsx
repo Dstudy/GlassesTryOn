@@ -27,7 +27,7 @@ export default function OrdersPage() {
     (async () => {
       const userId = user?.id;
       if (!userId) {
-        setError("User not logged in");
+        setError("Người dùng chưa đăng nhập");
         setLoading(false);
         return;
       }
@@ -46,7 +46,7 @@ export default function OrdersPage() {
         );
         setOrders(mapped);
       } catch (e) {
-        setError("Failed to load orders");
+        setError("Không thể tải đơn hàng");
       } finally {
         setLoading(false);
       }
@@ -59,25 +59,25 @@ export default function OrdersPage() {
       <main className="flex-1 bg-gray-50/50">
         <div className="container mx-auto px-4 py-8 md:py-12">
           <h1 className="font-headline text-4xl font-bold tracking-tight text-primary md:text-5xl">
-            Your Orders
+            Đơn hàng của bạn
           </h1>
 
           {loading ? (
             <div className="mt-8 flex items-center gap-2">
-              <Loader2 className="h-6 w-6 animate-spin" /> Loading orders...
+              <Loader2 className="h-6 w-6 animate-spin" /> Đang tải đơn hàng...
             </div>
           ) : error === "User not logged in" ? (
             // Hiển thị Card đăng nhập nếu chưa đăng nhập
             <Card className="mt-8">
               <CardHeader>
-                <CardTitle>Please Sign In</CardTitle>
+                <CardTitle>Vui lòng đăng nhập</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  You must be logged in to view your orders.
+                  Bạn cần đăng nhập để xem đơn hàng của mình.
                 </p>
                 <Button asChild className="mt-4">
-                  <Link href="/login">Sign In</Link>
+                  <Link href="/login">Đăng nhập</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -86,17 +86,17 @@ export default function OrdersPage() {
           ) : orders.length === 0 ? (
             <Card className="mt-8">
               <CardHeader>
-                <CardTitle>No orders yet</CardTitle>
+                <CardTitle>Chưa có đơn hàng</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Place an order to see it here.
+                  Hãy đặt hàng để xem tại đây.
                 </p>
                 <Button
                   asChild
                   className="mt-4 bg-accent text-accent-foreground hover:bg-accent/90"
                 >
-                  <Link href="/shop">Shop Now</Link>
+                  <Link href="/shop">Mua ngay</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -107,21 +107,21 @@ export default function OrdersPage() {
                   <CardContent className="p-4 flex items-center justify-between">
                     <div>
                       <div className="text-sm text-muted-foreground">
-                        Order #{o.id}
+                        Đơn hàng #{o.id}
                       </div>
-                      <div className="font-medium">Status: {o.status}</div>
+                      <div className="font-medium">Trạng thái: {o.status}</div>
                       <div className="text-sm">
-                        Total: {o.total_amount ?? "-"}
+                        Tổng tiền: {o.total_amount ?? "-"}
                       </div>
                       {o.order_date && (
                         <div className="text-xs text-muted-foreground">
-                          Placed: {new Date(o.order_date).toLocaleString()}
+                          Đặt lúc: {new Date(o.order_date).toLocaleString()}
                         </div>
                       )}
                     </div>
                     <Button asChild variant="outline">
                       <Link href={`/orders/${o.id}`}>
-                        View Details <ArrowRight className="ml-2 h-4 w-4" />
+                        Xem chi tiết <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
                   </CardContent>

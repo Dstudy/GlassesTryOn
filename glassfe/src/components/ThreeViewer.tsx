@@ -112,7 +112,7 @@ export default function ThreeViewer({ modelUrl }: Props) {
       },
       (error) => {
         console.error("An error happened loading the model:", error);
-        setError("Error loading model: " + (error as Error).message);
+        setError("Không thể tải mô hình: " + (error as Error).message);
       },
     );
 
