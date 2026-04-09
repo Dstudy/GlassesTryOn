@@ -81,7 +81,7 @@ export default function FaceShapeModal({ isOpen, onClose, onShapeDetected }: Fac
         }
       } catch (err) {
         console.error("Error accessing camera:", err);
-        setCameraError("Cannot access camera. Please allow camera permissions.");
+        setCameraError("Không thể truy cập camera. Vui lòng cấp quyền sử dụng camera.");
       }
     };
 
@@ -191,7 +191,7 @@ export default function FaceShapeModal({ isOpen, onClose, onShapeDetected }: Fac
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>AI Face Shape Classifier</DialogTitle>
+          <DialogTitle>AI nhận diện dáng khuôn mặt</DialogTitle>
         </DialogHeader>
 
         <div className="flex flex-col items-center gap-4 py-4">
@@ -202,7 +202,7 @@ export default function FaceShapeModal({ isOpen, onClose, onShapeDetected }: Fac
               {isModelLoading ? (
                 <div className="flex flex-col items-center gap-2 text-muted-foreground">
                   <Loader2 className="h-8 w-8 animate-spin" />
-                  <span>Loading AI Model...</span>
+                  <span>Đang tải mô hình AI...</span>
                 </div>
               ) : (
                 <>
@@ -224,17 +224,17 @@ export default function FaceShapeModal({ isOpen, onClose, onShapeDetected }: Fac
 
           {detectedShape && !cameraError && !isModelLoading && (
             <div className="flex flex-col items-center gap-2">
-              <span className="text-sm text-muted-foreground">Detected Face Shape:</span>
+              <span className="text-sm text-muted-foreground">Dáng khuôn mặt được nhận diện:</span>
               <span className="text-2xl font-bold text-primary">{detectedShape}</span>
             </div>
           )}
 
           <div className="flex w-full justify-end gap-3 mt-4">
             <Button variant="outline" onClick={handleClose}>
-              Cancel
+              Hủy
             </Button>
             <Button onClick={confirmShape} disabled={!detectedShape || isModelLoading || !!cameraError}>
-              Find Suitable Glasses
+              Tìm kính phù hợp
             </Button>
           </div>
         </div>

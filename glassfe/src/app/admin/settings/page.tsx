@@ -61,14 +61,14 @@ export default function AdminSettingsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Cài đặt</h1>
             <p className="text-gray-600">
-              Manage your store settings and preferences
+              Quản lý cài đặt và tùy chọn của cửa hàng
             </p>
           </div>
           <Button onClick={handleSave} disabled={saving}>
             <Save className="h-4 w-4 mr-2" />
-            {saving ? "Saving..." : "Save Changes"}
+            {saving ? "Đang lưu..." : "Lưu thay đổi"}
           </Button>
         </div>
 
@@ -77,13 +77,13 @@ export default function AdminSettingsPage() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <Store className="h-5 w-5 mr-2" />
-              Store Information
+              Thông tin cửa hàng
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="storeName">Store Name</Label>
+                <Label htmlFor="storeName">Tên cửa hàng</Label>
                 <Input
                   id="storeName"
                   value={settings.storeName}
@@ -91,7 +91,7 @@ export default function AdminSettingsPage() {
                 />
               </div>
               <div>
-                <Label htmlFor="storeEmail">Store Email</Label>
+                <Label htmlFor="storeEmail">Email cửa hàng</Label>
                 <Input
                   id="storeEmail"
                   type="email"
@@ -101,7 +101,7 @@ export default function AdminSettingsPage() {
               </div>
             </div>
             <div>
-              <Label htmlFor="storePhone">Store Phone</Label>
+              <Label htmlFor="storePhone">Số điện thoại cửa hàng</Label>
               <Input
                 id="storePhone"
                 value={settings.storePhone}
@@ -109,7 +109,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <Label htmlFor="storeAddress">Store Address</Label>
+              <Label htmlFor="storeAddress">Địa chỉ cửa hàng</Label>
               <Input
                 id="storeAddress"
                 value={settings.storeAddress}
@@ -117,7 +117,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <Label htmlFor="storeDescription">Store Description</Label>
+              <Label htmlFor="storeDescription">Mô tả cửa hàng</Label>
               <Textarea
                 id="storeDescription"
                 value={settings.storeDescription}
@@ -135,15 +135,15 @@ export default function AdminSettingsPage() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <Bell className="h-5 w-5 mr-2" />
-              Notifications
+              Thông báo
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <Label htmlFor="newOrders">New Orders</Label>
+                <Label htmlFor="newOrders">Đơn hàng mới</Label>
                 <p className="text-sm text-gray-500">
-                  Get notified when new orders are placed
+                  Nhận thông báo khi có đơn hàng mới
                 </p>
               </div>
               <Switch
@@ -156,9 +156,9 @@ export default function AdminSettingsPage() {
             </div>
             <div className="flex items-center justify-between">
               <div>
-                <Label htmlFor="lowStock">Low Stock Alerts</Label>
+                <Label htmlFor="lowStock">Cảnh báo sắp hết hàng</Label>
                 <p className="text-sm text-gray-500">
-                  Get notified when products are running low
+                  Nhận thông báo khi sản phẩm sắp hết
                 </p>
               </div>
               <Switch
@@ -171,9 +171,9 @@ export default function AdminSettingsPage() {
             </div>
             <div className="flex items-center justify-between">
               <div>
-                <Label htmlFor="customerMessages">Customer Messages</Label>
+                <Label htmlFor="customerMessages">Tin nhắn khách hàng</Label>
                 <p className="text-sm text-gray-500">
-                  Get notified when customers send messages
+                  Nhận thông báo khi khách hàng gửi tin nhắn
                 </p>
               </div>
               <Switch
@@ -186,9 +186,9 @@ export default function AdminSettingsPage() {
             </div>
             <div className="flex items-center justify-between">
               <div>
-                <Label htmlFor="systemUpdates">System Updates</Label>
+                <Label htmlFor="systemUpdates">Cập nhật hệ thống</Label>
                 <p className="text-sm text-gray-500">
-                  Get notified about system updates and maintenance
+                  Nhận thông báo về cập nhật và bảo trì hệ thống
                 </p>
               </div>
               <Switch
@@ -207,15 +207,15 @@ export default function AdminSettingsPage() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <Shield className="h-5 w-5 mr-2" />
-              Security Settings
+              Cài đặt bảo mật
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <Label htmlFor="twoFactorAuth">Two-Factor Authentication</Label>
+                <Label htmlFor="twoFactorAuth">Xác thực hai lớp</Label>
                 <p className="text-sm text-gray-500">
-                  Add an extra layer of security to your account
+                  Tăng thêm một lớp bảo mật cho tài khoản của bạn
                 </p>
               </div>
               <Switch
@@ -227,7 +227,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <Label htmlFor="sessionTimeout">Session Timeout (minutes)</Label>
+              <Label htmlFor="sessionTimeout">Thời gian hết phiên (phút)</Label>
               <Input
                 id="sessionTimeout"
                 type="number"
@@ -242,7 +242,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <Label htmlFor="passwordPolicy">Password Policy</Label>
+              <Label htmlFor="passwordPolicy">Chính sách mật khẩu</Label>
               <select
                 id="passwordPolicy"
                 value={settings.security.passwordPolicy}
@@ -251,10 +251,10 @@ export default function AdminSettingsPage() {
                 }
                 className="w-full p-2 border border-gray-300 rounded-md"
               >
-                <option value="basic">Basic (6+ characters)</option>
-                <option value="medium">Medium (8+ characters, numbers)</option>
+                <option value="basic">Cơ bản (6+ ký tự)</option>
+                <option value="medium">Trung bình (8+ ký tự, có số)</option>
                 <option value="strong">
-                  Strong (8+ characters, numbers, symbols)
+                  Mạnh (8+ ký tự, có số và ký hiệu)
                 </option>
               </select>
             </div>
@@ -266,22 +266,22 @@ export default function AdminSettingsPage() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <Mail className="h-5 w-5 mr-2" />
-              Contact Information
+              Thông tin liên hệ
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label>Support Email</Label>
+                <Label>Email hỗ trợ</Label>
                 <Input value="support@spectraspecs.com" disabled />
               </div>
               <div>
-                <Label>Support Phone</Label>
+                <Label>Số điện thoại hỗ trợ</Label>
                 <Input value="+1 (555) 123-4567" disabled />
               </div>
             </div>
             <div className="mt-4">
-              <Label>Business Hours</Label>
+              <Label>Giờ làm việc</Label>
               <Input value="Monday - Friday: 9:00 AM - 6:00 PM" disabled />
             </div>
           </CardContent>

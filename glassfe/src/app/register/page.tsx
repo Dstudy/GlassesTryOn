@@ -31,15 +31,15 @@ import { authApi, ApiError } from "@/lib/api";
 // 1. Tạo schema xác thực cho đăng ký
 const registerSchema = z
   .object({
-    name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-    email: z.string().email({ message: "Please enter a valid email." }),
+    name: z.string().min(2, { message: "Tên phải có ít nhất 2 ký tự." }),
+    email: z.string().email({ message: "Vui lòng nhập email hợp lệ." }),
     password: z
       .string()
-      .min(6, { message: "Password must be at least 6 characters." }),
+      .min(6, { message: "Mật khẩu phải có ít nhất 6 ký tự." }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match.",
+    message: "Mật khẩu xác nhận không khớp.",
     path: ["confirmPassword"], // Gắn lỗi vào trường confirmPassword
   });
 
@@ -79,8 +79,8 @@ export default function RegisterPage() {
       register(userData.id, userData.name, userData.roleID);
 
       toast({
-        title: "Account Created!",
-        description: "You've successfully created your account.",
+        title: "Tạo tài khoản thành công!",
+        description: "Bạn đã tạo tài khoản thành công.",
       });
 
       // Chuyển hướng về trang chủ
@@ -91,11 +91,11 @@ export default function RegisterPage() {
       // Xử lý lỗi (ví dụ: email đã tồn tại)
       const message =
         error instanceof ApiError && error.status === 409 // 409 Conflict
-          ? "This email is already in use."
-          : "An unexpected error occurred. Please try again.";
+          ? "Email này đã được sử dụng."
+          : "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại.";
 
       toast({
-        title: "Registration Failed",
+        title: "Đăng ký thất bại",
         description: message,
         variant: "destructive",
       });
@@ -114,10 +114,10 @@ export default function RegisterPage() {
         <Card className="shadow-lg">
           <CardHeader className="text-center">
             <CardTitle className="font-headline text-2xl">
-              Create an Account
+              Tạo tài khoản
             </CardTitle>
             <CardDescription>
-              Enter your details to get started.
+              Nhập thông tin của bạn để bắt đầu.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -132,10 +132,10 @@ export default function RegisterPage() {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Full Name</FormLabel>
+                      <FormLabel>Họ và tên</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="John Doe"
+                          placeholder="Nguyễn Văn A"
                           {...field}
                           disabled={isSubmitting}
                         />
@@ -167,7 +167,7 @@ export default function RegisterPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>Mật khẩu</FormLabel>
                       <FormControl>
                         <Input
                           type="password"
@@ -186,7 +186,7 @@ export default function RegisterPage() {
                   name="confirmPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Confirm Password</FormLabel>
+                      <FormLabel>Xác nhận mật khẩu</FormLabel>
                       <FormControl>
                         <Input
                           type="password"
@@ -204,7 +204,7 @@ export default function RegisterPage() {
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Creating Account..." : "Register"}
+                  {isSubmitting ? "Đang tạo tài khoản..." : "Đăng ký"}
                 </Button>
               </form>
             </Form>
@@ -212,12 +212,12 @@ export default function RegisterPage() {
           <CardFooter className="flex flex-col items-center gap-2 text-sm">
             <p className="text-muted-foreground">
               {/* Đổi link chân trang */}
-              Already have an account?{" "}
+              Đã có tài khoản?{" "}
               <Link
                 href="/login"
                 className="font-semibold text-primary hover:underline"
               >
-                Log in
+                Đăng nhập
               </Link>
             </p>
           </CardFooter>

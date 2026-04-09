@@ -56,22 +56,22 @@ export default function CartPage() {
       <main className="flex-1 bg-gray-50/50">
         <div className="container mx-auto px-4 py-8 md:py-12">
           <h1 className="font-headline text-4xl font-bold tracking-tight text-primary md:text-5xl">
-            Your Cart
+            Giỏ hàng của bạn
           </h1>
 
           {cart.length === 0 ? (
             // ... (Phần giỏ hàng rỗng không thay đổi) ...
             <div className="mt-8 flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
               <ShoppingCart className="mx-auto h-16 w-16 text-gray-400" />
-              <h2 className="mt-6 text-xl font-semibold">Your cart is empty</h2>
+              <h2 className="mt-6 text-xl font-semibold">Giỏ hàng của bạn đang trống</h2>
               <p className="mt-2 text-muted-foreground">
-                Looks like you haven't added anything to your cart yet.
+                Có vẻ như bạn chưa thêm sản phẩm nào vào giỏ hàng.
               </p>
               <Button
                 asChild
                 className="mt-6 bg-accent text-accent-foreground hover:bg-accent/90"
               >
-                <Link href="/shop">Start Shopping</Link>
+                <Link href="/shop">Bắt đầu mua sắm</Link>
               </Button>
             </div>
           ) : (
@@ -157,7 +157,7 @@ export default function CartPage() {
                                     removeFromCart(item.product.id)
                                   }
                                 >
-                                  <Trash2 className="h-4 w-4 mr-1" /> Remove
+                                  <Trash2 className="h-4 w-4 mr-1" /> Xóa
                                 </Button>
                               </div>
                             </div>
@@ -174,23 +174,23 @@ export default function CartPage() {
                 <Card className="shadow-sm">
                   <CardHeader>
                     <CardTitle className="font-headline text-2xl">
-                      Order Summary
+                      Tóm tắt đơn hàng
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
                       {/* ... (Các dòng Subtotal, Shipping, Total) ... */}
                       <div className="flex justify-between">
-                        <span>Subtotal</span>
+                        <span>Tạm tính</span>
                         <span>${getCartTotal().toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Shipping</span>
-                        <span className="text-green-600">Free</span>
+                        <span>Phí vận chuyển</span>
+                        <span className="text-green-600">Miễn phí</span>
                       </div>
                       <Separator />
                       <div className="flex justify-between text-lg font-bold">
-                        <span>Total</span>
+                        <span>Tổng cộng</span>
                         <span>${getCartTotal().toFixed(2)}</span>
                       </div>
                     </div>
@@ -204,7 +204,7 @@ export default function CartPage() {
                       {isLoading ? (
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       ) : null}
-                      Proceed to Checkout
+                      Tiến hành thanh toán
                     </Button>
                   </CardContent>
                 </Card>
@@ -217,16 +217,16 @@ export default function CartPage() {
         <AlertDialog open={showAuthModal} onOpenChange={setShowAuthModal}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Please Sign In</AlertDialogTitle>
+              <AlertDialogTitle>Vui lòng đăng nhập</AlertDialogTitle>
               <AlertDialogDescription>
-                You must be logged in to proceed to checkout.
+                Bạn cần đăng nhập để tiếp tục thanh toán.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogCancel>Hủy</AlertDialogCancel>
               {/* Nút này sẽ đưa người dùng đến trang đăng nhập */}
               <AlertDialogAction onClick={() => router.push("/login")}>
-                Sign In
+                Đăng nhập
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>

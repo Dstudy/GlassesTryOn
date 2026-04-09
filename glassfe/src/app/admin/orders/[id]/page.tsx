@@ -78,9 +78,9 @@ export default function AdminOrderDetailPage() {
       } catch (err) {
         console.error("Failed to load order:", err);
         if (err instanceof ApiError) {
-          setError(`Failed to load order: ${err.message}`);
+          setError(`Không thể tải đơn hàng: ${err.message}`);
         } else {
-          setError("Failed to load order data. Please try again.");
+          setError("Không thể tải dữ liệu đơn hàng. Vui lòng thử lại.");
         }
       } finally {
         setLoading(false);
@@ -95,9 +95,9 @@ export default function AdminOrderDetailPage() {
       case "completed":
         return "bg-green-100 text-green-800";
       case "processing":
-        return "bg-blue-100 text-blue-800";
+        return "bg-primary/10 text-primary";
       case "shipped":
-        return "bg-purple-100 text-purple-800";
+        return "bg-accent/15 text-primary";
       case "pending":
         return "bg-yellow-100 text-yellow-800";
       case "cancelled":
@@ -124,7 +124,7 @@ export default function AdminOrderDetailPage() {
           <div className="flex items-center gap-2">
             <Loader2 className="h-5 w-5 animate-spin" />
             <div className="text-lg text-gray-500">
-              Loading order details...
+              Đang tải chi tiết đơn hàng...
             </div>
           </div>
         </div>
@@ -140,12 +140,12 @@ export default function AdminOrderDetailPage() {
             href="/admin/orders"
             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to orders
+            <ArrowLeft className="w-4 h-4" /> Quay lại đơn hàng
           </Link>
 
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{error || "Order not found"}</AlertDescription>
+            <AlertDescription>{error || "Không tìm thấy đơn hàng"}</AlertDescription>
           </Alert>
         </div>
       </AdminLayout>
@@ -159,16 +159,16 @@ export default function AdminOrderDetailPage() {
           href="/admin/orders"
           className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"
         >
-          <ArrowLeft className="w-4 h-4" /> Back to orders
+          <ArrowLeft className="w-4 h-4" /> Quay lại đơn hàng
         </Link>
 
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">
-              Order #{order.id}
+              Đơn hàng #{order.id}
             </h1>
             <p className="text-gray-600">
-              Order details and customer information
+              Chi tiết đơn hàng và thông tin khách hàng
             </p>
           </div>
           <Badge
@@ -184,25 +184,25 @@ export default function AdminOrderDetailPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <User className="h-5 w-5" />
-                Customer Information
+                Thông tin khách hàng
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
                 <label className="text-sm font-medium text-gray-500">
-                  Name
+                  Tên
                 </label>
-                <p className="text-lg">{order.user?.name || "Unknown"}</p>
+                <p className="text-lg">{order.user?.name || "Không rõ"}</p>
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-500">
                   Email
                 </label>
-                <p className="text-lg">{order.user?.email || "N/A"}</p>
+                <p className="text-lg">{order.user?.email || "Không có"}</p>
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-500">
-                  User ID
+                  Mã người dùng
                 </label>
                 <p className="text-lg">#{order.user_id}</p>
               </div>
@@ -214,19 +214,19 @@ export default function AdminOrderDetailPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Package className="h-5 w-5" />
-                Order Information
+                Thông tin đơn hàng
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
                 <label className="text-sm font-medium text-gray-500">
-                  Order Date
+                  Ngày đặt hàng
                 </label>
                 <p className="text-lg">{formatDate(order.created_at)}</p>
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-500">
-                  Total Amount
+                  Tổng tiền
                 </label>
                 <p className="text-lg font-semibold">
                   ${formatAmount(order.total_amount)}
@@ -235,7 +235,7 @@ export default function AdminOrderDetailPage() {
               {order.shipping_cost && (
                 <div>
                   <label className="text-sm font-medium text-gray-500">
-                    Shipping Cost
+                    Phí vận chuyển
                   </label>
                   <p className="text-lg">
                     ${formatAmount(order.shipping_cost)}
@@ -245,7 +245,7 @@ export default function AdminOrderDetailPage() {
               {order.delivery_date && (
                 <div>
                   <label className="text-sm font-medium text-gray-500">
-                    Delivery Date
+                    Ngày giao hàng
                   </label>
                   <p className="text-lg">{formatDate(order.delivery_date)}</p>
                 </div>
@@ -260,7 +260,7 @@ export default function AdminOrderDetailPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <MapPin className="h-5 w-5" />
-                Shipping Address
+                Địa chỉ giao hàng
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -281,7 +281,7 @@ export default function AdminOrderDetailPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Package className="h-5 w-5" />
-              Order Items ({order.order_items?.length || 0})
+              Sản phẩm trong đơn ({order.order_items?.length || 0})
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -295,14 +295,14 @@ export default function AdminOrderDetailPage() {
                     <div className="flex-1">
                       <h4 className="font-medium">
                         {item.product_variation?.product?.name ||
-                          "Unknown Product"}
+                          "Sản phẩm không rõ"}
                       </h4>
                       <p className="text-sm text-gray-600">
-                        Quantity: {item.quantity}
+                        Số lượng: {item.quantity}
                       </p>
                       {item.product_variation?.color && (
                         <p className="text-sm text-gray-600">
-                          Color: {item.product_variation.color.name}
+                          Màu: {item.product_variation.color.name}
                         </p>
                       )}
                     </div>
@@ -311,7 +311,7 @@ export default function AdminOrderDetailPage() {
                         ${formatAmount(item.price_at_purchase)}
                       </p>
                       <p className="text-sm text-gray-600">
-                        Total: $
+                        Tổng: $
                         {formatAmount(item.price_at_purchase * item.quantity)}
                       </p>
                     </div>
@@ -319,7 +319,7 @@ export default function AdminOrderDetailPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-gray-500">No items found</p>
+              <p className="text-gray-500">Không tìm thấy sản phẩm nào</p>
             )}
           </CardContent>
         </Card>
@@ -330,7 +330,7 @@ export default function AdminOrderDetailPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Calendar className="h-5 w-5" />
-                Order Notes
+                Ghi chú đơn hàng
               </CardTitle>
             </CardHeader>
             <CardContent>

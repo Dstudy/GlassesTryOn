@@ -126,7 +126,7 @@ export default function AdminOrdersPage() {
   };
 
   const handleCancelOrder = async (orderId: number) => {
-    if (!confirm("Are you sure you want to cancel this order?")) return;
+    if (!confirm("Bạn có chắc muốn hủy đơn hàng này không?")) return;
 
     try {
       setUpdatingStatus(orderId);
@@ -159,9 +159,9 @@ export default function AdminOrdersPage() {
       case "completed":
         return <CheckCircle className="h-4 w-4 text-green-500" />;
       case "processing":
-        return <Package className="h-4 w-4 text-blue-500" />;
+        return <Package className="h-4 w-4 text-accent" />;
       case "shipped":
-        return <Truck className="h-4 w-4 text-purple-500" />;
+        return <Truck className="h-4 w-4 text-accent" />;
       case "pending":
         return <Clock className="h-4 w-4 text-yellow-500" />;
       case "cancelled":
@@ -176,9 +176,9 @@ export default function AdminOrdersPage() {
       case "completed":
         return "bg-green-100 text-green-800";
       case "processing":
-        return "bg-blue-100 text-blue-800";
+        return "bg-primary/10 text-primary";
       case "shipped":
-        return "bg-purple-100 text-purple-800";
+        return "bg-accent/15 text-primary";
       case "pending":
         return "bg-yellow-100 text-yellow-800";
       case "cancelled":
@@ -245,7 +245,7 @@ export default function AdminOrdersPage() {
         <div className="flex items-center justify-center h-64">
           <div className="flex items-center gap-2">
             <RefreshCw className="h-5 w-5 animate-spin" />
-            <div className="text-lg text-gray-500">Loading orders...</div>
+            <div className="text-lg text-gray-500">Đang tải đơn hàng...</div>
           </div>
         </div>
       </AdminLayout>
@@ -257,14 +257,14 @@ export default function AdminOrdersPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Orders</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Đơn hàng</h1>
             <p className="text-gray-600">
-              Manage customer orders and fulfillment
+              Quản lý đơn hàng và tiến trình xử lý
             </p>
           </div>
           <Button onClick={loadOrders} variant="outline">
             <RefreshCw className="h-4 w-4 mr-2" />
-            Refresh
+            Làm mới
           </Button>
         </div>
 
@@ -295,7 +295,7 @@ export default function AdminOrdersPage() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <ShoppingCart className="h-5 w-5 mr-2" />
-              Orders ({filteredOrders.length})
+              Đơn hàng ({filteredOrders.length})
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -303,14 +303,14 @@ export default function AdminOrdersPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="text-left border-b">
-                    <th className="py-3 pr-4 font-medium">Order ID</th>
-                    <th className="py-3 pr-4 font-medium">Customer</th>
+                    <th className="py-3 pr-4 font-medium">Mã đơn</th>
+                    <th className="py-3 pr-4 font-medium">Khách hàng</th>
                     <th className="py-3 pr-4 font-medium">Email</th>
-                    <th className="py-3 pr-4 font-medium">Items</th>
-                    <th className="py-3 pr-4 font-medium">Amount</th>
-                    <th className="py-3 pr-4 font-medium">Status</th>
-                    <th className="py-3 pr-4 font-medium">Date</th>
-                    <th className="py-3 pr-4 font-medium">Actions</th>
+                    <th className="py-3 pr-4 font-medium">Số món</th>
+                    <th className="py-3 pr-4 font-medium">Thành tiền</th>
+                    <th className="py-3 pr-4 font-medium">Trạng thái</th>
+                    <th className="py-3 pr-4 font-medium">Ngày</th>
+                    <th className="py-3 pr-4 font-medium">Thao tác</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -322,10 +322,10 @@ export default function AdminOrdersPage() {
                     >
                       <td className="py-3 pr-4 font-medium">#{order.id}</td>
                       <td className="py-3 pr-4">
-                        {order.user?.name || "Unknown"}
+                        {order.user?.name || "Không rõ"}
                       </td>
                       <td className="py-3 pr-4 text-gray-600">
-                        {order.user?.email || "N/A"}
+                        {order.user?.email || "Không có"}
                       </td>
                       <td className="py-3 pr-4">{getTotalItems(order)}</td>
                       <td className="py-3 pr-4 font-medium">
@@ -357,19 +357,19 @@ export default function AdminOrdersPage() {
                                 </SelectTrigger>
                                 <SelectContent>
                                   <SelectItem value="pending">
-                                    Pending
+                                    Chờ xử lý
                                   </SelectItem>
                                   <SelectItem value="processing">
-                                    Processing
+                                    Đang xử lý
                                   </SelectItem>
                                   <SelectItem value="shipped">
-                                    Shipped
+                                    Đã gửi hàng
                                   </SelectItem>
                                   <SelectItem value="completed">
-                                    Completed
+                                    Hoàn tất
                                   </SelectItem>
                                   <SelectItem value="cancelled">
-                                    Cancelled
+                                    Đã hủy
                                   </SelectItem>
                                 </SelectContent>
                               </Select>
@@ -389,7 +389,7 @@ export default function AdminOrdersPage() {
                             }
                           >
                             <Eye className="h-4 w-4 mr-1" />
-                            View
+                            Xem
                           </Button>
                           {order.status.toLowerCase() !== "cancelled" && (
                             <Button
@@ -417,12 +417,12 @@ export default function AdminOrdersPage() {
           {totalPageCount > 1 && (
             <CardFooter className="flex items-center justify-between py-4">
               <div className="text-sm text-gray-500">
-                Showing{" "}
+                Hiển thị{" "}
                 <strong>
                   {Math.min(startIndex + 1, filteredOrders.length)}
                 </strong>
                 -<strong>{Math.min(endIndex, filteredOrders.length)}</strong> of{" "}
-                <strong>{filteredOrders.length}</strong> orders
+                <strong>{filteredOrders.length}</strong> đơn hàng
               </div>
               <div className="flex gap-2">
                 <Button

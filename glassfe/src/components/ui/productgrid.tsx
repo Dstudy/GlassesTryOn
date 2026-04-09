@@ -89,7 +89,7 @@ export default function ProductGrid({
           onValueChange={(newValue) => onSortChange(newValue as SortOrder)} // Call function from props
           disabled={loading} // Use loading from props
         >
-          <SelectTrigger className="w-[200px] rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          <SelectTrigger className="w-[200px] rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
             <SelectValue placeholder="Sort by" />
           </SelectTrigger>
           <SelectContent>

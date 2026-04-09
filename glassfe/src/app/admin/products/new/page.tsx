@@ -60,7 +60,7 @@ export default function AdminNewProductPage() {
 
   const handleCreate = async () => {
     if (!form.name || !form.price) {
-      setError("Name and price are required");
+      setError("Tên và giá là bắt buộc");
       return;
     }
     try {
@@ -79,10 +79,10 @@ export default function AdminNewProductPage() {
         features,
       };
       await productApi.adminCreateProduct(payload);
-      setSuccess("Product created successfully!");
+      setSuccess("Tạo sản phẩm thành công!");
       setTimeout(() => router.push("/admin/products"), 1200);
     } catch (e) {
-      setError("Failed to create product");
+      setError("Không thể tạo sản phẩm");
     } finally {
       setSaving(false);
     }
@@ -99,44 +99,44 @@ export default function AdminNewProductPage() {
           >
             {" "}
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Products
+            Quay lại sản phẩm
           </Button>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">New Product</h1>
-            <p className="text-gray-600">Create a new product for your store</p>
+            <h1 className="text-3xl font-bold text-gray-900">Sản phẩm mới</h1>
+            <p className="text-gray-600">Tạo sản phẩm mới cho cửa hàng của bạn</p>
           </div>
         </div>
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Package className="h-5 w-5" />
-              Product Information
+              Thông tin sản phẩm
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="name">Product Name *</Label>
+                <Label htmlFor="name">Tên sản phẩm *</Label>
                 <Input
                   id="name"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="Enter product name"
+                  placeholder="Nhập tên sản phẩm"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="subtitle">Subtitle</Label>
+                <Label htmlFor="subtitle">Phụ đề</Label>
                 <Input
                   id="subtitle"
                   value={form.subtitle}
                   onChange={(e) =>
                     setForm({ ...form, subtitle: e.target.value })
                   }
-                  placeholder="Short subtitle"
+                  placeholder="Phụ đề ngắn"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="price">Price *</Label>
+                <Label htmlFor="price">Giá *</Label>
                 <div className="relative">
                   <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                   <Input
@@ -154,36 +154,36 @@ export default function AdminNewProductPage() {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="description">Description</Label>
+              <Label htmlFor="description">Mô tả</Label>
               <Textarea
                 id="description"
                 value={form.description}
                 onChange={(e) =>
                   setForm({ ...form, description: e.target.value })
                 }
-                placeholder="Enter product description"
+                placeholder="Nhập mô tả sản phẩm"
                 rows={4}
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="size">Size</Label>
+                <Label htmlFor="size">Kích thước</Label>
                 <Input
                   id="size"
                   value={size}
                   onChange={(e) => setSize(e.target.value)}
-                  placeholder="e.g. Small/Medium or 52-18-140"
+                  placeholder="Ví dụ: Nhỏ/Vừa hoặc 52-18-140"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="brand_id">Brand</Label>
+                <Label htmlFor="brand_id">Thương hiệu</Label>
                 <select
                   id="brand_id"
                   value={brand_id}
                   onChange={(e) => setBrandId(e.target.value)}
                   className="w-full border rounded px-2 py-1"
                 >
-                  <option value="">Select brand</option>
+                  <option value="">Chọn thương hiệu</option>
                   {brands.map((b) => (
                     <option key={b} value={b}>
                       {b}
@@ -192,14 +192,14 @@ export default function AdminNewProductPage() {
                 </select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="shape_id">Shape</Label>
+                <Label htmlFor="shape_id">Dáng</Label>
                 <select
                   id="shape_id"
                   value={shape_id}
                   onChange={(e) => setShapeId(e.target.value)}
                   className="w-full border rounded px-2 py-1"
                 >
-                  <option value="">Select shape</option>
+                  <option value="">Chọn dáng</option>
                   {shapes.map((s) => (
                     <option key={s} value={s}>
                       {s}
@@ -208,14 +208,14 @@ export default function AdminNewProductPage() {
                 </select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="material_id">Material</Label>
+                <Label htmlFor="material_id">Chất liệu</Label>
                 <select
                   id="material_id"
                   value={material_id}
                   onChange={(e) => setMaterialId(e.target.value)}
                   className="w-full border rounded px-2 py-1"
                 >
-                  <option value="">Select material</option>
+                  <option value="">Chọn chất liệu</option>
                   {materials.map((m) => (
                     <option key={m} value={m}>
                       {m}
@@ -226,11 +226,11 @@ export default function AdminNewProductPage() {
             </div>
             {/* Features selection */}
             <div className="space-y-3">
-              <Label>Selected Features</Label>
+              <Label>Tính năng đã chọn</Label>
               <div className="flex gap-2 flex-wrap">
                 {features.length === 0 ? (
                   <div className="text-sm text-gray-500">
-                    No features selected
+                    Chưa chọn tính năng nào
                   </div>
                 ) : (
                   features.map((f, idx) => (
@@ -253,17 +253,17 @@ export default function AdminNewProductPage() {
                           setFeatures(features.filter((_, i) => i !== idx))
                         }
                       >
-                        Remove
+                        Xóa
                       </Button>
                     </div>
                   ))
                 )}
               </div>
-              <Label className="pt-2">Available Features</Label>
+              <Label className="pt-2">Tính năng có sẵn</Label>
               <div className="flex gap-2 mt-2 flex-wrap">
                 {availableFeatures.length === 0 ? (
                   <div className="text-sm text-gray-500">
-                    No features available
+                    Không có tính năng nào
                   </div>
                 ) : (
                   availableFeatures.map((af) => {
@@ -326,13 +326,13 @@ export default function AdminNewProductPage() {
             <div className="flex items-center gap-2 pt-4">
               <Button onClick={handleCreate} disabled={saving}>
                 <Plus className="h-4 w-4 mr-2" />
-                {saving ? "Creating..." : "Create Product"}
+                {saving ? "Đang tạo..." : "Tạo sản phẩm"}
               </Button>
               <Button
                 variant="outline"
                 onClick={() => router.push("/admin/products")}
               >
-                Cancel
+                Hủy
               </Button>
             </div>
           </CardContent>

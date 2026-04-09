@@ -1,44 +1,34 @@
-"use client";
-
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Gem, Sparkles, Users } from "lucide-react"; // Icons
+import { Gem, Sparkles, Users } from "lucide-react";
 
 export default function AboutPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1 bg-background">
-        {/* === Section 1: Hero === */}
         <section className="bg-primary/5">
           <div className="container mx-auto px-4 py-16 md:py-24">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              {/* Text Content */}
+            <div className="grid items-center gap-12 md:grid-cols-2">
               <div>
                 <h1 className="font-headline text-5xl font-bold text-primary">
-                  About Spectra Specs
+                  Về Spectra Specs
                 </h1>
                 <p className="mt-4 text-lg text-muted-foreground">
-                  We believe that glasses are more than just a tool for vision—they
-                  are a core part of who you are.
+                  Chúng tôi tin rằng kính, vòng cổ và khuyên tai không chỉ là món phụ kiện để đeo, mà còn là cách bạn thể hiện gu thẩm mỹ mỗi ngày.
                 </p>
                 <p className="mt-4 text-muted-foreground">
-                  Founded on the principle that finding the perfect pair of
-                  glasses should be easy and enjoyable, Spectra Specs combines
-                  premium craftsmanship with cutting-edge technology. From
-                  AI-powered style recommendations to our virtual try-on feature,
-                  we have simplified the entire process so you can shop with confidence.
+                  Spectra Specs được xây dựng với mong muốn giúp việc tìm ra món phụ kiện phù hợp trở nên dễ dàng, hiện đại và đáng tin cậy hơn. Từ trải nghiệm duyệt sản phẩm trực quan đến gợi ý bằng AI, chúng tôi tập trung vào cảm giác tiện lợi, thẩm mỹ và sự tự tin cho từng khách hàng.
                 </p>
               </div>
 
-              {/* Image Content */}
-              <div className="relative h-64 md:h-96 w-full overflow-hidden rounded-lg shadow-lg">
+              <div className="relative h-64 w-full overflow-hidden rounded-2xl shadow-lg md:h-96">
                 <Image
                   src="/homepage/hero/hero2.avif"
-                  alt="A pair of stylish frames"
+                  alt="Bộ sưu tập phụ kiện thời trang hiện đại"
                   fill
                   className="object-cover"
                 />
@@ -47,75 +37,61 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* === Section 2: Core Values === */}
-        <section className="container mx-auto px-4 py-16 md:py-24 text-center">
+        <section className="container mx-auto px-4 py-16 text-center md:py-24">
           <h2 className="font-headline text-4xl font-bold text-primary">
-            Our Values
+            Giá trị cốt lõi của chúng tôi
           </h2>
-          <p className="mt-3 text-lg text-muted-foreground max-w-3xl mx-auto">
-            Our mission is to help you find the perfect frames that make you
-            look and feel your best, backed by technology that makes everything simple.
+          <p className="mx-auto mt-3 max-w-3xl text-lg text-muted-foreground">
+            Chúng tôi kết hợp thẩm mỹ, chất lượng và công nghệ để giúp bạn chọn kính và trang sức phù hợp với phong cách, nhu cầu và cá tính riêng.
           </p>
 
-          {/* 3-Column Grid */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-            {/* Value 1 */}
-            <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
-              <Gem className="h-10 w-10 text-primary mb-4" />
+          <div className="mt-12 grid grid-cols-1 gap-8 text-left md:grid-cols-3">
+            <div className="rounded-2xl border bg-card p-6 text-card-foreground shadow-sm">
+              <Gem className="mb-4 h-10 w-10 text-primary" />
               <h3 className="font-headline text-2xl font-semibold">
-                Superior Quality
+                Chất lượng vượt trội
               </h3>
               <p className="mt-2 text-muted-foreground">
-                We source only the finest materials, from ultra-lightweight
-                titanium to premium acetate, ensuring every pair is durable,
-                comfortable, and built to last.
+                Chúng tôi ưu tiên các chất liệu bền đẹp, nhẹ và có độ hoàn thiện tốt để mỗi sản phẩm đều mang lại trải nghiệm sử dụng lâu dài.
               </p>
             </div>
 
-            {/* Value 2 */}
-            <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
-              <Sparkles className="h-10 w-10 text-primary mb-4" />
+            <div className="rounded-2xl border bg-card p-6 text-card-foreground shadow-sm">
+              <Sparkles className="mb-4 h-10 w-10 text-primary" />
               <h3 className="font-headline text-2xl font-semibold">
-                Smart Shopping
+                Mua sắm thông minh
               </h3>
               <p className="mt-2 text-muted-foreground">
-                Our AI assistant and Virtual Try-On tools take the guesswork
-                out of online shopping. Find styles that match your face shape
-                and preferences instantly.
+                Công nghệ AI và trải nghiệm duyệt sản phẩm trực quan giúp bạn chọn nhanh hơn, đúng gu hơn và tự tin hơn khi mua online.
               </p>
             </div>
 
-            {/* Value 3 */}
-            <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
-              <Users className="h-10 w-10 text-primary mb-4" />
+            <div className="rounded-2xl border bg-card p-6 text-card-foreground shadow-sm">
+              <Users className="mb-4 h-10 w-10 text-primary" />
               <h3 className="font-headline text-2xl font-semibold">
-                Customer First
+                Khách hàng là ưu tiên
               </h3>
               <p className="mt-2 text-muted-foreground">
-                Your confidence is our priority. From a seamless browsing
-                experience to fast shipping, we are here to ensure you love
-                your new glasses.
+                Mọi chi tiết trong trải nghiệm của Spectra Specs đều hướng đến việc giúp bạn cảm thấy dễ chọn, dễ mua và hài lòng hơn.
               </p>
             </div>
           </div>
         </section>
 
-        {/* === Section 3: Call to Action (CTA) === */}
         <section className="bg-primary text-primary-foreground">
-          <div className="container mx-auto px-4 py-16 md:py-24 text-center">
+          <div className="container mx-auto px-4 py-16 text-center md:py-24">
             <h2 className="font-headline text-4xl font-bold">
-              Find Your Perfect Pair
+              Tìm món phù hợp với phong cách của bạn
             </h2>
-            <p className="mt-3 text-lg text-primary-foreground/90 max-w-2xl mx-auto">
-              Ready to see the difference? Explore our latest collection of
-              frames and find your own unique look.
+            <p className="mx-auto mt-3 max-w-2xl text-lg text-primary-foreground/90">
+              Sẵn sàng khám phá bộ sưu tập kính, vòng cổ và khuyên tai để hoàn thiện diện mạo theo cách riêng của bạn?
             </p>
             <Button
               asChild
               size="lg"
               className="mt-8 bg-white text-primary hover:bg-white/90 shadow-lg"
             >
-              <Link href="/shop">Shop Now</Link>
+              <Link href="/shop">Mua ngay</Link>
             </Button>
           </div>
         </section>

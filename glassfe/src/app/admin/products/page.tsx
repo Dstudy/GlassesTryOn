@@ -83,7 +83,7 @@ export default function AdminProductsPage() {
       setFilteredItems(processedData);
     } catch (e) {
       console.error("❌ Error loading products:", e);
-      setError("Failed to load products");
+      setError("Không thể tải sản phẩm");
     } finally {
       setLoading(false);
     }
@@ -143,7 +143,7 @@ export default function AdminProductsPage() {
       );
     } catch (error) {
       console.error("❌ Error in handleToggleActive:", error);
-      setError("Failed to toggle product status");
+      setError("Không thể thay đổi trạng thái sản phẩm");
     }
   };
 
@@ -167,12 +167,12 @@ export default function AdminProductsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Products</h1>
-            <p className="text-gray-600">Manage your product inventory</p>
+            <h1 className="text-3xl font-bold text-gray-900">Sản phẩm</h1>
+            <p className="text-gray-600">Quản lý kho sản phẩm của bạn</p>
           </div>
           <Button asChild>
             <Link href="/admin/products/new">
-              <Plus className="h-4 w-4 mr-2" /> New Product
+              <Plus className="h-4 w-4 mr-2" /> Sản phẩm mới
             </Link>
           </Button>
         </div>
@@ -185,7 +185,7 @@ export default function AdminProductsPage() {
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                   <Input
-                    placeholder="Search products by name, brand, or shape..."
+                    placeholder="Tìm sản phẩm theo tên, thương hiệu hoặc dáng..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-10"
@@ -200,9 +200,9 @@ export default function AdminProductsPage() {
                   }
                   className="px-3 py-2 border border-gray-300 rounded-md text-sm"
                 >
-                  <option value="name">Sort by Name</option>
-                  <option value="price">Sort by Price</option>
-                  <option value="created">Sort by Created Date</option>
+                  <option value="name">Sắp xếp theo tên</option>
+                  <option value="price">Sắp xếp theo giá</option>
+                  <option value="created">Sắp xếp theo ngày tạo</option>
                 </select>
                 <Button
                   variant="outline"
@@ -221,7 +221,7 @@ export default function AdminProductsPage() {
 
         {loading ? (
           <div className="flex items-center justify-center h-64">
-            <div className="text-lg text-gray-500">Loading products...</div>
+            <div className="text-lg text-gray-500">Đang tải sản phẩm...</div>
           </div>
         ) : error ? (
           <div className="flex items-center justify-center h-64">
@@ -232,7 +232,7 @@ export default function AdminProductsPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Package className="h-5 w-5" />
-                Products ({filteredItems.length} of {items.length})
+                Sản phẩm ({filteredItems.length}/{items.length})
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -240,14 +240,14 @@ export default function AdminProductsPage() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="text-left border-b">
-                      <th className="py-3 pr-4 font-medium">Product</th>
-                      <th className="py-3 pr-4 font-medium">Brand</th>
-                      <th className="py-3 pr-4 font-medium">Shape</th>
-                      <th className="py-3 pr-4 font-medium">Price</th>
-                      <th className="py-3 pr-4 font-medium">Status</th>
-                      <th className="py-3 pr-4 font-medium">Variations</th>
-                      <th className="py-3 pr-4 font-medium">Created</th>
-                      <th className="py-3 pr-4 font-medium">Actions</th>
+                      <th className="py-3 pr-4 font-medium">Sản phẩm</th>
+                      <th className="py-3 pr-4 font-medium">Thương hiệu</th>
+                      <th className="py-3 pr-4 font-medium">Dáng</th>
+                      <th className="py-3 pr-4 font-medium">Giá</th>
+                      <th className="py-3 pr-4 font-medium">Trạng thái</th>
+                      <th className="py-3 pr-4 font-medium">Biến thể</th>
+                      <th className="py-3 pr-4 font-medium">Ngày tạo</th>
+                      <th className="py-3 pr-4 font-medium">Thao tác</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -302,7 +302,7 @@ export default function AdminProductsPage() {
                                   : "bg-gray-100 text-gray-600"
                               }
                             >
-                              {p.active !== true ? "Active" : "Inactive"}
+                              {p.active !== true ? "Đang bán" : "Ngừng bán"}
                             </Badge>
                           }
                         </td>
@@ -359,8 +359,8 @@ export default function AdminProductsPage() {
                               }}
                               title={
                                 p.active !== true
-                                  ? "Deactivate product"
-                                  : "Activate product"
+                                  ? "Ngừng bán sản phẩm"
+                                  : "Kích hoạt sản phẩm"
                               }
                             >
                               {p.active !== true ? (
@@ -378,8 +378,8 @@ export default function AdminProductsPage() {
                 {filteredItems.length === 0 && (
                   <div className="text-center py-8 text-gray-500">
                     {searchTerm
-                      ? "No products found matching your search."
-                      : "No products found."}
+                      ? "Không tìm thấy sản phẩm phù hợp với tìm kiếm."
+                      : "Không tìm thấy sản phẩm."}
                   </div>
                 )}
               </div>
@@ -400,23 +400,23 @@ export default function AdminProductsPage() {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>Bạn có chắc không?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action will change the status of the product:
+              Hành động này sẽ thay đổi trạng thái của sản phẩm:
               <br />
               <strong className="font-medium">{productToToggle?.name}</strong>
               <br />
               You are about to{" "}
               <strong className="uppercase">
-                {productToToggle?.active !== true ? "Deactivate" : "Activate"}
+                {productToToggle?.active !== true ? "Ngừng bán" : "Kích hoạt"}
               </strong>{" "}
               this product.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>Hủy</AlertDialogCancel>
             <AlertDialogAction onClick={confirmToggleActive}>
-              Confirm
+              Xác nhận
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

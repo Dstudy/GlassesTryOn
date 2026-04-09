@@ -43,10 +43,10 @@ export default function FaceShapeSidebar({ shape, isOpen, onClose }: FaceShapeSi
       <SheetContent className="w-full sm:max-w-md overflow-y-auto">
         <SheetHeader className="mb-6">
           <SheetTitle className="text-2xl font-bold flex items-center gap-2">
-            AI Recommendations
+            Gợi ý từ AI
           </SheetTitle>
           <SheetDescription>
-            Based on your <span className="font-bold text-primary">{shape}</span> face shape, these frames will look best on you.
+            Dựa trên dáng khuôn mặt <span className="font-bold text-primary">{shape}</span> của bạn, những mẫu gọng này sẽ phù hợp nhất.
           </SheetDescription>
         </SheetHeader>
 
@@ -62,7 +62,7 @@ export default function FaceShapeSidebar({ shape, isOpen, onClose }: FaceShapeSi
           </div>
         ) : (
           <div className="text-center py-12 text-muted-foreground">
-            No specific glasses found yet for {shape} face shape.
+            Chưa tìm thấy mẫu kính phù hợp riêng cho dáng mặt {shape}.
           </div>
         )}
       </SheetContent>

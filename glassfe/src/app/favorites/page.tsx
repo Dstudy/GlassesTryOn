@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useContext, useState, useEffect } from "react";
 import Link from "next/link";
@@ -22,18 +22,17 @@ export default function FavoritesPage() {
     const loadFavoriteProducts = async () => {
       if (!user) {
         setLoading(false);
-        setFavoriteProducts([]); // Đảm bảo danh sách rỗng nếu đã đăng xuất
+        setFavoriteProducts([]);
         return;
       }
       try {
         setLoading(true);
         setError(null);
-        const userId = user?.id; // TODO: implement proper auth context
+        const userId = user.id;
         const prods = await productApi.getFavoriteProducts(userId);
-        // If local favorites differ, still filter down to local selection for safety
         const filtered =
           favorites.length > 0
-            ? prods.filter((p) => favorites.includes(p.id))
+            ? prods.filter((product) => favorites.includes(product.id))
             : prods;
         setFavoriteProducts(filtered);
       } catch (err) {
@@ -41,7 +40,7 @@ export default function FavoritesPage() {
         setError(
           err instanceof ApiError
             ? err.message
-            : "Failed to load favorite products"
+            : "Không thể tải danh sách yêu thích",
         );
       } finally {
         setLoading(false);
@@ -49,7 +48,7 @@ export default function FavoritesPage() {
     };
 
     loadFavoriteProducts();
-  }, [favorites]);
+  }, [favorites, user]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -57,30 +56,30 @@ export default function FavoritesPage() {
       <main className="flex-1">
         <div className="container mx-auto px-4 py-8 md:py-12">
           <h1 className="font-headline text-4xl font-bold tracking-tight text-primary md:text-5xl">
-            Your Favorites
+            Danh sách yêu thích
           </h1>
 
           {!user ? (
             <div className="mt-8 flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
               <User className="mx-auto h-16 w-16 text-gray-400" />
               <h2 className="mt-6 text-xl font-semibold">
-                Log in to see your favorites
+                Đăng nhập để xem danh sách yêu thích
               </h2>
               <p className="mt-2 text-muted-foreground">
-                Create an account or log in to save the styles you love.
+                Tạo tài khoản hoặc đăng nhập để lưu lại những sản phẩm bạn yêu thích.
               </p>
               <Button
                 asChild
                 className="mt-6 bg-primary text-primary-foreground hover:bg-primary/90"
               >
-                <Link href="/login">Log In / Sign Up</Link>
+                <Link href="/login">Đăng nhập / Đăng ký</Link>
               </Button>
             </div>
           ) : loading ? (
             <div className="mt-8 flex items-center justify-center py-12">
               <div className="flex items-center gap-2">
                 <Loader2 className="h-6 w-6 animate-spin" />
-                <span>Loading your favorites...</span>
+                <span>Đang tải danh sách yêu thích...</span>
               </div>
             </div>
           ) : error ? (
@@ -93,15 +92,15 @@ export default function FavoritesPage() {
           ) : favoriteProducts.length === 0 ? (
             <div className="mt-8 flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
               <Heart className="mx-auto h-16 w-16 text-gray-400" />
-              <h2 className="mt-6 text-xl font-semibold">No favorites yet</h2>
+              <h2 className="mt-6 text-xl font-semibold">Chưa có sản phẩm yêu thích</h2>
               <p className="mt-2 text-muted-foreground">
-                Click the heart icon on any product to save it here.
+                Nhấn vào biểu tượng trái tim trên bất kỳ sản phẩm nào để lưu lại tại đây.
               </p>
               <Button
                 asChild
                 className="mt-6 bg-accent text-accent-foreground hover:bg-accent/90"
               >
-                <Link href="/shop">Find Your Perfect Pair</Link>
+                <Link href="/shop">Khám phá sản phẩm phù hợp</Link>
               </Button>
             </div>
           ) : (
