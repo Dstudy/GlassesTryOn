@@ -40,7 +40,6 @@ import { Lens } from "@/components/ui/lens";
 import StarRating from "@/components/ui/star-rating";
 
 import FaceShapeModal from "@/components/FaceShapeModal";
-import FaceShapeSidebar from "@/components/FaceShapeSidebar";
 import { FaceShape } from "@/utils/faceShapeClassifier";
 
 // Helper function to optimize Cloudinary image URLs for performance
@@ -446,12 +445,15 @@ export default function ProductDetailPage() {
                   <span className="font-semibold">Hình dáng:</span>
                   <span className="text-muted-foreground">{product.shape}</span>
                 </div>
-                {product.face_suitable && product.face_suitable.trim() !== '' && (
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold">Phù hợp khuôn mặt:</span>
-                    <span className="text-muted-foreground">{product.face_suitable}</span>
-                  </div>
-                )}
+                {product.face_suitable &&
+                  product.face_suitable.trim() !== "" && (
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold">Phù hợp khuôn mặt:</span>
+                      <span className="text-muted-foreground">
+                        {product.face_suitable}
+                      </span>
+                    </div>
+                  )}
                 <div className="flex items-center gap-2">
                   <span className="font-semibold">Thương hiệu:</span>
                   <span className="bg-primary/10 text-primary px-2 py-1 rounded text-sm">
@@ -706,17 +708,10 @@ export default function ProductDetailPage() {
 
         <FaceShapeModal
           isOpen={showFaceModal}
-          onClose={() => setShowFaceModal(false)}
-          onShapeDetected={(shape) => {
-            setDetectedShape(shape);
-            setShowSidebar(true);
+          onClose={() => {
+            setShowFaceModal(false);
+            setDetectedShape(null);
           }}
-        />
-
-        <FaceShapeSidebar
-          shape={detectedShape}
-          isOpen={showSidebar}
-          onClose={() => setShowSidebar(false)}
         />
       </main>
       <Footer />

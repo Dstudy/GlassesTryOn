@@ -18,6 +18,14 @@ module.exports = {
         ...data.earrings.map((item) => ({ ...item, category: "earrings" })),
       ];
 
+      const faceShapes = [
+        "mặt tròn",
+        "mặt vuông",
+        "mặt trái xoan",
+        "mặt dài",
+        "mặt kim cương",
+      ];
+
       // Helpers
       const now = new Date();
       const toPrice = (p) => {
@@ -90,6 +98,9 @@ module.exports = {
       };
 
       for (const item of allItems) {
+        // 2. Chọn ngẫu nhiên một chuỗi từ mảng trên
+        const randomFace =
+          faceShapes[Math.floor(Math.random() * faceShapes.length)];
         // Prefer JSON-provided values when available
         let shapeId = item.shape ? shapeByName.get(item.shape) || null : null;
         let materialKey = normalizeMaterial(item.material);
@@ -128,7 +139,7 @@ module.exports = {
               category_id: categoryId,
               price: toPrice(item.price),
               size: item.size || null,
-              face_suitable: item.face_suitable || null,
+              face_suitable: randomFace,
               // If size string contains numbers, parse real dimensions; otherwise fallback to random
               ...(() => {
                 const dims = parseDimensions(item.size);
