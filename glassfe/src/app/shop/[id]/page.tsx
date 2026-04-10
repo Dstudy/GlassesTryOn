@@ -5,6 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import ThreeViewer from "@/components/ThreeViewer";
+import ArTryOnViewer from "@/components/ArTryOnViewer";
+import EarringTryOnViewer from "@/components/EarringTryOnViewer";
 import { AppContext } from "@/context/AppContext";
 import { productApi, ApiError } from "@/lib/api";
 import type { Product, ProductVariant } from "@/lib/types";
@@ -52,6 +54,7 @@ export default function ProductDetailPage() {
   );
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
   const [show3DModel, setShow3DModel] = useState(false);
+  const [showArTryOn, setShowArTryOn] = useState(false);
   const [reviewText, setReviewText] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -85,6 +88,7 @@ export default function ProductDetailPage() {
         const productData = productDataRaw as Product;
         setProduct(productData);
         setShow3DModel(false);
+        setShowArTryOn(false);
 
         const relatedByShape = await productApi.getProductsByShape(
           productData.shape,
@@ -185,6 +189,10 @@ export default function ProductDetailPage() {
   const isFavorite = favorites.includes(product.id);
   const modelUrl = product.modelUrl || null;
   const has3DModel = Boolean(modelUrl);
+  const isEarringProduct =
+    product.arTryOnCategory === "earrings" ||
+    /khuyên|earring|bông\s*tai|hoa\s*tai/i.test(product.name) ||
+    /khuyên|earring|bông\s*tai|hoa\s*tai/i.test(product.category ?? "");
   const selectedVariant =
     variants.find((variant) => variant.id === selectedVariantId) || null;
 
@@ -322,6 +330,20 @@ export default function ProductDetailPage() {
                   <div className="absolute inset-0 h-full w-full bg-gradient-to-br from-gray-50 to-white">
                     <ThreeViewer modelUrl={modelUrl!} />
                   </div>
+                ) : showArTryOn ? (
+                  <div className="absolute inset-0 h-full w-full">
+                    {isEarringProduct ? (
+                      <EarringTryOnViewer
+                        modelUrl={modelUrl!}
+                        fitMetadata={product.arModelFit}
+                      />
+                    ) : (
+                      <ArTryOnViewer
+                        modelUrl={modelUrl!}
+                        fitMetadata={product.arModelFit}
+                      />
+                    )}
+                  </div>
                 ) : (
                   <Lens
                     zoomFactor={1.5}
@@ -352,10 +374,11 @@ export default function ProductDetailPage() {
                       onClick={() => {
                         setSelectedImageUrl(optimizeImageUrl(url));
                         setShow3DModel(false);
+                        setShowArTryOn(false);
                       }}
                       className={cn(
                         "overflow-hidden rounded-lg border focus:outline-none",
-                        selectedImageUrl === url && !show3DModel
+                        selectedImageUrl === url && !show3DModel && !showArTryOn
                           ? "border-primary ring-2 ring-primary"
                           : "hover:border-primary/50",
                       )}
@@ -376,7 +399,8 @@ export default function ProductDetailPage() {
                     type="button"
                     onClick={() => {
                       if (!has3DModel) return;
-                      setShow3DModel((prev) => !prev);
+                        setShowArTryOn(false);
+                        setShow3DModel((prev) => !prev);
                     }}
                     disabled={!has3DModel}
                     className={cn(
@@ -407,6 +431,43 @@ export default function ProductDetailPage() {
                         />
                       </svg>
                       <span className="text-[10px] font-medium">3D</span>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!has3DModel) return;
+                      setShow3DModel(false);
+                      setShowArTryOn((prev) => !prev);
+                    }}
+                    disabled={!has3DModel}
+                    className={cn(
+                      "flex h-20 items-center justify-center overflow-hidden rounded-lg border transition-colors focus:outline-none",
+                      !has3DModel
+                        ? "cursor-not-allowed bg-gray-200 text-gray-400"
+                        : showArTryOn
+                        ? "border-primary bg-primary text-primary-foreground ring-2 ring-primary"
+                        : "bg-gray-100 text-gray-700 hover:border-primary/50",
+                    )}
+                    aria-label={
+                      isEarringProduct
+                        ? "Thử khuyên tai AR"
+                        : "Thử kính AR"
+                    }
+                    title={
+                      has3DModel
+                        ? isEarringProduct
+                          ? "Thử khuyên tai AR"
+                          : "Thử kính AR"
+                        : "Không có mô hình 3D"
+                    }
+                  >
+                    <div className="text-center">
+                      <Camera className="mx-auto mb-1 h-6 w-6" />
+                      <span className="text-[10px] font-medium">
+                        {isEarringProduct ? "AR Tai" : "AR"}
+                      </span>
                     </div>
                   </button>
                 </div>

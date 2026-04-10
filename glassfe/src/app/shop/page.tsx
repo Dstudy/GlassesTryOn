@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -45,7 +45,7 @@ import { Button } from "@/components/ui/button";
 // Giới hạn số lượng hiển thị cho mỗi bộ lọc
 const INITIAL_DISPLAY_LIMIT = 5;
 
-export default function ShopPage() {
+function ShopPageInner() {
   const searchParams = useSearchParams();
   const categoryFromQuery = searchParams.get("category");
   const [searchTerm, setSearchTerm] = useState("");
@@ -515,4 +515,10 @@ export default function ShopPage() {
   );
 }
 
-
+export default function ShopPage() {
+  return (
+    <Suspense>
+      <ShopPageInner />
+    </Suspense>
+  );
+}

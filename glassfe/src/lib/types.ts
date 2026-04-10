@@ -1,3 +1,17 @@
+export interface ArModelFitMetadata {
+  offset?: {
+    x?: number;
+    y?: number;
+    z?: number;
+  };
+  rotation?: {
+    x?: number;
+    y?: number;
+    z?: number;
+  };
+  scaleMultiplier?: number;
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -28,6 +42,9 @@ export interface Product {
   stock?: number;
   category?: string;
   modelUrl?: string; // 3D model URL from backend
+  arModelFit?: ArModelFitMetadata; // Optional AR fit metadata per model
+  /** Khi backend gửi — chọn viewer AR: kính vs khuyên tai */
+  arTryOnCategory?: "glasses" | "earrings";
 }
 
 export type Review = {
