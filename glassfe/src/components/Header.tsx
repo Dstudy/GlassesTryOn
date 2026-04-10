@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import { useContext, useEffect, useRef, useState } from "react";
+import { Suspense, useContext, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AppContext } from "@/context/AppContext";
@@ -73,7 +73,7 @@ function IconAction({ href, label, children, className }: { href: string; label:
   );
 }
 
-export default function Header() {
+function HeaderInner() {
   const { cart, user, logout } = useContext(AppContext);
   const pathname = usePathname();
   const router = useRouter();
@@ -393,5 +393,16 @@ export default function Header() {
   );
 }
 
-
-
+export default function Header() {
+  return (
+    <Suspense fallback={
+      <header className="sticky top-0 z-[500] isolate w-full border-b border-accent/20 bg-background/92 shadow-[0_10px_30px_-22px_hsl(var(--primary)/0.55)] backdrop-blur supports-[backdrop-filter]:bg-background/70">
+        <div className="container mx-auto grid h-16 grid-cols-[auto_1fr_auto] items-center gap-4 px-4">
+          <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text font-headline text-2xl font-bold text-transparent">Spectra Specs</span>
+        </div>
+      </header>
+    }>
+      <HeaderInner />
+    </Suspense>
+  );
+}

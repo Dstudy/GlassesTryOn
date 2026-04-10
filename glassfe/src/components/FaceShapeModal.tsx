@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { classifyFaceShape, FaceShape } from "@/utils/faceShapeClassifier";
+import { drawFaceMeshOverlay } from "@/utils/faceMeshOverlay";
 import { Loader2, Sparkles } from "lucide-react";
 import { productApi } from "@/lib/api";
 import { Product } from "@/lib/types";
@@ -137,25 +138,25 @@ export default function FaceShapeModal({
         canvasRef.current.height = video.videoHeight;
         const landmarks = results.faceLandmarks[0];
 
-        // Vẽ mesh cơ bản
+        // Vẽ mesh cơ bản dùng chung với TryOnARViewer
         canvasCtx.clearRect(
           0,
           0,
           canvasRef.current.width,
           canvasRef.current.height,
         );
-        canvasCtx.fillStyle = "#3b82f6";
-        for (const landmark of landmarks) {
-          canvasCtx.beginPath();
-          canvasCtx.arc(
-            landmark.x * canvasRef.current.width,
-            landmark.y * canvasRef.current.height,
-            1,
-            0,
-            2 * Math.PI,
-          );
-          canvasCtx.fill();
-        }
+        drawFaceMeshOverlay(
+          canvasCtx,
+          landmarks,
+          canvasRef.current.width,
+          canvasRef.current.height,
+          {
+            mirrorX: false,
+            sampleStep: 1,
+            pointRadius: 1,
+            color: "#3b82f6",
+          },
+        );
       }
     }
     requestRef.current = requestAnimationFrame(predictWebcam);
@@ -187,7 +188,7 @@ export default function FaceShapeModal({
 
     if (results.faceLandmarks && results.faceLandmarks.length > 0) {
       const shape = classifyFaceShape(results.faceLandmarks[0]);
-      if (shape !== "Unknown") {
+      if (shape !== "Không xác định") {
         setDetectedShape(shape);
         await fetchProducts(shape); // Chỉ gọi API khi nhấn nút
       }
