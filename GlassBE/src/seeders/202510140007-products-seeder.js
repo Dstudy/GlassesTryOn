@@ -8,15 +8,13 @@ module.exports = {
     const t = await queryInterface.sequelize.transaction();
     try {
       const jsonPath = path.join(__dirname, "..", "..", "ref", "products.json");
+
       const file = fs.readFileSync(jsonPath, "utf8");
       const data = JSON.parse(file);
 
-      // Combine all products from different categories
-      const allItems = [
-        ...data.glasses.map((item) => ({ ...item, category: "glasses" })),
-        ...data.necklaces.map((item) => ({ ...item, category: "necklaces" })),
-        ...data.earrings.map((item) => ({ ...item, category: "earrings" })),
-      ];
+      // Since your JSON is already a flat array with 'category' fields,
+      // just use it directly.
+      const allItems = data;
 
       const faceShapes = [
         "mặt tròn",

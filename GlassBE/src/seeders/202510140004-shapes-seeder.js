@@ -5,8 +5,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const jsonPath = path.join(__dirname, "..", "..", "ref", "products.json");
     const raw = fs.readFileSync(jsonPath, "utf8");
-    const data = JSON.parse(raw);
-    const products = [...data.glasses, ...data.necklaces, ...data.earrings];
+    const products = JSON.parse(raw);
 
     const shapeSet = new Set();
     for (const item of products) {

@@ -417,13 +417,11 @@ export default function ProductDetailPage() {
               <h1 className="font-headline text-4xl font-bold text-primary md:text-5xl">
                 {product.name}
               </h1>
-
               <div className="mt-2 flex items-center gap-4">
                 <p className="text-3xl font-bold text-primary">
                   ${Number(product.price ?? 0).toFixed(2)}
                 </p>
               </div>
-
               <div className="mt-4 space-y-3">
                 <div className="flex items-center gap-2">
                   <span className="font-semibold">Hình dáng:</span>
@@ -453,96 +451,60 @@ export default function ProductDetailPage() {
                     {product.material}
                   </span>
                 </div>
-
-                <div className="flex items-center gap-3">
-                  <span className="font-semibold">Màu sắc:</span>
-                  <div className="flex flex-wrap gap-2">
-                    {variants.map((variant) => (
-                      <button
-                        key={variant.id}
-                        onClick={() => {
-                          setSelectedVariantId(variant.id);
-                          const images = Array.isArray(variant.images)
-                            ? variant.images
-                            : [];
-                          if (images.length > 0) {
-                            setSelectedImageUrl(optimizeImageUrl(images[0]));
-                          }
-                        }}
-                        className={cn(
-                          "flex h-8 items-center gap-2 rounded-full border px-3 text-sm",
-                          selectedVariantId === variant.id
-                            ? "border-primary bg-primary/10 text-primary"
-                            : "border-input bg-background text-foreground hover:bg-muted",
-                        )}
-                        title={variant.colorName}
-                        aria-label={`Chọn màu ${variant.colorName}`}
-                      >
-                        {variant.colorHex && (
-                          <span
-                            className="inline-block h-3 w-3 rounded-full border"
-                            style={{ backgroundColor: variant.colorHex }}
-                          />
-                        )}
-                        <span>{variant.colorName || "Màu"}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
               </div>
-
               <Separator className="my-6" />
-
               <p className="text-lg leading-relaxed text-muted-foreground">
                 {product.description}
               </p>
-
               <Separator className="my-6" />
-
-              <div className="space-y-4">
-                <h3 className="text-xl font-semibold">Thông số kỹ thuật</h3>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      Chiều ngang kính:
-                    </span>
-                    <span className="font-medium">
-                      {product.dimensions.width}mm
-                    </span>
+              {product.category === "kính" && (
+                <>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold">Thông số kỹ thuật</h3>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">
+                          Chiều ngang kính:
+                        </span>
+                        <span className="font-medium">
+                          {product.dimensions.width}mm
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">
+                          Chiều dài kính:
+                        </span>
+                        <span className="font-medium">
+                          {product.dimensions.length}mm
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">
+                          Độ rộng tròng:
+                        </span>
+                        <span className="font-medium">
+                          {product.dimensions.lensWidth}mm
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">
+                          Độ cao tròng:
+                        </span>
+                        <span className="font-medium">
+                          {product.dimensions.lensHeight}mm
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Cầu mũi:</span>
+                        <span className="font-medium">
+                          {product.dimensions.bridge}mm
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      Chiều dài kính:
-                    </span>
-                    <span className="font-medium">
-                      {product.dimensions.length}mm
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      Độ rộng tròng:
-                    </span>
-                    <span className="font-medium">
-                      {product.dimensions.lensWidth}mm
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Độ cao tròng:</span>
-                    <span className="font-medium">
-                      {product.dimensions.lensHeight}mm
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Cầu mũi:</span>
-                    <span className="font-medium">
-                      {product.dimensions.bridge}mm
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <Separator className="my-6" />
-
+                  <Separator className="my-6" />
+                </>
+              )}
               <div className="flex flex-col gap-4 sm:flex-row">
                 <Button
                   size="lg"
@@ -567,7 +529,6 @@ export default function ProductDetailPage() {
                   {isFavorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích"}
                 </Button>
               </div>
-
               <div className="mt-4">
                 <Button
                   size="lg"

@@ -7,8 +7,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const jsonPath = path.join(__dirname, "..", "..", "ref", "products.json");
     const raw = fs.readFileSync(jsonPath, "utf8");
-    const data = JSON.parse(raw);
-    const products = [...data.glasses, ...data.necklaces, ...data.earrings];
+    const products = JSON.parse(raw);
 
     const now = new Date();
     const slug = (s) =>
