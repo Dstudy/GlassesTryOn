@@ -147,7 +147,7 @@ export const productApi = {
 
     const res = resjson.data;
 
-    console.log('API Response:', res); // Debug log
+    //console.log('API Response:', res); // Debug log
 
     const arr = Array.isArray(res)
       ? res

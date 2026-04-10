@@ -18,63 +18,58 @@ interface Landmark {
 export function classifyFaceShape(landmarks: Landmark[]): FaceShape {
   if (!landmarks || landmarks.length < 468) return "Không xác định";
 
-  const getDistance = (point1: Landmark, point2: Landmark) => {
+  const getDistance2D = (p1: Landmark, p2: Landmark) => {
     return Math.sqrt(
-      Math.pow(point1.x - point2.x, 2) + 
-      Math.pow(point1.y - point2.y, 2) + 
-      Math.pow(point1.z - point2.z, 2)
+      Math.pow(p1.x - p2.x, 2) + 
+      Math.pow(p1.y - p2.y, 2)
     );
   };
 
-  // Các chỉ số Landmark dựa trên Face Mesh chuẩn
-  const topForehead = landmarks[10];
-  const chin = landmarks[152];
-  
   const leftCheekbone = landmarks[234];
   const rightCheekbone = landmarks[454];
-  
+
   const leftJawline = landmarks[132];
   const rightJawline = landmarks[361];
-  
+
   const leftForehead = landmarks[54];
   const rightForehead = landmarks[284];
 
-  // Các kích thước đo đạc
-  const faceLength = getDistance(topForehead, chin);
-  const faceWidth = getDistance(leftCheekbone, rightCheekbone);
-  const jawlineWidth = getDistance(leftJawline, rightJawline);
-  const foreheadWidth = getDistance(leftForehead, rightForehead);
+  // 🔥 FIX: dùng min/max Y thay vì landmark cứng
+  const ys = landmarks.map(p => p.y);
+  const faceLength = Math.max(...ys) - Math.min(...ys);
 
-  // Tỷ lệ
-  const lengthToWidthRatio = faceLength / faceWidth;
+  const faceWidth = getDistance2D(leftCheekbone, rightCheekbone);
+  const jawlineWidth = getDistance2D(leftJawline, rightJawline);
+  const foreheadWidth = getDistance2D(leftForehead, rightForehead);
 
-  // --- Bộ phân loại logic (Heuristic Classifier) ---
+  const ratio = faceLength / faceWidth;
 
-  // 1. Mặt dài (Long): Chiều dài lớn hơn đáng kể so với chiều rộng
-  if (lengthToWidthRatio >= 1.45) {
+  // --- Classifier ---
+
+  // Long
+  if (ratio > 1.6) {
     return "mặt dài";
   }
-  
-  // 2. Mặt trái xoan (Oval): Dài > Rộng, trán rộng hơn hàm một chút
-  if (lengthToWidthRatio >= 1.25 && lengthToWidthRatio < 1.45) {
-    if (jawlineWidth < foreheadWidth && jawlineWidth < faceWidth * 0.9) {
+
+  // Oval
+  if (ratio > 1.35) {
+    if (jawlineWidth < foreheadWidth) {
       return "mặt trái xoan";
     }
   }
 
-  // 3. Mặt kim cương (Diamond): Gò má là phần rộng nhất (Rộng hơn trán và hàm)
-  // Lưu ý: Tôi ưu tiên Diamond lên trước vì logic Heart/Oval có thể bị chồng lấn
+  // Diamond
   if (faceWidth > foreheadWidth * 1.05 && faceWidth > jawlineWidth * 1.05) {
     return "mặt kim cương";
   }
 
-  // 4. Mặt tròn (Round): Chiều dài ≈ Chiều rộng, hàm không góc cạnh
-  if (lengthToWidthRatio < 1.2) {
+  // Round
+  if (ratio < 1.2) {
     if (jawlineWidth < faceWidth * 0.9) {
       return "mặt tròn";
     }
   }
 
-  // 5. Mặt vuông (Square): Chiều dài ≈ Chiều rộng, hàm rộng và khỏe
+  // Square
   return "mặt vuông";
 }

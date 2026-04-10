@@ -70,6 +70,12 @@ function ShopPageInner() {
   const [totalPages, setTotalPages] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
 
+  const categoryMap: Record<string, string> = {
+    glasses: "Kính",
+    necklaces: "Vòng cổ",
+    earrings: "Khuyên tai",
+  };
+
   const normalizeCategory = (value: string) => value.trim().toLowerCase();
   const scrollToProducts = () => {
     document
@@ -116,7 +122,9 @@ function ShopPageInner() {
   };
 
   useEffect(() => {
-    const nextCategories = categoryFromQuery ? [normalizeCategory(categoryFromQuery)] : [];
+    const nextCategories = categoryFromQuery
+      ? [normalizeCategory(categoryFromQuery)]
+      : [];
 
     setSelectedCategories((prev) => {
       const prevNormalized = prev.map(normalizeCategory);
@@ -163,7 +171,11 @@ function ShopPageInner() {
         if (filterOptions) {
           setBrands(filterOptions.brands || []);
           setMaterials(filterOptions.materials || []);
-          setCategories(filterOptions.categories || []);
+          setCategories(
+            (filterOptions.categories || []).map(
+              (item: string) => categoryMap[item] || item,
+            ),
+          );
           setInitialLoaded(true);
         }
       } catch (err) {
@@ -218,7 +230,10 @@ function ShopPageInner() {
     const hasMore = items.length > INITIAL_DISPLAY_LIMIT;
 
     return (
-      <AccordionItem value={value} className="border-b border-primary/10 last:border-b-0">
+      <AccordionItem
+        value={value}
+        className="border-b border-primary/10 last:border-b-0"
+      >
         <AccordionTrigger className="px-3 py-4 font-headline text-lg transition-colors duration-300 hover:text-primary hover:no-underline">
           <span className="font-semibold text-gray-900">{title}</span>
         </AccordionTrigger>
@@ -279,7 +294,8 @@ function ShopPageInner() {
               Khám phá sản phẩm
             </h1>
             <p className="mx-auto mt-2 max-w-2xl text-lg text-gray-600">
-              Khám phá kính, vòng cổ và khuyên tai phù hợp với phong cách và nhu cầu của bạn.
+              Khám phá kính, vòng cổ và khuyên tai phù hợp với phong cách và nhu
+              cầu của bạn.
             </p>
           </div>
         </div>
@@ -337,7 +353,10 @@ function ShopPageInner() {
               </div>
             </aside>
 
-            <div id="product-listing" className="flex min-w-0 self-start flex-col">
+            <div
+              id="product-listing"
+              className="flex min-w-0 self-start flex-col"
+            >
               <div id="shop-controls-anchor" className="h-0 scroll-mt-24" />
               <div
                 id="shop-controls"
@@ -369,10 +388,10 @@ function ShopPageInner() {
                           sản phẩm
                         </span>
                       )}
-                      </p>
-                    </div>
-                    <Select
-                      value={sortOrder}
+                    </p>
+                  </div>
+                  <Select
+                    value={sortOrder}
                     onValueChange={handleSortChange}
                     disabled={loading}
                   >
@@ -381,11 +400,15 @@ function ShopPageInner() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="featured">Nổi bật</SelectItem>
-                      <SelectItem value="price-asc">Giá: Thấp đến cao</SelectItem>
-                      <SelectItem value="price-desc">Giá: Cao đến thấp</SelectItem>
+                      <SelectItem value="price-asc">
+                        Giá: Thấp đến cao
+                      </SelectItem>
+                      <SelectItem value="price-desc">
+                        Giá: Cao đến thấp
+                      </SelectItem>
                       <SelectItem value="rating">Đánh giá cao nhất</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
@@ -403,7 +426,9 @@ function ShopPageInner() {
                   <div className="flex items-center justify-center rounded-2xl border border-primary/10 bg-white/95 py-20 shadow-[0_24px_55px_-36px_hsl(var(--primary)/0.32)]">
                     <div className="flex flex-col items-center gap-3">
                       <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                      <span className="text-gray-600">Đang tải sản phẩm...</span>
+                      <span className="text-gray-600">
+                        Đang tải sản phẩm...
+                      </span>
                     </div>
                   </div>
                 ) : (
