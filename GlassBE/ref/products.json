@@ -2,986 +2,1042 @@
   {
     "id": "GLS-001",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767706/g1_centered.glb",
-    "name": "Kính Oval Cổ Điển",
-    "subtitle": "Kính gọng mảnh Oval mạ vàng",
-    "price": "$49",
-    "material": "Metal",
-    "shape": "Oval",
-    "size": "Size Medium ( 50 19 - 142 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017846/g1/g1.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017846/g1/g1Try.glb",
+    "name": "Kính chữ nhật ngọc",
+    "subtitle": "Nửa viền xanh ngọc",
+    "price": "1.200.000 ₫",
+    "material": "Kim loại phối nhựa cao cấp",
+    "shape": "Chữ nhật",
+    "size": "Cỡ vừa (50-19-142)",
     "features": [
       {
-        "title": "Lightweight Frame",
+        "title": "Gọng nửa viền",
         "image": "/icons/features/lightweight.svg"
       },
       {
-        "title": "Adjustable Nose Pads",
+        "title": "Đệm mũi chỉnh được",
         "image": "/icons/features/nosepads.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767707/g1_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767709/g1_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767710/g1_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017846/g1/g1_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017846/g1/g1_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017846/g1/g1_side.png"
     },
     "descriptions": [
       {
-        "text": "Thiết kế gọng kim loại mảnh hình oval thanh lịch với phần càng kính thanh mảnh và kiểu dáng retro cổ điển. Đây là lựa chọn lý tưởng làm gọng kính đeo hàng ngày cho những ai yêu thích vẻ ngoài tối giản hoặc cảm hứng cổ điển."
+        "text": "Gọng kính dáng chữ nhật với chất liệu kim loại phối nhựa, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với cấu trúc nửa viền thanh thoát, đệm mũi chỉnh được, tạo cảm giác đeo êm, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-002",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767711/g2_centered.glb",
-    "name": "Kính Tròn Truyền Thống",
-    "subtitle": "Kính gọng tròn màu bạc cổ điển",
-    "price": "$45",
-    "material": "Metal",
-    "shape": "Round",
-    "size": "Size Medium ( 49 20 - 140 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017848/g2/g2.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017848/g2/g2Try.glb",
+    "name": "Kính Browline đen",
+    "subtitle": "Viền vàng hồng cổ điển",
+    "price": "1.200.000 ₫",
+    "material": "Kim loại phối nhựa cao cấp",
+    "shape": "Browline",
+    "size": "Cỡ vừa (50-19-145)",
     "features": [
       {
-        "title": "Low Nose Bridge",
-        "image": "/icons/features/low-nose-bridge.svg"
+        "title": "Phom browline cổ điển",
+        "image": "/icons/features/classic.svg"
       },
       {
-        "title": "Vintage Style",
-        "image": "/icons/features/vintage.svg"
+        "title": "Đệm mũi chỉnh được",
+        "image": "/icons/features/nosepads.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767713/g2_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767714/g2_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767715/g2_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017847/g2/g2_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017847/g2/g2_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017847/g2/g2_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu gọng tròn vượt thời gian với viền mỏng và tỷ lệ cân đối. Thiết kế mang lại cảm giác nhẹ nhàng trên khuôn mặt trong khi vẫn giữ được vẻ ngoài tinh tế, mang hơi hướng tri thức."
+        "text": "Gọng kính dáng browline với chất liệu kim loại phối nhựa, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với đệm mũi chỉnh được, tạo cảm giác đeo êm, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-003",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767716/g3_centered.glb",
-    "name": "Kính Tròn Kim Loại",
-    "subtitle": "Kính gọng tròn kim loại bóng",
-    "price": "$52",
-    "material": "Metal",
-    "shape": "Round",
-    "size": "Size Large ( 51 19 - 145 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017850/g3/g3.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017850/g3/g3Try.glb",
+    "name": "Kính bát giác bạc",
+    "subtitle": "Khung kim loại thanh mảnh",
+    "price": "1.300.000 ₫",
+    "material": "Kim loại",
+    "shape": "Bát giác",
+    "size": "Cỡ lớn (51-19-145)",
     "features": [
       {
-        "title": "Thin Rim",
+        "title": "Viền mảnh",
         "image": "/icons/features/thin-rim.svg"
       },
       {
-        "title": "Adjustable Nose Pads",
-        "image": "/icons/features/nosepads.svg"
+        "title": "Gọng nhẹ",
+        "image": "/icons/features/lightweight.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767718/g3_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767719/g3_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767720/g3_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017850/g3/g3_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017850/g3/g3_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017850/g3/g3_side.png"
     },
     "descriptions": [
       {
-        "text": "Gọng kính tròn bằng kim loại sáng bóng với kết cấu hiện đại và trọng lượng nhẹ. Tròng kính hình tròn thanh lịch và cầu kính mảnh giúp sản phẩm phù hợp với phong cách thời trang lịch sự nhưng vẫn trẻ trung (smart-casual)."
-      }
-    ]
-  },
-  {
-    "id": "GLS-004",
-    "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767721/g4_centered.glb",
-    "name": "Kính Vuông Thành Thị",
-    "subtitle": "Kính gọng vuông đen nguyên khung",
-    "price": "$39",
-    "material": "Acetate",
-    "shape": "Square",
-    "size": "Size Large ( 53 18 - 145 )",
-    "features": [
-      {
-        "title": "Full Rim",
-        "image": "/icons/features/full-rim.svg"
-      },
-      {
-        "title": "Daily Wear",
-        "image": "/icons/features/daily.svg"
-      }
-    ],
-    "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767722/g4_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767724/g4_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767725/g4_side.png"
-    },
-    "descriptions": [
-      {
-        "text": "Một mẫu gọng vuông nguyên khung thực dụng với kiểu dáng đô thị gọn gàng. Được thiết kế như một phong cách linh hoạt hàng ngày, phù hợp cho cả trang phục thường nhật lẫn môi trường công sở."
+        "text": "Gọng kính dáng bát giác với chất liệu kim loại, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với viền mảnh gọn gàng, trọng lượng nhẹ và linh hoạt, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-005",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767726/g5_centered.glb",
-    "name": "Kính Mát Retro",
-    "subtitle": "Kính mát tròng màu hổ phách phong cách Retro",
-    "price": "$59",
-    "material": "Plastic-Metal",
-    "shape": "Aviator",
-    "size": "Size Large ( 55 16 - 145 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017852/g5/g5.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017852/g5/g5Try.glb",
+    "name": "Kính mát hổ phách",
+    "subtitle": "Dáng tròn ánh hổ phách",
+    "price": "1.500.000 ₫",
+    "material": "Kim loại",
+    "shape": "Tròn",
+    "size": "Cỡ lớn (55-16-145)",
     "features": [
       {
-        "title": "Tinted Lenses",
+        "title": "Tròng màu",
         "image": "/icons/features/tinted.svg"
       },
       {
-        "title": "Lightweight",
-        "image": "/icons/features/lightweight.svg"
+        "title": "Cảm hứng cổ điển",
+        "image": "/icons/features/vintage.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767727/g5_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767728/g5_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767730/g5_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017852/g5/g5_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017852/g5/g5_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017852/g5/g5_side.png"
     },
     "descriptions": [
       {
-        "text": "Thiết kế kính mát mang cảm hứng retro với tròng kính màu ấm và kiểu dáng đầy tự tin. Rất phù hợp cho những phong cách thời trang táo bạo, trang phục du lịch hoặc các nhân vật 3D định hướng thời trang."
-      }
-    ]
-  },
-  {
-    "id": "GLS-006",
-    "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767731/g6_centered.glb",
-    "name": "Kính Mát Pixel Meme",
-    "subtitle": "Kính mát đen phong cách Pixel độc lạ",
-    "price": "$18",
-    "material": "Plastic",
-    "shape": "Novelty",
-    "size": "One Size",
-    "features": [
-      {
-        "title": "Novelty Style",
-        "image": "/icons/features/novelty.svg"
-      },
-      {
-        "title": "Low Poly",
-        "image": "/icons/features/low-poly.svg"
-      }
-    ],
-    "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767733/g6_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767734/g6_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767735/g6_side.png"
-    },
-    "descriptions": [
-      {
-        "text": "Một mẫu kính mát phong cách pixel vui nhộn được lấy cảm hứng từ thẩm mỹ meme trên internet. Phù hợp nhất cho các cảnh phim cách điệu, phụ kiện nhân vật hài hước và các đạo cụ game nhẹ nhàng."
+        "text": "Kính mát dáng tròn với chất liệu kim loại, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với tròng màu có chiều sâu thị giác, tinh thần retro được tiết chế vừa đủ, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-007",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767736/g7_centered.glb",
-    "name": "Khung Kính Wayfarer",
-    "subtitle": "Gọng kính Wayfarer màu đen",
-    "price": "$34",
-    "material": "Plastic",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017854/g7/g7.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017854/g7/g7Try.glb",
+    "name": "Gọng Wayfarer",
+    "subtitle": "Xanh đậm, phom cổ điển",
+    "price": "850.000 ₫",
+    "material": "Nhựa cao cấp",
     "shape": "Wayfarer",
-    "size": "Size Medium ( 52 18 - 142 )",
+    "size": "Cỡ vừa (52-18-142)",
     "features": [
       {
-        "title": "Lensless Rim",
+        "title": "Gọng không tròng",
         "image": "/icons/features/rim.svg"
       },
       {
-        "title": "Classic Wayfarer",
-        "image": "/icons/features/classic.svg"
+        "title": "Tông màu nổi bật",
+        "image": "/icons/features/style.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767738/g7_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767739/g7_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767740/g7_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017854/g7/g7_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017854/g7/g7_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017854/g7/g7_side.png"
     },
     "descriptions": [
       {
-        "text": "Thiết kế gọng Wayfarer gọn gàng không kèm tròng kính, mang lại kiểu dáng kinh điển với sự linh hoạt trong phối đồ. Phù hợp cho các ứng dụng thử kính ảo và các cảnh phụ kiện cách điệu."
+        "text": "Gọng kính dáng wayfarer với chất liệu nhựa cao cấp, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với thiết kế không tròng mang cảm giác tối giản hiện đại, tông màu nổi nhưng vẫn sạch và sang, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-008",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767741/g8_centered.glb",
-    "name": "Kính Mát Mùa Hè Low Poly",
-    "subtitle": "Kính mát hình chữ nhật phong cách Low Poly",
-    "price": "$29",
-    "material": "Plastic",
-    "shape": "Rectangle",
-    "size": "One Size",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017856/g8/g8.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017856/g8/g8Try.glb",
+    "name": "Kính mát liền tròng",
+    "subtitle": "Hình học bản lớn",
+    "price": "700.000 ₫",
+    "material": "Nhựa cao cấp phối kim loại",
+    "shape": "Liền tròng",
+    "size": "Một cỡ",
     "features": [
       {
-        "title": "Low Poly",
-        "image": "/icons/features/low-poly.svg"
+        "title": "Tròng màu",
+        "image": "/icons/features/tinted.svg"
       },
       {
-        "title": "Optimized Mesh",
-        "image": "/icons/features/optimized.svg"
-      },
-      {
-        "title": "Separated Parts",
-        "image": "/icons/features/parts.svg"
+        "title": "Cầu mày bản nổi bật",
+        "image": "/icons/features/statement.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767743/g8_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767744/g8_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767745/g8_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017856/g8/g8_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017856/g8/g8_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017856/g8/g8_side.png"
     },
     "descriptions": [
       {
-        "text": "Mẫu kính mát low-poly được tối ưu hóa với vẻ ngoài mùa hè tươi sáng. Gọng kính góc cạnh đơn giản phù hợp cho các cảnh trên di động, trò chơi phổ thông và xem trước AR nhẹ."
+        "text": "Kính mát dáng shield với chất liệu nhựa phối kim loại, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với tròng màu có chiều sâu thị giác, thanh brow bar tạo điểm nhấn mạnh, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-009",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767748/g9_centered.glb",
-    "name": "Kính Mát Wraparound",
-    "subtitle": "Kính mát Wraparound đen bán trong suốt",
-    "price": "$64",
-    "material": "Plastic",
-    "shape": "Wraparound",
-    "size": "One Size",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017858/g9/g9.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017859/g9/g9Try.glb",
+    "name": "Kính Clubmaster",
+    "subtitle": "Nửa viền đen sang trọng",
+    "price": "1.600.000 ₫",
+    "material": "Kim loại phối nhựa cao cấp",
+    "shape": "Browline",
+    "size": "Một cỡ",
     "features": [
       {
-        "title": "4K Textures",
-        "image": "/icons/features/4k.svg"
+        "title": "Gọng nửa viền",
+        "image": "/icons/features/lightweight.svg"
       },
       {
-        "title": "Clean Topology",
-        "image": "/icons/features/topology.svg"
-      },
-      {
-        "title": "Opacity Map",
-        "image": "/icons/features/opacity.svg"
+        "title": "Tròng màu",
+        "image": "/icons/features/tinted.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767749/g9_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767751/g9_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767752/g9_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017858/g9/g9_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017858/g9/g9_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017858/g9/g9_side.png"
     },
     "descriptions": [
       {
-        "text": "Thiết kế kính mát ôm sát (wraparound) bóng bẩy với tròng kính màu tối bán trong suốt. Sản phẩm phù hợp với phong cách phụ kiện thể thao, tương lai và thời trang đường phố (streetwear)."
+        "text": "Kính mát dáng browline với chất liệu kim loại phối nhựa, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với cấu trúc nửa viền thanh thoát, tròng màu có chiều sâu thị giác, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-010",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767753/g10_centered.glb",
-    "name": "Kính Mát Điệp Viên Tròn",
-    "subtitle": "Kính mát tròn phong cách điệp viên với chất liệu PBR",
-    "price": "$47",
-    "material": "Metal",
-    "shape": "Round",
-    "size": "Size Medium ( 50 18 - 140 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017861/g10/g10.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017861/g10/g10Try.glb",
+    "name": "Kính thể thao",
+    "subtitle": "Liền tròng ánh chuyển sắc",
+    "price": "1.200.000 ₫",
+    "material": "Nhựa cao cấp",
+    "shape": "Liền tròng",
+    "size": "Cỡ vừa (50-18-140)",
     "features": [
       {
-        "title": "PBR Materials",
-        "image": "/icons/features/pbr.svg"
+        "title": "Tròng liền khối",
+        "image": "/icons/features/style.svg"
       },
       {
-        "title": "Stylized Spy Look",
-        "image": "/icons/features/style.svg"
+        "title": "Phong cách thể thao",
+        "image": "/icons/features/daily.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767755/g10_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767756/g10_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767757/g10_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017861/g10/g10_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017861/g10/g10_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017861/g10/g10_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu kính mát tròn mang phong thái điệp viên bóng bẩy với các vật liệu sẵn sàng cho PBR. Phù hợp cho phim ảnh, các cảnh hành động lén lút và tạo hình nhân vật thời thượng."
+        "text": "Kính mát dáng shield với chất liệu nhựa cao cấp, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với một dải lens liền khối đậm chất thời trang, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-011",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767759/g11_centered.glb",
-    "name": "Kính Vuông Đậm",
-    "subtitle": "Kính vuông nhựa Acetate đen",
-    "price": "$44",
-    "material": "Acetate, Wood-Look Temples",
-    "shape": "Square",
-    "size": "Size Large ( 53 19 - 145 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017866/g11/g11.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017864/g11/g11Try.glb",
+    "name": "Kính vuông bản dày",
+    "subtitle": "Gọng đen hiện đại",
+    "price": "1.100.000 ₫",
+    "material": "Nhựa cao cấp",
+    "shape": "Vuông",
+    "size": "Cỡ lớn (53-19-145)",
     "features": [
       {
-        "title": "Full Rim",
+        "title": "Gọng toàn viền",
         "image": "/icons/features/full-rim.svg"
       },
       {
-        "title": "Daily Wear",
+        "title": "Dễ đeo hằng ngày",
         "image": "/icons/features/daily.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767761/g11_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767762/g11_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767763/g11_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017863/g11/g11_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017863/g11/g11_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017863/g11/g11_side.png"
     },
     "descriptions": [
       {
-        "text": "Một khung kính vuông đậm nét với viền đen dày và càng kính vân gỗ ấm áp. Hình dáng này mang lại cảm giác thực dụng, hiện đại và dễ dàng phối hợp cho trang phục hàng ngày."
+        "text": "Gọng kính dáng vuông với chất liệu nhựa cao cấp, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với phom full-rim chắc tay, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-013",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767765/g13_centered.glb",
-    "name": "Kính Mát Mắt Mèo Thanh Mảnh",
-    "subtitle": "Kính mát mắt mèo mạ vàng thanh mảnh",
-    "price": "$53",
-    "material": "Metal",
-    "shape": "Cat-Eye",
-    "size": "Size Medium ( 54 18 - 142 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017869/g13/g13.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017868/g13/g13Try.glb",
+    "name": "Kính mắt mèo",
+    "subtitle": "Kim loại thanh mảnh",
+    "price": "1.300.000 ₫",
+    "material": "Kim loại",
+    "shape": "Mắt mèo",
+    "size": "Cỡ vừa (54-18-142)",
     "features": [
       {
-        "title": "Tinted Lenses",
+        "title": "Tròng màu",
         "image": "/icons/features/tinted.svg"
       },
       {
-        "title": "Vintage Style",
+        "title": "Cảm hứng cổ điển",
         "image": "/icons/features/vintage.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767766/g13_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767767/g13_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767769/g13_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017867/g13/g13_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017867/g13/g13_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017867/g13/g13_side.png"
     },
     "descriptions": [
       {
-        "text": "Thiết kế kính mát mắt mèo thanh mảnh với tròng kính tối màu và gọng kim loại tông vàng nhạt. Kiểu dáng mang lại sự sắc sảo, cảm hứng retro và rất phù hợp cho những phong cách thời trang dẫn đầu xu hướng."
+        "text": "Kính mát dáng mắt mèo với chất liệu kim loại, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với tròng màu có chiều sâu thị giác, tinh thần retro được tiết chế vừa đủ, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-014",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767770/g14_centered.glb",
-    "name": "Kính Tròn Gọng Mảnh Cổ Điển",
-    "subtitle": "Kính tròn gọng mảnh màu bạc",
-    "price": "$46",
-    "material": "Metal",
-    "shape": "Round",
-    "size": "Size Medium ( 49 20 - 140 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017871/g14/g14.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017871/g14/g14Try.glb",
+    "name": "Kính viền dây",
+    "subtitle": "Dáng tròn cổ điển",
+    "price": "1.150.000 ₫",
+    "material": "Kim loại",
+    "shape": "Tròn",
+    "size": "Cỡ vừa (49-20-140)",
     "features": [
       {
-        "title": "Thin Rim",
-        "image": "/icons/features/thin-rim.svg"
+        "title": "Tròng màu",
+        "image": "/icons/features/tinted.svg"
       },
       {
-        "title": "Adjustable Nose Pads",
-        "image": "/icons/features/nosepads.svg"
+        "title": "Cảm hứng cổ điển",
+        "image": "/icons/features/vintage.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767774/g14_side.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767772/g14_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767771/g14_front.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017870/g14/g14_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017870/g14/g14_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017870/g14/g14_side.png"
     },
     "descriptions": [
       {
-        "text": "Mẫu kính tròn gọng mảnh cổ điển với viền tông bạc, đệm mũi có thể điều chỉnh và càng kính thanh mảnh. Sản phẩm mang lại vẻ ngoài nhẹ nhàng, phù hợp cho phong cách tối giản, cổ điển hoặc cảm hứng học thuật."
+        "text": "Kính mát dáng tròn với chất liệu kim loại, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với tròng màu có chiều sâu thị giác, tinh thần retro được tiết chế vừa đủ, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-015",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767775/g15_centered.glb",
-    "name": "Kính Mát Tròn Cổ Điển",
-    "subtitle": "Kính mát tròn bạc phong cách Vintage",
-    "price": "$49",
-    "material": "Metal",
-    "shape": "Round",
-    "size": "Size Medium ( 48 20 - 140 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017874/g15/g15.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017874/g15/g15Try.glb",
+    "name": "Kính tròn phối màu",
+    "subtitle": "Khung bạc, tròng tương phản",
+    "price": "1.200.000 ₫",
+    "material": "Kim loại",
+    "shape": "Tròn",
+    "size": "Cỡ vừa (48-20-140)",
     "features": [
       {
-        "title": "Tinted Lenses",
+        "title": "Tròng màu",
         "image": "/icons/features/tinted.svg"
       },
       {
-        "title": "Vintage Style",
-        "image": "/icons/features/vintage.svg"
+        "title": "Chi tiết phá cách",
+        "image": "/icons/features/novelty.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767777/g15_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767778/g15_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767779/g15_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017873/g15/g15_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017873/g15/g15_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017873/g15/g15_side.png"
     },
     "descriptions": [
       {
-        "text": "Một khung kính mát tròn nhỏ gọn với viền kim loại mỏng và tròng kính tối màu. Nó mang lại vẻ ngoài cổ điển vượt thời gian trong khi vẫn đủ tinh tế cho phong cách thường nhật hàng ngày."
+        "text": "Kính mát dáng tròn với chất liệu kim loại, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với tròng màu có chiều sâu thị giác, chi tiết phối khác biệt tăng độ nhận diện, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-016",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767780/g16_centered.glb",
-    "name": "Kính Vuông Góc Cạnh",
-    "subtitle": "Kính vuông góc cạnh màu đen",
-    "price": "$42",
-    "material": "Acetate, Wood-Look Temples",
-    "shape": "Square",
-    "size": "Size Medium ( 52 17 - 145 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017877/g16/g16.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017877/g16/g16Try.glb",
+    "name": "Kính mắt mèo đen",
+    "subtitle": "Góc cạnh, sắc nét",
+    "price": "1.050.000 ₫",
+    "material": "Nhựa cao cấp phối kim loại",
+    "shape": "Mắt mèo",
+    "size": "Cỡ vừa (52-17-145)",
     "features": [
       {
-        "title": "Full Rim",
-        "image": "/icons/features/full-rim.svg"
+        "title": "Tròng màu",
+        "image": "/icons/features/tinted.svg"
       },
       {
-        "title": "Daily Wear",
-        "image": "/icons/features/daily.svg"
+        "title": "Phom góc cạnh",
+        "image": "/icons/features/style.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767782/g16_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767783/g16_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767785/g16_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017876/g16/g16_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017876/g16/g16_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017876/g16/g16_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu kính vuông góc cạnh màu đen với đường chân mày hơi xếch lên, đệm mũi mảnh và càng kính vân gỗ. Kết quả tạo nên một cảm giác sắc sảo, hiện đại và rất phù hợp cho môi trường công sở."
+        "text": "Kính mát dáng mắt mèo với chất liệu nhựa phối kim loại, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với tròng màu có chiều sâu thị giác, đường nét sắc sảo, lên mặt gọn, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-017",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767786/g17_centered.glb",
-    "name": "Kính Mát Tròn Tối Màu",
-    "subtitle": "Kính mát tròn nhựa Acetate tối màu",
-    "price": "$56",
-    "material": "Acetate",
-    "shape": "Round",
-    "size": "Size Medium ( 50 20 - 145 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017879/g17/g17.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017879/g17/g17Try.glb",
+    "name": "Kính tròn khói",
+    "subtitle": "Phom bóng sang",
+    "price": "1.400.000 ₫",
+    "material": "Nhựa cao cấp",
+    "shape": "Tròn",
+    "size": "Cỡ vừa (50-20-145)",
     "features": [
       {
-        "title": "Tinted Lenses",
+        "title": "Tròng màu",
         "image": "/icons/features/tinted.svg"
       },
       {
-        "title": "Classic Style",
+        "title": "Phom kinh điển",
         "image": "/icons/features/classic.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767788/g17_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767789/g17_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767790/g17_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017879/g17/g17_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017879/g17/g17_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017879/g17/g17_side.png"
     },
     "descriptions": [
       {
-        "text": "Thiết kế kính mát tròn với gọng nhựa acetate đen bóng và tròng kính màu. Sản phẩm có hình dáng cổ điển cân đối, phù hợp cho trang phục thường ngày, du lịch và các phong cách thời trang sành điệu."
+        "text": "Kính mát dáng tròn với chất liệu nhựa cao cấp, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với tròng màu có chiều sâu thị giác, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-018",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767791/g18_centered.glb",
-    "name": "Kính Mát Mắt Mèo Trong Suốt",
-    "subtitle": "Kính mát mắt mèo màu Lavender trong suốt",
-    "price": "$41",
-    "material": "Translucent Acetate",
-    "shape": "Cat-Eye",
-    "size": "Size Medium ( 52 18 - 142 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017881/g18/g18.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017881/g18/g18Try.glb",
+    "name": "Kính oải hương",
+    "subtitle": "Mắt mèo xuyên màu",
+    "price": "1.000.000 ₫",
+    "material": "Acetat xuyên màu",
+    "shape": "Mắt mèo",
+    "size": "Cỡ vừa (52-18-142)",
     "features": [
       {
-        "title": "Tinted Lenses",
+        "title": "Tròng màu",
         "image": "/icons/features/tinted.svg"
       },
       {
-        "title": "Stylized Look",
+        "title": "Tinh thần thời trang",
         "image": "/icons/features/style.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767792/g18_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767794/g18_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767795/g18_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017881/g18/g18_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017881/g18/g18_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017881/g18/g18_side.png"
     },
     "descriptions": [
       {
-        "text": "Khung kính mát mắt mèo trong suốt với sắc tím oải hương nhẹ nhàng và tròng kính tím đậm. Hình dáng mang lại cảm giác vui tươi, thời thượng và rất phù hợp cho phong cách mùa hè rực rỡ hoặc các buổi chụp hình thời trang."
+        "text": "Kính mát dáng mắt mèo với chất liệu acetate bán trong, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với tròng màu có chiều sâu thị giác, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-019",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767797/g19_centered.glb",
-    "name": "Kính Vuông Không Viền",
-    "subtitle": "Kính vuông không viền màu bạc",
-    "price": "$48",
-    "material": "Metal",
-    "shape": "Square",
-    "size": "Size Large ( 54 18 - 145 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017883/g19/g19.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017883/g19/g19Try.glb",
+    "name": "Kính không viền vuông",
+    "subtitle": "Ánh bạc tối giản",
+    "price": "1.200.000 ₫",
+    "material": "Kim loại",
+    "shape": "Vuông",
+    "size": "Cỡ lớn (54-18-145)",
     "features": [
       {
-        "title": "Lightweight Frame",
+        "title": "Gọng nhẹ",
         "image": "/icons/features/lightweight.svg"
       },
       {
-        "title": "Adjustable Nose Pads",
+        "title": "Đệm mũi chỉnh được",
         "image": "/icons/features/nosepads.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767798/g19_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767799/g19_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767800/g19_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017882/g19/g19_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017882/g19/g19_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017882/g19/g19_side.png"
     },
     "descriptions": [
       {
-        "text": "Thiết kế kính vuông không viền trọng lượng nhẹ với tròng kính vuông bo góc, phụ kiện kim loại mảnh và đuôi càng kính kiểu đồi mồi. Sản phẩm mang lại cảm giác sạch sẽ, chuyên nghiệp và không gây cản trở tầm nhìn."
+        "text": "Gọng kính dáng vuông với chất liệu kim loại, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với đệm mũi chỉnh được, tạo cảm giác đeo êm, trọng lượng nhẹ và linh hoạt, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "GLS-020",
     "category": "glasses",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767802/g20_centered.glb",
-    "name": "Kính Vuông Trong Suốt",
-    "subtitle": "Kính vuông màu xám trong suốt",
-    "price": "$43",
-    "material": "Transparent Acetate",
-    "shape": "Square",
-    "size": "Size Large ( 53 19 - 145 )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017887/g20/g20.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017887/g20/g20Try.glb",
+    "name": "Kính vuông khói",
+    "subtitle": "Trong suốt hiện đại",
+    "price": "1.100.000 ₫",
+    "material": "Acetat trong suốt",
+    "shape": "Vuông",
+    "size": "Cỡ lớn (53-19-145)",
     "features": [
       {
-        "title": "Full Rim",
+        "title": "Gọng toàn viền",
         "image": "/icons/features/full-rim.svg"
       },
       {
-        "title": "Daily Wear",
+        "title": "Dễ đeo hằng ngày",
         "image": "/icons/features/daily.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767804/g20_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767805/g20_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767806/g20_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017886/g20/g20_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017886/g20/g20_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017886/g20/g20_side.png"
     },
     "descriptions": [
       {
-        "text": "Khung kính vuông màu xám trong suốt với kết cấu hiện đại mềm mại và các chi tiết kim loại tinh tế. Thiết kế mang lại sự linh hoạt, dễ tiếp cận và dễ dàng kết hợp với các tủ đồ hàng ngày."
+        "text": "Gọng kính dáng vuông với chất liệu acetate trong, mang tổng thể chỉn chu và thiên về tinh thần luxury hiện đại. Thiết kế được hoàn thiện với phom full-rim chắc tay, nhờ đó vừa tạo điểm nhấn thị giác vừa giữ được độ thanh lịch khi phối đồ."
       }
     ]
   },
   {
     "id": "NCK-001",
     "category": "necklaces",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767808/n1_centered.glb",
-    "name": "Dây Chuyền Vàng Ruby Kim Cương",
-    "subtitle": "Dây chuyền vàng gắn Ruby & Kim cương phong cách Low Poly",
-    "price": "$129",
-    "material": "Gold-Plated Alloy, Ruby, Crystal",
-    "shape": "Pendant",
-    "size": "Adjustable ( 42cm + 5cm extender )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017890/n1/n1.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017890/n1/n1Try.glb",
+    "name": "Vòng cổ đá đỏ",
+    "subtitle": "Mạ vàng nổi bật",
+    "price": "3.200.000 ₫",
+    "material": "Hợp kim mạ vàng, pha lê đỏ",
+    "shape": "Dáng bản nổi bật",
+    "size": "Dài điều chỉnh 42 cm + 5 cm nối dài",
     "features": [
       {
-        "title": "Gem Accent",
+        "title": "Điểm nhấn đá",
         "image": "/icons/features/gem.svg"
       },
       {
-        "title": "Low Poly",
-        "image": "/icons/features/low-poly.svg"
+        "title": "Phong cách sang trọng",
+        "image": "/icons/features/formal.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767809/n1_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767810/n1_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767811/n1_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017889/n1/n1_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017889/n1/n1_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017889/n1/n1_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu dây chuyền lấy cảm hứng từ thế giới kỳ ảo với chuỗi dây vàng và viên ruby trung tâm được bao quanh bởi các chi tiết tinh thể. Tổng thể thiết kế mang lại vẻ vương giả, rực rỡ và phù hợp cho những phong cách tạo điểm nhấn mạnh mẽ."
+        "text": "Mẫu vòng cổ dáng statement với chất liệu hợp kim mạ vàng phối đá đỏ, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ điểm nhấn đá bắt sáng, tỷ lệ đậm chất trang sức dự tiệc, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
       }
     ]
   },
   {
     "id": "NCK-002",
     "category": "necklaces",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767812/n2_centered.glb",
-    "name": "Vòng Cổ Choker Trung Cổ",
-    "subtitle": "Vòng cổ Choker bạc cổ điển phong cách Trung cổ",
-    "price": "$119",
-    "material": "Antique Silver Alloy",
-    "shape": "Collar",
-    "size": "Adjustable ( 40cm + 6cm extender )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017893/n2/n2.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017893/n2/n2Try.glb",
+    "name": "Vòng cổ đồng xu",
+    "subtitle": "Dây cord chạm khắc",
+    "price": "3.000.000 ₫",
+    "material": "Dây cord, hợp kim bạc giả cổ",
+    "shape": "Mặt đồng xu",
+    "size": "Dài điều chỉnh 40 cm + 6 cm nối dài",
     "features": [
       {
-        "title": "Medieval Style",
-        "image": "/icons/features/medieval.svg"
+        "title": "Mặt chạm khắc",
+        "image": "/icons/features/engraved.svg"
       },
       {
-        "title": "Textured Surface",
-        "image": "/icons/features/textured.svg"
+        "title": "Cảm hứng cổ điển",
+        "image": "/icons/features/vintage.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767814/n2_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767815/n2_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767816/n2_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017893/n2/n2_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017893/n2/n2_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017893/n2/n2_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu vòng cổ lấy cảm hứng từ đồ cổ với các chi tiết trang trí tỉ mỉ và kiểu dáng mang đậm dấu ấn lịch sử. Lý tưởng cho tủ đồ phong cách kỳ ảo, trang phục hóa trang hoặc phụ kiện nhân vật kịch tính."
+        "text": "Mẫu vòng cổ dáng mặt huy chương với chất liệu dây cord phối hợp kim bạc cổ, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ bề mặt khắc họa tiết có chiều sâu, hơi hướng cổ điển sang trọng, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
       }
     ]
   },
   {
     "id": "NCK-003",
     "category": "necklaces",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767818/n3_centered.glb",
-    "name": "Dây Chuyền Mặt Ma Nhỏ",
-    "subtitle": "Dây chuyền mặt dây hình ma bằng thủy tinh",
-    "price": "$39",
-    "material": "Glass, Silver-Plated Alloy",
-    "shape": "Pendant",
-    "size": "Adjustable ( 45cm + 5cm extender )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017897/n3/n3.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017897/n3/n3Try.glb",
+    "name": "Vòng cổ mặt ma",
+    "subtitle": "Thủy tinh ánh khói",
+    "price": "1.000.000 ₫",
+    "material": "Thủy tinh, hợp kim ánh bạc",
+    "shape": "Mặt dây chuyền",
+    "size": "Dài điều chỉnh 45 cm + 5 cm nối dài",
     "features": [
       {
-        "title": "Glass Pendant",
+        "title": "Mặt thủy tinh",
         "image": "/icons/features/glass.svg"
       },
       {
-        "title": "Halloween Theme",
+        "title": "Cảm hứng lễ hội",
         "image": "/icons/features/theme.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767820/n3_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767821/n3_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767823/n3_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017894/n3/n3_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017894/n3/n3_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017894/n3/n3_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu dây chuyền mặt thủy tinh hình bóng ma kỳ quặc với cảm giác thủ công mềm mại. Rất tuyệt vời cho phong cách phụ kiện vui nhộn, theo mùa hoặc trang phục nhân vật theo chủ đề."
+        "text": "Mẫu vòng cổ dáng mặt dây với chất liệu thủy tinh phối hợp kim tông bạc, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ mặt dây thủy tinh tạo cảm giác lạ mắt, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
       }
     ]
   },
   {
     "id": "NCK-004",
     "category": "necklaces",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767824/n4_centered.glb",
-    "name": "Dây Chuyền Mặt Cổ Ngữ",
-    "subtitle": "Dây chuyền mặt khắc ký tự Rune",
-    "price": "$54",
-    "material": "Brushed Steel",
-    "shape": "Pendant",
-    "size": "Adjustable ( 50cm chain )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017900/n4/n4.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017900/n4/n4Try.glb",
+    "name": "Vòng cổ rune",
+    "subtitle": "Thép xước khắc rune",
+    "price": "1.350.000 ₫",
+    "material": "Thép xước mờ",
+    "shape": "Mặt dây chuyền",
+    "size": "Dây dài 50 cm",
     "features": [
       {
-        "title": "Rune Engraving",
+        "title": "Khắc rune",
         "image": "/icons/features/engraved.svg"
       },
       {
-        "title": "Minimalist Chain",
+        "title": "Dây tối giản",
         "image": "/icons/features/minimal.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767826/n4_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767827/n4_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767828/n4_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017899/n4/n4_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017899/n4/n4_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017899/n4/n4_side.png"
     },
     "descriptions": [
       {
-        "text": "Dây chuyền mặt tối giản xoay quanh một mảnh bùa khắc ký tự cổ ngữ (rune). Thiết kế đủ tinh tế để đeo hàng ngày trong khi vẫn mang lại không khí huyền bí hoặc giàu tính biểu tượng."
+        "text": "Mẫu vòng cổ dáng mặt dây với chất liệu thép xước, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ bề mặt khắc họa tiết có chiều sâu, phần dây và form được tiết chế gọn gàng, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
       }
     ]
   },
   {
     "id": "NCK-005",
     "category": "necklaces",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767829/n5_centered.glb",
-    "name": "Dây Chuyền Xích Vàng",
-    "subtitle": "Dây chuyền dạng xích vàng truyền thống",
-    "price": "$79",
-    "material": "Gold-Plated Brass",
-    "shape": "Chain",
-    "size": "Length 48cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017902/n5/n5.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017902/n5/n5Try.glb",
+    "name": "Vòng cổ mặt vuông",
+    "subtitle": "Tối giản thanh lịch",
+    "price": "2.000.000 ₫",
+    "material": "Hợp kim mạ vàng",
+    "shape": "Mặt hình học",
+    "size": "Chiều dài 48 cm",
     "features": [
       {
-        "title": "Classic Link Chain",
-        "image": "/icons/features/chain.svg"
+        "title": "Thiết kế tối giản",
+        "image": "/icons/features/minimal.svg"
       },
       {
-        "title": "Polished Finish",
-        "image": "/icons/features/polished.svg"
+        "title": "Dáng hình học",
+        "image": "/icons/features/geometric.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767830/n5_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767831/n5_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767833/n5_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017902/n5/n5_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017902/n5/n5_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017902/n5/n5_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu dây chuyền xích vàng đơn giản với kiểu dáng vượt thời gian và bề mặt kim loại mịn màng. Hữu ích khi đeo độc lập hoặc dùng làm lớp nền để phối tầng cùng các loại dây chuyền khác."
+        "text": "Mẫu vòng cổ dáng mặt hình học với chất liệu hợp kim mạ vàng, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ phần dây và form được tiết chế gọn gàng, hình khối gọn và hiện đại, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
       }
     ]
   },
   {
     "id": "NCK-006",
     "category": "necklaces",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767834/n6_centered.glb",
-    "name": "Dây Chuyền Jashin",
-    "subtitle": "Dây chuyền mặt biểu tượng bóng tối",
-    "price": "$44",
-    "material": "Blackened Alloy",
-    "shape": "Symbol Pendant",
-    "size": "Adjustable ( 46cm + 4cm extender )",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017906/n6/n6.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017906/n6/n6Try.glb",
+    "name": "Vòng cổ Jashin",
+    "subtitle": "Biểu tượng tối màu",
+    "price": "1.100.000 ₫",
+    "material": "Hợp kim xử lý đen",
+    "shape": "Mặt biểu tượng",
+    "size": "Dài điều chỉnh 46 cm + 4 cm nối dài",
     "features": [
       {
-        "title": "Anime Inspired",
+        "title": "Cảm hứng anime",
         "image": "/icons/features/anime.svg"
       },
       {
-        "title": "Dark Finish",
+        "title": "Hoàn thiện ánh tối",
         "image": "/icons/features/dark.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767836/n6_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767837/n6_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767838/n6_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017904/n6/n6_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017904/n6/n6_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017904/n6/n6_side.png"
     },
     "descriptions": [
       {
-        "text": "Dây chuyền biểu tượng táo bạo mang phong cách kỳ ảo đen tối với mặt dây hình tròn đặc trưng. Sản phẩm mang lại cảm giác kịch tính, phù hợp cho việc sưu tầm và các phong cách nhân vật có chiều sâu."
+        "text": "Mẫu vòng cổ dáng mặt biểu tượng với chất liệu hợp kim xử lý đen, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Tổng thể phù hợp cho các set đồ thanh lịch, giúp phần cổ trở thành điểm nhấn một cách tinh gọn và đắt giá."
       }
     ]
   },
   {
     "id": "NCK-007",
     "category": "necklaces",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767839/n7_centered.glb",
-    "name": "Dây Chuyền Đá Quý",
-    "subtitle": "Dây chuyền đá quý tạo điểm nhấn",
-    "price": "$139",
-    "material": "Gold-Plated Alloy, Gemstone",
-    "shape": "Statement Necklace",
-    "size": "Length 43cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017910/n7/n7.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017910/n7/n7Try.glb",
+    "name": "Vòng cổ đá xanh",
+    "subtitle": "Mặt đá dáng lồng",
+    "price": "3.500.000 ₫",
+    "material": "Hợp kim ánh bạc, pha lê xanh lục",
+    "shape": "Mặt đá",
+    "size": "Chiều dài 43 cm",
     "features": [
       {
-        "title": "Gemstone Centerpiece",
+        "title": "Điểm nhấn đá",
         "image": "/icons/features/gem.svg"
       },
       {
-        "title": "Formal Style",
-        "image": "/icons/features/formal.svg"
+        "title": "Mặt dây nổi bật",
+        "image": "/icons/features/statement.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767841/n7_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767842/n7_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767844/n7_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017910/n7/n7_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017910/n7/n7_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017909/n7/n7_side.png"
     },
     "descriptions": [
       {
-        "text": "Dây chuyền đá quý trang trí với sự tương phản màu sắc phong phú và một viên đá trung tâm nổi bật. Phù hợp nhất cho tủ đồ thanh lịch, trang phục nghi lễ hoặc các mẫu sản phẩm cao cấp."
+        "text": "Mẫu vòng cổ dáng mặt đá với chất liệu hợp kim tông bạc phối đá xanh, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ điểm nhấn đá bắt sáng, mặt dây nổi bật làm trung tâm tổng thể, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
       }
     ]
   },
   {
     "id": "NCK-008",
     "category": "necklaces",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767846/n8_centered.glb",
-    "name": "Dây Chuyền Lục Giác",
-    "subtitle": "Dây chuyền mặt lục giác tối giản",
-    "price": "$36",
-    "material": "Stainless Steel",
-    "shape": "Hexagon Pendant",
-    "size": "Length 45cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017913/n8/n8.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017913/n8/n8Try.glb",
+    "name": "Vòng cổ ngũ giác",
+    "subtitle": "Ánh bạc huyền bí",
+    "price": "900.000 ₫",
+    "material": "Hợp kim ánh bạc",
+    "shape": "Mặt ngũ giác sao",
+    "size": "Chiều dài 45 cm",
     "features": [
       {
-        "title": "Minimal Design",
-        "image": "/icons/features/minimal.svg"
+        "title": "Mặt biểu tượng",
+        "image": "/icons/features/statement.svg"
       },
       {
-        "title": "Geometric Shape",
-        "image": "/icons/features/geometric.svg"
+        "title": "Thiết kế tối giản",
+        "image": "/icons/features/minimal.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767848/n8_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767849/n8_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767850/n8_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017912/n8/n8_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017912/n8/n8_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017912/n8/n8_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu dây chuyền hình học đơn giản với mặt dây chuyền hình lục giác nhỏ gọn. Thiết kế gọn gàng giúp sản phẩm dễ dàng được tạo kiểu như một phụ kiện hàng ngày hoặc một món trang sức phối lớp."
+        "text": "Mẫu vòng cổ dáng mặt ngũ giác với chất liệu hợp kim tông bạc, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ phần dây và form được tiết chế gọn gàng, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
       }
     ]
   },
   {
     "id": "NCK-009",
     "category": "necklaces",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767851/n9_centered.glb",
-    "name": "Vòng Cổ Ngọc Trai",
-    "subtitle": "Vòng cổ ngọc trai trắng cổ điển",
-    "price": "$89",
-    "material": "Pearl, Silver-Plated Clasp",
-    "shape": "Pearl Strand",
-    "size": "Length 42cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017915/n9/n9.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017915/n9/n9Try.glb",
+    "name": "Vòng cổ ngọc trai",
+    "subtitle": "Cổ điển thanh lịch",
+    "price": "2.200.000 ₫",
+    "material": "Ngọc trai, khóa mạ bạc",
+    "shape": "Chuỗi ngọc trai",
+    "size": "Chiều dài 42 cm",
     "features": [
       {
-        "title": "Pearl Strand",
+        "title": "Chuỗi ngọc trai",
         "image": "/icons/features/pearl.svg"
       },
       {
-        "title": "Rigged Accessory",
+        "title": "Phụ kiện rig sẵn",
         "image": "/icons/features/rigged.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767853/n9_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767854/n9_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767857/n9_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017915/n9/n9_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017915/n9/n9_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017915/n9/n9_side.png"
     },
     "descriptions": [
       {
-        "text": "Chuỗi vòng cổ ngọc trai vượt thời gian với các hạt được xếp đều đặn mang lại cảm giác trang trọng và tinh tế. Phù hợp cho phong cách cô dâu, các bộ trang phục thời trang cổ điển và phụ kiện chân dung thanh lịch."
+        "text": "Mẫu vòng cổ dáng chuỗi ngọc trai với chất liệu ngọc trai phối khóa mạ bạc, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ chuỗi hạt đều và sáng, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
       }
     ]
   },
   {
     "id": "NCK-010",
     "category": "necklaces",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767859/n10_centered.glb",
-    "name": "Dây Chuyền Tidus",
-    "subtitle": "Dây chuyền mặt lấy cảm hứng từ Zanarkand",
-    "price": "$49",
-    "material": "Silver Alloy, Blue Enamel",
-    "shape": "Symbol Pendant",
-    "size": "Length 50cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017920/n10/n10.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017920/n10/n10Try.glb",
+    "name": "Vòng cổ biểu tượng",
+    "subtitle": "Mặt bạc trừu tượng",
+    "price": "1.200.000 ₫",
+    "material": "Hợp kim ánh bạc",
+    "shape": "Mặt biểu tượng",
+    "size": "Chiều dài 50 cm",
     "features": [
       {
-        "title": "Game Inspired",
-        "image": "/icons/features/game.svg"
+        "title": "Mặt dây nổi bật",
+        "image": "/icons/features/statement.svg"
       },
       {
-        "title": "Statement Pendant",
-        "image": "/icons/features/statement.svg"
+        "title": "Biểu tượng trừu tượng",
+        "image": "/icons/features/style.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767860/n10_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767862/n10_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767863/n10_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017918/n10/n10_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017918/n10/n10_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017918/n10/n10_side.png"
     },
     "descriptions": [
       {
-        "text": "Dây chuyền lấy cảm hứng từ trò chơi kỳ ảo với mặt dây chuyền lớn và chi tiết tráng men sáng bóng. Được thiết kế để trông có vẻ đáng sưu tầm, dễ nhận diện và tạo ấn tượng mạnh trên trang phục nhân vật."
+        "text": "Mẫu vòng cổ dáng mặt biểu tượng với chất liệu hợp kim tông bạc, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ mặt dây nổi bật làm trung tâm tổng thể, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
+      }
+    ]
+  },
+  {
+    "id": "NCK-011",
+    "category": "necklaces",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017924/n11/n11.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017925/n11/n11Try.glb",
+    "name": "Vòng cổ mặt hoa",
+    "subtitle": "Nhám vàng sang trọng",
+    "price": "1.000.000 ₫",
+    "material": "Hợp kim mạ vàng",
+    "shape": "Mặt treo hoa",
+    "size": "Chiều dài 45 cm",
+    "features": [
+      {
+        "title": "Bề mặt tạo vân",
+        "image": "/icons/features/textured.svg"
+      },
+      {
+        "title": "Chi tiết hoa",
+        "image": "/icons/features/floral.svg"
+      }
+    ],
+    "imagesByColor": {
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017923/n11/n11_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017923/n11/n11_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017923/n11/n11_side.png"
+    },
+    "descriptions": [
+      {
+        "text": "Mẫu vòng cổ dáng charm hoa với chất liệu hợp kim mạ vàng, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ bề mặt tạo vân giàu chiều sâu, chi tiết hoa tăng nét mềm mại, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
+      }
+    ]
+  },
+  {
+    "id": "NCK-012",
+    "category": "necklaces",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017929/n12/n12.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017929/n12/n12Try.glb",
+    "name": "Vòng cổ mặt cầu",
+    "subtitle": "Hiệu ứng phản chiếu",
+    "price": "1.150.000 ₫",
+    "material": "Hợp kim tông vàng, kim loại đánh bóng",
+    "shape": "Mặt cầu",
+    "size": "Chiều dài 46 cm",
+    "features": [
+      {
+        "title": "Hoàn thiện đánh bóng",
+        "image": "/icons/features/polished.svg"
+      },
+      {
+        "title": "Thiết kế tối giản",
+        "image": "/icons/features/minimal.svg"
+      }
+    ],
+    "imagesByColor": {
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017927/n12/n12_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017928/n12/n12_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017927/n12/n12_side.png"
+    },
+    "descriptions": [
+      {
+        "text": "Mẫu vòng cổ dáng mặt cầu với chất liệu hợp kim tông vàng bóng gương, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ phần dây và form được tiết chế gọn gàng, độ bóng hoàn thiện cao, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
+      }
+    ]
+  },
+  {
+    "id": "NCK-013",
+    "category": "necklaces",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017932/n13/n13.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017932/n13/n13Try.glb",
+    "name": "Vòng cổ emerald",
+    "subtitle": "Đá xanh cắt emerald",
+    "price": "1.450.000 ₫",
+    "material": "Hợp kim ánh bạc, pha lê xanh lục",
+    "shape": "Mặt đá",
+    "size": "Chiều dài 45 cm",
+    "features": [
+      {
+        "title": "Điểm nhấn đá",
+        "image": "/icons/features/gem.svg"
+      },
+      {
+        "title": "Dáng hình học",
+        "image": "/icons/features/geometric.svg"
+      }
+    ],
+    "imagesByColor": {
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017930/n13/n13_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017930/n13/n13_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017930/n13/n13_side.png"
+    },
+    "descriptions": [
+      {
+        "text": "Mẫu vòng cổ dáng mặt đá với chất liệu hợp kim tông bạc phối đá xanh, hướng tới vẻ sang trọng, tinh tế và có độ hoàn thiện cao. Phần thiết kế nổi bật nhờ điểm nhấn đá bắt sáng, hình khối gọn và hiện đại, phù hợp để nâng tông cho outfit theo hướng cao cấp mà vẫn giữ được tính ứng dụng."
       }
     ]
   },
   {
     "id": "EAR-001",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767588/e1_centered.glb",
-    "name": "Bông Tai Dáng Dài Hoa Hướng Dương",
-    "subtitle": "Bông tai dáng dài hình hoa hướng dương kim loại",
-    "price": "$59",
-    "material": "Polished Gold-Plated Alloy",
-    "shape": "Floral Drop",
-    "size": "Drop Length 4.2 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017777/e1/e1.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017786/e1/e1Try.glb",
+    "name": "Khuyên hướng dương",
+    "subtitle": "Dáng rủ mạ vàng",
+    "price": "1.500.000 ₫",
+    "material": "Hợp kim mạ vàng đánh bóng",
+    "shape": "Dáng hoa rủ",
+    "size": "Độ rủ 4,2 cm",
     "features": [
       {
-        "title": "Floral Detail",
+        "title": "Chi tiết hoa",
         "image": "/icons/features/floral.svg"
       },
       {
-        "title": "High Poly",
+        "title": "Mô hình chi tiết cao",
         "image": "/icons/features/high-poly.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767590/e1_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767591/e1_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767593/e1_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017776/e1/e1_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017776/e1/e1_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017775/e1/e1_side.png"
     },
     "descriptions": [
       {
-        "text": "Thiết kế bông tai hoa chi tiết hình hoa hướng dương với bề mặt kim loại bóng bẩy. Sản phẩm kết hợp giữa họa tiết lãng mạn và kích thước tạo điểm nhấn táo bạo."
+        "text": "Mẫu khuyên tai dáng thả hoa với chất liệu hợp kim mạ vàng đánh bóng, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở chi tiết hoa giàu tính trang sức, bề mặt dựng khối đầy đặn, lên form sang, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-002",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767595/e2_centered.glb",
-    "name": "Bông Tai Trái Tim Modular",
-    "subtitle": "Bông tai dáng dài hình trái tim dạng Modular",
-    "price": "$42",
-    "material": "Silver-Plated Alloy",
-    "shape": "Heart Drop",
-    "size": "Drop Length 3.8 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017791/e2/e2.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017791/e2/e2Try.glb",
+    "name": "Khuyên lệch cặp",
+    "subtitle": "Hình học tông vàng",
+    "price": "1.050.000 ₫",
+    "material": "Hợp kim mạ vàng",
+    "shape": "Hình học lệch cặp",
+    "size": "Độ rủ 3,8 cm",
     "features": [
       {
-        "title": "Modular Design",
+        "title": "Thiết kế lệch cặp",
         "image": "/icons/features/modular.svg"
       },
       {
-        "title": "Romantic Style",
-        "image": "/icons/features/romantic.svg"
+        "title": "Chi tiết hình học",
+        "image": "/icons/features/geometric.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767597/e2_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767598/e2_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767599/e2_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017790/e2/e2_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017790/e2/e2_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017790/e2/e2_side.png"
     },
     "descriptions": [
       {
-        "text": "Ý tưởng bông tai hình trái tim với các phân đoạn lắp ghép (modular) mang lại vẻ ngoài trang sức hiện đại. Kiểu dáng mang lại sự vui tươi, bóng bẩy và hơi hướng thời trang cao cấp."
+        "text": "Mẫu khuyên tai dáng hình học lệch cặp với chất liệu hợp kim mạ vàng, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở bố cục lệch cặp đầy chủ ý, đường nét hình học hiện đại, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-003",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767603/e3_centered.glb",
-    "name": "Bông Tai Hình Học Cơ Bản",
-    "subtitle": "Bông tai hình học phong cách tối giản",
-    "price": "$24",
-    "material": "Matte Alloy",
-    "shape": "Geometric",
-    "size": "Drop Length 2.6 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017793/e3/e3.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017795/e3/e3Try.glb",
+    "name": "Khuyên khung rỗng",
+    "subtitle": "Hình học ánh vàng",
+    "price": "600.000 ₫",
+    "material": "Hợp kim mạ vàng",
+    "shape": "Hình học rủ",
+    "size": "Độ rủ 2,6 cm",
     "features": [
       {
-        "title": "Minimal Design",
-        "image": "/icons/features/minimal.svg"
+        "title": "Chi tiết hình học",
+        "image": "/icons/features/geometric.svg"
       },
       {
         "title": "Lightweight",
@@ -989,540 +1045,557 @@
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767605/e3_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767606/e3_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767608/e3_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017793/e3/e3_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017793/e3/e3_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017793/e3/e3_side.png"
     },
     "descriptions": [
       {
-        "text": "Một cặp bông tai hình học gọn gàng với kiểu dáng tối giản, dễ dàng phối đồ. Phù hợp cho tủ đồ thường nhật, phong cách hiện đại và các bộ phụ kiện trọng lượng nhẹ."
+        "text": "Mẫu khuyên tai dáng thả hình học với chất liệu hợp kim mạ vàng, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở đường nét hình học hiện đại, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-004",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767609/e4_centered.glb",
-    "name": "Bông Tai Mặt Sapphire",
-    "subtitle": "Bông tai dáng dài mặt Sapphire phong cách Low-Poly",
-    "price": "$37",
-    "material": "Silver Alloy, Sapphire Crystal",
-    "shape": "Pendant Drop",
-    "size": "Drop Length 4.0 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017799/e4/e4.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017796/e4/e4Try.glb",
+    "name": "Khuyên đá xanh",
+    "subtitle": "Cụm rủ tông vàng",
+    "price": "900.000 ₫",
+    "material": "Hợp kim tông vàng, pha lê xanh lam",
+    "shape": "Cụm đá rủ",
+    "size": "Độ rủ 4,0 cm",
     "features": [
       {
-        "title": "Sapphire Accent",
+        "title": "Điểm nhấn đá",
         "image": "/icons/features/gem.svg"
       },
       {
-        "title": "Low Poly",
-        "image": "/icons/features/low-poly.svg"
+        "title": "Điểm nhấn nổi bật",
+        "image": "/icons/features/statement.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767611/e4_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767612/e4_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767614/e4_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017796/e4/e4_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017796/e4/e4_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017796/e4/e4_side.png"
     },
     "descriptions": [
       {
-        "text": "Bông tai dáng dài với một viên đá quý trung tâm và kiểu dáng được cách điệu nhẹ nhàng. Sản phẩm hoạt động tốt như một điểm nhấn trang trí cho phong cách kỳ ảo hoặc các mẫu trang sức cao cấp."
+        "text": "Mẫu khuyên tai dáng thả cụm đá với chất liệu hợp kim tông vàng phối đá xanh lam, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở chi tiết đá tạo độ bắt sáng, phom dáng có khả năng làm điểm nhấn tốt, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-005",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767615/e5_centered.glb",
-    "name": "Bông Tai Kẹo Ngọt",
-    "subtitle": "Bông tai dáng dài lấy cảm hứng từ kẹo mút",
-    "price": "$19",
-    "material": "Plastic, Resin",
-    "shape": "Novelty Drop",
-    "size": "Drop Length 5.1 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017800/e5/e5.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017800/e5/e5Try.glb",
+    "name": "Khuyên kẹo mút",
+    "subtitle": "Mặt treo men xanh",
+    "price": "500.000 ₫",
+    "material": "Hợp kim, resin màu",
+    "shape": "Dáng rủ phá cách",
+    "size": "Độ rủ 5,1 cm",
     "features": [
       {
-        "title": "Candy Theme",
+        "title": "Cảm hứng ngọt ngào",
         "image": "/icons/features/theme.svg"
       },
       {
-        "title": "Playful Style",
+        "title": "Phong cách trẻ trung",
         "image": "/icons/features/playful.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767616/e5_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767617/e5_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767619/e5_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017800/e5/e5_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017800/e5/e5_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017800/e5/e5_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu bông tai độc đáo lấy cảm hứng từ hình dáng kẹo mút, được thiết kế với vẻ ngoài rực rỡ, vui nhộn và trẻ trung. Tốt nhất cho các chủ đề thời trang cách điệu hoặc phụ kiện ảo dễ thương."
+        "text": "Mẫu khuyên tai dáng thả phá cách với chất liệu hợp kim phối resin màu, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở tinh thần trẻ trung nhưng vẫn có tính thời trang, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-006",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767620/e6_centered.glb",
-    "name": "Bông Tai Vàng",
-    "subtitle": "Bông tai vòng (Hoop) vàng cổ điển",
-    "price": "$46",
-    "material": "Gold-Plated Brass",
-    "shape": "Hoop",
-    "size": "Diameter 3.2 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017803/e6/e6.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017802/e6/e6Try.glb",
+    "name": "Khuyên chữ V",
+    "subtitle": "Vòng mạ vàng",
+    "price": "1.150.000 ₫",
+    "material": "Hợp kim mạ vàng",
+    "shape": "Vòng tròn góc cạnh",
+    "size": "Đường kính 3,2 cm",
     "features": [
       {
-        "title": "Classic Hoop",
-        "image": "/icons/features/hoop.svg"
+        "title": "Dáng hình học",
+        "image": "/icons/features/geometric.svg"
       },
       {
-        "title": "Polished Finish",
+        "title": "Hoàn thiện đánh bóng",
         "image": "/icons/features/polished.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767621/e6_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767623/e6_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767624/e6_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017802/e6/e6_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017802/e6/e6_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017802/e6/e6_side.png"
     },
     "descriptions": [
       {
-        "text": "Một cặp bông tai tông vàng cổ điển với hình dáng đơn giản, linh hoạt. Bề mặt bóng bẩy và tỷ lệ đơn giản giúp chúng dễ dàng kết hợp với nhiều phong cách khác nhau."
+        "text": "Mẫu khuyên tai dáng hoop góc cạnh với chất liệu hợp kim mạ vàng, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở đường nét hình học hiện đại, độ bóng hoàn thiện cao, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-007",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767625/e7_centered.glb",
-    "name": "Bông Tai Người Ngoài Hành Tinh",
-    "subtitle": "Bông tai bùa hình người ngoài hành tinh Sci-Fi",
-    "price": "$21",
-    "material": "Resin, Alloy",
-    "shape": "Charm Drop",
-    "size": "Drop Length 4.5 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017806/e7/e7.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017805/e7/e7Try.glb",
+    "name": "Khuyên trừu tượng",
+    "subtitle": "Phom trắng hiện đại",
+    "price": "500.000 ₫",
+    "material": "Resin cao cấp",
+    "shape": "Vòng trừu tượng",
+    "size": "Độ rủ 4,5 cm",
     "features": [
       {
-        "title": "Sci-Fi Theme",
-        "image": "/icons/features/scifi.svg"
+        "title": "Thiết kế điêu khắc",
+        "image": "/icons/features/style.svg"
       },
       {
-        "title": "Statement Piece",
+        "title": "Điểm nhấn nổi bật",
         "image": "/icons/features/statement.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767627/e7_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767628/e7_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767629/e7_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017804/e7/e7_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017804/e7/e7_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017804/e7/e7_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu bông tai kỳ lạ được xây dựng quanh bùa hình người ngoài hành tinh mang lại thẩm mỹ táo bạo, thay thế. Được thiết kế để nổi bật trong các bộ phụ kiện tập trung vào nhân vật hoặc phong cách cách điệu."
+        "text": "Mẫu khuyên tai dáng vòng trừu tượng với chất liệu resin, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở phom dáng có khả năng làm điểm nhấn tốt, hình khối điêu khắc giàu cá tính, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-008",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767631/e8_centered.glb",
-    "name": "Bông Tai Những Vì Sao",
-    "subtitle": "Bông tai dáng dài hình ngôi sao",
-    "price": "$28",
-    "material": "Silver-Plated Alloy",
-    "shape": "Star Drop",
-    "size": "Drop Length 3.9 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017808/e8/e8.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017807/e8/e8Try.glb",
+    "name": "Khuyên tua xích",
+    "subtitle": "Vòng tròn ánh vàng",
+    "price": "700.000 ₫",
+    "material": "Hợp kim mạ vàng",
+    "shape": "Vòng tròn tua xích",
+    "size": "Độ rủ 3,9 cm",
     "features": [
       {
-        "title": "Star Motif",
-        "image": "/icons/features/star.svg"
+        "title": "Dáng vòng tròn kinh điển",
+        "image": "/icons/features/hoop.svg"
       },
       {
-        "title": "Lightweight",
-        "image": "/icons/features/lightweight.svg"
+        "title": "Điểm nhấn nổi bật",
+        "image": "/icons/features/statement.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767632/e8_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767634/e8_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767635/e8_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017807/e8/e8_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017807/e8/e8_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017807/e8/e8_side.png"
     },
     "descriptions": [
       {
-        "text": "Một cặp bông tai dáng dài hình ngôi sao với kiểu dáng trẻ trung rực rỡ. Thiết kế đơn giản, mang tính trang trí và dễ dàng sử dụng cho cả chủ đề thời trang hàng ngày lẫn chủ đề mộng mơ."
+        "text": "Mẫu khuyên tai dáng hoop tua xích với chất liệu hợp kim mạ vàng, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở phom dáng có khả năng làm điểm nhấn tốt, phom hoop dễ đeo và giữ nét thanh lịch, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-009",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767636/e9_centered.glb",
-    "name": "Bông Tai Potara",
-    "subtitle": "Bông tai Potara lấy cảm hứng từ Anime",
-    "price": "$33",
-    "material": "Gold Alloy, Green Crystal",
-    "shape": "Orb Drop",
-    "size": "Drop Length 4.1 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017809/e9/e9.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017809/e9/e9Try.glb",
+    "name": "Khuyên cầu rủ",
+    "subtitle": "Hai tông kim loại",
+    "price": "800.000 ₫",
+    "material": "Kim loại phối hai tông, resin màu",
+    "shape": "Cầu rủ",
+    "size": "Độ rủ 4,1 cm",
     "features": [
       {
-        "title": "Anime Inspired",
-        "image": "/icons/features/anime.svg"
+        "title": "Hoàn thiện hai tông",
+        "image": "/icons/features/style.svg"
       },
       {
-        "title": "Crystal Accent",
-        "image": "/icons/features/gem.svg"
+        "title": "Điểm nhấn nổi bật",
+        "image": "/icons/features/statement.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767638/e9_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767639/e9_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767640/e9_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017809/e9/e9_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017809/e9/e9_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017809/e9/e9_side.png"
     },
     "descriptions": [
       {
-        "text": "Cặp bông tai lấy cảm hứng từ anime với khối cầu đặc trưng và phần trên bằng kim loại. Nó mang lại cảm giác đáng sưu tầm, dễ nhận diện và lý tưởng cho việc tạo hình nhân vật hoặc hóa trang (cosplay)."
+        "text": "Mẫu khuyên tai dáng thả hình cầu với chất liệu kim loại hai tông phối resin màu, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở phom dáng có khả năng làm điểm nhấn tốt, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-010",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767641/e10_centered.glb",
-    "name": "Bông Tai Pop Statement",
-    "subtitle": "Bông tai tạo điểm nhấn bằng Acrylic táo bạo",
-    "price": "$22",
-    "material": "Acrylic, Alloy",
-    "shape": "Statement Drop",
-    "size": "Drop Length 5.0 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017812/e10/e10.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017811/e10/e10Try.glb",
+    "name": "Khuyên tạo vân",
+    "subtitle": "Vòng ánh vàng",
+    "price": "550.000 ₫",
+    "material": "Hợp kim mạ vàng",
+    "shape": "Vòng tròn",
+    "size": "Độ rủ 5,0 cm",
     "features": [
       {
-        "title": "Pop Style",
-        "image": "/icons/features/pop.svg"
+        "title": "Dáng vòng tròn kinh điển",
+        "image": "/icons/features/hoop.svg"
       },
       {
-        "title": "Statement Piece",
-        "image": "/icons/features/statement.svg"
+        "title": "Bề mặt tạo vân",
+        "image": "/icons/features/textured.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767643/e10_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767644/e10_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767645/e10_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017811/e10/e10_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017811/e10/e10_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017811/e10/e10_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu bông tai tạo điểm nhấn bằng acrylic táo bạo được thiết kế cho phong cách thời trang pop đầy màu sắc. Phù hợp cho các nhân vật cách điệu, trang phục vui tươi và các bộ phụ kiện nổi bật."
+        "text": "Mẫu khuyên tai dáng hoop với chất liệu hợp kim mạ vàng, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở phom hoop dễ đeo và giữ nét thanh lịch, bề mặt texture giúp món trang sức trông đắt hơn, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-011",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767646/e11_centered.glb",
-    "name": "Bông Tai Khối Cầu Đa Diện",
-    "subtitle": "Bông tai dáng dài hình cầu đa diện mạ vàng",
-    "price": "$38",
-    "material": "Polished Gold-Plated Alloy",
-    "shape": "Orb Drop",
-    "size": "Drop Length 5.4 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017814/e11/e11.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017814/e11/e11Try.glb",
+    "name": "Khuyên cầu đa diện",
+    "subtitle": "Dáng rủ mạ vàng",
+    "price": "950.000 ₫",
+    "material": "Hợp kim mạ vàng đánh bóng",
+    "shape": "Cầu rủ",
+    "size": "Độ rủ 5,4 cm",
     "features": [
       {
-        "title": "Geometric Detail",
+        "title": "Chi tiết hình học",
         "image": "/icons/features/geometric.svg"
       },
       {
-        "title": "Polished Finish",
+        "title": "Hoàn thiện đánh bóng",
         "image": "/icons/features/polished.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767648/e11_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767649/e11_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767650/e11_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017813/e11/e11_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017813/e11/e11_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017813/e11/e11_side.png"
     },
     "descriptions": [
       {
-        "text": "Bông tai dáng dài bóng bẩy với phần kết nối đa diện phía trên một mặt dây chuyền hình cầu phản chiếu. Thiết kế mang tính điêu khắc, rực rỡ và phù hợp cho phong cách tạo điểm nhấn hiện đại."
+        "text": "Mẫu khuyên tai dáng thả hình cầu với chất liệu hợp kim mạ vàng đánh bóng, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở đường nét hình học hiện đại, độ bóng hoàn thiện cao, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-012",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767651/e12_centered.glb",
-    "name": "Bông Tai Chuỗi Bùa Ngọc Lam",
-    "subtitle": "Bông tai chuỗi vàng với bùa ngọc lam",
-    "price": "$47",
-    "material": "Gold-Plated Alloy, Turquoise-Look Resin",
-    "shape": "Chain Drop",
-    "size": "Drop Length 7.2 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017817/e12/e12.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017816/e12/e12Try.glb",
+    "name": "Khuyên ngọc lam",
+    "subtitle": "Dây xích vàng sang",
+    "price": "1.200.000 ₫",
+    "material": "Hợp kim mạ vàng, resin giả ngọc lam",
+    "shape": "Dây xích rủ",
+    "size": "Độ rủ 7,2 cm",
     "features": [
       {
-        "title": "Gem Accent",
+        "title": "Điểm nhấn đá",
         "image": "/icons/features/gem.svg"
       },
       {
-        "title": "Statement Piece",
+        "title": "Điểm nhấn nổi bật",
         "image": "/icons/features/statement.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767653/e12_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767654/e12_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767655/e12_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017815/e12/e12_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017815/e12/e12_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017815/e12/e12_side.png"
     },
     "descriptions": [
       {
-        "text": "Thiết kế bông tai chuỗi dài với các chi tiết tông vàng rèn thủ công và bùa hình lưỡi liềm giả ngọc lam. Sản phẩm mang lại cảm giác thủ công, phong cách bohemian cho các cách phối phụ kiện biểu cảm."
+        "text": "Mẫu khuyên tai dáng thả dây xích với chất liệu hợp kim mạ vàng phối charm xanh ngọc, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở chi tiết đá tạo độ bắt sáng, phom dáng có khả năng làm điểm nhấn tốt, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-013",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767657/e13_centered.glb",
-    "name": "Bông Tai Dáng Đinh Nhọn",
-    "subtitle": "Bông tai dáng dài hình đinh nhọn mạ vàng",
-    "price": "$26",
-    "material": "Gold-Plated Alloy",
-    "shape": "Spike Drop",
-    "size": "Drop Length 5.0 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017818/e13/e13.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017819/e13/e13Try.glb",
+    "name": "Khuyên mũi nhọn",
+    "subtitle": "Dáng rủ mạ vàng",
+    "price": "650.000 ₫",
+    "material": "Hợp kim mạ vàng",
+    "shape": "Mũi nhọn rủ",
+    "size": "Độ rủ 5,0 cm",
     "features": [
       {
-        "title": "Minimal Design",
+        "title": "Thiết kế tối giản",
         "image": "/icons/features/minimal.svg"
       },
       {
-        "title": "Polished Finish",
+        "title": "Hoàn thiện đánh bóng",
         "image": "/icons/features/polished.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767658/e13_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767660/e13_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767661/e13_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017819/e13/e13_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017818/e13/e13_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017818/e13/e13_side.png"
     },
     "descriptions": [
       {
-        "text": "Bông tai dáng dài tối giản được xây dựng quanh hình dáng đinh nhọn thon dài. Kiểu dáng kim loại sạch sẽ mang lại vẻ ngoài hiện đại, sắc sảo và là một điểm nhấn dễ dàng phối đồ."
+        "text": "Mẫu khuyên tai dáng thả mũi nhọn với chất liệu hợp kim mạ vàng, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở độ bóng hoàn thiện cao, tỷ lệ gọn, tinh thần tối giản, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-014",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767662/e14_centered.glb",
-    "name": "Bông Tai Điêu Khắc Nhám",
-    "subtitle": "Bông tai điêu khắc màu đen nhám",
-    "price": "$24",
-    "material": "Matte Resin, Alloy",
-    "shape": "Sculptural Drop",
-    "size": "Drop Length 5.3 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017823/e14/e14.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017820/e14/e14Try.glb",
+    "name": "Khuyên điêu khắc",
+    "subtitle": "Ánh bạc hiện đại",
+    "price": "600.000 ₫",
+    "material": "Hợp kim ánh bạc",
+    "shape": "Điêu khắc rủ",
+    "size": "Độ rủ 5,3 cm",
     "features": [
       {
-        "title": "Statement Piece",
-        "image": "/icons/features/statement.svg"
+        "title": "Thiết kế điêu khắc",
+        "image": "/icons/features/style.svg"
       },
       {
-        "title": "Minimal Design",
-        "image": "/icons/features/minimal.svg"
+        "title": "Điểm nhấn nổi bật",
+        "image": "/icons/features/statement.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767664/e14_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767665/e14_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767667/e14_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017820/e14/e14_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017820/e14/e14_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017820/e14/e14_side.png"
     },
     "descriptions": [
       {
-        "text": "Bông tai dáng dài mang tính điêu khắc với hình dáng trừu tượng màu đen nhám và kiểu dáng hiện đại rõ rệt. Phù hợp nhất cho phong cách chụp ảnh tạp chí, tủ đồ tối giản hoặc các bộ phụ kiện định hướng nghệ thuật."
+        "text": "Mẫu khuyên tai dáng thả điêu khắc với chất liệu hợp kim tông bạc, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở phom dáng có khả năng làm điểm nhấn tốt, hình khối điêu khắc giàu cá tính, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-015",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767670/e15_centered.glb",
-    "name": "Bông Tai Nụ Hình Cầu Bóng",
-    "subtitle": "Bông tai nụ hình cầu bề mặt gương",
-    "price": "$18",
-    "material": "Silver-Tone Alloy",
-    "shape": "Sphere Stud",
-    "size": "Stud Diameter 1.6 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017826/e15/e15.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017825/e15/e15Try.glb",
+    "name": "Khuyên nụ oval",
+    "subtitle": "Gương bóng tối giản",
+    "price": "450.000 ₫",
+    "material": "Hợp kim ánh bạc",
+    "shape": "Nụ oval",
+    "size": "Đường kính mặt 1,6 cm",
     "features": [
       {
-        "title": "Polished Finish",
+        "title": "Hoàn thiện đánh bóng",
         "image": "/icons/features/polished.svg"
       },
       {
-        "title": "Minimal Design",
+        "title": "Thiết kế tối giản",
         "image": "/icons/features/minimal.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767672/e15_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767673/e15_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767674/e15_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017825/e15/e15_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017825/e15/e15_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017825/e15/e15_side.png"
     },
     "descriptions": [
       {
-        "text": "Cặp bông tai nụ hình cầu nhỏ gọn với bề mặt hoàn thiện trơn nhẵn như gương. Thiết kế đơn giản, linh hoạt và dễ dàng kết hợp với cả vẻ ngoài tối giản lẫn trang trọng."
+        "text": "Mẫu khuyên tai dáng stud oval với chất liệu hợp kim tông bạc, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở độ bóng hoàn thiện cao, tỷ lệ gọn, tinh thần tối giản, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-016",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767676/e16_centered.glb",
-    "name": "Bông Tai Khung Hở Đính Đá",
-    "subtitle": "Bông tai dáng dài khung hở vàng đính đá",
-    "price": "$44",
-    "material": "Gold-Plated Alloy, Clear Crystal",
-    "shape": "Geometric Drop",
-    "size": "Drop Length 5.1 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017829/e16/e16.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017829/e16/e16Try.glb",
+    "name": "Khuyên hoa văn đá",
+    "subtitle": "Khung rỗng đính pha lê",
+    "price": "1.100.000 ₫",
+    "material": "Hợp kim mạ vàng, pha lê trong",
+    "shape": "Rỗng hoa văn rủ",
+    "size": "Độ rủ 5,1 cm",
     "features": [
       {
-        "title": "Gem Accent",
+        "title": "Điểm nhấn đá",
         "image": "/icons/features/gem.svg"
       },
       {
-        "title": "Geometric Detail",
+        "title": "Chi tiết hình học",
         "image": "/icons/features/geometric.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767678/e16_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767679/e16_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767681/e16_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017828/e16/e16_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017828/e16/e16_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017828/e16/e16_side.png"
     },
     "descriptions": [
       {
-        "text": "Bông tai dáng dài hình học thanh mảnh với khung kim loại hở và các điểm nhấn giống tinh thể ở trung tâm. Sản phẩm cân bằng giữa sự sang trọng và cấu trúc cho các phong cách trang trọng hoặc dịp đặc biệt."
+        "text": "Mẫu khuyên tai dáng thả openwork với chất liệu hợp kim mạ vàng phối pha lê trong, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở đường nét hình học hiện đại, chi tiết đá tạo độ bắt sáng, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-017",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767684/e17_centered.glb",
-    "name": "Bông Tai Dáng Dài Thon",
-    "subtitle": "Bông tai hình giọt nước thon dài mạ vàng",
-    "price": "$36",
-    "material": "Gold-Plated Alloy",
-    "shape": "Elongated Drop",
-    "size": "Drop Length 5.6 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017833/e17/e17.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017833/e17/e17Try.glb",
+    "name": "Khuyên giọt lệ dài",
+    "subtitle": "Dáng dài mạ vàng",
+    "price": "900.000 ₫",
+    "material": "Hợp kim mạ vàng",
+    "shape": "Dáng dài rủ",
+    "size": "Độ rủ 5,6 cm",
     "features": [
       {
-        "title": "Polished Finish",
+        "title": "Hoàn thiện đánh bóng",
         "image": "/icons/features/polished.svg"
       },
       {
-        "title": "Statement Piece",
+        "title": "Điểm nhấn nổi bật",
         "image": "/icons/features/statement.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767686/e17_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767687/e17_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767688/e17_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017832/e17/e17_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017832/e17/e17_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017832/e17/e17_side.png"
     },
     "descriptions": [
       {
-        "text": "Thiết kế bông tai dáng dài với bề mặt kim loại mịn màng và kiểu dáng thuôn nhọn. Hình dáng mang lại cảm giác sạch sẽ, thanh lịch và hơi hướng kịch tính mà không trở nên quá cầu kỳ."
+        "text": "Mẫu khuyên tai dáng thả dáng dài với chất liệu hợp kim mạ vàng, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở phom dáng có khả năng làm điểm nhấn tốt, độ bóng hoàn thiện cao, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-018",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767689/e18_centered.glb",
-    "name": "Bông Tai Vòng Xoắn",
-    "subtitle": "Bông tai vòng (Hoop) bạc dạng xoắn",
-    "price": "$32",
-    "material": "Silver-Tone Alloy",
-    "shape": "Hoop",
-    "size": "Diameter 3.1 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017836/e18/e18.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017836/e18/e18Try.glb",
+    "name": "Khuyên vòng xoắn",
+    "subtitle": "Ánh bạc thanh lịch",
+    "price": "800.000 ₫",
+    "material": "Hợp kim ánh bạc",
+    "shape": "Vòng tròn",
+    "size": "Đường kính 3,1 cm",
     "features": [
       {
-        "title": "Classic Hoop",
+        "title": "Dáng vòng tròn kinh điển",
         "image": "/icons/features/hoop.svg"
       },
       {
-        "title": "Polished Finish",
+        "title": "Hoàn thiện đánh bóng",
         "image": "/icons/features/polished.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767691/e18_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767692/e18_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767693/e18_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017835/e18/e18_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017835/e18/e18_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017835/e18/e18_side.png"
     },
     "descriptions": [
       {
-        "text": "Một cặp vòng tai cỡ trung bình với đường viền xoắn nhẹ mang lại vẻ ngoài như được chế tác thủ công. Sản phẩm mang lại cảm giác cổ điển ngay từ cái nhìn đầu tiên, nhưng đủ khác biệt để làm điểm nhấn hàng ngày."
+        "text": "Mẫu khuyên tai dáng hoop với chất liệu hợp kim tông bạc, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở phom hoop dễ đeo và giữ nét thanh lịch, độ bóng hoàn thiện cao, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-019",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767695/e19_centered.glb",
-    "name": "Bông Tai Giọt Nước Đính Đá",
-    "subtitle": "Bông tai dáng dài hình giọt nước vàng đính đá",
-    "price": "$39",
-    "material": "Gold-Plated Alloy, Clear Crystal",
-    "shape": "Teardrop Drop",
-    "size": "Drop Length 4.5 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017840/e19/e19.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017840/e19/e19Try.glb",
+    "name": "Khuyên giọt lệ",
+    "subtitle": "Pha lê tông vàng",
+    "price": "1.000.000 ₫",
+    "material": "Hợp kim mạ vàng, pha lê trong",
+    "shape": "Giọt lệ rủ",
+    "size": "Độ rủ 4,5 cm",
     "features": [
       {
-        "title": "Gem Accent",
+        "title": "Điểm nhấn đá",
         "image": "/icons/features/gem.svg"
       },
       {
-        "title": "Statement Piece",
+        "title": "Điểm nhấn nổi bật",
         "image": "/icons/features/statement.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767696/e19_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767698/e19_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767700/e19_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017838/e19/e19_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017838/e19/e19_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017838/e19/e19_side.png"
     },
     "descriptions": [
       {
-        "text": "Thiết kế bông tai hình giọt nước với các điểm nhấn pha lê sáng bóng và khung tông vàng bóng bẩy. Sản phẩm mang tính trang trí cao, nữ tính và phù hợp cho các phong cách lễ hội hoặc trang trọng."
+        "text": "Mẫu khuyên tai dáng thả giọt lệ với chất liệu hợp kim mạ vàng phối pha lê trong, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở chi tiết đá tạo độ bắt sáng, phom dáng có khả năng làm điểm nhấn tốt, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   },
   {
     "id": "EAR-020",
     "category": "earrings",
-    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767701/e20_centered.glb",
-    "name": "Bông Tai Đèn Chùm Hoa Văn",
-    "subtitle": "Bông tai đèn chùm vàng hoa văn cầu kỳ",
-    "price": "$52",
-    "material": "Gold-Plated Alloy, Clear Crystal",
-    "shape": "Chandelier Drop",
-    "size": "Drop Length 5.8 cm",
+    "url": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017843/e20/e20.glb",
+    "tryOnUrl": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017844/e20/e20Try.glb",
+    "name": "Khuyên chùm pha lê",
+    "subtitle": "Tông vàng sang trọng",
+    "price": "1.300.000 ₫",
+    "material": "Hợp kim mạ vàng, pha lê trong",
+    "shape": "Dáng chùm rủ",
+    "size": "Độ rủ 5,8 cm",
     "features": [
       {
-        "title": "Statement Piece",
+        "title": "Điểm nhấn nổi bật",
         "image": "/icons/features/statement.svg"
       },
       {
-        "title": "Polished Finish",
+        "title": "Hoàn thiện đánh bóng",
         "image": "/icons/features/polished.svg"
       }
     ],
     "imagesByColor": {
-      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767703/e20_front.png",
-      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767704/e20_front45.png",
-      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1775767705/e20_side.png"
+      "View 1": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017844/e20/e20_front.png",
+      "View 2": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017841/e20/e20_front45.png",
+      "View 3": "https://res.cloudinary.com/de0g9idw4/image/upload/v1777017841/e20/e20_side.png"
     },
     "descriptions": [
       {
-        "text": "Một mẫu bông tai phong cách đèn chùm (chandelier) cầu kỳ với các lớp hình dạng giống như hoa văn chạm trổ và các điểm nhấn đá quý. Tổng thể vẻ ngoài rất sang trọng, mang tính trang trí và phù hợp nhất cho các trang phục dạ tiệc hoặc dịp quan trọng."
+        "text": "Mẫu khuyên tai dáng chandelier với chất liệu hợp kim mạ vàng phối pha lê trong, mang cảm giác thanh lịch và cao cấp khi lên tai. Điểm cuốn hút nằm ở phom dáng có khả năng làm điểm nhấn tốt, độ bóng hoàn thiện cao, nhờ đó tổng thể vừa nổi bật vừa phù hợp với các outfit theo hướng sang trọng hiện đại."
       }
     ]
   }

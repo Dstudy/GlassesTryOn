@@ -56,7 +56,7 @@ export async function glassesRecommendation(
   try {
     // 2. Call OpenAI
     const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "googleai/gemini-2.0-flash",
       messages: [
         {
           role: "system",
