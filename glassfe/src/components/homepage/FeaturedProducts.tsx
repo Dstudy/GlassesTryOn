@@ -1,12 +1,11 @@
-"use client"
+"use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { ArrowRight, AlertCircle, Loader2 } from "lucide-react";
 import { productApi, ApiError } from "@/lib/api";
 import type { Product } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
-import { Button } from "@/components/ui/button";
-import { Loader2, AlertCircle, ArrowRight } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function FeaturedProducts() {
@@ -19,15 +18,16 @@ export default function FeaturedProducts() {
       try {
         setLoading(true);
         setError(null);
-
         const products = await productApi.getFeaturedProducts();
         if (Array.isArray(products)) {
-          setFeaturedProducts(products.slice(0, 4));
+          setFeaturedProducts(products.slice(0, 5));
         } else {
-          setError("Dữ liệu nhận từ máy chủ không hợp lệ.");
+          setError("Du lieu tra ve tu may chu khong hop le.");
         }
       } catch (err) {
-        setError(err instanceof ApiError ? err.message : "Không thể tải sản phẩm nổi bật");
+        setError(
+          err instanceof ApiError ? err.message : "Khong the tai san pham noi bat.",
+        );
       } finally {
         setLoading(false);
       }
@@ -37,50 +37,52 @@ export default function FeaturedProducts() {
   }, []);
 
   return (
-    <section id="featured" className="relative overflow-hidden border-y border-primary/10 bg-[linear-gradient(180deg,hsl(var(--background)),hsl(var(--background))_22%,hsl(var(--primary)/0.04)_100%),radial-gradient(circle_at_top_left,hsl(var(--accent)/0.12),transparent_30%),linear-gradient(135deg,hsl(var(--accent)/0.08),transparent_40%)] py-16 md:py-28">
+    <section className="py-16 md:py-24">
       <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="inline-flex rounded-full border border-accent/30 bg-accent/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-            Bộ sưu tập chọn lọc
-          </p>
-          <h2 className="mt-4 font-headline text-3xl font-bold tracking-tight text-primary sm:text-4xl">
-            Mẫu nổi bật
-          </h2>
-          <p className="mt-3 text-lg text-muted-foreground">
-            Những thiết kế kính, vòng cổ và khuyên tai được yêu thích nhất, dễ chọn cho cả phong cách thanh lịch lẫn cá tính.
-          </p>
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-3 text-[1.4rem] font-semibold uppercase tracking-[0.22em] text-accent">
+              <span
+                className="h-px w-14 bg-[linear-gradient(90deg,rgba(255,130,32,0.12),rgba(255,130,32,0.95))]"
+                aria-hidden
+              />
+              Tuyển chọn nổi bật
+            </span>
+            <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-base">
+              Khám phá các thiết kế kính mắt và trang sức được yêu thích nhất
+            </p>
+          </div>
+
+          <Link
+            href="/shop"
+            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.05em] text-muted-foreground no-underline transition-colors hover:text-accent"
+          >
+            Xem tất cả
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
-        {error && (
-          <Alert variant="destructive" className="mx-auto mt-8 max-w-2xl rounded-2xl shadow-[0_18px_35px_-26px_rgba(220,38,38,0.35)]">
+        {error ? (
+          <Alert className="mt-10 rounded-[1.5rem] border-[#ff9b53]/15 bg-[rgba(255,130,32,0.06)]">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>{error}</AlertDescription>
           </Alert>
-        )}
+        ) : null}
 
         {loading ? (
-          <div className="mt-12 flex items-center justify-center py-14">
-            <div className="flex items-center gap-3 rounded-full border border-primary/10 bg-background/90 px-5 py-3 shadow-[0_18px_35px_-28px_hsl(var(--primary)/0.35)]">
+          <div className="mt-12 flex justify-center">
+            <div className="kyro-panel-soft flex items-center gap-3 px-5 py-4">
               <Loader2 className="h-5 w-5 animate-spin text-primary" />
-              <span>Đang tải sản phẩm nổi bật...</span>
+              <span className="text-sm text-muted-foreground">Dang tai san pham noi bat...</span>
             </div>
           </div>
-        ) : !error ? (
-          <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        ) : (
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
-        ) : null}
-
-        <div className="mt-14 text-center">
-          <Button asChild size="lg" className="group rounded-full px-8">
-            <Link href="/shop">
-              Xem tất cả sản phẩm
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
+        )}
       </div>
     </section>
   );

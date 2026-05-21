@@ -13,21 +13,22 @@ import { classifyFaceShape, FaceShape } from "@/utils/faceShapeClassifier";
 import { drawFaceMeshOverlay } from "@/utils/faceMeshOverlay";
 import { Loader2, Sparkles } from "lucide-react";
 import { productApi } from "@/lib/api";
-import { Product } from "@/lib/types";
-import AIRecommendationGroups from "@/components/AIRecommendationGroups";
+import type { Product } from "@/lib/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import AIRecommendationGroups from "@/components/AIRecommendationGroups";
 
 interface FaceShapeModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function FaceShapeModal({
+export default function FaceShapeModalFixed({
   isOpen,
   onClose,
 }: FaceShapeModalProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
   const [isModelLoading, setIsModelLoading] = useState(true);
   const [faceLandmarker, setFaceLandmarker] = useState<FaceLandmarker | null>(
     null,
@@ -35,7 +36,6 @@ export default function FaceShapeModal({
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
 
-  // States cho logic tích hợp
   const [detectedShape, setDetectedShape] = useState<FaceShape | null>(null);
   const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
   const [isFetchingProducts, setIsFetchingProducts] = useState(false);
@@ -44,7 +44,6 @@ export default function FaceShapeModal({
   const requestRef = useRef<number>();
   const lastVideoTimeRef = useRef<number>(-1);
 
-  // 1. Initialize MediaPipe (Giữ nguyên logic cũ)
   useEffect(() => {
     let active = true;
     const setupModel = async () => {
@@ -71,14 +70,15 @@ export default function FaceShapeModal({
         console.error("Error loading MediaPipe model:", err);
       }
     };
+
     if (isOpen) setupModel();
+
     return () => {
       active = false;
       if (faceLandmarker) faceLandmarker.close();
     };
   }, [isOpen]);
 
-  // 2. Handle Camera
   useEffect(() => {
     const startCamera = async () => {
       try {
@@ -94,6 +94,7 @@ export default function FaceShapeModal({
         setCameraError("Cannot access camera.");
       }
     };
+
     if (isOpen && faceLandmarker && !isModelLoading) startCamera();
     return () => stopCamera();
   }, [isOpen, faceLandmarker, isModelLoading]);
@@ -104,7 +105,6 @@ export default function FaceShapeModal({
     if (requestRef.current) cancelAnimationFrame(requestRef.current);
   };
 
-  // 3. Logic lấy sản phẩm gợi ý khi phát hiện khuôn mặt
   const fetchProducts = async (shape: FaceShape) => {
     setIsFetchingProducts(true);
     try {
@@ -117,48 +117,35 @@ export default function FaceShapeModal({
     }
   };
 
-  // 4. Prediction Loop & Auto-detect
   const predictWebcam = () => {
     if (!videoRef.current || !faceLandmarker || !canvasRef.current || !stream)
       return;
-    const video = videoRef.current;
-    if (
-      video.readyState >= 2 &&
-      video.currentTime !== lastVideoTimeRef.current
-    ) {
-      lastVideoTimeRef.current = video.currentTime;
-      const results = faceLandmarker.detectForVideo(video, performance.now());
-      const canvasCtx = canvasRef.current.getContext("2d");
-      if (
-        canvasCtx &&
-        results.faceLandmarks &&
-        results.faceLandmarks.length > 0
-      ) {
-        canvasRef.current.width = video.videoWidth;
-        canvasRef.current.height = video.videoHeight;
-        const landmarks = results.faceLandmarks[0];
 
-        // Vẽ mesh cơ bản dùng chung với TryOnARViewer
-        canvasCtx.clearRect(
-          0,
-          0,
-          canvasRef.current.width,
-          canvasRef.current.height,
-        );
-        drawFaceMeshOverlay(
-          canvasCtx,
-          landmarks,
-          canvasRef.current.width,
-          canvasRef.current.height,
-          {
-            mirrorX: false,
-            sampleStep: 1,
-            pointRadius: 1,
-            color: "#3b82f6",
-          },
-        );
-      }
+    const video = videoRef.current;
+    if (video.readyState < 2 || video.currentTime === lastVideoTimeRef.current)
+      return;
+
+    lastVideoTimeRef.current = video.currentTime;
+    const results = faceLandmarker.detectForVideo(video, performance.now());
+    const canvasCtx = canvasRef.current.getContext("2d");
+
+    if (canvasCtx && results.faceLandmarks && results.faceLandmarks.length > 0) {
+      canvasRef.current.width = video.videoWidth;
+      canvasRef.current.height = video.videoHeight;
+      drawFaceMeshOverlay(
+        canvasCtx,
+        results.faceLandmarks[0],
+        canvasRef.current.width,
+        canvasRef.current.height,
+        {
+          mirrorX: false,
+          sampleStep: 1,
+          pointRadius: 1,
+          color: "#3b82f6",
+        },
+      );
     }
+
     requestRef.current = requestAnimationFrame(predictWebcam);
   };
 
@@ -168,19 +155,15 @@ export default function FaceShapeModal({
     }
 
     return () => {
-      // Kiểm tra tường minh bằng if thay vì dùng toán tử &&
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current);
-      }
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, faceLandmarker, stream]);
 
   const handleManualScan = async () => {
     if (!videoRef.current || !faceLandmarker) return;
-
     setIsScanning(true);
 
-    // Thực hiện nhận diện tại thời điểm bấm nút
     const results = faceLandmarker.detectForVideo(
       videoRef.current,
       performance.now(),
@@ -190,9 +173,10 @@ export default function FaceShapeModal({
       const shape = classifyFaceShape(results.faceLandmarks[0]);
       if (shape !== "Không xác định") {
         setDetectedShape(shape);
-        await fetchProducts(shape); // Chỉ gọi API khi nhấn nút
+        await fetchProducts(shape);
       }
     }
+
     setIsScanning(false);
   };
 
@@ -203,20 +187,17 @@ export default function FaceShapeModal({
         if (!open) onClose();
       }}
     >
-      {/* Tăng độ rộng Modal lên max-w-5xl để chứa 2 cột */}
-      <DialogContent className="flex h-[90vh] w-[98vw] max-w-[calc(80rem+3cm)] flex-col overflow-hidden border-0 bg-[linear-gradient(180deg,rgba(0,0,0,1),rgba(20,20,22,1))] p-0 text-white shadow-[0_36px_100px_-42px_rgba(0,0,0,0.95)]">
+      <DialogContent className="flex h-[90vh] w-[98vw] max-w-[calc(80rem+3cm)] flex-col overflow-hidden border border-white/20 ring-1 ring-white/10 bg-[linear-gradient(180deg,#000_0%,#050000_40%,#000_100%),radial-gradient(circle_at_top,rgba(255,155,83,0.06),transparent_24%)] p-0 text-white shadow-[0_48px_120px_-10px_rgba(0,0,0,0.85)] drop-shadow-2xl backdrop-blur-sm">
         <DialogHeader className="px-4 py-1 sm:px-5 sm:py-1">
-
-          <DialogTitle className="flex items-center gap-2 font-body text-base font-semibold tracking-normal text-white">
+          <DialogTitle className="flex items-center gap-2 font-body text-base font-semibold tracking-normal text-white/60">
             <Sparkles className="h-4 w-4 text-[#ff9b53]" />
-            AI Smart Recommendation
+            AI gợi ý sản phẩm
           </DialogTitle>
         </DialogHeader>
 
         <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-          {/* CỘT TRÁI: Camera & Phân tích */}
           <div className="flex w-full flex-col items-center bg-transparent px-4 py-4 md:w-[53%] md:px-5">
-            <h3 className="mb-2 self-start text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/45">
+            <h3 className="mb-2 self-start text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white">
               BƯỚC 1: PHÂN TÍCH KHUÔN MẶT
             </h3>
 
@@ -224,13 +205,14 @@ export default function FaceShapeModal({
               <div className="absolute left-0 right-0 bottom-0 z-10 px-4 pb-4">
                 <div className="w-full rounded-[1rem] bg-black/55 px-4 py-3 text-center backdrop-blur border border-white/10 shadow-[0_20px_45px_-25px_rgba(255,155,83,0.25)]">
                   <div className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[#ffd4af]/68">
-                    Detected Shape
+                    KẾT QUẢ PHÂN TÍCH
                   </div>
                   <div className="mt-1 text-base font-semibold tracking-normal text-[#ffb56d]">
                     {detectedShape ?? ""}
                   </div>
                 </div>
               </div>
+
               {isModelLoading ? (
                 <div className="flex flex-col items-center justify-center h-full text-white gap-2">
                   <Loader2 className="h-8 w-8 animate-spin" />
@@ -263,18 +245,19 @@ export default function FaceShapeModal({
                   Analyzing...
                 </>
               ) : (
-                "Scan My Face Shape"
+                "Quét khuôn mặt"
               )}
             </Button>
 
-
+            {cameraError ? (
+              <div className="mt-3 text-sm text-red-300">{cameraError}</div>
+            ) : null}
           </div>
 
-          {/* CỘT PHẢI: Kết quả gợi ý (Thay thế cho Sidebar cũ) */}
           <div className="flex w-full flex-col bg-transparent md:w-[47%]">
             <div className="px-4 py-3 sm:px-5 sm:py-4">
-              <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/45">
-                Step 2: Recommendations
+              <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white">
+                BƯỚC 2: SẢN PHẨM PHÙ HỢP
               </h3>
             </div>
 
@@ -291,9 +274,9 @@ export default function FaceShapeModal({
                     <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]">
                       <Loader2 className="h-8 w-8 animate-pulse text-white/30" />
                     </div>
-                    <p className="max-w-[250px] text-white/55">
-                      Please position your face in the camera to see
-                      personalized recommendations.
+                    <p className="max-w-[250px] text-white/40">
+                      Please position your face in the camera to see personalized
+                      recommendations.
                     </p>
                   </div>
                 ) : isFetchingProducts ? (
@@ -306,7 +289,7 @@ export default function FaceShapeModal({
                 ) : recommendedProducts.length > 0 ? (
                   <AIRecommendationGroups products={recommendedProducts} />
                 ) : (
-                  <div className="text-center text-white/55">
+                  <div className="text-center text-white/40">
                     No matching products found for{" "}
                     <span className="font-bold text-[#ffb56d]">{detectedShape}</span>{" "}
                     shape yet.
@@ -316,8 +299,8 @@ export default function FaceShapeModal({
             </ScrollArea>
           </div>
         </div>
-
       </DialogContent>
     </Dialog>
   );
 }
+

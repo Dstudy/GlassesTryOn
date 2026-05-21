@@ -52,33 +52,20 @@ export default function LoginPage() {
 
   async function onSubmit(data: LoginFormData) {
     try {
-      // 1. Gọi API đăng nhập
       const userData = await authApi.login(data.email, data.password);
-
-      // 2. Nếu thành công, gọi hàm login từ Context với dữ liệu chuẩn
       login(userData.id, userData.name, userData.roleID);
 
       toast({
-        title: "Chào mừng quay lại!",
-        description: "Bạn đã đăng nhập thành công.",
+        title: "Chào mừng quay lại",
+        description: "Tài khoản của bạn đã sẵn sàng.",
       });
 
-      // 3. Chuyển hướng dựa trên roleID từ API
-      if (userData.roleID === 1) {
-        router.push("/admin/dashboard");
-      } else {
-        router.push("/");
-      }
+      router.push(userData.roleID === 1 ? "/admin/dashboard" : "/");
     } catch (error) {
-      // 4. Xử lý lỗi đăng nhập
-      console.error("Login failed:", error);
-
-      // Hiển thị thông báo lỗi thân thiện
       const message =
-        error instanceof ApiError &&
-        (error.status === 404 || error.status === 401)
+        error instanceof ApiError && (error.status === 404 || error.status === 401)
           ? "Email hoặc mật khẩu không đúng."
-          : "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại.";
+          : "Đã có lỗi xảy ra. Vui lòng thử lại.";
 
       toast({
         title: "Đăng nhập thất bại",
@@ -89,29 +76,26 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md">
-        <Link
-          href="/"
-          className="font-headline text-3xl font-bold tracking-tight text-primary block text-center mb-6"
-        >
-          Spectra Specs
-        </Link>
-        <Card className="shadow-lg">
+    <div className="kyro-shell flex min-h-screen items-center justify-center px-4 py-10">
+      <div className="grid w-full max-w-6xl gap-6 lg:grid-cols-[1fr_440px]">
+        <div className="kyro-panel hidden p-10 lg:block xl:p-14">
+          <span className="kyro-kicker">Truy cập tài khoản</span>
+          <h1 className="mt-6 font-headline text-6xl uppercase tracking-[0.12em] text-white">
+            Bước vào KYRO.
+          </h1>
+        </div>
+
+        <Card className="text-white">
           <CardHeader className="text-center">
-            <CardTitle className="font-headline text-2xl">
-              Chào mừng trở lại
-            </CardTitle>
-            <CardDescription>
-              Nhập thông tin đăng nhập để truy cập tài khoản của bạn.
-            </CardDescription>
+            <Link href="/" className="font-headline text-3xl uppercase tracking-[0.24em] text-white no-underline">
+              KYRO
+            </Link>
+            <CardTitle className="mt-4">Đăng nhập</CardTitle>
+            <CardDescription>Truy cập đơn hàng, danh sách yêu thích và giỏ hàng của bạn.</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                 <FormField
                   control={form.control}
                   name="email"
@@ -119,12 +103,7 @@ export default function LoginPage() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="m@example.com"
-                          disabled={isSubmitting}
-                          {...field}
-                        />
+                        <Input type="email" placeholder="ban@example.com" disabled={isSubmitting} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -137,37 +116,23 @@ export default function LoginPage() {
                     <FormItem>
                       <FormLabel>Mật khẩu</FormLabel>
                       <FormControl>
-                        <Input
-                          type="password"
-                          placeholder="••••••••"
-                          disabled={isSubmitting}
-                          {...field}
-                        />
+                        <Input type="password" placeholder="••••••••" disabled={isSubmitting} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button
-                  type="submit"
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                  disabled={isSubmitting}
-                >
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
                   {isSubmitting ? "Đang đăng nhập..." : "Đăng nhập"}
                 </Button>
               </form>
             </Form>
           </CardContent>
-          <CardFooter className="flex flex-col items-center gap-2 text-sm">
-            <p className="text-muted-foreground">
-              Chưa có tài khoản?{" "}
-              <Link
-                href="/register"
-                className="font-semibold text-primary hover:underline"
-              >
-                Đăng ký
-              </Link>
-            </p>
+          <CardFooter className="justify-center text-sm text-muted-foreground">
+            Chưa có tài khoản?{" "}
+            <Link href="/register" className="ml-2 text-white no-underline hover:text-primary">
+              Tạo tài khoản
+            </Link>
           </CardFooter>
         </Card>
       </div>

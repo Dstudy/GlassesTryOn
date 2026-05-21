@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -7,7 +7,7 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { productApi } from "@/lib/api";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { AppContext } from "@/context/AppContext";
 
@@ -22,6 +22,18 @@ interface OrderItemView {
   colorName?: string;
   colorHex?: string;
   currentPrice?: number;
+}
+
+const orderSectionTitleClass =
+  "border-b border-white/10 pb-3 text-xl font-semibold tracking-tight text-white sm:text-2xl";
+
+function formatOrderTotal(total?: string) {
+  if (!total) return "—";
+  const numeric = Number(String(total).replace(/[^0-9.-]/g, ""));
+  if (!Number.isNaN(numeric) && String(total).trim() !== "") {
+    return `$${numeric.toFixed(2)}`;
+  }
+  return total;
 }
 
 export default function OrderDetailPage() {
@@ -118,68 +130,75 @@ export default function OrderDetailPage() {
   }, [orderId, user]);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="kyro-shell flex min-h-screen flex-col">
       <Header />
-      <main className="flex-1 bg-gray-50/50">
+      <main className="flex-1">
         <div className="container mx-auto px-4 py-8 md:py-12">
           <Link
             href="/orders"
-            className="mb-6 flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary"
+            className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground no-underline transition-colors hover:text-[#ffb56d]"
           >
-            <ArrowLeft className="h-4 w-4" /> Quay lại đơn hàng
+            <ArrowLeft className="h-4 w-4" />
+            Quay lại đơn hàng
           </Link>
 
-          <h1 className="mb-6 font-headline text-4xl font-bold text-primary md:text-5xl">
+          <h1 className="mb-8 font-headline text-4xl font-light uppercase tracking-[0.18em] text-white sm:text-5xl">
             Đơn hàng #{orderId}
           </h1>
 
           {loading ? (
-            <div className="mt-8 flex items-center gap-3 text-base font-medium">
-              <Loader2 className="h-6 w-6 animate-spin" /> Đang tải đơn hàng...
+            <div className="mt-8 flex items-center gap-3 text-muted-foreground">
+              <Loader2 className="h-6 w-6 animate-spin" />
+              Đang tải đơn hàng...
             </div>
           ) : error ? (
-            <p className="mt-8 text-red-600">{error}</p>
+            <p className="mt-8 text-red-400">{error}</p>
           ) : (
             <>
-              <Card className="mb-6 border-primary/10 shadow-[0_20px_45px_-34px_hsl(var(--primary)/0.35)]">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-primary">Tóm tắt</CardTitle>
-                </CardHeader>
-                <CardContent>
+              <Card className="mb-6 text-white">
+                <CardContent className="space-y-4 p-6">
+                  <p className={orderSectionTitleClass}>Tóm tắt</p>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                    <div className="rounded-2xl bg-primary/5 p-4">
-                      <span className="text-sm font-medium text-muted-foreground">Trạng thái:</span>
-                      <span className="block pt-2 text-lg font-semibold text-foreground">
-                        {summary?.status}
+                    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                      <span className="text-sm text-muted-foreground">
+                        Trạng thái
+                      </span>
+                      <span className="mt-2 block text-base font-semibold text-white">
+                        {summary?.status || "—"}
                       </span>
                     </div>
-                    <div className="rounded-2xl bg-accent/10 p-4">
-                      <span className="text-sm font-medium text-muted-foreground">Tổng tiền:</span>
-                      <span className="block pt-2 text-2xl font-bold text-primary">
-                        {summary?.total_amount ?? "-"}
+                    <div className="rounded-2xl border border-[#ff9b53]/25 bg-[rgba(255,130,32,0.1)] p-4">
+                      <span className="text-sm text-muted-foreground">
+                        Tổng tiền
+                      </span>
+                      <span className="mt-2 block font-headline text-2xl font-semibold text-[#ffb56d]">
+                        {formatOrderTotal(summary?.total_amount)}
                       </span>
                     </div>
-                    <div className="rounded-2xl bg-primary/5 p-4">
-                      <span className="text-sm font-medium text-muted-foreground">Ngày đặt:</span>
-                      <span className="block pt-2 text-base font-semibold text-foreground">
+                    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                      <span className="text-sm text-muted-foreground">
+                        Ngày đặt
+                      </span>
+                      <span className="mt-2 block text-base font-semibold text-white">
                         {summary?.order_date
-                          ? new Date(summary.order_date).toLocaleString()
-                          : "-"}
+                          ? new Date(summary.order_date).toLocaleString("vi-VN")
+                          : "—"}
                       </span>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-primary/10 shadow-[0_20px_45px_-34px_hsl(var(--primary)/0.35)]">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-primary">Sản phẩm</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="divide-y divide-border">
+              <Card className="text-white">
+                <CardContent className="p-6">
+                  <p className={`${orderSectionTitleClass} mb-4`}>Sản phẩm</p>
+                  <ul className="divide-y divide-white/10">
                     {items.map((it) => (
-                      <li key={it.id} className="flex items-center gap-4 py-5">
-                        <div className="h-20 w-20 overflow-hidden rounded-xl border bg-white shadow-sm">
+                      <li
+                        key={it.id}
+                        className="flex flex-col gap-4 py-5 sm:flex-row sm:items-center"
+                      >
+                        <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]">
                           <Image
                             src={it.image || "/placeholder.svg"}
                             alt={it.name}
@@ -189,8 +208,10 @@ export default function OrderDetailPage() {
                           />
                         </div>
 
-                        <div className="flex-1">
-                          <div className="text-lg font-semibold text-foreground">{it.name}</div>
+                        <div className="min-w-0 flex-1">
+                          <div className="text-base font-semibold text-white">
+                            {it.name}
+                          </div>
                           <div className="mt-2 flex flex-wrap gap-3 text-sm text-muted-foreground">
                             <span>Số lượng: {it.quantity}</span>
                             {it.colorName && (
@@ -198,7 +219,7 @@ export default function OrderDetailPage() {
                                 <span>Màu: {it.colorName}</span>
                                 {it.colorHex && (
                                   <span
-                                    className="inline-block h-3 w-3 rounded-full border"
+                                    className="inline-block h-3 w-3 rounded-full border border-white/20"
                                     style={{ backgroundColor: it.colorHex }}
                                   />
                                 )}
@@ -207,13 +228,13 @@ export default function OrderDetailPage() {
                           </div>
                         </div>
 
-                        <div className="text-right">
-                          <div className="text-2xl font-bold tracking-tight text-primary">
+                        <div className="text-left sm:text-right">
+                          <div className="text-xl font-semibold text-[#ffb56d]">
                             ${it.price.toFixed(2)}
                           </div>
                           {typeof it.currentPrice === "number" &&
                             it.currentPrice !== it.price && (
-                              <div className="mt-1 text-sm font-medium text-muted-foreground">
+                              <div className="mt-1 text-sm text-muted-foreground">
                                 Giá hiện tại: ${it.currentPrice.toFixed(2)}
                               </div>
                             )}

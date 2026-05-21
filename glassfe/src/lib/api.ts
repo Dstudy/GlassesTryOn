@@ -508,6 +508,27 @@ export const productApi = {
   async adminToggleProductActive(id: number): Promise<{ active: boolean }> {
     return fetchApi<{ active: boolean }>(`/api/admin/products/${id}/toggle-active`, { method: 'PATCH' } as any);
   },
+  async adminAddVariationImage(
+    variationId: number,
+    payload: { pic_url: string; display_order?: number }
+  ): Promise<any> {
+    return fetchApi<any>(`/api/admin/product-variations/${variationId}/images`, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    } as any);
+  },
+  async adminUpdateProductImage(
+    id: number,
+    payload: { pic_url?: string; display_order?: number }
+  ): Promise<any> {
+    return fetchApi<any>(`/api/admin/product-images/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    } as any);
+  },
+  async adminDeleteProductImage(id: number): Promise<void> {
+    await fetchApi(`/api/admin/product-images/${id}`, { method: 'DELETE' } as any);
+  },
 
   // Favorites
   async getFavoriteProducts(userId: number): Promise<Product[]> {

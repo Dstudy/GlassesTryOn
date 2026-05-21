@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
@@ -12,13 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import ProductCard from "./ProductCard";
 import { Sparkles, Bot } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -84,20 +77,20 @@ export default function AIAssistant() {
   return (
     <section
       id="ai-assistant"
-      className="relative w-full overflow-hidden border-y border-primary/10 bg-[linear-gradient(180deg,hsl(var(--primary)/0.08),transparent_18%),radial-gradient(circle_at_top,hsl(var(--accent)/0.16),transparent_24%),hsl(var(--background))] py-16 md:py-28 lg:py-32"
+      className="relative w-full overflow-hidden bg-[linear-gradient(180deg,#000000_0%,#050000_40%,#000000_100%),radial-gradient(circle_at_top,rgba(255,155,83,0.06),transparent_24%)] py-16 md:py-28 lg:py-32"
     >
-      <div className="container px-4 md:px-6">
-        <div className="mx-auto max-w-3xl">
-          <Card className="border-primary/20 shadow-lg">
-            <CardHeader className="text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground">
+      <div className="container mx-auto px-4">
+        <div>
+          <Card className="overflow-hidden border-white/12 bg-[linear-gradient(165deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_52%,rgba(255,255,255,0.02)),radial-gradient(circle_at_top,rgba(191,195,201,0.18),transparent_30%)] shadow-[0_32px_90px_-42px_rgba(0,0,0,0.9)]">
+              <CardHeader className="text-center">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[1.1rem] border border-white/12 bg-[linear-gradient(135deg,rgba(245,245,243,0.92),rgba(191,195,201,0.76))] text-[#0F0F10] shadow-[0_20px_40px_-24px_rgba(191,195,201,0.72)]">
                 <Bot className="h-6 w-6" />
               </div>
-              <CardTitle className="font-headline text-3xl text-primary md:text-4xl">
-                Trợ lý chọn phong cách AI
+              <CardTitle className="text-3xl text-white/95 md:text-4xl">
+                AI STYLIST
               </CardTitle>
-              <CardDescription className="text-lg">
-                Hãy cho chúng tôi biết phong cách hoặc nhu cầu của bạn, AI sẽ gợi ý những mẫu kính, vòng cổ hoặc khuyên tai phù hợp nhất.
+              <CardDescription className="mx-auto max-w-2xl text-base leading-7 text-white/95 md:text-lg">
+                Chia sẻ phong cách, nhu cầu của bạn để AI gợi ý những phụ kiện phù hợp nhất.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -106,7 +99,7 @@ export default function AIAssistant() {
                   id="needs"
                   name="needs"
                   placeholder="Ví dụ: 'Tôi muốn một cặp kính thanh lịch để đi làm', 'Tôi cần khuyên tai nhỏ gọn để đeo hằng ngày' hoặc 'Gợi ý cho tôi một vòng cổ tối giản để dễ phối đồ'"
-                  className="min-h-[100px] text-base"
+                  className="min-h-[148px] resize-y px-4 py-3.5 text-base leading-relaxed placeholder:text-muted-foreground/85 sm:min-h-[168px] md:min-h-[188px] md:px-5 md:py-4 md:text-lg md:leading-relaxed"
                   required
                 />
                 <div className="flex flex-col justify-center gap-2 sm:flex-row">
@@ -116,33 +109,25 @@ export default function AIAssistant() {
 
               {state.recommendation && (
                 <div key={state.timestamp} className="mt-6 animate-in fade-in-50 duration-500">
-                  <Card className="border-primary/20 bg-primary/10">
+                  <Card className="border-white/12 bg-[linear-gradient(155deg,rgba(191,195,201,0.14),rgba(255,255,255,0.04)_48%,rgba(255,255,255,0.02))]">
                     <CardHeader>
-                      <CardTitle className="flex items-center gap-2 font-headline text-xl text-primary">
+                      <CardTitle className="flex items-center gap-2 text-xl text-white/95">
                         <Sparkles className="h-5 w-5 text-accent" />
                         Gợi ý dành cho bạn
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-primary/90">{state.recommendation}</p>
+                      <p className="text-white/95">{state.recommendation}</p>
                       {state.recommendedProducts && state.recommendedProducts.length > 0 && (
-                        <div className="mt-6">
-                          <h4 className="mb-4 font-headline text-lg text-primary">
-                            Sản phẩm phù hợp:
+                        <div className="mt-10">
+                          <h4 className="mb-6 text-lg text-white/95 sm:text-xl">
+                            Sản phẩm phù hợp
                           </h4>
-                          <Carousel opts={{ align: "start", loop: true }} className="w-full">
-                            <CarouselContent className="-ml-4">
-                              {state.recommendedProducts.map((product, index) => (
-                                <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                                  <div className="p-1">
-                                    <ProductCard product={product} />
-                                  </div>
-                                </CarouselItem>
-                              ))}
-                            </CarouselContent>
-                            <CarouselPrevious className="ml-12" />
-                            <CarouselNext className="mr-12" />
-                          </Carousel>
+                          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                            {state.recommendedProducts.map((product) => (
+                              <ProductCard key={product.id} product={product} />
+                            ))}
+                          </div>
                         </div>
                       )}
                     </CardContent>

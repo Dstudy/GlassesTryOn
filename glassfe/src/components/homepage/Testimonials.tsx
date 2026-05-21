@@ -1,146 +1,128 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { Star } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/ui/marquee";
 
-const testimonials = [
+const reviews = [
   {
     name: "Linh A.",
-    role: "Nhân viên văn phòng",
-    quote:
-      "Mình chọn được cả kính lẫn khuyên tai chỉ trong một lần mua. Giao diện dễ dùng, sản phẩm lên hình đẹp và nhận hàng cũng rất ưng.",
-    image: "https://picsum.photos/100/100?random=1",
-    rating: 5,
+    role: "Dan cong so",
+    body: "Be mat dark moi khien trai nghiem duyet san pham cao cap hon han. San pham noi bat nhanh hon va luong xem co chu dich hon.",
+    img: "https://picsum.photos/100/100?random=11",
   },
   {
     name: "Mai N.",
-    role: "Fashion creator",
-    quote:
-      "Phần gợi ý sản phẩm khá đúng gu. Mình tìm được một chiếc vòng cổ tối giản và một mẫu kính rất dễ phối đồ hằng ngày.",
-    image: "https://picsum.photos/100/100?random=2",
-    rating: 5,
+    role: "Nha sang tao",
+    body: "Sang trong nhung khong on ao. The san pham, khoang trang va hinh anh deu chin chu hon tren dien thoai.",
+    img: "https://picsum.photos/100/100?random=12",
   },
   {
-    name: "Khánh T.",
-    role: "Nhà thiết kế",
-    quote:
-      "Mình thích cách shop chọn mẫu. Từ kính đến trang sức đều có cảm giác hiện đại, gọn gàng và không bị đại trà.",
-    image: "https://picsum.photos/100/100?random=3",
-    rating: 5,
+    name: "Khanh T.",
+    role: "Nha thiet ke",
+    body: "Bang mau den va bac tao ban sac manh hon, dong thoi lam cho danh muc mang cam giac thuong hieu ro net hon.",
+    img: "https://picsum.photos/100/100?random=13",
   },
   {
     name: "Vy P.",
-    role: "Sinh viên",
-    quote:
-      "Giá ổn, hình ảnh rõ và phần bộ lọc giúp mình tìm khuyên tai rất nhanh. Trải nghiệm mua hàng khá mượt trên điện thoại.",
-    image: "https://picsum.photos/100/100?random=4",
-    rating: 5,
+    role: "Sinh vien",
+    body: "Minh quet san pham nhanh hon rat nhieu. Bo cuc sach hon va cao cap hon truoc.",
+    img: "https://picsum.photos/100/100?random=14",
   },
   {
-    name: "Hoàng D.",
-    role: "Photographer",
-    quote:
-      "Mình đặt kính và vòng cổ cho một buổi chụp lookbook, nhận hàng đúng như mong đợi. Thiết kế đẹp và hoàn thiện tốt.",
-    image: "https://picsum.photos/100/100?random=5",
-    rating: 5,
+    name: "Hoang D.",
+    role: "Nhiep anh gia",
+    body: "Cach xu ly anh san pham va chi tiet hover phan sang dac biet hop voi mat hang kinh mat.",
+    img: "https://picsum.photos/100/100?random=15",
   },
   {
     name: "Trang K.",
-    role: "Content creator",
-    quote:
-      "Shop có gu rất rõ. Những món mình nhận được đều dễ phối, nổi bật vừa đủ và hợp để dùng hằng ngày lẫn chụp hình.",
-    image: "https://picsum.photos/100/100?random=6",
-    rating: 5,
+    role: "Sang tao noi dung",
+    body: "Responsive gio muot va can bang hon nhieu. Khong con cam giac qua to hay chat choi tren man hinh nho.",
+    img: "https://picsum.photos/100/100?random=16",
   },
 ];
-
-const renderStars = (rating: number) => {
-  return Array(rating)
-    .fill(0)
-    .map((_, i) => (
-      <Star key={i} className="h-5 w-5 fill-current text-amber-400" />
-    ));
-};
-
-const reviews = testimonials.map((testimonial) => ({
-  name: testimonial.name,
-  username: `@${testimonial.role.replace(/\s+/g, "")}`,
-  body: testimonial.quote,
-  img: testimonial.image,
-  rating: testimonial.rating,
-}));
 
 const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
 
-const ReviewCard = ({
+function ReviewCard({
   img,
   name,
-  username,
+  role,
   body,
-  rating,
 }: {
   img: string;
   name: string;
-  username: string;
+  role: string;
   body: string;
-  rating: number;
-}) => {
+}) {
   return (
-    <figure
-      className={cn(
-        "relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
-        "border-primary/10 bg-white/85 shadow-[0_16px_40px_-32px_hsl(var(--primary)/0.45)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/35 hover:bg-white",
-        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
-      )}
-    >
-      <div className="flex flex-row items-center gap-2">
-        <Image className="rounded-full" width={32} height={32} alt={name} src={img} />
-        <div className="flex flex-col">
-          <figcaption className="text-sm font-medium dark:text-white">
-            {name}
-          </figcaption>
-          <p className="text-xs font-medium dark:text-white/40">{username}</p>
+    <figure className="relative flex h-[172px] w-[20rem] flex-col overflow-hidden rounded-[1.1rem] border border-white/20 bg-white/[0.12] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_40%)] p-3.5 shadow-[0_24px_70px_-42px_rgba(0,0,0,0.9)] backdrop-blur-2xl">
+      <div className="absolute inset-x-3.5 top-0 h-px bg-white/24" aria-hidden />
+      <div className="absolute inset-x-3.5 bottom-0 h-px bg-white/8" aria-hidden />
+      <div className="absolute right-2.5 top-2 text-[1.35rem] leading-none text-white/10" aria-hidden>
+        "
+      </div>
+      <div className="flex items-center gap-2.5">
+        <Image
+          src={img}
+          alt={name}
+          width={38}
+          height={38}
+          className="rounded-full border border-white/12"
+        />
+        <div>
+          <figcaption className="text-[0.84rem] font-semibold text-white">{name}</figcaption>
+          <p className="text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground">{role}</p>
         </div>
       </div>
-      <blockquote className="mt-2 text-sm leading-6">{body}</blockquote>
-      <div className="mt-2 flex justify-start">{renderStars(rating)}</div>
+      <div className="mt-1.5 flex gap-1 text-[#e5e7eb]">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <Star key={index} className="h-3 w-3 fill-current" />
+        ))}
+      </div>
+      <blockquote className="mt-1.5 flex-1 overflow-hidden text-[0.78rem] leading-[1.1rem] text-white/72">
+        {body}
+      </blockquote>
     </figure>
   );
-};
+}
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="relative overflow-hidden border-y border-primary/10 bg-[linear-gradient(180deg,hsl(var(--primary)/0.05),transparent_20%),radial-gradient(circle_at_20%_18%,hsl(var(--accent)/0.12),transparent_22%),hsl(var(--background))] py-16 md:py-28">
+    <section id="testimonials" className="py-16 md:py-24">
       <div className="container mx-auto px-4">
-        <div className="text-center">
-          <h2 className="font-headline text-3xl font-bold tracking-tight text-primary sm:text-4xl">
-            Khách hàng nói gì về chúng tôi
-          </h2>
-          <p className="mt-3 text-lg text-muted-foreground">
-            Những chia sẻ chân thật từ khách hàng đã chọn kính, vòng cổ và khuyên tai tại Spectra Specs.
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-3 text-[1.4rem] font-semibold uppercase tracking-[0.22em] text-accent">
+            <span
+              className="h-px w-10 bg-[linear-gradient(90deg,rgba(255,255,255,0.12),rgba(255,255,255,0.95))]"
+              aria-hidden
+            />
+            Trải nghiệm từ khách hàng
+          </span>
+          <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-base">
+            Những phản hồi từ khách hàng đã trải nghiệm sản phẩm và phong cách của KYRO.
           </p>
         </div>
 
-        <div className="relative mt-12 flex w-full flex-col items-center justify-center overflow-hidden">
-          <Marquee pauseOnHover className="[--duration:20s]">
+        <div className="relative mt-8 overflow-hidden">
+          <Marquee pauseOnHover className="[--duration:24s]">
             {firstRow.map((review) => (
-              <div key={review.username} className="mx-2">
+              <div key={review.name} className="mx-3 py-2 odd:-rotate-1 even:rotate-1">
                 <ReviewCard {...review} />
               </div>
             ))}
           </Marquee>
-          <Marquee reverse pauseOnHover className="[--duration:20s]">
+          <Marquee reverse pauseOnHover className="mt-6 [--duration:26s]">
             {secondRow.map((review) => (
-              <div key={review.username} className="mx-2 mt-4">
+              <div key={review.name} className="mx-3 py-2 odd:rotate-1 even:-rotate-1">
                 <ReviewCard {...review} />
               </div>
             ))}
           </Marquee>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent" />
         </div>
       </div>
     </section>

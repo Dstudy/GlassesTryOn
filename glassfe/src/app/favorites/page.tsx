@@ -9,7 +9,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
-import { User, Heart, Loader2, AlertCircle } from "lucide-react";
+import { User, Heart, Loader2, AlertCircle, Star, Sparkles } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function FavoritesPage() {
@@ -51,16 +51,38 @@ export default function FavoritesPage() {
   }, [favorites, user]);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="kyro-shell flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
-        <div className="container mx-auto px-4 py-8 md:py-12">
-          <h1 className="font-headline text-4xl font-bold tracking-tight text-primary md:text-5xl">
-            Danh sách yêu thích
-          </h1>
+        <section className="relative overflow-hidden">
+          <div className="container relative z-10 mx-auto px-4 pt-10 pb-4 md:pt-12 md:pb-6">
+            <div className="mx-auto max-w-3xl text-center flex flex-col items-center relative">
+              <div className="mb-6 flex items-center justify-center gap-4">
+                <div className="h-px w-12 bg-gradient-to-r from-transparent to-white/20"></div>
+                <span className="text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-white/40">
+                  Sở thích cá nhân
+                </span>
+                <div className="h-px w-12 bg-gradient-to-l from-transparent to-white/20"></div>
+              </div>
+              <h1 className="font-headline text-4xl uppercase tracking-[0.18em] text-white/95 sm:text-5xl md:text-6xl font-light relative z-10">
+                <div className="absolute -top-10 -left-8 md:-left-16 w-10 h-10 md:w-16 md:h-16 rounded-2xl overflow-hidden animate-float-fade shadow-lg border border-white/10" style={{ animationDelay: '0s' }}>
+                  <img src="/homepage/hero/anh5.jpg" alt="Decor" className="w-full h-full object-cover" />
+                </div>
+                <div className="absolute top-2 -right-8 md:-right-16 w-12 h-12 md:w-20 md:h-20 rounded-full overflow-hidden animate-float-fade shadow-lg border border-white/10" style={{ animationDelay: '-2s' }}>
+                  <img src="/homepage/hero/anh1.jpg" alt="Decor" className="w-full h-full object-cover" />
+                </div>
+                <div className="absolute -bottom-4 left-6 md:left-8 w-8 h-8 md:w-12 md:h-12 rounded-xl overflow-hidden animate-float-fade shadow-lg border border-white/10" style={{ animationDelay: '-4s' }}>
+                  <img src="/homepage/hero/anh2.jpg" alt="Decor" className="w-full h-full object-cover" />
+                </div>
+                Đã lưu
+              </h1>
+            </div>
+          </div>
+        </section>
 
+        <div className="container mx-auto px-4 pt--5 pb-10">
           {!user ? (
-            <div className="mt-8 flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
+            <div className="mt-4 flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
               <User className="mx-auto h-16 w-16 text-gray-400" />
               <h2 className="mt-6 text-xl font-semibold">
                 Đăng nhập để xem danh sách yêu thích

@@ -10,7 +10,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Save,
@@ -23,6 +22,24 @@ import {
   Trash2,
 } from "lucide-react";
 
+interface ProductFeature {
+  id?: number;
+  name: string;
+  img?: string;
+}
+
+interface ProductImage {
+  id?: number;
+  pic_url: string;
+  display_order: number;
+}
+
+interface ProductVariation {
+  id: number;
+  Color: { name: string; hex_code: string };
+  ProductImages: ProductImage[];
+}
+
 interface Product {
   id: number;
   name: string;
@@ -33,22 +50,37 @@ interface Product {
   Brand?: { id: number; name: string };
   Shape?: { id: number; name: string };
   Material?: { id: number; name: string };
-  ProductFeatures?: Array<{ id: number; name: string; img?: string }>;
-  ProductVariations?: Array<{
-    id: number;
-    Color: { name: string; hex_code: string };
-    ProductImages: Array<{ pic_url: string; display_order: number }>;
-  }>;
+  ProductFeatures?: ProductFeature[];
+  ProductVariations?: ProductVariation[];
   createdAt?: string;
   updatedAt?: string;
 }
 
 export default function AdminEditProductPage() {
+  const { id } = useParams();
+  const router = useRouter();
+  const productId = Number(id);
+
   const [brands, setBrands] = useState<Array<{ id: number; name: string }>>([]);
   const [shapes, setShapes] = useState<Array<{ id: number; name: string }>>([]);
-  const [materials, setMaterials] = useState<
-    Array<{ id: number; name: string }>
-  >([]);
+  const [materials, setMaterials] = useState<Array<{ id: number; name: string }>>([]);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [form, setForm] = useState({
+    name: "",
+    subtitle: "",
+    price: "",
+    description: "",
+    size: "",
+    brand_id: "",
+    shape_id: "",
+    material_id: "",
+  });
+  const [features, setFeatures] = useState<ProductFeature[]>([]);
+  const [availableFeatures, setAvailableFeatures] = useState<ProductFeature[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -62,39 +94,26 @@ export default function AdminEditProductPage() {
         setShapes(shapesList);
         setMaterials(materialsList);
       } catch {
-        // ignore load errors for now
+        // Ignore lookup loading errors for now.
       }
     })();
   }, []);
-  const { id } = useParams();
-  const router = useRouter();
-  const productId = Number(id);
-  const [product, setProduct] = useState<Product | null>(null);
-  const [form, setForm] = useState<any>({
-    name: "",
-    subtitle: "",
-    price: "",
-    description: "",
-    size: "",
-    brand_id: "",
-    shape_id: "",
-    material_id: "",
-  });
-  const [features, setFeatures] = useState<
-    Array<{ id?: number; name: string; img?: string }>
-  >([]);
-  const [availableFeatures, setAvailableFeatures] = useState<
-    Array<{ id?: number; name: string; img?: string }>
-  >([]);
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
 
   useEffect(() => {
     if (!productId) return;
     loadProduct();
   }, [productId]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const list = await productApi.getFeatures();
+        setAvailableFeatures(list);
+      } catch {
+        // Ignore feature loading errors for now.
+      }
+    })();
+  }, []);
 
   const loadProduct = async () => {
     try {
@@ -108,42 +127,66 @@ export default function AdminEditProductPage() {
         price: String(data?.price ?? ""),
         description: data?.description ?? "",
         size: data?.size ?? "",
-        brand_id: data?.Brand?.id ?? "",
-        shape_id: data?.Shape?.id ?? "",
-        material_id: data?.Material?.id ?? "",
+        brand_id: data?.Brand?.id ? String(data.Brand.id) : "",
+        shape_id: data?.Shape?.id ? String(data.Shape.id) : "",
+        material_id: data?.Material?.id ? String(data.Material.id) : "",
       });
-      const rawFeatures = Array.isArray((data as any)?.ProductFeatures)
-        ? (data as any).ProductFeatures
-        : Array.isArray((data as any)?.features)
-        ? (data as any).features
-        : [];
+
+      const rawFeatures = Array.isArray(data?.ProductFeatures)
+        ? data.ProductFeatures
+        : Array.isArray(data?.features)
+          ? data.features
+          : [];
+
       setFeatures(
         rawFeatures
-          .map((f: any) => ({
-            id: f.id,
-            name: f.name ?? f.title,
-            img: f.img ?? f.image,
+          .map((feature: any) => ({
+            id: feature.id,
+            name: feature.name ?? feature.title,
+            img: feature.img ?? feature.image,
           }))
-          .filter((f: any) => f.name)
+          .filter((feature: ProductFeature) => feature.name)
       );
-    } catch (e) {
-      setError("Không thể tải sản phẩm");
+    } catch {
+      setError("Khong the tai san pham.");
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    // load available features for admin to choose from
-    (async () => {
-      try {
-        const list = await productApi.getFeatures();
-        setAvailableFeatures(list);
-      } catch (e) {
-        // ignore feature load errors for now
-      }
-    })();
-  }, []);
+  const getVariationById = (variationId: number) =>
+    product?.ProductVariations?.find((item) => item.id === variationId);
+
+  const updateVariationImageValue = (variationId: number, nextUrl: string) => {
+    setProduct((current) => {
+      if (!current?.ProductVariations) return current;
+
+      return {
+        ...current,
+        ProductVariations: current.ProductVariations.map((variation) => {
+          if (variation.id !== variationId) return variation;
+
+          const nextImages = variation.ProductImages ? [...variation.ProductImages] : [];
+          if (nextImages.length === 0) {
+            nextImages.push({
+              pic_url: nextUrl,
+              display_order: 1,
+            });
+          } else {
+            nextImages[0] = {
+              ...nextImages[0],
+              pic_url: nextUrl,
+            };
+          }
+
+          return {
+            ...variation,
+            ProductImages: nextImages,
+          };
+        }),
+      };
+    });
+  };
 
   const handleSave = async () => {
     try {
@@ -162,12 +205,126 @@ export default function AdminEditProductPage() {
         material_id: form.material_id ? Number(form.material_id) : null,
       });
 
-      setSuccess("Cập nhật sản phẩm thành công!");
+      setSuccess("Cap nhat san pham thanh cong.");
       setTimeout(() => {
         router.push("/admin/products");
       }, 1500);
-    } catch (error) {
-      setError("Không thể lưu sản phẩm");
+    } catch {
+      setError("Khong the luu san pham.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleSaveVariationImage = async (variationId: number) => {
+    const currentVariation = getVariationById(variationId);
+    const firstImage = currentVariation?.ProductImages?.[0];
+    const url = firstImage?.pic_url?.trim();
+
+    if (!url) {
+      setError("Vui long nhap URL anh hop le.");
+      return;
+    }
+
+    try {
+      setSaving(true);
+      setError(null);
+      setSuccess(null);
+
+      if (firstImage?.id) {
+        await productApi.adminUpdateProductImage(firstImage.id, {
+          pic_url: url,
+        });
+      } else {
+        await productApi.adminAddVariationImage(variationId, {
+          pic_url: url,
+          display_order: 1,
+        });
+      }
+
+      setSuccess("Da cap nhat anh bien the.");
+      await loadProduct();
+    } catch {
+      setError("Khong the cap nhat anh bien the.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDeleteVariationImage = async (variationId: number) => {
+    const firstImage = getVariationById(variationId)?.ProductImages?.[0];
+
+    if (!firstImage?.id) {
+      setError("Khong co anh hop le de xoa.");
+      return;
+    }
+
+    try {
+      setSaving(true);
+      setError(null);
+      setSuccess(null);
+      await productApi.adminDeleteProductImage(firstImage.id);
+      setSuccess("Da xoa anh.");
+      await loadProduct();
+    } catch {
+      setError("Khong the xoa anh.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const swapVariationImageOrder = async (
+    currentVariationId: number,
+    direction: "up" | "down"
+  ) => {
+    if (!product?.ProductVariations?.length) {
+      setError("Khong tim thay bien the de sap xep.");
+      return;
+    }
+
+    const currentIndex = product.ProductVariations.findIndex(
+      (item) => item.id === currentVariationId
+    );
+    const targetIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+
+    if (
+      currentIndex < 0 ||
+      targetIndex < 0 ||
+      targetIndex >= product.ProductVariations.length
+    ) {
+      setError("Khong the di chuyen anh theo huong nay.");
+      return;
+    }
+
+    const currentImage = product.ProductVariations[currentIndex]?.ProductImages?.[0];
+    const targetImage = product.ProductVariations[targetIndex]?.ProductImages?.[0];
+
+    if (
+      !currentImage?.id ||
+      !targetImage?.id ||
+      currentImage.display_order == null ||
+      targetImage.display_order == null
+    ) {
+      setError("Can hai anh chinh hop le de doi thu tu.");
+      return;
+    }
+
+    try {
+      setSaving(true);
+      setError(null);
+      setSuccess(null);
+      await Promise.all([
+        productApi.adminUpdateProductImage(currentImage.id, {
+          display_order: targetImage.display_order,
+        }),
+        productApi.adminUpdateProductImage(targetImage.id, {
+          display_order: currentImage.display_order,
+        }),
+      ]);
+      setSuccess("Da cap nhat thu tu anh.");
+      await loadProduct();
+    } catch {
+      setError("Khong the sap xep lai anh.");
     } finally {
       setSaving(false);
     }
@@ -182,29 +339,29 @@ export default function AdminEditProductPage() {
             size="sm"
             onClick={() => router.push("/admin/products")}
           >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Quay lại sản phẩm
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Quay lai san pham
           </Button>
           <div>
             <h1 className="text-3xl font-bold text-gray-900">
-              Chỉnh sửa sản phẩm #{productId}
+              Chinh sua san pham #{productId}
             </h1>
             <p className="text-gray-600">
-              Cập nhật thông tin sản phẩm và các biến thể
+              Cap nhat thong tin san pham va cac bien the
             </p>
           </div>
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center h-64">
-            <div className="text-lg text-gray-500">Đang tải sản phẩm...</div>
+          <div className="flex h-64 items-center justify-center">
+            <div className="text-lg text-gray-500">Dang tai san pham...</div>
           </div>
         ) : (
           <Tabs defaultValue="basic" className="space-y-6">
             <TabsList>
-              <TabsTrigger value="basic">Thông tin cơ bản</TabsTrigger>
-              <TabsTrigger value="features">Tính năng</TabsTrigger>
-              <TabsTrigger value="variations">Biến thể</TabsTrigger>
+              <TabsTrigger value="basic">Thong tin co ban</TabsTrigger>
+              <TabsTrigger value="features">Tinh nang</TabsTrigger>
+              <TabsTrigger value="variations">Bien the</TabsTrigger>
             </TabsList>
 
             <TabsContent value="basic">
@@ -212,37 +369,37 @@ export default function AdminEditProductPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Package className="h-5 w-5" />
-                    Thông tin sản phẩm
+                    Thong tin san pham
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Tên sản phẩm *</Label>
+                      <Label htmlFor="name">Ten san pham *</Label>
                       <Input
                         id="name"
                         value={form.name}
                         onChange={(e) =>
                           setForm({ ...form, name: e.target.value })
                         }
-                        placeholder="Nhập tên sản phẩm"
+                        placeholder="Nhap ten san pham"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="subtitle">Phụ đề</Label>
+                      <Label htmlFor="subtitle">Phu de</Label>
                       <Input
                         id="subtitle"
                         value={form.subtitle}
                         onChange={(e) =>
                           setForm({ ...form, subtitle: e.target.value })
                         }
-                        placeholder="Phụ đề ngắn"
+                        placeholder="Phu de ngan"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="price">Giá *</Label>
+                      <Label htmlFor="price">Gia *</Label>
                       <div className="relative">
-                        <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                        <DollarSign className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
                         <Input
                           id="price"
                           type="number"
@@ -259,80 +416,80 @@ export default function AdminEditProductPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="description">Mô tả</Label>
+                    <Label htmlFor="description">Mo ta</Label>
                     <Textarea
                       id="description"
                       value={form.description}
                       onChange={(e) =>
                         setForm({ ...form, description: e.target.value })
                       }
-                      placeholder="Nhập mô tả sản phẩm"
+                      placeholder="Nhap mo ta san pham"
                       rows={4}
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                     <div className="space-y-2">
-                      <Label htmlFor="size">Kích thước</Label>
+                      <Label htmlFor="size">Kich thuoc</Label>
                       <Input
                         id="size"
                         value={form.size}
                         onChange={(e) =>
                           setForm({ ...form, size: e.target.value })
                         }
-                        placeholder="Ví dụ: Nhỏ/Vừa hoặc 52-18-140"
+                        placeholder="Vi du: Nho/Vua hoac 52-18-140"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="brand_id">Thương hiệu</Label>
+                      <Label htmlFor="brand_id">Thuong hieu</Label>
                       <select
                         id="brand_id"
                         value={form.brand_id}
                         onChange={(e) =>
                           setForm({ ...form, brand_id: e.target.value })
                         }
-                        className="w-full border rounded px-2 py-1"
+                        className="w-full rounded border px-2 py-1"
                       >
-                        <option value="">Chọn thương hiệu</option>
-                        {brands.map((b) => (
-                          <option key={b.id} value={b.id}>
-                            {b.name}
+                        <option value="">Chon thuong hieu</option>
+                        {brands.map((brand) => (
+                          <option key={brand.id} value={brand.id}>
+                            {brand.name}
                           </option>
                         ))}
                       </select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="shape_id">Dáng</Label>
+                      <Label htmlFor="shape_id">Dang</Label>
                       <select
                         id="shape_id"
                         value={form.shape_id}
                         onChange={(e) =>
                           setForm({ ...form, shape_id: e.target.value })
                         }
-                        className="w-full border rounded px-2 py-1"
+                        className="w-full rounded border px-2 py-1"
                       >
-                        <option value="">Chọn dáng</option>
-                        {shapes.map((s) => (
-                          <option key={s.id} value={s.id}>
-                            {s.name}
+                        <option value="">Chon dang</option>
+                        {shapes.map((shape) => (
+                          <option key={shape.id} value={shape.id}>
+                            {shape.name}
                           </option>
                         ))}
                       </select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="material_id">Chất liệu</Label>
+                      <Label htmlFor="material_id">Chat lieu</Label>
                       <select
                         id="material_id"
                         value={form.material_id}
                         onChange={(e) =>
                           setForm({ ...form, material_id: e.target.value })
                         }
-                        className="w-full border rounded px-2 py-1"
+                        className="w-full rounded border px-2 py-1"
                       >
-                        <option value="">Chọn chất liệu</option>
-                        {materials.map((m) => (
-                          <option key={m.id} value={m.id}>
-                            {m.name}
+                        <option value="">Chon chat lieu</option>
+                        {materials.map((material) => (
+                          <option key={material.id} value={material.id}>
+                            {material.name}
                           </option>
                         ))}
                       </select>
@@ -340,27 +497,27 @@ export default function AdminEditProductPage() {
                   </div>
 
                   {error && (
-                    <div className="p-4 bg-red-50 border border-red-200 rounded-md">
+                    <div className="rounded-md border border-red-200 bg-red-50 p-4">
                       <p className="text-sm text-red-600">{error}</p>
                     </div>
                   )}
 
                   {success && (
-                    <div className="p-4 bg-green-50 border border-green-200 rounded-md">
+                    <div className="rounded-md border border-green-200 bg-green-50 p-4">
                       <p className="text-sm text-green-600">{success}</p>
                     </div>
                   )}
 
                   <div className="flex items-center gap-2 pt-4">
                     <Button onClick={handleSave} disabled={saving}>
-                      <Save className="h-4 w-4 mr-2" />
-                      {saving ? "Đang lưu..." : "Lưu thay đổi"}
+                      <Save className="mr-2 h-4 w-4" />
+                      {saving ? "Dang luu..." : "Luu thay doi"}
                     </Button>
                     <Button
                       variant="outline"
                       onClick={() => router.push("/admin/products")}
                     >
-                      Hủy
+                      Huy
                     </Button>
                   </div>
                 </CardContent>
@@ -372,39 +529,42 @@ export default function AdminEditProductPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Tag className="h-5 w-5" />
-                    Tính năng sản phẩm
+                    Tinh nang san pham
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
-                    {features.map((f, idx) => (
+                    {features.map((feature, index) => (
                       <div
-                        key={idx}
-                        className="grid grid-cols-1 md:grid-cols-3 gap-3 items-end"
+                        key={index}
+                        className="grid grid-cols-1 items-end gap-3 md:grid-cols-3"
                       >
                         <div className="space-y-2">
-                          <Label>Tên</Label>
+                          <Label>Ten</Label>
                           <Input
-                            value={f.name}
+                            value={feature.name}
                             onChange={(e) => {
-                              const copy = features.slice();
-                              copy[idx] = {
-                                ...copy[idx],
+                              const next = features.slice();
+                              next[index] = {
+                                ...next[index],
                                 name: e.target.value,
                               };
-                              setFeatures(copy);
+                              setFeatures(next);
                             }}
-                            placeholder="Lớp phủ chống trầy"
+                            placeholder="Lop phu chong tray"
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label>URL hình ảnh</Label>
+                          <Label>URL hinh anh</Label>
                           <Input
-                            value={f.img ?? ""}
+                            value={feature.img ?? ""}
                             onChange={(e) => {
-                              const copy = features.slice();
-                              copy[idx] = { ...copy[idx], img: e.target.value };
-                              setFeatures(copy);
+                              const next = features.slice();
+                              next[index] = {
+                                ...next[index],
+                                img: e.target.value,
+                              };
+                              setFeatures(next);
                             }}
                             placeholder="https://..."
                           />
@@ -413,96 +573,80 @@ export default function AdminEditProductPage() {
                           <Button
                             variant="destructive"
                             onClick={() =>
-                              setFeatures(features.filter((_, i) => i !== idx))
+                              setFeatures(features.filter((_, i) => i !== index))
                             }
                           >
-                            <Trash2 className="h-4 w-4 mr-1" /> Xóa
+                            <Trash2 className="mr-1 h-4 w-4" /> Xoa
                           </Button>
                         </div>
                       </div>
                     ))}
                   </div>
+
                   <div className="pt-4">
-                    <Label>Tính năng có sẵn</Label>
-                    <div className="flex items-center gap-2 mt-2 flex-wrap">
+                    <Label>Tinh nang co san</Label>
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
                       {availableFeatures.length === 0 ? (
                         <div className="text-sm text-gray-500">
-                          Không có tính năng nào
+                          Khong co tinh nang nao
                         </div>
                       ) : (
-                        availableFeatures.map((af) => {
-                          const isSelected = features.some((x) =>
-                            af.id !== undefined && x.id !== undefined
-                              ? x.id === af.id
-                              : x.name === af.name
+                        availableFeatures.map((availableFeature) => {
+                          const isSelected = features.some((item) =>
+                            availableFeature.id !== undefined && item.id !== undefined
+                              ? item.id === availableFeature.id
+                              : item.name === availableFeature.name
                           );
-                          const toggle = () => {
-                            if (isSelected) {
-                              setFeatures(
-                                features.filter((x) =>
-                                  af.id !== undefined && x.id !== undefined
-                                    ? x.id !== af.id
-                                    : x.name !== af.name
-                                )
-                              );
-                            } else {
-                              setFeatures([
-                                ...features,
-                                { id: af.id, name: af.name, img: af.img },
-                              ]);
-                            }
-                          };
 
                           return (
                             <label
-                              key={af.id ?? af.name}
-                              className="flex items-center gap-2 border rounded-md p-2 cursor-pointer"
+                              key={availableFeature.id ?? availableFeature.name}
+                              className="flex cursor-pointer items-center gap-2 rounded-md border p-2"
                             >
                               <Checkbox
                                 checked={isSelected}
-                                onCheckedChange={(v) => {
-                                  // Radix Checkbox returns boolean or "indeterminate"; handle accordingly
-                                  const truthy = v as boolean;
-                                  if (truthy) {
-                                    if (!isSelected) {
-                                      setFeatures([
-                                        ...features,
-                                        {
-                                          id: af.id,
-                                          name: af.name,
-                                          img: af.img,
-                                        },
-                                      ]);
-                                    }
-                                  } else {
-                                    if (isSelected) {
-                                      setFeatures(
-                                        features.filter((x) =>
-                                          af.id !== undefined &&
-                                          x.id !== undefined
-                                            ? x.id !== af.id
-                                            : x.name !== af.name
-                                        )
-                                      );
-                                    }
+                                onCheckedChange={(value) => {
+                                  const checked = Boolean(value);
+                                  if (checked && !isSelected) {
+                                    setFeatures([
+                                      ...features,
+                                      {
+                                        id: availableFeature.id,
+                                        name: availableFeature.name,
+                                        img: availableFeature.img,
+                                      },
+                                    ]);
+                                    return;
+                                  }
+
+                                  if (!checked && isSelected) {
+                                    setFeatures(
+                                      features.filter((item) =>
+                                        availableFeature.id !== undefined &&
+                                        item.id !== undefined
+                                          ? item.id !== availableFeature.id
+                                          : item.name !== availableFeature.name
+                                      )
+                                    );
                                   }
                                 }}
                               />
-                              {af.img ? (
+                              {availableFeature.img ? (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
-                                  src={af.img}
-                                  alt={af.name}
-                                  className="w-6 h-6 object-contain"
+                                  src={availableFeature.img}
+                                  alt={availableFeature.name}
+                                  className="h-6 w-6 object-contain"
                                 />
                               ) : null}
-                              <div className="text-sm">{af.name}</div>
+                              <div className="text-sm">{availableFeature.name}</div>
                             </label>
                           );
                         })
                       )}
                     </div>
                   </div>
+
                   <div className="flex gap-2">
                     <Button
                       variant="outline"
@@ -510,26 +654,28 @@ export default function AdminEditProductPage() {
                         setFeatures([...features, { name: "", img: "" }])
                       }
                     >
-                      <Plus className="h-4 w-4 mr-1" /> Thêm tính năng
+                      <Plus className="mr-1 h-4 w-4" /> Them tinh nang
                     </Button>
                     <Button
                       onClick={async () => {
                         try {
                           setSaving(true);
+                          setError(null);
+                          setSuccess(null);
                           await productApi.adminSetProductFeatures(
                             productId,
                             features
                           );
-                          setSuccess("Cập nhật tính năng thành công!");
+                          setSuccess("Cap nhat tinh nang thanh cong.");
                           await loadProduct();
-                        } catch (e) {
-                          setError("Không thể cập nhật tính năng");
+                        } catch {
+                          setError("Khong the cap nhat tinh nang.");
                         } finally {
                           setSaving(false);
                         }
                       }}
                     >
-                      <Save className="h-4 w-4 mr-1" /> Lưu tính năng
+                      <Save className="mr-1 h-4 w-4" /> Luu tinh nang
                     </Button>
                   </div>
                 </CardContent>
@@ -541,22 +687,19 @@ export default function AdminEditProductPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Palette className="h-5 w-5" />
-                    Biến thể sản phẩm & hình ảnh
+                    Bien the san pham va hinh anh
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   {product?.ProductVariations &&
                   product.ProductVariations.length > 0 ? (
                     <div className="space-y-4">
-                      {product.ProductVariations.map((variation, vIdx) => (
-                        <div
-                          key={variation.id}
-                          className="p-4 border rounded-lg"
-                        >
-                          <div className="flex items-center justify-between">
+                      {product.ProductVariations.map((variation) => (
+                        <div key={variation.id} className="rounded-lg border p-4">
+                          <div className="flex items-center justify-between gap-4">
                             <div className="flex items-center gap-3">
                               <div
-                                className="w-8 h-8 rounded-full border"
+                                className="h-8 w-8 rounded-full border"
                                 style={{
                                   backgroundColor: variation.Color?.hex_code,
                                 }}
@@ -566,219 +709,64 @@ export default function AdminEditProductPage() {
                                   {variation.Color?.name}
                                 </p>
                                 <p className="text-sm text-gray-500">
-                                  {variation.ProductImages?.length || 0} hình ảnh
+                                  {variation.ProductImages?.length || 0} hinh anh
                                 </p>
                               </div>
                             </div>
 
                             <div className="flex items-center gap-2">
-                              {/* Allow admin to edit the single main image for this variation */}
                               <input
                                 type="text"
-                                placeholder="URL hình ảnh (một ảnh)"
-                                value={
-                                  variation.ProductImages &&
-                                  variation.ProductImages[0]
-                                    ? variation.ProductImages[0].pic_url
-                                    : ""
+                                placeholder="URL hinh anh"
+                                value={variation.ProductImages?.[0]?.pic_url ?? ""}
+                                onChange={(e) =>
+                                  updateVariationImageValue(
+                                    variation.id,
+                                    e.target.value
+                                  )
                                 }
-                                onChange={(e) => {
-                                  // update local product state to reflect the changed image URL
-                                  const copy = { ...product } as any;
-                                  const pv = copy.ProductVariations.find(
-                                    (p: any) => p.id === variation.id
-                                  );
-                                  if (pv) {
-                                    pv.ProductImages = pv.ProductImages
-                                      ? pv.ProductImages.slice()
-                                      : [];
-                                    if (pv.ProductImages.length === 0)
-                                      pv.ProductImages.push({
-                                        pic_url: e.target.value,
-                                        display_order: 0,
-                                      });
-                                    else
-                                      pv.ProductImages[0].pic_url =
-                                        e.target.value;
-                                    setProduct(copy);
-                                  }
-                                }}
-                                className="border px-2 py-1 rounded w-64"
+                                className="w-64 rounded border px-2 py-1"
                               />
 
                               <Button
                                 size="sm"
-                                onClick={async () => {
-                                  // Save single image for this variation via admin endpoint
-                                  try {
-                                    setSaving(true);
-                                    setError(null);
-                                    const url =
-                                      (product as any).ProductVariations.find(
-                                        (p: any) => p.id === variation.id
-                                      )?.ProductImages?.[0]?.pic_url || null;
-                                    // best-effort endpoint; backend may expect different shape
-                                    await fetch(
-                                      `${
-                                        process.env.NEXT_PUBLIC_API_URL ||
-                                        "http://localhost:8000"
-                                      }/api/admin/variations/${
-                                        variation.id
-                                      }/image`,
-                                      {
-                                        method: "PUT",
-                                        headers: {
-                                          "Content-Type": "application/json",
-                                        },
-                                        body: JSON.stringify({ pic_url: url }),
-                                      }
-                                    );
-                                    setSuccess("Đã cập nhật ảnh biến thể");
-                                    await loadProduct();
-                                  } catch (e) {
-                                    setError(
-                                      "Không thể cập nhật ảnh biến thể"
-                                    );
-                                  } finally {
-                                    setSaving(false);
-                                  }
-                                }}
+                                onClick={() =>
+                                  handleSaveVariationImage(variation.id)
+                                }
+                                disabled={saving}
                               >
-                                Lưu ảnh
-                              </Button>
-
-                              {/* Reorder controls for images of this variation (move first image up/down within product images order) */}
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={async () => {
-                                  // Move this variation's first image up in global product image order
-                                  try {
-                                    setSaving(true);
-                                    setError(null);
-                                    const pv = (
-                                      product as any
-                                    ).ProductVariations.find(
-                                      (p: any) => p.id === variation.id
-                                    );
-                                    const firstUrl =
-                                      pv?.ProductImages?.[0]?.pic_url;
-                                    if (!firstUrl)
-                                      return setError("Không có ảnh để sắp xếp lại");
-                                    // best-effort endpoint; backend may support a product images reorder endpoint
-                                    await fetch(
-                                      `${
-                                        process.env.NEXT_PUBLIC_API_URL ||
-                                        "http://localhost:8000"
-                                      }/api/admin/products/${productId}/images/reorder`,
-                                      {
-                                        method: "PUT",
-                                        headers: {
-                                          "Content-Type": "application/json",
-                                        },
-                                        body: JSON.stringify({
-                                          pic_url: firstUrl,
-                                          direction: "up",
-                                        }),
-                                      }
-                                    );
-                                    setSuccess("Đã cập nhật thứ tự ảnh");
-                                    await loadProduct();
-                                  } catch (e) {
-                                    setError("Không thể sắp xếp lại ảnh");
-                                  } finally {
-                                    setSaving(false);
-                                  }
-                                }}
-                              >
-                                Chuyển lên
+                                Luu anh
                               </Button>
 
                               <Button
                                 size="sm"
                                 variant="outline"
-                                onClick={async () => {
-                                  try {
-                                    setSaving(true);
-                                    setError(null);
-                                    const pv = (
-                                      product as any
-                                    ).ProductVariations.find(
-                                      (p: any) => p.id === variation.id
-                                    );
-                                    const firstUrl =
-                                      pv?.ProductImages?.[0]?.pic_url;
-                                    if (!firstUrl)
-                                      return setError("Không có ảnh để sắp xếp lại");
-                                    await fetch(
-                                      `${
-                                        process.env.NEXT_PUBLIC_API_URL ||
-                                        "http://localhost:8000"
-                                      }/api/admin/products/${productId}/images/reorder`,
-                                      {
-                                        method: "PUT",
-                                        headers: {
-                                          "Content-Type": "application/json",
-                                        },
-                                        body: JSON.stringify({
-                                          pic_url: firstUrl,
-                                          direction: "down",
-                                        }),
-                                      }
-                                    );
-                                    setSuccess("Đã cập nhật thứ tự ảnh");
-                                    await loadProduct();
-                                  } catch (e) {
-                                    setError("Không thể sắp xếp lại ảnh");
-                                  } finally {
-                                    setSaving(false);
-                                  }
-                                }}
+                                onClick={() =>
+                                  swapVariationImageOrder(variation.id, "up")
+                                }
+                                disabled={saving}
                               >
-                                Chuyển xuống
+                                Chuyen len
+                              </Button>
+
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() =>
+                                  swapVariationImageOrder(variation.id, "down")
+                                }
+                                disabled={saving}
+                              >
+                                Chuyen xuong
                               </Button>
 
                               <Button
                                 size="sm"
                                 variant="destructive"
-                                onClick={async () => {
-                                  try {
-                                    setSaving(true);
-                                    setError(null);
-                                    // delete the first image for this variation
-                                    const pv = (
-                                      product as any
-                                    ).ProductVariations.find(
-                                      (p: any) => p.id === variation.id
-                                    );
-                                    const first = pv?.ProductImages?.[0];
-                                    if (!first)
-                                      return setError("Không có ảnh để xóa");
-                                    await fetch(
-                                      `${
-                                        process.env.NEXT_PUBLIC_API_URL ||
-                                        "http://localhost:8000"
-                                      }/api/admin/variations/${
-                                        variation.id
-                                      }/images`,
-                                      {
-                                        method: "DELETE",
-                                        headers: {
-                                          "Content-Type": "application/json",
-                                        },
-                                        body: JSON.stringify({
-                                          pic_url: first.pic_url,
-                                        }),
-                                      }
-                                    );
-                                    setSuccess("Đã xóa ảnh");
-                                    await loadProduct();
-                                  } catch (e) {
-                                    setError("Không thể xóa ảnh");
-                                  } finally {
-                                    setSaving(false);
-                                  }
-                                }}
+                                onClick={() =>
+                                  handleDeleteVariationImage(variation.id)
+                                }
+                                disabled={saving}
                               >
                                 <Trash2 className="h-4 w-4" />
                               </Button>
@@ -788,9 +776,9 @@ export default function AdminEditProductPage() {
                       ))}
                     </div>
                   ) : (
-                    <div className="text-center py-8 text-gray-500">
-                      <Palette className="h-12 w-12 mx-auto mb-4 text-gray-300" />
-                      <p>Không tìm thấy biến thể cho sản phẩm này.</p>
+                    <div className="py-8 text-center text-gray-500">
+                      <Palette className="mx-auto mb-4 h-12 w-12 text-gray-300" />
+                      <p>Khong tim thay bien the cho san pham nay.</p>
                     </div>
                   )}
                 </CardContent>

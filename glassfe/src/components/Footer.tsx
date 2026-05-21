@@ -1,52 +1,71 @@
-﻿import Link from "next/link";
-import { Twitter, Facebook, Instagram, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Instagram, Facebook, Twitter } from "lucide-react";
 
-const footerLinkClass =
-  "group inline-flex items-center gap-2 text-primary-foreground/78 transition-all duration-300 hover:text-white";
+const links = {
+  "Khám phá": [
+    { href: "/shop", label: "Tất cả sản phẩm" },
+    { href: "/shop?category=glasses", label: "Kính mắt" },
+    { href: "/shop?category=necklaces", label: "Vòng cổ" },
+    { href: "/shop?category=earrings", label: "Khuyên tai" },
+  ],
+  "Dịch vụ": [
+    { href: "/cart", label: "Giỏ hàng" },
+    { href: "/orders", label: "Đơn hàng" },
+    { href: "/favorites", label: "Danh sách yêu thích" },
+    { href: "/about", label: "Về KYRO" },
+  ],
+};
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[radial-gradient(circle_at_top,hsl(var(--accent)/0.12),transparent_28%),linear-gradient(180deg,hsl(var(--primary)),hsl(var(--primary)/0.98))] text-primary-foreground">
-      <div className="container mx-auto px-4 py-10">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
-          <div>
-            <h3 className="font-headline text-2xl font-bold">Spectra Specs</h3>
-            <p className="mt-3 max-w-sm text-primary-foreground/78">
-              Không gian mua sắm hiện đại dành cho kính, vòng cổ và khuyên tai với thiết kế tinh tế, dễ chọn và dễ phối.
-            </p>
-            <div className="mt-5 flex gap-3">
+    <footer className="bg-[linear-gradient(180deg,#070708,#030304)]">
+      <div className="container mx-auto px-4 py-14">
+        <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr_1fr]">
+          <div className="kyro-panel p-8">
+            <p className="text-xs uppercase tracking-[0.34em] text-primary">KYRO</p>
+            <h3 className="mt-3 font-headline text-4xl uppercase tracking-[0.16em] text-white">
+              Hiện đại - Cao cấp
+            </h3>
+            {/* <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
+              Trải nghiệm mua sắm dark theme cho kính mắt và phụ kiện với đường nét
+              tối giản, điểm nhấn bạc tinh tế và cảm giác cao cấp trên mọi màn hình.
+            </p> */}
+            <div className="mt-6 flex gap-3">
               {[Twitter, Facebook, Instagram].map((Icon, index) => (
                 <Link
                   key={index}
                   href="#"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-primary-foreground/80 shadow-[0_14px_30px_-22px_rgba(255,255,255,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:bg-accent/18 hover:text-white"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-muted-foreground no-underline hover:border-[#ff9b53]/35 hover:bg-[rgba(255,130,32,0.08)] hover:text-white"
                 >
-                  <Icon className="h-5 w-5" />
+                  <Icon className="h-4 w-4" />
                 </Link>
               ))}
             </div>
           </div>
-          <div>
-            <h4 className="font-headline text-lg font-semibold">Cửa hàng</h4>
-            <ul className="mt-3 space-y-3">
-              <li><Link href="/shop" className={footerLinkClass}>Tất cả sản phẩm <ArrowUpRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" /></Link></li>
-              <li><Link href="/shop?category=glasses" className={footerLinkClass}>Kính <ArrowUpRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" /></Link></li>
-              <li><Link href="/shop?category=necklaces" className={footerLinkClass}>Vòng cổ <ArrowUpRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" /></Link></li>
-              <li><Link href="/shop?category=earrings" className={footerLinkClass}>Khuyên tai <ArrowUpRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" /></Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-headline text-lg font-semibold">Hỗ trợ</h4>
-            <ul className="mt-3 space-y-3">
-              <li><Link href="#" className={footerLinkClass}>Liên hệ <ArrowUpRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" /></Link></li>
-              <li><Link href="#" className={footerLinkClass}>Câu hỏi thường gặp <ArrowUpRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" /></Link></li>
-              <li><Link href="#" className={footerLinkClass}>Vận chuyển và hoàn trả <ArrowUpRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" /></Link></li>
-            </ul>
-          </div>
+
+          {Object.entries(links).map(([title, items]) => (
+            <div key={title} className="kyro-panel-soft p-8">
+              <h4 className="text-xs uppercase tracking-[0.34em] text-accent">{title}</h4>
+              <div className="mt-5 space-y-4">
+                {items.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="group flex items-center justify-between text-sm text-muted-foreground no-underline hover:text-white"
+                  >
+                    <span>{item.label}</span>
+                    <ArrowUpRight className="h-4 w-4 opacity-40 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent group-hover:opacity-100" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="mt-10 border-t border-white/12 pt-5 text-center text-sm text-primary-foreground/60">
-          <p>&copy; {new Date().getFullYear()} Spectra Specs. Bảo lưu mọi quyền.</p>
-        </div>
+
+        {/* <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-3 text-xs uppercase tracking-[0.24em] text-muted-foreground md:flex-row md:items-center md:justify-between">
+          <p>© {new Date().getFullYear()} KYRO</p>
+          <p>Đen / Bạc / Trắng</p>
+        </div> */}
       </div>
     </footer>
   );

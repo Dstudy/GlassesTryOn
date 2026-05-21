@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['"Be Vietnam Pro"', 'sans-serif'],
-        headline: ['Lora', 'serif'],
+        body: ['var(--font-body)', 'sans-serif'],
+        headline: ['var(--font-display)', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
@@ -62,6 +62,10 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        'float-fade': {
+          '0%, 100%': { opacity: '0.1', transform: 'translateY(10px)' },
+          '50%': { opacity: '0.8', transform: 'translateY(-10px)' },
+        },
         'accordion-down': {
           from: {
             height: '0',
@@ -89,6 +93,7 @@ export default {
         },
       },
       animation: {
+        'float-fade': 'float-fade 6s ease-in-out infinite',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         marquee: "marquee var(--duration) linear infinite",

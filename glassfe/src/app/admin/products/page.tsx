@@ -7,8 +7,6 @@ import { productApi } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-// Import AlertDialog components
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,13 +20,11 @@ import {
 import {
   Plus,
   Pencil,
-  Trash2,
   Search,
   Filter,
   Eye,
   Package,
   DollarSign,
-  Calendar,
   Power,
   PowerOff,
 } from "lucide-react";
@@ -59,8 +55,6 @@ export default function AdminProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState<"name" | "price" | "created">("name");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
-
-  // --- New state for confirmation dialog ---
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [productToToggle, setProductToToggle] = useState<Product | null>(null);
 
@@ -77,12 +71,11 @@ export default function AdminProductsPage() {
       setLoading(true);
       setError(null);
       const data = await productApi.adminListProducts();
-      // console.log("🔄 Admin products data:", data);
       const processedData = Array.isArray(data) ? data : [];
       setItems(processedData);
       setFilteredItems(processedData);
     } catch (e) {
-      console.error("❌ Error loading products:", e);
+      console.error("Error loading products:", e);
       setError("Không thể tải sản phẩm");
     } finally {
       setLoading(false);
@@ -94,11 +87,13 @@ export default function AdminProductsPage() {
       (item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.Brand?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.Shape?.name.toLowerCase().includes(searchTerm.toLowerCase())
+        item.Shape?.name.toLowerCase().includes(searchTerm.toLowerCase()),
     );
 
     filtered.sort((a, b) => {
-      let aValue, bValue;
+      let aValue;
+      let bValue;
+
       switch (sortBy) {
         case "name":
           aValue = a.name.toLowerCase();
@@ -118,9 +113,9 @@ export default function AdminProductsPage() {
 
       if (sortOrder === "asc") {
         return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
-      } else {
-        return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
       }
+
+      return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
     });
 
     setFilteredItems(filtered);
@@ -134,32 +129,29 @@ export default function AdminProductsPage() {
         if (Number(product?.id) === id) {
           return { ...product, active: result.product.active };
         }
+
         return product;
       };
 
       setItems((prevItems) => prevItems.map(updateProductStatus));
       setFilteredItems((prevFilteredItems) =>
-        prevFilteredItems.map(updateProductStatus)
+        prevFilteredItems.map(updateProductStatus),
       );
-    } catch (error) {
-      console.error("❌ Error in handleToggleActive:", error);
+    } catch (toggleError) {
+      console.error("Error in handleToggleActive:", toggleError);
       setError("Không thể thay đổi trạng thái sản phẩm");
     }
   };
 
-  // --- New function to open the dialog ---
   const promptToggleActive = (product: Product) => {
     setProductToToggle(product);
     setIsDialogOpen(true);
   };
 
-  // --- New function to handle the confirmation ---
   const confirmToggleActive = () => {
     if (productToToggle) {
       handleToggleActive(Number(productToToggle.id));
     }
-    // Dialog will close automatically via onOpenChange
-    // We clear the product on close (see AlertDialog onOpenChange)
   };
 
   return (
@@ -172,18 +164,18 @@ export default function AdminProductsPage() {
           </div>
           <Button asChild>
             <Link href="/admin/products/new">
-              <Plus className="h-4 w-4 mr-2" /> Sản phẩm mới
+              <Plus className="mr-2 h-4 w-4" />
+              Sản phẩm mới
             </Link>
           </Button>
         </div>
 
-        {/* Search and Filter Controls */}
-        <Card>
+        <Card className="border-white/10 bg-[linear-gradient(180deg,rgba(197,202,210,0.12),rgba(96,102,112,0.08))]">
           <CardContent className="pt-6">
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex-1">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                   <Input
                     placeholder="Tìm sản phẩm theo tên, thương hiệu hoặc dáng..."
                     value={searchTerm}
@@ -198,7 +190,7 @@ export default function AdminProductsPage() {
                   onChange={(e) =>
                     setSortBy(e.target.value as "name" | "price" | "created")
                   }
-                  className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  className="rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-2.5 text-sm text-white"
                 >
                   <option value="name">Sắp xếp theo tên</option>
                   <option value="price">Sắp xếp theo giá</option>
@@ -211,7 +203,7 @@ export default function AdminProductsPage() {
                     setSortOrder(sortOrder === "asc" ? "desc" : "asc")
                   }
                 >
-                  <Filter className="h-4 w-4 mr-1" />
+                  <Filter className="mr-1 h-4 w-4" />
                   {sortOrder === "asc" ? "↑" : "↓"}
                 </Button>
               </div>
@@ -220,11 +212,11 @@ export default function AdminProductsPage() {
         </Card>
 
         {loading ? (
-          <div className="flex items-center justify-center h-64">
+          <div className="flex h-64 items-center justify-center">
             <div className="text-lg text-gray-500">Đang tải sản phẩm...</div>
           </div>
         ) : error ? (
-          <div className="flex items-center justify-center h-64">
+          <div className="flex h-64 items-center justify-center">
             <div className="text-lg text-red-600">{error}</div>
           </div>
         ) : (
@@ -236,134 +228,150 @@ export default function AdminProductsPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+              <div className="overflow-x-auto rounded-[1.25rem] border border-white/10 bg-[rgba(0,0,0,0.24)]">
+                <table className="w-full table-fixed text-sm">
                   <thead>
-                    <tr className="text-left border-b">
-                      <th className="py-3 pr-4 font-medium">Sản phẩm</th>
-                      <th className="py-3 pr-4 font-medium">Thương hiệu</th>
-                      <th className="py-3 pr-4 font-medium">Dáng</th>
-                      <th className="py-3 pr-4 font-medium">Giá</th>
-                      <th className="py-3 pr-4 font-medium">Trạng thái</th>
-                      <th className="py-3 pr-4 font-medium">Biến thể</th>
-                      <th className="py-3 pr-4 font-medium">Ngày tạo</th>
-                      <th className="py-3 pr-4 font-medium">Thao tác</th>
+                    <tr className="border-b border-white/10 bg-white/[0.04] text-left">
+                      <th className="w-[25%] px-3 py-4 font-medium text-[#d9dde3]">
+                        Sản phẩm
+                      </th>
+                      <th className="w-[12%] px-3 py-4 font-medium text-[#d9dde3]">
+                        Thương hiệu
+                      </th>
+                      <th className="w-[11%] px-3 py-4 font-medium text-[#d9dde3]">
+                        Dáng
+                      </th>
+                      <th className="w-[12%] px-3 py-4 font-medium text-[#d9dde3]">
+                        Giá
+                      </th>
+                      <th className="w-[11%] px-3 py-4 font-medium text-[#d9dde3]">
+                        Trạng thái
+                      </th>
+                      <th className="w-[10%] px-3 py-4 font-medium text-[#d9dde3]">
+                        Biến thể
+                      </th>
+                      <th className="w-[12%] px-3 py-4 font-medium text-[#d9dde3]">
+                        Ngày tạo
+                      </th>
+                      <th className="w-[8%] px-3 py-4 font-medium text-center text-[#d9dde3]">
+                        Thao tác
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredItems.map((p) => (
+                    {filteredItems.map((product) => (
                       <tr
-                        key={p.id}
-                        className="border-b last:border-0 hover:bg-gray-50"
+                        key={product.id}
+                        className="border-b border-white/10 last:border-0 hover:bg-white/[0.04]"
                       >
-                        <td className="py-3 pr-4">
-                          <div>
-                            <div className="font-medium">{p.name}</div>
-                            {p.description && (
-                              <div className="text-xs text-gray-500 truncate max-w-xs">
-                                {p.description}
+                        <td className="px-3 py-4 align-top">
+                          <div className="min-w-0">
+                            <div className="truncate font-medium text-white">
+                              {product.name}
+                            </div>
+                            {product.description ? (
+                              <div className="truncate text-xs text-[#bfc3c9]">
+                                {product.description}
                               </div>
-                            )}
+                            ) : null}
                           </div>
                         </td>
-                        <td className="py-3 pr-4">
-                          {p.Brand ? (
-                            <Badge variant="secondary">{p.Brand.name}</Badge>
+                        <td className="px-3 py-4 align-top">
+                          {product.Brand ? (
+                            <span className="block truncate text-[#eef2f6]">
+                              {product.Brand.name}
+                            </span>
                           ) : (
                             <span className="text-gray-400">-</span>
                           )}
                         </td>
-                        <td className="py-3 pr-4">
-                          {p.Shape ? (
-                            <Badge variant="outline">{p.Shape.name}</Badge>
+                        <td className="px-3 py-4 align-top">
+                          {product.Shape ? (
+                            <span className="block truncate text-[#ffd7b7]">
+                              {product.Shape.name}
+                            </span>
                           ) : (
                             <span className="text-gray-400">-</span>
                           )}
                         </td>
-                        <td className="py-3 pr-4">
-                          <div className="flex items-center gap-1">
-                            <DollarSign className="h-3 w-3" />
-                            <span className="font-medium">
-                              {Number.isFinite(Number(p.price))
-                                ? Number(p.price).toFixed(2)
+                        <td className="px-3 py-4 align-top">
+                          <div className="inline-flex items-center gap-1 rounded-full border border-[#ff9b53]/20 bg-[rgba(255,155,83,0.08)] px-3 py-1 text-[#fff1e3]">
+                            <DollarSign className="h-3 w-3 text-[#ffb57a]" />
+                            <span className="font-medium text-white">
+                              {Number.isFinite(Number(product.price))
+                                ? Number(product.price).toFixed(2)
                                 : "0.00"}
                             </span>
                           </div>
                         </td>
-                        <td className="py-3 pr-4">
-                          {
-                            <Badge
-                              variant={
-                                p.active !== true ? "default" : "secondary"
-                              }
-                              className={
-                                p.active !== true
-                                  ? "bg-green-100 text-green-800"
-                                  : "bg-gray-100 text-gray-600"
-                              }
-                            >
-                              {p.active !== true ? "Đang bán" : "Ngừng bán"}
-                            </Badge>
-                          }
+                        <td className="px-3 py-4 align-top">
+                          <span
+                            className={`block truncate ${
+                              product.active !== true
+                                ? "text-[#ffe6d0]"
+                                : "text-[#c7ccd3]"
+                            }`}
+                          >
+                            {product.active !== true ? "Đang bán" : "Ngừng bán"}
+                          </span>
                         </td>
-                        <td className="py-3 pr-4">
-                          <div className="flex flex-wrap gap-1">
-                            {p.ProductVariations?.slice(0, 3).map(
+                        <td className="px-3 py-4 align-top">
+                          <div className="flex items-center gap-1">
+                            {product.ProductVariations?.slice(0, 2).map(
                               (variation) => (
                                 <div
                                   key={variation.id}
-                                  className="w-4 h-4 rounded-full border"
+                                  className="h-3 w-3 rounded-full border border-white/20 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]"
                                   style={{
                                     backgroundColor: variation.Color?.hex_code,
                                   }}
                                   title={variation.Color?.name}
                                 />
-                              )
+                              ),
                             )}
-                            {p.ProductVariations &&
-                              p.ProductVariations.length > 3 && (
-                                <span className="text-xs text-gray-500">
-                                  +{p.ProductVariations.length - 3}
-                                </span>
-                              )}
+                            {product.ProductVariations &&
+                            product.ProductVariations.length > 2 ? (
+                              <span className="text-xs text-[#bfc3c9]">
+                                +{product.ProductVariations.length - 2}
+                              </span>
+                            ) : null}
                           </div>
                         </td>
-                        <td className="py-3 pr-4">
-                          <div className="flex items-center gap-1 text-xs text-gray-500">
-                            <Calendar className="h-3 w-3" />
-                            {p.createdAt
-                              ? new Date(p.createdAt).toLocaleDateString()
+                        <td className="px-3 py-4 align-top">
+                          <div className="truncate text-[#bfc3c9]">
+                            {product.createdAt
+                              ? new Date(product.createdAt).toLocaleDateString()
                               : "-"}
                           </div>
                         </td>
-                        <td className="py-3 pr-4">
-                          <div className="flex items-center gap-2">
-                            <Button asChild size="sm" variant="outline">
-                              <Link href={`/shop/${p.id}`}>
+                        <td className="px-3 py-4 align-top">
+                          <div className="flex items-center justify-center gap-1">
+                            <Button asChild size="sm" variant="outline" className="h-9 w-9 px-0">
+                              <Link href={`/shop/${product.id}`}>
                                 <Eye className="h-4 w-4" />
                               </Link>
                             </Button>
-                            <Button asChild size="sm" variant="outline">
-                              <Link href={`/admin/products/${p.id}`}>
+                            <Button asChild size="sm" variant="outline" className="h-9 w-9 px-0">
+                              <Link href={`/admin/products/${product.id}`}>
                                 <Pencil className="h-4 w-4" />
                               </Link>
                             </Button>
                             <Button
                               size="sm"
+                              className="h-9 w-9 px-0"
                               variant={
-                                p.active !== true ? "destructive" : "default"
+                                product.active !== true
+                                  ? "destructive"
+                                  : "default"
                               }
-                              // --- Updated onClick handler ---
-                              onClick={() => {
-                                promptToggleActive(p);
-                              }}
+                              onClick={() => promptToggleActive(product)}
                               title={
-                                p.active !== true
+                                product.active !== true
                                   ? "Ngừng bán sản phẩm"
                                   : "Kích hoạt sản phẩm"
                               }
                             >
-                              {p.active !== true ? (
+                              {product.active !== true ? (
                                 <PowerOff className="h-4 w-4" />
                               ) : (
                                 <Power className="h-4 w-4" />
@@ -375,26 +383,26 @@ export default function AdminProductsPage() {
                     ))}
                   </tbody>
                 </table>
-                {filteredItems.length === 0 && (
-                  <div className="text-center py-8 text-gray-500">
+
+                {filteredItems.length === 0 ? (
+                  <div className="py-10 text-center text-[#bfc3c9]">
                     {searchTerm
                       ? "Không tìm thấy sản phẩm phù hợp với tìm kiếm."
                       : "Không tìm thấy sản phẩm."}
                   </div>
-                )}
+                ) : null}
               </div>
             </CardContent>
           </Card>
         )}
       </div>
 
-      {/* --- New Confirmation Dialog --- */}
       <AlertDialog
         open={isDialogOpen}
         onOpenChange={(open) => {
           setIsDialogOpen(open);
           if (!open) {
-            setProductToToggle(null); // Clear selection when dialog closes
+            setProductToToggle(null);
           }
         }}
       >
@@ -406,11 +414,11 @@ export default function AdminProductsPage() {
               <br />
               <strong className="font-medium">{productToToggle?.name}</strong>
               <br />
-              You are about to{" "}
+              Bạn sắp{" "}
               <strong className="uppercase">
-                {productToToggle?.active !== true ? "Ngừng bán" : "Kích hoạt"}
+                {productToToggle?.active !== true ? "ngừng bán" : "kích hoạt"}
               </strong>{" "}
-              this product.
+              sản phẩm này.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

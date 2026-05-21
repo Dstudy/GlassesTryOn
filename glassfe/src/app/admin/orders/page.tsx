@@ -5,12 +5,11 @@ import AdminLayout from "@/components/admin/AdminLayout";
 import {
   Card,
   CardContent,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardFooter, // <-- Added CardFooter
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -22,10 +21,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   ShoppingCart,
   Eye,
-  Package,
-  Truck,
-  CheckCircle,
-  Clock,
   XCircle,
   RefreshCw,
   AlertCircle,
@@ -35,7 +30,7 @@ import { adminOrdersApi, ApiError } from "@/lib/api";
 interface Order {
   id: number;
   user_id: number;
-  total_amount: number | string; // Backend might return string
+  total_amount: number | string;
   status: string;
   created_at: string;
   updated_at: string;
@@ -46,7 +41,7 @@ interface Order {
   province?: string;
   district?: string;
   ward?: string;
-  item_count?: number; // Backend provides this field
+  item_count?: number;
   user?: {
     id: number;
     name: string;
@@ -71,7 +66,6 @@ interface Order {
   }>;
 }
 
-// --- Pagination constant ---
 const ORDERS_PER_PAGE = 15;
 
 export default function AdminOrdersPage() {
@@ -80,7 +74,6 @@ export default function AdminOrdersPage() {
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<string>("all");
   const [updatingStatus, setUpdatingStatus] = useState<number | null>(null);
-  // --- New state for pagination ---
   const [currentPage, setCurrentPage] = useState(1);
 
   const loadOrders = async () => {
@@ -88,12 +81,6 @@ export default function AdminOrdersPage() {
       setLoading(true);
       setError(null);
       const ordersData = await adminOrdersApi.getAllOrders();
-      console.log("Orders data received:", ordersData);
-      console.log("First order structure:", ordersData[0]);
-      console.log(
-        "First order total_amount type:",
-        typeof ordersData[0]?.total_amount
-      );
       setOrders(ordersData);
     } catch (err) {
       console.error("Failed to load orders:", err);
@@ -111,7 +98,6 @@ export default function AdminOrdersPage() {
     try {
       setUpdatingStatus(orderId);
       await adminOrdersApi.updateOrderStatus(orderId, newStatus);
-      // Reload orders to get updated data
       await loadOrders();
     } catch (err) {
       console.error("Failed to update order status:", err);
@@ -131,7 +117,6 @@ export default function AdminOrdersPage() {
     try {
       setUpdatingStatus(orderId);
       await adminOrdersApi.cancelOrder(orderId);
-      // Reload orders to get updated data
       await loadOrders();
     } catch (err) {
       console.error("Failed to cancel order:", err);
@@ -149,53 +134,17 @@ export default function AdminOrdersPage() {
     loadOrders();
   }, []);
 
-  // --- Reset page to 1 when filter changes ---
   useEffect(() => {
     setCurrentPage(1);
   }, [filter]);
-
-  const getStatusIcon = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "completed":
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
-      case "processing":
-        return <Package className="h-4 w-4 text-accent" />;
-      case "shipped":
-        return <Truck className="h-4 w-4 text-accent" />;
-      case "pending":
-        return <Clock className="h-4 w-4 text-yellow-500" />;
-      case "cancelled":
-        return <XCircle className="h-4 w-4 text-red-500" />;
-      default:
-        return <Clock className="h-4 w-4 text-gray-500" />;
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "completed":
-        return "bg-green-100 text-green-800";
-      case "processing":
-        return "bg-primary/10 text-primary";
-      case "shipped":
-        return "bg-accent/15 text-primary";
-      case "pending":
-        return "bg-yellow-100 text-yellow-800";
-      case "cancelled":
-        return "bg-red-100 text-red-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
 
   const filteredOrders =
     filter === "all"
       ? orders
       : orders.filter(
-          (order) => order.status.toLowerCase() === filter.toLowerCase()
+          (order) => order.status.toLowerCase() === filter.toLowerCase(),
         );
 
-  // --- Pagination Calculations ---
   const totalPageCount = Math.ceil(filteredOrders.length / ORDERS_PER_PAGE);
   const startIndex = (currentPage - 1) * ORDERS_PER_PAGE;
   const endIndex = startIndex + ORDERS_PER_PAGE;
@@ -204,6 +153,7 @@ export default function AdminOrdersPage() {
   const handlePreviousPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
+
   const handleNextPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPageCount));
   };
@@ -225,7 +175,6 @@ export default function AdminOrdersPage() {
   };
 
   const getTotalItems = (order: Order) => {
-    // Use item_count from backend if available, otherwise calculate from order_items
     return (
       order.item_count ||
       order.order_items?.reduce((total, item) => total + item.quantity, 0) ||
@@ -233,16 +182,16 @@ export default function AdminOrdersPage() {
     );
   };
 
-  const formatAmount = (amount: any) => {
+  const formatAmount = (amount: number | string) => {
     const numAmount =
       typeof amount === "string" ? parseFloat(amount) : Number(amount);
-    return isNaN(numAmount) ? "0.00" : numAmount.toFixed(2);
+    return Number.isNaN(numAmount) ? "0.00" : numAmount.toFixed(2);
   };
 
   if (loading) {
     return (
       <AdminLayout>
-        <div className="flex items-center justify-center h-64">
+        <div className="flex h-64 items-center justify-center">
           <div className="flex items-center gap-2">
             <RefreshCw className="h-5 w-5 animate-spin" />
             <div className="text-lg text-gray-500">Đang tải đơn hàng...</div>
@@ -263,19 +212,18 @@ export default function AdminOrdersPage() {
             </p>
           </div>
           <Button onClick={loadOrders} variant="outline">
-            <RefreshCw className="h-4 w-4 mr-2" />
+            <RefreshCw className="mr-2 h-4 w-4" />
             Làm mới
           </Button>
         </div>
 
-        {error && (
+        {error ? (
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>{error}</AlertDescription>
           </Alert>
-        )}
+        ) : null}
 
-        {/* Status Filter */}
         <div className="flex flex-wrap gap-2">
           {Object.entries(statusCounts).map(([status, count]) => (
             <Button
@@ -290,121 +238,127 @@ export default function AdminOrdersPage() {
           ))}
         </div>
 
-        {/* Orders Table */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center">
-              <ShoppingCart className="h-5 w-5 mr-2" />
+            <CardTitle className="flex items-center gap-2">
+              <ShoppingCart className="h-5 w-5" />
               Đơn hàng ({filteredOrders.length})
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+            <div className="overflow-x-auto rounded-[1.25rem] border border-white/10 bg-black/10">
+              <table className="w-full table-fixed text-sm">
                 <thead>
-                  <tr className="text-left border-b">
-                    <th className="py-3 pr-4 font-medium">Mã đơn</th>
-                    <th className="py-3 pr-4 font-medium">Khách hàng</th>
-                    <th className="py-3 pr-4 font-medium">Email</th>
-                    <th className="py-3 pr-4 font-medium">Số món</th>
-                    <th className="py-3 pr-4 font-medium">Thành tiền</th>
-                    <th className="py-3 pr-4 font-medium">Trạng thái</th>
-                    <th className="py-3 pr-4 font-medium">Ngày</th>
-                    <th className="py-3 pr-4 font-medium">Thao tác</th>
+                  <tr className="border-b border-white/10 bg-white/[0.04] text-left">
+                    <th className="w-[8%] px-4 py-4 font-medium text-[#d9dde3]">
+                      Mã đơn
+                    </th>
+                    <th className="w-[14%] px-4 py-4 font-medium text-[#d9dde3]">
+                      Khách hàng
+                    </th>
+                    <th className="w-[20%] px-4 py-4 font-medium text-[#d9dde3]">
+                      Email
+                    </th>
+                    <th className="w-[10%] px-4 py-4 font-medium text-[#d9dde3]">
+                      Số món
+                    </th>
+                    <th className="w-[12%] px-4 py-4 font-medium text-[#d9dde3]">
+                      Thành tiền
+                    </th>
+                    <th className="w-[16%] px-4 py-4 font-medium text-[#d9dde3]">
+                      Trạng thái
+                    </th>
+                    <th className="w-[8%] px-4 py-4 font-medium text-[#d9dde3]">
+                      Ngày
+                    </th>
+                    <th className="w-[8%] px-4 py-4 font-medium text-[#d9dde3]">
+                      Thao tác
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {/* --- Updated to map pagedOrders --- */}
                   {pagedOrders.map((order) => (
                     <tr
                       key={order.id}
-                      className="border-b last:border-0 hover:bg-gray-50"
+                      className="border-b border-white/10 last:border-0 hover:bg-white/[0.04]"
                     >
-                      <td className="py-3 pr-4 font-medium">#{order.id}</td>
-                      <td className="py-3 pr-4">
-                        {order.user?.name || "Không rõ"}
+                      <td className="px-4 py-4 align-top">
+                        <span className="font-medium text-white">
+                          #{order.id}
+                        </span>
                       </td>
-                      <td className="py-3 pr-4 text-gray-600">
-                        {order.user?.email || "Không có"}
-                      </td>
-                      <td className="py-3 pr-4">{getTotalItems(order)}</td>
-                      <td className="py-3 pr-4 font-medium">
-                        ${formatAmount(order.total_amount)}
-                      </td>
-                      <td className="py-3 pr-4">
-                        <div className="flex items-center gap-2">
-                          <Badge
-                            className={`${getStatusColor(
-                              order.status
-                            )} flex items-center w-fit`}
-                          >
-                            {getStatusIcon(order.status)}
-                            <span className="ml-1 capitalize">
-                              {order.status}
-                            </span>
-                          </Badge>
-                          {order.status.toLowerCase() !== "cancelled" &&
-                            order.status.toLowerCase() !== "completed" && (
-                              <Select
-                                value={order.status}
-                                onValueChange={(value) =>
-                                  handleStatusUpdate(order.id, value)
-                                }
-                                disabled={updatingStatus === order.id}
-                              >
-                                <SelectTrigger className="w-32 h-8">
-                                  <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="pending">
-                                    Chờ xử lý
-                                  </SelectItem>
-                                  <SelectItem value="processing">
-                                    Đang xử lý
-                                  </SelectItem>
-                                  <SelectItem value="shipped">
-                                    Đã gửi hàng
-                                  </SelectItem>
-                                  <SelectItem value="completed">
-                                    Hoàn tất
-                                  </SelectItem>
-                                  <SelectItem value="cancelled">
-                                    Đã hủy
-                                  </SelectItem>
-                                </SelectContent>
-                              </Select>
-                            )}
+                      <td className="px-4 py-4 align-top">
+                        <div className="font-medium text-white">
+                          {order.user?.name || "Không rõ"}
                         </div>
                       </td>
-                      <td className="py-3 pr-4 text-gray-600">
-                        {formatDate(order.created_at)}
+                      <td className="truncate px-4 py-4 align-top text-[#bfc3c9]">
+                        {order.user?.email || "Không có"}
                       </td>
-                      <td className="py-3 pr-4">
-                        <div className="flex items-center gap-2">
+                      <td className="px-4 py-4 align-top">
+                        <span className="inline-flex min-w-[3rem] items-center justify-center rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-[#eef2f6]">
+                          {getTotalItems(order)}
+                        </span>
+                      </td>
+                      <td className="px-4 py-4 align-top">
+                        <div className="inline-flex items-center gap-1 rounded-full border border-[#ff9b53]/20 bg-[rgba(255,155,83,0.08)] px-3 py-1 text-[#fff1e3]">
+                          <span className="font-medium text-white">
+                            ${formatAmount(order.total_amount)}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4 align-top">
+                        <Select
+                          value={order.status}
+                          onValueChange={(value) =>
+                            handleStatusUpdate(order.id, value)
+                          }
+                          disabled={updatingStatus === order.id}
+                        >
+                          <SelectTrigger className="h-8 w-full min-w-0">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="pending">Chờ xử lý</SelectItem>
+                            <SelectItem value="processing">Đang xử lý</SelectItem>
+                            <SelectItem value="shipped">Đã gửi hàng</SelectItem>
+                            <SelectItem value="completed">Hoàn tất</SelectItem>
+                            <SelectItem value="cancelled">Đã hủy</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </td>
+                      <td className="px-4 py-4 align-top">
+                        <span className="text-[#bfc3c9]">
+                          {formatDate(order.created_at)}
+                        </span>
+                      </td>
+                      <td className="px-4 py-4 align-top">
+                        <div className="flex items-center gap-1.5">
                           <Button
                             size="sm"
                             variant="outline"
+                            className="h-8 w-8 px-0"
                             onClick={() =>
                               window.open(`/admin/orders/${order.id}`, "_blank")
                             }
                           >
-                            <Eye className="h-4 w-4 mr-1" />
-                            Xem
+                            <Eye className="h-3.5 w-3.5" />
                           </Button>
-                          {order.status.toLowerCase() !== "cancelled" && (
+                          {order.status.toLowerCase() !== "cancelled" ? (
                             <Button
                               size="sm"
                               variant="destructive"
+                              className="h-8 w-8 px-0"
                               onClick={() => handleCancelOrder(order.id)}
                               disabled={updatingStatus === order.id}
                             >
                               {updatingStatus === order.id ? (
-                                <RefreshCw className="h-4 w-4 animate-spin" />
+                                <RefreshCw className="h-3.5 w-3.5 animate-spin" />
                               ) : (
-                                <XCircle className="h-4 w-4" />
+                                <XCircle className="h-3.5 w-3.5" />
                               )}
                             </Button>
-                          )}
+                          ) : null}
                         </div>
                       </td>
                     </tr>
@@ -413,15 +367,14 @@ export default function AdminOrdersPage() {
               </table>
             </div>
           </CardContent>
-          {/* --- New Pagination Footer --- */}
-          {totalPageCount > 1 && (
+
+          {totalPageCount > 1 ? (
             <CardFooter className="flex items-center justify-between py-4">
               <div className="text-sm text-gray-500">
-                Hiển thị{" "}
-                <strong>
-                  {Math.min(startIndex + 1, filteredOrders.length)}
-                </strong>
-                -<strong>{Math.min(endIndex, filteredOrders.length)}</strong> of{" "}
+                Hiển thị <strong>{Math.min(startIndex + 1, filteredOrders.length)}</strong>
+                {" - "}
+                <strong>{Math.min(endIndex, filteredOrders.length)}</strong>
+                {" / "}
                 <strong>{filteredOrders.length}</strong> đơn hàng
               </div>
               <div className="flex gap-2">
@@ -431,7 +384,7 @@ export default function AdminOrdersPage() {
                   onClick={handlePreviousPage}
                   disabled={currentPage === 1}
                 >
-                  Previous
+                  Trước
                 </Button>
                 <Button
                   variant="outline"
@@ -441,11 +394,11 @@ export default function AdminOrdersPage() {
                     currentPage === totalPageCount || totalPageCount === 0
                   }
                 >
-                  Next
+                  Sau
                 </Button>
               </div>
             </CardFooter>
-          )}
+          ) : null}
         </Card>
       </div>
     </AdminLayout>
