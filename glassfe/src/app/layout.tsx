@@ -1,11 +1,22 @@
-﻿import type { Metadata } from 'next';
-import { AppProvider } from '@/context/AppContext';
-import { Toaster } from '@/components/ui/toaster';
-import './globals.css';
+import type { Metadata } from "next";
+import { Manrope, Syne } from "next/font/google";
+import { AppProvider } from "@/context/AppContext";
+import { Toaster } from "@/components/ui/toaster";
+import "./globals.css";
+
+const bodyFont = Manrope({
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-body",
+});
+
+const displayFont = Syne({
+  subsets: ["latin"],
+  variable: "--font-display",
+});
 
 export const metadata: Metadata = {
-  title: 'Spectra Specs',
-  description: 'Kính, vòng cổ và khuyên tai cho phong cách hiện đại',
+  title: "KYRO",
+  description: "Kính mắt và phụ kiện cao cấp với trải nghiệm hiện đại, tinh gọn.",
 };
 
 export default function RootLayout({
@@ -15,15 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" className="scroll-smooth">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:wght@400;500;600;700&display=swap&subset=vietnamese"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="font-body antialiased">
+      <body
+        className={`${bodyFont.variable} ${displayFont.variable} bg-background font-body text-foreground antialiased`}
+      >
         <AppProvider>
           {children}
           <Toaster />

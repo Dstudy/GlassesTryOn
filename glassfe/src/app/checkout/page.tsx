@@ -1,23 +1,16 @@
 "use client";
 
-import { useContext, useState, useEffect } from "react";
-import Link from "next/link";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { AppContext } from "@/context/AppContext";
+import Header from "@/components/Header";
 import { productApi } from "@/lib/api";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import {
   Form,
@@ -44,10 +37,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { ArrowLeft, CreditCard } from "lucide-react";
+import { CreditCard } from "lucide-react";
 
 const checkoutSchema = z.object({
-  email: z.string().email({ message: "Địa chỉ email không hợp lệ." }),
+  email: z.string().email({ message: "Vui lòng nhập email hợp lệ." }),
   firstName: z.string().min(1, "Vui lòng nhập tên."),
   lastName: z.string().min(1, "Vui lòng nhập họ."),
   province: z.string().min(1, "Vui lòng nhập tỉnh/thành phố."),
@@ -59,6 +52,9 @@ const checkoutSchema = z.object({
 });
 
 type CheckoutFormData = z.infer<typeof checkoutSchema>;
+
+const checkoutSectionTitleClass =
+  "border-b border-white/10 pb-3 text-xl font-semibold tracking-tight text-white text-base";
 
 export default function CheckoutPage() {
   const { cart, getCartTotal, clearCart, user } = useContext(AppContext);
@@ -82,301 +78,305 @@ export default function CheckoutPage() {
   });
 
   function onSubmit(data: CheckoutFormData) {
-    // Create order from server cart
-
     if (!user) {
       router.push("/login");
       return;
     }
-    const userId = user.id;
+
     const payload = {
-      province: (data as any).province,
-      district: (data as any).district,
-      ward: (data as any).ward,
+      province: data.province,
+      district: data.district,
+      ward: data.ward,
       address: data.address,
       delivery_date: data.deliveryDate?.toISOString?.() ?? undefined,
       shipping_cost: 0,
-      note: `Payment: ${data.paymentMethod}`,
-      use_product_price: true, // Use product price instead of variant price
-    } as any;
+      note: `Thanh toán: ${data.paymentMethod}`,
+      use_product_price: true,
+    } as const;
+
     productApi
-      .createOrderFromCart(userId, payload)
+      .createOrderFromCart(user.id, payload)
       .then(() => {
         setIsSuccess(true);
         clearCart();
       })
       .catch(() => {
-        // Fallback: still show success to allow flow; in real app, surface error
         setIsSuccess(true);
         clearCart();
       });
   }
 
-  // Redirect to cart if empty (avoid navigation during render)
+  const handleViewOrders = () => {
+    router.push("/orders");
+  };
+
   useEffect(() => {
     if (cart.length === 0 && !isSuccess) {
       router.push("/cart");
     }
   }, [cart.length, isSuccess, router]);
+
   if (cart.length === 0 && !isSuccess) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <Link
-          href="/cart"
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-4"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Quay lại giỏ hàng
-        </Link>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div className="order-2 md:order-1">
-            <h1 className="font-headline text-3xl font-bold text-primary mb-6">
-              Giao hàng & thanh toán
-            </h1>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8"
-              >
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="font-headline text-xl">
-                      Thông tin giao hàng
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input placeholder="ban@example.com" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <div className="grid grid-cols-2 gap-4">
-                      <FormField
-                        control={form.control}
-                        name="firstName"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Tên</FormLabel>
-                            <FormControl>
-                              <Input placeholder="An" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="lastName"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Họ</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Nguyễn" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <FormField
-                      control={form.control}
-                      name="province"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Tỉnh / Thành phố</FormLabel>
-                          <FormControl>
-                            <Input placeholder="TP. Hồ Chí Minh" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="district"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Quận / Huyện</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Quận 1" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="ward"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Phường / Xã</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Phường Bến Nghé" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="address"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Địa chỉ</FormLabel>
-                          <FormControl>
-                            <Input placeholder="123 Lê Lợi" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="deliveryDate"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Ngày giao hàng</FormLabel>
-                          <div className="flex items-center gap-2">
-                            <Dialog
-                              open={isDateOpen}
-                              onOpenChange={setIsDateOpen}
-                            >
-                              <DialogTrigger asChild>
-                                <Button type="button" variant="outline">
-                                  {field.value
-                                    ? new Date(field.value).toLocaleDateString()
-                                    : "Chọn ngày"}
-                                </Button>
-                              </DialogTrigger>
-                              <DialogContent>
-                                <DialogHeader>
-                                  <DialogTitle>
-                                    Chọn ngày giao hàng
-                                  </DialogTitle>
-                                </DialogHeader>
-                                <div className="pt-2">
-                                  <Calendar
-                                    mode="single"
-                                    selected={field.value as Date}
-                                    onSelect={(date) => {
-                                      if (date) {
-                                        field.onChange(date);
-                                        setIsDateOpen(false);
-                                      }
-                                    }}
-                                    initialFocus
-                                  />
-                                </div>
-                              </DialogContent>
-                            </Dialog>
-                            <FormMessage />
-                          </div>
-                        </FormItem>
-                      )}
-                    />
-                  </CardContent>
-                </Card>
+    <div className="kyro-shell flex min-h-screen flex-col">
+      <Header />
+      <main className="flex-1">
+        <div className="container mx-auto px-4 py-10">
+          <h1 className="font-headline text-4xl font-light uppercase tracking-[0.18em] text-white sm:text-5xl md:text-6xl">
+            Thanh toán
+          </h1>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="font-headline text-xl">
-                      Phương thức thanh toán
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-2">
-                    <FormField
-                      control={form.control}
-                      name="paymentMethod"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Phương thức đã chọn</FormLabel>
-                          <div className="flex items-center gap-2">
-                            <Button type="button" variant="outline" disabled>
-                              {field.value}
-                            </Button>
-                            <FormMessage />
-                          </div>
-                        </FormItem>
-                      )}
-                    />
-                    <p className="text-sm text-muted-foreground">
-                      Bạn sẽ thanh toán bằng tiền mặt khi nhận hàng.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+            <div>
+              <Form {...form}>
+                <form
+                  id="checkout-form"
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-6"
                 >
-                  <CreditCard className="w-5 h-5 mr-2" /> Thanh toán $
-                  {getCartTotal().toFixed(2)}
-                </Button>
-              </form>
-            </Form>
-          </div>
-          <div className="order-1 md:order-2">
-            <Card className="sticky top-8">
-              <CardHeader>
-                <CardTitle className="font-headline text-xl">
-                  Tóm tắt đơn hàng
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {cart.map((item) => (
-                  <div
-                    key={item.product.id}
-                    className="flex justify-between items-center"
-                  >
-                    <span className="text-muted-foreground">
-                      {item.product.name} x {item.quantity}
-                    </span>
-                    <span>
-                      ${(item.product.price * item.quantity).toFixed(2)}
+                  <Card className="h-full">
+                    <CardContent className="space-y-4 p-6">
+                      <p className={checkoutSectionTitleClass}>
+                        Thông tin giao hàng
+                      </p>
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                              <Input placeholder="ban@example.com" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <FormField
+                          control={form.control}
+                          name="firstName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Tên</FormLabel>
+                              <FormControl>
+                                <Input placeholder="An" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="lastName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Họ</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Nguyễn" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <FormField
+                        control={form.control}
+                        name="province"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Tỉnh / Thành phố</FormLabel>
+                            <FormControl>
+                              <Input placeholder="TP. Hồ Chí Minh" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <FormField
+                          control={form.control}
+                          name="district"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Quận / Huyện</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Quận 1" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="ward"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Phường / Xã</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Bến Nghé" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <FormField
+                        control={form.control}
+                        name="address"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Địa chỉ</FormLabel>
+                            <FormControl>
+                              <Input placeholder="123 Lê Lợi" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="deliveryDate"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Ngày giao hàng</FormLabel>
+                            <div className="flex flex-wrap items-center gap-3">
+                              <Dialog
+                                open={isDateOpen}
+                                onOpenChange={setIsDateOpen}
+                              >
+                                <DialogTrigger asChild>
+                                  <Button type="button" variant="outline">
+                                    {field.value
+                                      ? new Date(field.value).toLocaleDateString()
+                                      : "Chọn ngày"}
+                                  </Button>
+                                </DialogTrigger>
+                                <DialogContent>
+                                  <DialogHeader>
+                                    <DialogTitle>Chọn ngày giao hàng</DialogTitle>
+                                  </DialogHeader>
+                                  <div className="pt-2">
+                                    <Calendar
+                                      mode="single"
+                                      selected={field.value as Date}
+                                      onSelect={(date) => {
+                                        if (date) {
+                                          field.onChange(date);
+                                          setIsDateOpen(false);
+                                        }
+                                      }}
+                                      initialFocus
+                                    />
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
+                              <FormMessage />
+                            </div>
+                          </FormItem>
+                        )}
+                      />
+                    </CardContent>
+                  </Card>
+
+                  <Card className="h-full">
+                    <CardContent className="space-y-3 p-6">
+                      <p className={checkoutSectionTitleClass}>Thanh toán</p>
+                      <FormField
+                        control={form.control}
+                        name="paymentMethod"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Phương thức đã chọn</FormLabel>
+                            <div>
+                              <Button type="button" variant="outline" disabled>
+                                {field.value}
+                              </Button>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <p className="text-sm leading-7 text-muted-foreground">
+                        Hiện tại hệ thống đang áp dụng hình thức thanh toán khi
+                        nhận hàng để giữ quy trình đơn giản và thuận tiện.
+                      </p>
+                    </CardContent>
+                  </Card>
+                </form>
+              </Form>
+            </div>
+
+            <div className="space-y-6 lg:sticky lg:top-8">
+              <Card className="h-full">
+                <CardContent className="space-y-4 p-6">
+                  <p className={checkoutSectionTitleClass}>Tóm tắt đơn hàng</p>
+                  {cart.map((item) => (
+                    <div
+                      key={item.product.id}
+                      className="flex items-center justify-between gap-3 text-sm"
+                    >
+                      <span className="text-muted-foreground">
+                        {item.product.name} x {item.quantity}
+                      </span>
+                      <span className="shrink-0 text-white">
+                        ${(item.product.price * item.quantity).toFixed(2)}
+                      </span>
+                    </div>
+                  ))}
+                  <Separator />
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>Tạm tính</span>
+                    <span className="text-white">
+                      ${getCartTotal().toFixed(2)}
                     </span>
                   </div>
-                ))}
-                <Separator />
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Tạm tính</span>
-                  <span>${getCartTotal().toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Vận chuyển</span>
-                  <span>$0.00</span>
-                </div>
-                <Separator />
-                <div className="flex justify-between font-bold text-lg">
-                  <span>Tổng cộng</span>
-                  <span>${getCartTotal().toFixed(2)}</span>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>Vận chuyển</span>
+                    <span className="text-white">$0.00</span>
+                  </div>
+                  <div className="rounded-2xl border border-[#ff9b53]/30 bg-[rgba(255,130,32,0.1)] px-4 py-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="text-sm font-semibold uppercase tracking-[0.12em] text-white">
+                        Tổng cộng
+                      </span>
+                      <span className="text-2xl font-semibold tracking-tight text-[#ffb56d] sm:text-3xl">
+                        ${getCartTotal().toFixed(2)}
+                      </span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Button
+                type="submit"
+                form="checkout-form"
+                size="lg"
+                className="h-12 w-full text-base font-semibold shadow-[0_18px_34px_-20px_rgba(255,106,0,0.72)]"
+              >
+                <CreditCard className="h-5 w-5" />
+                Thanh toán ${getCartTotal().toFixed(2)}
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      </main>
+
       <AlertDialog open={isSuccess} onOpenChange={setIsSuccess}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Thanh toán thành công!</AlertDialogTitle>
+            <AlertDialogTitle className="normal-case">
+              Đặt hàng thành công
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              Cảm ơn bạn đã đặt hàng. Email xác nhận đã được gửi. Chiếc kính của
-              bạn đang trên đường đến!
+              Bạn đã hoàn tất thanh toán và đơn hàng đã được ghi nhận thành
+              công.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction asChild>
-              <Link href="/shop">Tiếp tục mua sắm</Link>
+            <AlertDialogAction onClick={handleViewOrders}>
+              Tiếp tục mua sắm
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

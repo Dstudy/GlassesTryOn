@@ -701,7 +701,7 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
       )}
 
       {showCalibrationPanel && (
-        <div className="absolute bottom-2 left-2 right-2 z-20 rounded-md bg-black/70 p-3 text-white backdrop-blur-sm">
+        <div className="absolute bottom-2 left-2 right-2 z-20 rounded-md bg-black/70 p-3 text-white backdrop-blur-sm ar-calibration-panel">
           <div className="mb-2 text-xs font-semibold">
             AR Calibration (local)
           </div>
