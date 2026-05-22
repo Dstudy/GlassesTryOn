@@ -107,10 +107,11 @@ function mapApiProduct(raw: any): Product {
         : typeof raw?.['3DUrl'] === 'string' && raw['3DUrl'].trim()
         ? raw['3DUrl'].trim()
         : undefined,
-    reviews: Array.isArray(raw?.reviews) ? raw.reviews : [], // Keep reviews array from API as is
-    createdAt: raw?.createdAt,
-    updatedAt: raw?.updatedAt,
-    stock: raw?.stock,
+    tryOnUrl:
+      typeof raw?.tryOnUrl === 'string' && raw.tryOnUrl.trim()
+        ? raw.tryOnUrl.trim()
+        : undefined,
+    reviews: Array.isArray(raw?.reviews) ? raw.reviews : [],
   } as Product;
 }
 
@@ -228,11 +229,6 @@ export const productApi = {
     return withImages;
   },
 
-  // Get products by color
-  async getProductsByColor(colorName: string): Promise<Product[]> {
-    return fetchApi<Product[]>(`/api/products/color/${encodeURIComponent(colorName)}`);
-  },
-
   // Get all product images
   async getProductImages(productId: number): Promise<string[]> {
     const res = await fetchApi<any>(`/api/products/${productId}/images`);
@@ -331,11 +327,6 @@ export const productApi = {
     const arr = Array.isArray(res) ? res : Array.isArray(res?.data) ? res.data : [];
     return arr.map((x: any) => (typeof x === 'string' ? x : x?.name)).filter((s: any) => typeof s === 'string' && s.length > 0);
   },
-  async getColors(): Promise<string[]> {
-    const res = await fetchApi<any>('/api/colors');
-    const arr = Array.isArray(res) ? res : Array.isArray(res?.data) ? res.data : [];
-    return arr.map((x: any) => (typeof x === 'string' ? x : x?.name)).filter((s: any) => typeof s === 'string' && s.length > 0);
-  },
   async getMaterials(): Promise<string[]> {
     const res = await fetchApi<any>('/api/materials');
     const arr = Array.isArray(res) ? res : Array.isArray(res?.data) ? res.data : [];
@@ -366,11 +357,6 @@ export const productApi = {
       id: Number(x?.id ?? 0),
       name: typeof x === 'string' ? x : String(x?.name ?? ''),
     })).filter((item: any) => item.id > 0 && item.name.length > 0);
-  },
-  async getCategories(): Promise<string[]> {
-    const res = await fetchApi<any>('/api/categories');
-    const arr = Array.isArray(res) ? res : Array.isArray(res?.data) ? res.data : [];
-    return arr.map((x: any) => (typeof x === 'string' ? x : x?.name)).filter((s: any) => typeof s === 'string' && s.length > 0);
   },
   async adminGetCategories(): Promise<Array<{ id: number; name: string }>> {
     const res = await fetchApi<any>('/api/categories');
@@ -435,15 +421,6 @@ export const productApi = {
       body: JSON.stringify({ productVariationId, quantity }),
     } as any);
   },
-  async updateCartItem(userId: number, productVariationId: number, quantity: number): Promise<void> {
-    await fetchApi(`/api/users/${userId}/cart/items`, {
-      method: 'PUT',
-      body: JSON.stringify({ productVariationId, quantity }),
-    } as any);
-  },
-  async removeCartItem(userId: number, productVariationId: number): Promise<void> {
-    await fetchApi(`/api/users/${userId}/cart/items/${productVariationId}`, { method: 'DELETE' } as any);
-  },
   async clearCart(userId: number): Promise<void> {
     await fetchApi(`/api/users/${userId}/cart`, { method: 'DELETE' } as any);
   },
@@ -472,10 +449,6 @@ export const productApi = {
     const res = await fetchApi<any>(`/api/users/${userId}/orders/${orderId}`);
     return res?.data ?? res;
   },
-  async cancelOrder(userId: number, orderId: number): Promise<void> {
-    await fetchApi(`/api/users/${userId}/orders/${orderId}`, { method: 'DELETE' } as any);
-  },
-
   // Admin products
   async adminListProducts(): Promise<any[]> {
     const res = await fetchApi<any>(`/api/admin/products`);
@@ -501,9 +474,6 @@ export const productApi = {
       method: 'PUT',
       body: JSON.stringify({ features }),
     } as any);
-  },
-  async adminDeleteProduct(id: number): Promise<void> {
-    await fetchApi(`/api/admin/products/${id}`, { method: 'DELETE' } as any);
   },
   async adminToggleProductActive(id: number): Promise<{ active: boolean }> {
     return fetchApi<{ active: boolean }>(`/api/admin/products/${id}/toggle-active`, { method: 'PATCH' } as any);
@@ -611,50 +581,6 @@ export const analyticsApi = {
     }>;
   }> {
     const res = await fetchApi<any>('/api/admin/analytics/dashboard');
-    return res?.data ?? res;
-  },
-
-  // Get monthly revenue data
-  async getMonthlyRevenue(year?: number): Promise<Array<{
-    period: string;
-    month_name: string;
-    revenue: number;
-  }>> {
-    const params = year ? `?year=${year}` : '';
-    const res = await fetchApi<any>(`/api/admin/analytics/monthly-revenue${params}`);
-    return res?.data ?? res;
-  },
-
-  // Get top selling products
-  async getTopSellingProducts(limit?: number): Promise<Array<{
-    rank: number;
-    product_id: number;
-    product_name: string;
-    sales: number;
-    revenue: number;
-  }>> {
-    const params = limit ? `?limit=${limit}` : '';
-    const res = await fetchApi<any>(`/api/admin/analytics/top-products${params}`);
-    return res?.data ?? res;
-  },
-
-  // Get analytics summary
-  async getAnalyticsSummary(metricType?: string, period?: string): Promise<Array<{
-    id: number;
-    metric_name: string;
-    metric_value: number;
-    metric_type: string;
-    period: string | null;
-    metadata: any;
-    created_at: string;
-    updated_at: string;
-  }>> {
-    const params = new URLSearchParams();
-    if (metricType) params.append('metric_type', metricType);
-    if (period) params.append('period', period);
-    const queryString = params.toString();
-    const endpoint = queryString ? `/api/admin/analytics/summary?${queryString}` : '/api/admin/analytics/summary';
-    const res = await fetchApi<any>(endpoint);
     return res?.data ?? res;
   },
 
@@ -928,26 +854,6 @@ export const adminOrdersApi = {
     return res?.data ?? res;
   },
 
-  // Create order (admin)
-  async createOrder(orderData: {
-    user_id: number;
-    total_amount: number;
-    status?: string;
-    delivery_date?: string;
-    shipping_cost?: number;
-    note?: string;
-    address?: string;
-    province?: string;
-    district?: string;
-    ward?: string;
-    use_product_price?: boolean; // Flag to indicate using product price instead of variant price
-  }): Promise<{ success: boolean; message: string; order_id?: number }> {
-    const res = await fetchApi<any>('/api/admin/orders', {
-      method: 'POST',
-      body: JSON.stringify(orderData),
-    });
-    return res?.data ?? res;
-  },
 };
 
 export const authApi = {
@@ -1025,29 +931,3 @@ export const authApi = {
 };
 
 export { ApiError };
-
-export async function userApi() {
-  // Get user profile
-  async function getUserProfile(userId: number): Promise<{
-    id: number;
-    name: string;
-    email: string;
-    created_at: string;
-    updated_at: string;
-  }> {
-    const res = await fetchApi<any>(`/api/users/${userId}/profile`);
-    const profile = res?.data ?? res;
-
-    return {
-      id: Number(profile.id),
-      name: String(profile.name ?? profile.fullname ?? ""),
-      email: String(profile.email),
-      created_at: String(profile.createdAt ?? profile.created_at ?? ""),
-      updated_at: String(profile.updatedAt ?? profile.updated_at ?? ""),
-    };
-  }
-
-  return {
-    getUserProfile,
-  };
-}

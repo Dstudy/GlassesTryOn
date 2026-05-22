@@ -35,16 +35,13 @@ export interface Product {
   color: string; // Color: Red, black, black blue, purple, ...
   face_suitable: string; // "Round face", "Square face", "Oval face", "Long face", "Diamond face", "Heart face"
   features?: Array<{ id?: number; name: string; img?: string }>;
-  // Optional fields that might come from API
   reviews: Review[];
-  createdAt?: string;
-  updatedAt?: string;
-  stock?: number;
   category?: string;
   modelUrl?: string; // 3D model URL from backend
+  tryOnUrl?: string; // optimised AR try-on model URL from backend
   arModelFit?: ArModelFitMetadata; // Optional AR fit metadata per model
-  /** Khi backend gửi — chọn viewer AR: kính vs khuyên tai */
-  arTryOnCategory?: "glasses" | "earrings";
+  /** Khi backend gửi — chọn viewer AR: kính vs khuyên tai vs vòng cổ */
+  arTryOnCategory?: "glasses" | "earrings" | "necklaces";
 }
 
 export type Review = {

@@ -76,6 +76,10 @@ function ShopPageInner() {
     earrings: "Khuyên tai",
   };
 
+  const reverseCategoryMap: Record<string, string> = Object.fromEntries(
+    Object.entries(categoryMap).map(([k, v]) => [v, k]),
+  );
+
   const normalizeCategory = (value: string) => value.trim().toLowerCase();
   const scrollToProducts = () => {
     document
@@ -151,7 +155,9 @@ function ShopPageInner() {
           material:
             selectedMaterials.length > 0 ? selectedMaterials : undefined,
           category:
-            selectedCategories.length > 0 ? selectedCategories : undefined,
+            selectedCategories.length > 0
+              ? selectedCategories.map((c) => reverseCategoryMap[c] || c)
+              : undefined,
           page: currentPage,
         };
 

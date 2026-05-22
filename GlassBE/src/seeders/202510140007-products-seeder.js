@@ -161,6 +161,7 @@ module.exports = {
               isFeatured: false,
               active: true,
               url: item.url || null,
+              tryOnUrl: item.tryOnUrl || null,
               createdAt: now,
               updatedAt: now,
             },

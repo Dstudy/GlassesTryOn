@@ -304,27 +304,19 @@ const createProductReview = async (req, res) => {
         .json({ errCode: 1, message: "Rating is required." });
     }
 
-    const newReview = await productService.createReview(
+    const review = await productService.createReview(
       userId,
       productId,
       rating,
       reviewText,
     );
 
-    return res.status(201).json({
+    return res.status(200).json({
       errCode: 0,
-      message: "Review created successfully",
-      data: newReview,
+      message: "Review saved successfully",
+      data: review,
     });
   } catch (error) {
-    // Handle specific "already reviewed" error from service
-    if (error.message === "You have already reviewed this product.") {
-      return res.status(409).json({
-        // 409 Conflict
-        errCode: 1,
-        message: error.message,
-      });
-    }
     return res.status(500).json({
       errCode: 1,
       message: "Error creating review",

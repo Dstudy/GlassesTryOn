@@ -7,6 +7,7 @@ import Link from "next/link";
 import ThreeViewer from "@/components/ThreeViewer";
 import ArTryOnViewer from "@/components/ArTryOnViewer";
 import EarringTryOnViewer from "@/components/EarringTryOnViewer";
+import NecklaceTryOnViewer from "@/components/NecklaceTryOnViewer";
 import { AppContext } from "@/context/AppContext";
 import { productApi, ApiError } from "@/lib/api";
 import type { Product, ProductVariant } from "@/lib/types";
@@ -188,11 +189,16 @@ export default function ProductDetailPage() {
 
   const isFavorite = favorites.includes(product.id);
   const modelUrl = product.modelUrl || null;
+  const arModelUrl = product.tryOnUrl || modelUrl;
   const has3DModel = Boolean(modelUrl);
   const isEarringProduct =
     product.arTryOnCategory === "earrings" ||
     /khuyên|earring|bông\s*tai|hoa\s*tai/i.test(product.name) ||
     /khuyên|earring|bông\s*tai|hoa\s*tai/i.test(product.category ?? "");
+  const isNecklaceProduct =
+    product.arTryOnCategory === "necklaces" ||
+    /necklace|vòng\s*cổ|dây\s*chuyền/i.test(product.name) ||
+    /necklace|vòng\s*cổ|dây\s*chuyền/i.test(product.category ?? "");
   const selectedVariant =
     variants.find((variant) => variant.id === selectedVariantId) || null;
 
@@ -332,14 +338,19 @@ export default function ProductDetailPage() {
                   </div>
                 ) : showArTryOn ? (
                   <div className="absolute inset-0 h-full w-full">
-                    {isEarringProduct ? (
+                    {isNecklaceProduct ? (
+                      <NecklaceTryOnViewer
+                        modelUrl={arModelUrl!}
+                        fitMetadata={product.arModelFit}
+                      />
+                    ) : isEarringProduct ? (
                       <EarringTryOnViewer
-                        modelUrl={modelUrl!}
+                        modelUrl={arModelUrl!}
                         fitMetadata={product.arModelFit}
                       />
                     ) : (
                       <ArTryOnViewer
-                        modelUrl={modelUrl!}
+                        modelUrl={arModelUrl!}
                         fitMetadata={product.arModelFit}
                       />
                     )}
@@ -451,13 +462,17 @@ export default function ProductDetailPage() {
                         : "bg-gray-100 text-gray-700 hover:border-primary/50",
                     )}
                     aria-label={
-                      isEarringProduct
+                      isNecklaceProduct
+                        ? "Thử vòng cổ AR"
+                        : isEarringProduct
                         ? "Thử khuyên tai AR"
                         : "Thử kính AR"
                     }
                     title={
                       has3DModel
-                        ? isEarringProduct
+                        ? isNecklaceProduct
+                          ? "Thử vòng cổ AR"
+                          : isEarringProduct
                           ? "Thử khuyên tai AR"
                           : "Thử kính AR"
                         : "Không có mô hình 3D"
@@ -466,7 +481,7 @@ export default function ProductDetailPage() {
                     <div className="text-center">
                       <Camera className="mx-auto mb-1 h-6 w-6" />
                       <span className="text-[10px] font-medium">
-                        {isEarringProduct ? "AR Tai" : "AR"}
+                        {isNecklaceProduct ? "AR Cổ" : isEarringProduct ? "AR Tai" : "AR"}
                       </span>
                     </div>
                   </button>

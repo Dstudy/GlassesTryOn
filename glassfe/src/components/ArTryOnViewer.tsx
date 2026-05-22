@@ -50,8 +50,16 @@ const DEFAULT_FIT: Required<ArModelFitMetadata> = {
 };
 
 const MODEL_FIT_PRESETS: Record<string, ArModelFitMetadata> = {
-  "aviator.glb": { offset: { y: 2, z: 4 }, rotation: { x: 0.1 }, scaleMultiplier: 1.04 },
-  "round.glb": { offset: { y: 1 }, rotation: { x: 0.07 }, scaleMultiplier: 0.98 },
+  "aviator.glb": {
+    offset: { y: 2, z: 4 },
+    rotation: { x: 0.1 },
+    scaleMultiplier: 1.04,
+  },
+  "round.glb": {
+    offset: { y: 1 },
+    rotation: { x: 0.07 },
+    scaleMultiplier: 0.98,
+  },
 };
 
 const clamp = (value: number, min: number, max: number) =>
@@ -70,12 +78,12 @@ const getFileName = (url: string) => {
 
 const defaultCalibrationState: ArCalibrationState = {
   offsetX: 0,
-  offsetY: 0,
-  offsetZ: 0,
-  rotX: 0,
+  offsetY: -6.5,
+  offsetZ: -300,
+  rotX: 2.8,
   rotY: 0,
   rotZ: 0,
-  scaleMultiplier: 1,
+  scaleMultiplier: 1.23,
   smoothing: 0.28,
 };
 
@@ -324,7 +332,8 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
         const fitRotX = baseFitRotX + runtimeCalib.rotX;
         const fitRotY = baseFitRotY + runtimeCalib.rotY;
         const fitRotZ = baseFitRotZ + runtimeCalib.rotZ;
-        const fitScaleMultiplier = mergedFit.scaleMultiplier * runtimeCalib.scaleMultiplier;
+        const fitScaleMultiplier =
+          mergedFit.scaleMultiplier * runtimeCalib.scaleMultiplier;
 
         lastVideoTimeRef.current = video.currentTime;
         const results = landmarker.detectForVideo(video, performance.now());
@@ -343,7 +352,7 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
             // into the Three.js camera's coordinate system that
             // matches the mount element dimensions.
             const mountEl = rendererMountRef.current;
-            const mw = mountEl ? mountEl.clientWidth  : width;
+            const mw = mountEl ? mountEl.clientWidth : width;
             const mh = mountEl ? mountEl.clientHeight : height;
             const coverScale = Math.max(mw / width, mh / height);
 
@@ -393,8 +402,10 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
             const foreheadToChin = chinWorld.clone().sub(foreheadWorld);
             targetPosition.copy(noseWorld);
             targetPosition.addScaledVector(foreheadToChin, -0.08);
-            targetPosition.add(new THREE.Vector3(fitOffsetX, fitOffsetY, fitOffsetZ));
-            targetPosition.z = clamp(targetPosition.z, -260, 190);
+            targetPosition.add(
+              new THREE.Vector3(fitOffsetX, fitOffsetY, fitOffsetZ),
+            );
+            targetPosition.z = clamp(targetPosition.z, -460, 190);
 
             const targetScale =
               Math.max(0.35, eyeDistance * baseScaleByEyeDistance) *
@@ -419,9 +430,9 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
               // Clamp angular jumps before smoothing to avoid spinning artifacts.
               previousEuler.setFromQuaternion(smoothQuaternion, "XYZ");
               nextEuler.setFromQuaternion(targetQuaternion, "XYZ");
-              nextEuler.x = clampAbsDelta(nextEuler.x, previousEuler.x, 0.2);
-              nextEuler.y = clampAbsDelta(nextEuler.y, previousEuler.y, 0.2);
-              nextEuler.z = clampAbsDelta(nextEuler.z, previousEuler.z, 0.2);
+              // nextEuler.x = clampAbsDelta(nextEuler.x, previousEuler.x, 0.2);
+              // nextEuler.y = clampAbsDelta(nextEuler.y, previousEuler.y, 0.2);
+              // nextEuler.z = clampAbsDelta(nextEuler.z, previousEuler.z, 0.2);
               targetQuaternion.setFromEuler(nextEuler);
               smoothQuaternion.slerp(targetQuaternion, smoothing);
             }
@@ -442,7 +453,10 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
 
             debugFrameCounterRef.current += 1;
             if (debugFrameCounterRef.current % 5 === 0) {
-              const rot = new THREE.Euler().setFromQuaternion(smoothQuaternion, "XYZ");
+              const rot = new THREE.Euler().setFromQuaternion(
+                smoothQuaternion,
+                "XYZ",
+              );
               setDebugInfo({
                 eyeDistance,
                 modelPosition: {
@@ -488,7 +502,8 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
       const mountWidth = mount.clientWidth || 640;
       const mountHeight = mount.clientHeight || 480;
       const fov = 47;
-      cameraZ = (mountHeight * 0.5) / Math.tan(THREE.MathUtils.degToRad(fov / 2));
+      cameraZ =
+        (mountHeight * 0.5) / Math.tan(THREE.MathUtils.degToRad(fov / 2));
       viewPlaneZ = 0;
 
       scene = new THREE.Scene();
@@ -687,7 +702,9 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
 
       {showCalibrationPanel && (
         <div className="absolute bottom-2 left-2 right-2 z-20 rounded-md bg-black/70 p-3 text-white backdrop-blur-sm">
-          <div className="mb-2 text-xs font-semibold">AR Calibration (local)</div>
+          <div className="mb-2 text-xs font-semibold">
+            AR Calibration (local)
+          </div>
           <div className="grid grid-cols-2 gap-x-3 gap-y-2 text-[11px] md:grid-cols-4">
             {[
               {
@@ -726,7 +743,7 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
                 key: "rotX",
                 label: "Rot X",
                 min: -4,
-                max: 2,
+                max: 4,
                 step: 0.01,
                 value: calibration.rotX,
               },

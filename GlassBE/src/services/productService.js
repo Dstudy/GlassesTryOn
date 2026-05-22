@@ -493,39 +493,29 @@ const getProductReviews = async (productId, queryParams) => {
 
 const createReview = async (userId, productId, rating, reviewText) => {
   const t = await sequelize.transaction();
-  console.log(
-    "Creating review for user:",
-    userId,
-    "product:",
-    productId,
-    "reviewText:",
-    reviewText,
-  );
   try {
-    // 1. Create the review
-    const newReview = await Review.create(
-      {
-        user_id: userId,
-        product_id: productId,
-        rating,
-        review_text: reviewText,
-      },
-      { transaction: t },
-    );
+    // Upsert: update existing review or create a new one
+    let review = await Review.findOne({
+      where: { user_id: userId, product_id: productId },
+      transaction: t,
+    });
 
-    // 2. Update the product's averageRating/totalReviews
+    if (review) {
+      review.rating = rating;
+      review.review_text = reviewText;
+      await review.save({ transaction: t });
+    } else {
+      review = await Review.create(
+        { user_id: userId, product_id: productId, rating, review_text: reviewText },
+        { transaction: t },
+      );
+    }
+
     await _updateProductRating(productId, t);
-
-    // 3. Commit
     await t.commit();
-    return newReview;
+    return review;
   } catch (error) {
     await t.rollback();
-
-    // Handle unique constraint error
-    if (error.name === "SequelizeUniqueConstraintError") {
-      throw new Error("You have already reviewed this product.");
-    }
     console.error("Error in createReview:", error);
     throw new Error("Failed to create review.");
   }

@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Users, Search, Mail, Calendar, Shield, User } from "lucide-react";
-import { userApi } from "@/lib/api";
 
 interface User {
   id: number;
@@ -29,9 +28,8 @@ export default function AdminUsersPage() {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-        // TODO: Replace with actual API call when users API is available
-        const usersData = await userApi.getAllUsers();
-        setUsers(usersData);
+        // Users API not yet implemented on the backend
+        setUsers([]);
       } catch (error) {
         console.error("Error fetching users:", error);
         setUsers([]);
