@@ -35,8 +35,8 @@ type CalibState = {
 const defaultCalib: CalibState = {
   offsetX: 0,
   offsetY: 0,
-  offsetZ: 20,
-  dropAmount: 25,
+  offsetZ: 0,
+  dropAmount: 40,
   rotX: 0,
   rotY: 0,
   rotZ: 0,
@@ -123,6 +123,7 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
     let baseScaleByEarSpan = 0.012;
     let smoothing = 0.28;
     let predictErrorCount = 0;
+    const clipPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
 
     const merged = {
       offset: { ...DEFAULT_FIT.offset, ...(fitMetadata?.offset ?? {}) },
@@ -242,6 +243,13 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
               let fwd = v3.crossVectors(eyeAxis, up).normalize();
               fwd.negate();
 
+              if (fwd.lengthSq() < 1e-6) {
+                necklaceAnchor.visible = false;
+                renderer.render(scene, cam);
+                frameRef.current = requestAnimationFrame(predict);
+                return;
+              }
+
               // Necklace anchor: chin, pushed downward by dropFraction of face height
               const neckPos = chinW.clone();
               neckPos.addScaledVector(up, -dropFraction * faceHeight);
@@ -288,6 +296,10 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
                   smoothing,
                 );
               }
+
+              // Clip plane normal faces toward camera; clips the back half of the necklace.
+              // Plane sits at the smooth neck position so clipping follows with smoothing.
+              clipPlane.setFromNormalAndCoplanarPoint(fwd, smooth.pos);
 
               necklaceAnchor.visible = true;
               necklaceAnchor.position.copy(smooth.pos);
@@ -358,6 +370,7 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(mw, mh);
       renderer.setClearColor(0x000000, 0);
+      renderer.clippingPlanes = [clipPlane];
       mount.appendChild(renderer.domElement);
 
       scene.add(new THREE.AmbientLight(0xffffff, 1.8));
@@ -396,10 +409,17 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
     };
 
     const run = async () => {
+      const origConsoleError = console.error;
       try {
         setIsLoading(true);
         setCameraError(null);
         await setupThree();
+
+        console.error = (...args: unknown[]) => {
+          if (typeof args[0] === "string" && args[0].startsWith("INFO:")) return;
+          origConsoleError(...args);
+        };
+
         const vision = await FilesetResolver.forVisionTasks(
           "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm",
         );
@@ -413,6 +433,8 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
           numFaces: 1,
           outputFaceBlendshapes: false,
         });
+        console.error = origConsoleError;
+
         stream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: "user" },
           audio: false,
@@ -425,6 +447,7 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
           frameRef.current = requestAnimationFrame(predict);
         }
       } catch (e) {
+        console.error = origConsoleError;
         console.error(e);
         setIsLoading(false);
         setCameraError("Không thể khởi động camera AR vòng cổ.");

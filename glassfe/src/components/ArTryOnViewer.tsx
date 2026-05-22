@@ -564,11 +564,17 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
     };
 
     const setup = async () => {
+      const origConsoleError = console.error;
       try {
         setIsLoading(true);
         setCameraError(null);
 
         await setupThree();
+
+        console.error = (...args: unknown[]) => {
+          if (typeof args[0] === "string" && args[0].startsWith("INFO:")) return;
+          origConsoleError(...args);
+        };
 
         const vision = await FilesetResolver.forVisionTasks(
           "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm",
@@ -585,6 +591,7 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
           outputFaceBlendshapes: false,
           outputFacialTransformationMatrixes: true,
         });
+        console.error = origConsoleError;
 
         localStream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: "user" },
@@ -601,6 +608,7 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
           frameRef.current = requestAnimationFrame(predict);
         }
       } catch (error) {
+        console.error = origConsoleError;
         console.error("AR try-on init failed:", error);
         if (isActive) {
           setIsLoading(false);

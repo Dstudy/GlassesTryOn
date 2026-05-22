@@ -32,7 +32,15 @@ import {
   PaginationPrevious,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
-import { AlertCircle, ChevronDown, ChevronUp, Loader2, Search, Star, Sparkles } from "lucide-react";
+import {
+  AlertCircle,
+  ChevronDown,
+  ChevronUp,
+  Loader2,
+  Search,
+  Star,
+  Sparkles,
+} from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 
@@ -66,11 +74,9 @@ function ShopPageInner() {
     earrings: "Khuyên tai",
   };
 
-  const categoryViToSlug: Record<string, string> = {
-    "Kính mắt": "glasses",
-    "Vòng cổ": "necklaces",
-    "Khuyên tai": "earrings",
-  };
+  const reverseCategoryMap: Record<string, string> = Object.fromEntries(
+    Object.entries(categoryMap).map(([k, v]) => [v, k]),
+  );
 
   const normalizeCategory = (value: string) => value.trim().toLowerCase();
 
@@ -83,7 +89,9 @@ function ShopPageInner() {
     });
 
   useEffect(() => {
-    const slug = categoryFromQuery ? normalizeCategory(categoryFromQuery) : null;
+    const slug = categoryFromQuery
+      ? normalizeCategory(categoryFromQuery)
+      : null;
     const nextCategories = slug && categoryMap[slug] ? [categoryMap[slug]] : [];
     setSelectedCategories((prev) => {
       const unchanged =
@@ -104,9 +112,12 @@ function ShopPageInner() {
           search: searchTerm || undefined,
           sortBy: sortOrder as ProductFilters["sortBy"],
           brand: selectedBrands.length > 0 ? selectedBrands : undefined,
-          material: selectedMaterials.length > 0 ? selectedMaterials : undefined,
+          material:
+            selectedMaterials.length > 0 ? selectedMaterials : undefined,
           category:
-            selectedCategories.length > 0 ? categoriesForApi(selectedCategories) : undefined,
+            selectedCategories.length > 0
+              ? selectedCategories.map((c) => reverseCategoryMap[c] || c)
+              : undefined,
           page: currentPage,
         };
 
@@ -125,12 +136,16 @@ function ShopPageInner() {
           setBrands(filterOptions.brands || []);
           setMaterials(filterOptions.materials || []);
           setCategories(
-            (filterOptions.categories || []).map((item: string) => categoryMap[item] || item),
+            (filterOptions.categories || []).map(
+              (item: string) => categoryMap[item] || item,
+            ),
           );
           setInitialLoaded(true);
         }
       } catch (err) {
-        setError(err instanceof ApiError ? err.message : "Không thể tải sản phẩm.");
+        setError(
+          err instanceof ApiError ? err.message : "Không thể tải sản phẩm.",
+        );
       } finally {
         setLoading(false);
       }
@@ -177,28 +192,42 @@ function ShopPageInner() {
     const hasMore = items.length > INITIAL_DISPLAY_LIMIT;
 
     return (
-      <AccordionItem value={value} className="border-b border-white/10 last:border-b-0">
+      <AccordionItem
+        value={value}
+        className="border-b border-white/10 last:border-b-0"
+      >
         <AccordionTrigger className="px-3 py-4 font-body text-base font-semibold uppercase tracking-[0.14em] text-white hover:no-underline">
           {title}
         </AccordionTrigger>
         <AccordionContent className="px-3 pb-4 pt-2">
           <div className="space-y-3">
             {displayedItems.map((item) => (
-              <div key={item} className="flex items-center space-x-3 rounded-xl px-2 py-2 hover:bg-white/[0.04]">
+              <div
+                key={item}
+                className="flex items-center space-x-3 rounded-xl px-2 py-2 hover:bg-white/[0.04]"
+              >
                 <Checkbox
                   id={`${value}-${item}`}
                   onCheckedChange={() => onItemChange(item)}
                   checked={selectedItems.includes(item)}
                   className="border-white/20 data-[state=checked]:border-[#BFC3C9] data-[state=checked]:bg-[#BFC3C9] data-[state=checked]:text-[#0F0F10]"
                 />
-                <Label htmlFor={`${value}-${item}`} className="cursor-pointer text-sm text-muted-foreground">
+                <Label
+                  htmlFor={`${value}-${item}`}
+                  className="cursor-pointer text-sm text-muted-foreground"
+                >
                   {item}
                 </Label>
               </div>
             ))}
           </div>
           {hasMore ? (
-            <Button variant="ghost" size="sm" onClick={onToggleShowAll} className="mt-3 w-full justify-center">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onToggleShowAll}
+              className="mt-3 w-full justify-center"
+            >
               {showAll ? (
                 <>
                   <ChevronUp className="mr-2 h-4 w-4" />
@@ -232,14 +261,35 @@ function ShopPageInner() {
                 <div className="h-px w-12 bg-gradient-to-l from-transparent to-white/20"></div>
               </div>
               <h1 className="font-headline text-4xl uppercase tracking-[0.18em] text-white/95 sm:text-5xl md:text-6xl font-light relative z-10">
-                <div className="absolute -top-12 -left-10 md:-left-20 w-12 h-12 md:w-20 md:h-20 rounded-2xl overflow-hidden animate-float-fade shadow-lg border border-white/10" style={{ animationDelay: '0s' }}>
-                  <img src="/homepage/hero/anh1.jpg" alt="Decor" className="w-full h-full object-cover" />
+                <div
+                  className="absolute -top-12 -left-10 md:-left-20 w-12 h-12 md:w-20 md:h-20 rounded-2xl overflow-hidden animate-float-fade shadow-lg border border-white/10"
+                  style={{ animationDelay: "0s" }}
+                >
+                  <img
+                    src="/homepage/hero/anh1.jpg"
+                    alt="Decor"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <div className="absolute top-0 -right-10 md:-right-20 w-10 h-10 md:w-16 md:h-16 rounded-full overflow-hidden animate-float-fade shadow-lg border border-white/10" style={{ animationDelay: '-1.5s' }}>
-                  <img src="/homepage/hero/anh2.jpg" alt="Decor" className="w-full h-full object-cover" />
+                <div
+                  className="absolute top-0 -right-10 md:-right-20 w-10 h-10 md:w-16 md:h-16 rounded-full overflow-hidden animate-float-fade shadow-lg border border-white/10"
+                  style={{ animationDelay: "-1.5s" }}
+                >
+                  <img
+                    src="/homepage/hero/anh2.jpg"
+                    alt="Decor"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <div className="absolute -bottom-8 left-4 md:left-10 w-8 h-8 md:w-14 md:h-14 rounded-xl overflow-hidden animate-float-fade shadow-lg border border-white/10" style={{ animationDelay: '-3s' }}>
-                  <img src="/homepage/hero/anh5.jpg" alt="Decor" className="w-full h-full object-cover" />
+                <div
+                  className="absolute -bottom-8 left-4 md:left-10 w-8 h-8 md:w-14 md:h-14 rounded-xl overflow-hidden animate-float-fade shadow-lg border border-white/10"
+                  style={{ animationDelay: "-3s" }}
+                >
+                  <img
+                    src="/homepage/hero/anh5.jpg"
+                    alt="Decor"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 Khám phá KYRO
               </h1>
@@ -256,16 +306,23 @@ function ShopPageInner() {
                     Bộ lọc
                   </h2>
                 </div>
-                <Accordion type="multiple" defaultValue={["category", "brand", "material"]}>
+                <Accordion
+                  type="multiple"
+                  defaultValue={["category", "brand", "material"]}
+                >
                   <FilterSection
                     title="Danh mục"
                     items={categories}
                     selectedItems={selectedCategories}
                     showAll={showAllCategories}
-                    onToggleShowAll={() => setShowAllCategories(!showAllCategories)}
+                    onToggleShowAll={() =>
+                      setShowAllCategories(!showAllCategories)
+                    }
                     onItemChange={(item) => {
                       setSelectedCategories((prev) =>
-                        prev.includes(item) ? prev.filter((value) => value !== item) : [...prev, item],
+                        prev.includes(item)
+                          ? prev.filter((value) => value !== item)
+                          : [...prev, item],
                       );
                       setCurrentPage(1);
                     }}
@@ -279,7 +336,9 @@ function ShopPageInner() {
                     onToggleShowAll={() => setShowAllBrands(!showAllBrands)}
                     onItemChange={(item) => {
                       setSelectedBrands((prev) =>
-                        prev.includes(item) ? prev.filter((value) => value !== item) : [...prev, item],
+                        prev.includes(item)
+                          ? prev.filter((value) => value !== item)
+                          : [...prev, item],
                       );
                       setCurrentPage(1);
                     }}
@@ -290,10 +349,14 @@ function ShopPageInner() {
                     items={materials}
                     selectedItems={selectedMaterials}
                     showAll={showAllMaterials}
-                    onToggleShowAll={() => setShowAllMaterials(!showAllMaterials)}
+                    onToggleShowAll={() =>
+                      setShowAllMaterials(!showAllMaterials)
+                    }
                     onItemChange={(item) => {
                       setSelectedMaterials((prev) =>
-                        prev.includes(item) ? prev.filter((value) => value !== item) : [...prev, item],
+                        prev.includes(item)
+                          ? prev.filter((value) => value !== item)
+                          : [...prev, item],
                       );
                       setCurrentPage(1);
                     }}
@@ -320,7 +383,9 @@ function ShopPageInner() {
                       />
                     </div>
                     <p className="text-xs uppercase tracking-[0.1em] text-muted-foreground">
-                      {loading ? "Đang tải danh mục..." : `${totalProducts} sản phẩm`}
+                      {loading
+                        ? "Đang tải danh mục..."
+                        : `${totalProducts} sản phẩm`}
                     </p>
                   </div>
                   <Select
@@ -335,8 +400,12 @@ function ShopPageInner() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="featured">Nổi bật</SelectItem>
-                      <SelectItem value="price-asc">Giá: thấp đến cao</SelectItem>
-                      <SelectItem value="price-desc">Giá: cao đến thấp</SelectItem>
+                      <SelectItem value="price-asc">
+                        Giá: thấp đến cao
+                      </SelectItem>
+                      <SelectItem value="price-desc">
+                        Giá: cao đến thấp
+                      </SelectItem>
                       <SelectItem value="rating">Đánh giá cao nhất</SelectItem>
                     </SelectContent>
                   </Select>
@@ -375,7 +444,8 @@ function ShopPageInner() {
                       Không có sản phẩm phù hợp
                     </h3>
                     <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                      Hãy thử từ khóa rộng hơn hoặc đặt lại bộ lọc để tiếp tục khám phá.
+                      Hãy thử từ khóa rộng hơn hoặc đặt lại bộ lọc để tiếp tục
+                      khám phá.
                     </p>
                   </div>
                 </div>
@@ -391,7 +461,11 @@ function ShopPageInner() {
                           event.preventDefault();
                           handlePageChange(currentPage - 1);
                         }}
-                        className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                        className={
+                          currentPage === 1
+                            ? "pointer-events-none opacity-50"
+                            : ""
+                        }
                       />
                     </PaginationItem>
 
@@ -418,7 +492,10 @@ function ShopPageInner() {
                         );
                       }
 
-                      if (page === currentPage - 2 || page === currentPage + 2) {
+                      if (
+                        page === currentPage - 2 ||
+                        page === currentPage + 2
+                      ) {
                         return (
                           <PaginationItem key={page}>
                             <PaginationEllipsis />
@@ -436,7 +513,11 @@ function ShopPageInner() {
                           event.preventDefault();
                           handlePageChange(currentPage + 1);
                         }}
-                        className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                        className={
+                          currentPage === totalPages
+                            ? "pointer-events-none opacity-50"
+                            : ""
+                        }
                       />
                     </PaginationItem>
                   </PaginationContent>

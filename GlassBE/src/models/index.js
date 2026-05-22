@@ -1,3 +1,4 @@
+require("dotenv").config();
 import { Sequelize } from "sequelize";
 import { Op } from "sequelize";
 import Product from "./product.js";
@@ -19,15 +20,19 @@ import Favorite from "./favorite.js";
 import Analytics from "./analytics.js";
 import Reviews from "./review.js";
 import Category from "./category.js";
-const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.json")[env];
-
 // ✅ Initialize Sequelize
-const sequelize = new Sequelize("glasses", config.username, config.password, {
-  host: "localhost",
-  dialect: "mysql",
-  logging: false,
-});
+const sequelize = new Sequelize(
+  process.env.DB_NAME || "glasses",
+  process.env.DB_USER || "root",
+  process.env.DB_PASSWORD || null,
+  {
+    host: process.env.DB_HOST || "127.0.0.1",
+    port: parseInt(process.env.DB_PORT || "3306", 10),
+    dialect: "mysql",
+    logging: false,
+    timezone: "+07:00",
+  },
+);
 
 // ✅ Initialize models
 // We store the initialized models in this 'models' object
