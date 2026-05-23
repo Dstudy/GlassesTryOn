@@ -68,12 +68,14 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
   const frameRef = useRef<number>();
   const lastVideoTimeRef = useRef(-1);
   const calibRef = useRef<CalibState>(defaultCalib);
+  const showOccluderDebugRef = useRef(false);
 
   const [isLoading, setIsLoading] = useState(true);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [showCalib, setShowCalib] = useState(false);
   const [showMesh, setShowMesh] = useState(true);
   const showMeshRef = useRef(true);
+  const [showOccluderDebug, setShowOccluderDebug] = useState(false);
   const [calib, setCalib] = useState<CalibState>(defaultCalib);
 
   useEffect(() => {
@@ -113,6 +115,7 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
     let cam: THREE.PerspectiveCamera | null = null;
     let leftAnchor: THREE.Group | null = null;
     let rightAnchor: THREE.Group | null = null;
+    let headOccluder: THREE.Mesh | null = null;
     let resizeObserver: ResizeObserver | null = null;
 
     const smoothL = {
@@ -143,6 +146,8 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
     const frz = merged.rotation.z ?? 0;
 
     const m = new THREE.Matrix4();
+    const faceBasisMat = new THREE.Matrix4();
+    const faceBaseQuaternion = new THREE.Quaternion();
     const q = new THREE.Quaternion();
     const prevE = new THREE.Euler();
     const nextE = new THREE.Euler();
@@ -315,26 +320,17 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
 
               const fitQ = new THREE.Quaternion().setFromEuler(new THREE.Euler(frX, frY, frZ));
 
-                      // Orientation: world-stable so earring doesn't rotate with head movement
-              const basisForEar = (out: THREE.Vector3) => {
-                const worldY = new THREE.Vector3(0, 1, 0);
-                const xAxis = out.clone().normalize();
-                let zAxis = new THREE.Vector3().crossVectors(xAxis, worldY).normalize();
-                if (zAxis.lengthSq() < 0.001) zAxis.set(0, 0, 1);
-                const yAxis = new THREE.Vector3().crossVectors(zAxis, xAxis).normalize();
-                m.makeBasis(xAxis, yAxis, zAxis);
-                const qq = new THREE.Quaternion().setFromRotationMatrix(m);
-                qq.multiply(fitQ);
-                return qq;
-              };
+              // Build head orientation from face basis so earrings rotate with the head
+              faceBasisMat.makeBasis(eyeAxis, up, fwd.clone().negate());
+              faceBaseQuaternion.setFromRotationMatrix(faceBasisMat);
 
               const targetScale = Math.max(0.15, earSpan * baseScaleByEarSpan) * scaleM;
 
               lobL.z = clamp(lobL.z, -260, 190);
               lobR.z = clamp(lobR.z, -260, 190);
 
-              const qBasisL = basisForEar(outL);
-              const qBasisR = basisForEar(outR);
+              const qBasisL = faceBaseQuaternion.clone().multiply(fitQ);
+              const qBasisR = faceBaseQuaternion.clone().multiply(fitQ);
 
               if (!hasPose) {
                 smoothL.pos.copy(lobL);
@@ -392,6 +388,29 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
               leftAnchor.quaternion.copy(smoothL.quat);
               rightAnchor.quaternion.copy(smoothR.quat);
 
+              // Update depth-mask head sphere.
+              // fwd points toward camera; push center back in world Z so the
+              // front surface sits behind the nose, occluding the far earring.
+              if (headOccluder) {
+                headOccluder.position.copy(noseW);
+                headOccluder.position.z -= faceHeight * 0.6;
+                headOccluder.quaternion.copy(faceBaseQuaternion);
+                headOccluder.scale.set(
+                  earSpan * 0.55,
+                  faceHeight * 0.50,
+                  earSpan * 0.50,
+                );
+                headOccluder.visible = true;
+                const mat = headOccluder.material as THREE.MeshBasicMaterial;
+                const debugOn = showOccluderDebugRef.current;
+                if (mat.colorWrite !== debugOn) {
+                  mat.colorWrite = debugOn;
+                  mat.wireframe = debugOn;
+                  if (debugOn) mat.color.set(0x00ff00);
+                  mat.needsUpdate = true;
+                }
+              }
+
               if (dbg) {
                 // Debug dots in video-pixel space (matches debug canvas)
                 const le2 = { x: le.x * w, y: le.y * h };
@@ -401,11 +420,13 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
             } else {
               leftAnchor.visible = false;
               rightAnchor.visible = false;
+              if (headOccluder) headOccluder.visible = false;
               if (dbg && lm) drawDebug(dbg, lm, w, h);
             }
           } else {
             leftAnchor.visible = false;
             rightAnchor.visible = false;
+            if (headOccluder) headOccluder.visible = false;
           }
           predictErrorCount = 0;
         } catch (error) {
@@ -484,6 +505,19 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
       rightAnchor = new THREE.Group();
       scene.add(leftAnchor, rightAnchor);
 
+      // Invisible depth-mask sphere — renders before earrings to occlude
+      // the far-ear earring when the user turns their head.
+      const headOccluderGeo = new THREE.SphereGeometry(1, 24, 16);
+      const headOccluderMat = new THREE.MeshBasicMaterial({
+        colorWrite: false,
+        depthWrite: true,
+        side: THREE.FrontSide,
+      });
+      headOccluder = new THREE.Mesh(headOccluderGeo, headOccluderMat);
+      headOccluder.renderOrder = -1;
+      headOccluder.visible = false;
+      scene.add(headOccluder);
+
       const gltf = await new GLTFLoader().loadAsync(modelUrl);
       const root = gltf.scene;
       const box = new THREE.Box3().setFromObject(root);
@@ -500,6 +534,9 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
 
       leftAnchor.add(leftRoot);
       rightAnchor.add(rightRoot);
+      // Earring meshes must render after the depth occluder.
+      leftRoot.traverse((obj) => { obj.renderOrder = 1; });
+      rightRoot.traverse((obj) => { obj.renderOrder = 1; });
 
       const mb = new THREE.Box3().setFromObject(leftRoot);
       const ms = mb.getSize(new THREE.Vector3());
@@ -597,6 +634,19 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
           className="rounded bg-black/60 px-3 py-1 text-xs text-white hover:bg-black/75"
         >
           {showMesh ? "Ẩn Mesh" : "Hiện Mesh"}
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setShowOccluderDebug((prev) => {
+              const next = !prev;
+              showOccluderDebugRef.current = next;
+              return next;
+            });
+          }}
+          className={`rounded px-3 py-1 text-xs text-white hover:bg-black/75 ${showOccluderDebug ? "bg-green-700/80" : "bg-black/60"}`}
+        >
+          {showOccluderDebug ? "Ẩn Occluder" : "Occluder"}
         </button>
       </div>
 

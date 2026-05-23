@@ -38,7 +38,7 @@ const defaultCalib: CalibState = {
   rotX: 0,
   rotY: 0,
   rotZ: 0,
-  scaleMultiplier: 1,
+  scaleMultiplier: 0.8,
   smoothing: 0.28,
 };
 
@@ -72,6 +72,8 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
   const [showCalib, setShowCalib] = useState(false);
   const [showMesh, setShowMesh] = useState(true);
   const showMeshRef = useRef(true);
+  const [showOccluder, setShowOccluder] = useState(false);
+  const showOccluderRef = useRef(false);
   const [calib, setCalib] = useState<CalibState>(defaultCalib);
 
   useEffect(() => {
@@ -97,7 +99,10 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
     setCalib((prev) => {
       const next = { ...prev, ...patch };
       calibRef.current = next;
-      localStorage.setItem(`ar-neck-fit:${fileName(modelUrl)}`, JSON.stringify(next));
+      localStorage.setItem(
+        `ar-neck-fit:${fileName(modelUrl)}`,
+        JSON.stringify(next),
+      );
       return next;
     });
   };
@@ -110,6 +115,8 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
     let scene: THREE.Scene | null = null;
     let cam: THREE.PerspectiveCamera | null = null;
     let necklaceAnchor: THREE.Group | null = null;
+    let neckOccluder: THREE.Mesh | null = null;
+    let occluderMat: THREE.MeshBasicMaterial | null = null;
     let resizeObserver: ResizeObserver | null = null;
 
     const smooth = {
@@ -121,11 +128,14 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
     let baseScaleByShoulderSpan = 0.012;
     let smoothing = 0.28;
     let predictErrorCount = 0;
+    const yAxis = new THREE.Vector3(0, 1, 0);
+    const neckQ = new THREE.Quaternion();
 
     const merged = {
       offset: { ...DEFAULT_FIT.offset, ...(fitMetadata?.offset ?? {}) },
       rotation: { ...DEFAULT_FIT.rotation, ...(fitMetadata?.rotation ?? {}) },
-      scaleMultiplier: fitMetadata?.scaleMultiplier ?? DEFAULT_FIT.scaleMultiplier,
+      scaleMultiplier:
+        fitMetadata?.scaleMultiplier ?? DEFAULT_FIT.scaleMultiplier,
     };
     const ox = merged.offset.x ?? 0;
     const oy = merged.offset.y ?? 0;
@@ -187,7 +197,15 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
 
     const predict = () => {
       const video = videoRef.current;
-      if (!video || !landmarker || !active || !renderer || !scene || !cam || !necklaceAnchor)
+      if (
+        !video ||
+        !landmarker ||
+        !active ||
+        !renderer ||
+        !scene ||
+        !cam ||
+        !necklaceAnchor
+      )
         return;
 
       const w = video.videoWidth;
@@ -197,7 +215,10 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
         return;
       }
 
-      if (video.readyState >= 2 && video.currentTime !== lastVideoTimeRef.current) {
+      if (
+        video.readyState >= 2 &&
+        video.currentTime !== lastVideoTimeRef.current
+      ) {
         try {
           lastVideoTimeRef.current = video.currentTime;
           const c = calibRef.current;
@@ -216,7 +237,10 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
 
           const dbg = debugCanvasRef.current?.getContext("2d");
           if (dbg) {
-            if (debugCanvasRef.current!.width !== w || debugCanvasRef.current!.height !== h) {
+            if (
+              debugCanvasRef.current!.width !== w ||
+              debugCanvasRef.current!.height !== h
+            ) {
               debugCanvasRef.current!.width = w;
               debugCanvasRef.current!.height = h;
             }
@@ -265,7 +289,9 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
               }
 
               // Necklace anchor: lerp from shoulder midpoint toward ear midpoint
-              const neckPos = shoulderMid.clone().lerp(earMid, neckRiseFraction);
+              const neckPos = shoulderMid
+                .clone()
+                .lerp(earMid, neckRiseFraction);
 
               neckPos.addScaledVector(shoulderAxis, fx);
               neckPos.addScaledVector(upVec, fy);
@@ -276,10 +302,13 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
               m.makeBasis(shoulderAxis, upVec, fwd);
               const targetQ = new THREE.Quaternion().setFromRotationMatrix(m);
               targetQ.multiply(
-                new THREE.Quaternion().setFromEuler(new THREE.Euler(frX, frY, frZ)),
+                new THREE.Quaternion().setFromEuler(
+                  new THREE.Euler(frX, frY, frZ),
+                ),
               );
 
-              const targetScale = Math.max(0.15, shoulderSpan * baseScaleByShoulderSpan) * scaleM;
+              const targetScale =
+                Math.max(0.15, shoulderSpan * baseScaleByShoulderSpan) * scaleM;
 
               if (!hasPose) {
                 smooth.pos.copy(neckPos);
@@ -314,6 +343,18 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
               necklaceAnchor.scale.copy(smooth.scale);
               necklaceAnchor.quaternion.copy(smooth.quat);
 
+              // Position neck occluder to block necklace geometry clipping through the body.
+              if (occluderMat) occluderMat.colorWrite = showOccluderRef.current;
+              if (neckOccluder) {
+                const neckH = Math.max(10, shoulderMid.distanceTo(earMid) * 0.5);
+                const neckR = Math.max(8, shoulderSpan * 0.13);
+                neckOccluder.position.lerpVectors(shoulderMid, earMid, 0.25);
+                neckOccluder.scale.set(neckR, neckH, neckR);
+                neckQ.setFromUnitVectors(yAxis, upVec);
+                neckOccluder.quaternion.copy(neckQ);
+                neckOccluder.visible = true;
+              }
+
               if (dbg) {
                 for (const [lmk, label, color] of [
                   [ls, "LS", "#22d3ee"],
@@ -323,8 +364,14 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
                 ] as const) {
                   drawDebugDot(dbg, lmk.x * w, lmk.y * h, label, color);
                 }
-                const smPx = { x: (ls.x + rs.x) / 2 * w, y: (ls.y + rs.y) / 2 * h };
-                const emPx = { x: (le.x + re.x) / 2 * w, y: (le.y + re.y) / 2 * h };
+                const smPx = {
+                  x: ((ls.x + rs.x) / 2) * w,
+                  y: ((ls.y + rs.y) / 2) * h,
+                };
+                const emPx = {
+                  x: ((le.x + re.x) / 2) * w,
+                  y: ((le.y + re.y) / 2) * h,
+                };
                 drawDebugDot(
                   dbg,
                   smPx.x + (emPx.x - smPx.x) * neckRiseFraction,
@@ -335,9 +382,11 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
               }
             } else {
               necklaceAnchor.visible = false;
+              if (neckOccluder) neckOccluder.visible = false;
             }
           } else {
             necklaceAnchor.visible = false;
+            if (neckOccluder) neckOccluder.visible = false;
           }
           predictErrorCount = 0;
         } catch (error) {
@@ -346,7 +395,9 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
             console.warn("AR necklace frame error:", error);
           }
           if (predictErrorCount > 120) {
-            setCameraError("Theo dõi tư thế bị gián đoạn. Vui lòng tải lại trang.");
+            setCameraError(
+              "Theo dõi tư thế bị gián đoạn. Vui lòng tải lại trang.",
+            );
             setIsLoading(false);
             stop();
             return;
@@ -397,6 +448,22 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
       necklaceAnchor.visible = false;
       scene.add(necklaceAnchor);
 
+      // Occluder meshes: invisible but write to depth buffer so the necklace
+      // cannot bleed through the user's physical neck/head.
+      occluderMat = new THREE.MeshBasicMaterial({
+        colorWrite: false,
+        color: 0xa78bfa,
+        side: THREE.FrontSide,
+      });
+
+      neckOccluder = new THREE.Mesh(
+        new THREE.CylinderGeometry(1, 1, 1, 12),
+        occluderMat,
+      );
+      neckOccluder.renderOrder = 0;
+      neckOccluder.visible = false;
+      scene.add(neckOccluder);
+
       const gltf = await new GLTFLoader().loadAsync(modelUrl);
       const root = gltf.scene;
       const box = new THREE.Box3().setFromObject(root);
@@ -407,6 +474,9 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
       const norm = maxS > 0 ? 100 / maxS : 1;
       root.scale.setScalar(norm);
       necklaceAnchor.add(root);
+      root.traverse((obj) => {
+        if ((obj as THREE.Mesh).isMesh) obj.renderOrder = 1;
+      });
 
       const mb = new THREE.Box3().setFromObject(root);
       const ms = mb.getSize(new THREE.Vector3());
@@ -432,7 +502,8 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
         await setupThree();
 
         console.error = (...args: unknown[]) => {
-          if (typeof args[0] === "string" && args[0].startsWith("INFO:")) return;
+          if (typeof args[0] === "string" && args[0].startsWith("INFO:"))
+            return;
           origConsoleError(...args);
         };
 
@@ -518,6 +589,19 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
         >
           {showMesh ? "Ẩn Mesh" : "Hiện Mesh"}
         </button>
+        <button
+          type="button"
+          onClick={() => {
+            setShowOccluder((v) => {
+              const next = !v;
+              showOccluderRef.current = next;
+              return next;
+            });
+          }}
+          className={`rounded px-3 py-1 text-xs text-white hover:bg-black/75 ${showOccluder ? "bg-violet-600/80" : "bg-black/60"}`}
+        >
+          {showOccluder ? "Ẩn Occluder" : "Occluder"}
+        </button>
       </div>
 
       {showCalib && (
@@ -526,11 +610,39 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
           <div className="grid grid-cols-2 gap-2 text-[11px] md:grid-cols-4">
             {(
               [
-                ["offsetX", "Offset X (trái/phải)", -150, 150, 1, calib.offsetX],
-                ["offsetY", "Offset Y (lên/xuống)", -150, 150, 1, calib.offsetY],
-                ["offsetZ", "Offset Z (trước/sau)", -200, 200, 1, calib.offsetZ],
+                [
+                  "offsetX",
+                  "Offset X (trái/phải)",
+                  -150,
+                  150,
+                  1,
+                  calib.offsetX,
+                ],
+                [
+                  "offsetY",
+                  "Offset Y (lên/xuống)",
+                  -150,
+                  150,
+                  1,
+                  calib.offsetY,
+                ],
+                [
+                  "offsetZ",
+                  "Offset Z (trước/sau)",
+                  -200,
+                  200,
+                  1,
+                  calib.offsetZ,
+                ],
                 ["neckRise", "Vị trí cổ (%)", 0, 100, 1, calib.neckRise],
-                ["scaleMultiplier", "Scale", 0.2, 3.0, 0.01, calib.scaleMultiplier],
+                [
+                  "scaleMultiplier",
+                  "Scale",
+                  0.2,
+                  3.0,
+                  0.01,
+                  calib.scaleMultiplier,
+                ],
                 ["rotX", "Rot X", -1.5, 3, 0.01, calib.rotX],
                 ["rotY", "Rot Y", -1.5, 1.5, 0.01, calib.rotY],
                 ["rotZ", "Rot Z", -1.5, 1.5, 0.01, calib.rotZ],
@@ -548,7 +660,9 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
                   step={step}
                   value={val}
                   onChange={(e) =>
-                    updateCalib({ [key]: Number(e.target.value) } as Partial<CalibState>)
+                    updateCalib({
+                      [key]: Number(e.target.value),
+                    } as Partial<CalibState>)
                   }
                 />
               </label>

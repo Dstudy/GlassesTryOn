@@ -29,7 +29,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Lens } from "@/components/ui/lens";
 import StarRating from "@/components/ui/star-rating";
 import FaceShapeModal from "@/components/FaceShapeModal.fixed";
 import { FaceShape } from "@/utils/faceShapeClassifier";
@@ -357,24 +356,16 @@ export default function ProductDetailPage() {
                       )}
                     </div>
                   ) : (
-                    <Lens
-                      zoomFactor={1.5}
-                      lensSize={150}
-                      isStatic={false}
-                      ariaLabel="Khu vực phóng to"
-                      hideBaseOnHover
-                    >
-                      <div className="flex h-full w-full items-center justify-center p-0">
-                        <Image
-                          src={primaryImageUrl}
-                          alt={product.name}
-                          width={600}
-                          height={600}
-                          className="mx-auto h-full w-full max-h-[200%] max-w-[200%] object-contain"
-                          data-ai-hint="product photo"
-                        />
-                      </div>
-                    </Lens>
+                    <div className="flex h-full w-full items-center justify-center p-0">
+                      <Image
+                        src={primaryImageUrl}
+                        alt={product.name}
+                        width={600}
+                        height={600}
+                        className="mx-auto h-full w-full max-h-[200%] max-w-[200%] object-contain"
+                        data-ai-hint="product photo"
+                      />
+                    </div>
                   )}
                 </div>
 

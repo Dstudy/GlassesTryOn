@@ -79,7 +79,7 @@ const getFileName = (url: string) => {
 const defaultCalibrationState: ArCalibrationState = {
   offsetX: 0,
   offsetY: -6.5,
-  offsetZ: -300,
+  offsetZ: -100,
   rotX: 2.8,
   rotY: 0,
   rotZ: 0,
@@ -96,11 +96,13 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
   const calibrationRef = useRef<ArCalibrationState>(defaultCalibrationState);
   const debugFrameCounterRef = useRef(0);
   const showTrackingDebugRef = useRef(true);
+  const showOccluderDebugRef = useRef(false);
 
   const [isLoading, setIsLoading] = useState(true);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [showCalibrationPanel, setShowCalibrationPanel] = useState(false);
   const [showTrackingDebug, setShowTrackingDebug] = useState(true);
+  const [showOccluderDebug, setShowOccluderDebug] = useState(false);
   const [calibration, setCalibration] = useState<ArCalibrationState>(
     defaultCalibrationState,
   );
@@ -147,6 +149,7 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
     let camera: THREE.PerspectiveCamera | null = null;
     let glassesAnchor: THREE.Group | null = null;
     let loadedModel: THREE.Object3D | null = null;
+    let headOccluder: THREE.Mesh | null = null;
     let resizeObserver: ResizeObserver | null = null;
     const smoothPosition = new THREE.Vector3();
     const smoothScale = new THREE.Vector3(1, 1, 1);
@@ -159,6 +162,7 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
     const targetPosition = new THREE.Vector3();
     const targetRotationMatrix = new THREE.Matrix4();
     const targetQuaternion = new THREE.Quaternion();
+    const faceBaseQuaternion = new THREE.Quaternion();
     const eyeAxis = new THREE.Vector3();
     const upAxis = new THREE.Vector3();
     const forwardAxis = new THREE.Vector3();
@@ -442,6 +446,38 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
             glassesAnchor.scale.copy(smoothScale);
             glassesAnchor.quaternion.copy(smoothQuaternion);
 
+            // Update depth-mask head sphere each frame.
+            // Position it slightly behind the nose so the sphere covers
+            // the ears and the back of the head, occluding temple arms
+            // that wrap around when the user turns their face.
+            if (headOccluder) {
+              const faceHeight = foreheadWorld.distanceTo(chinWorld);
+              faceBaseQuaternion.setFromRotationMatrix(targetRotationMatrix);
+              // Position center behind the nose in world Z (camera depth axis).
+              // Using direct Z offset is more reliable than face-normal offset
+              // because the head always occludes in the camera depth direction.
+              headOccluder.position.copy(noseWorld);
+              headOccluder.position.z -= faceHeight * 1.5;
+              headOccluder.quaternion.copy(faceBaseQuaternion);
+              // Scale = radius in world units (SphereGeometry r=1).
+              // Diameter = 2 × scale, so keep values at ~half head dimension.
+              headOccluder.scale.set(
+                eyeDistance * 1.5, // radius ≈ 0.55 × eye_dist → diam ≈ 1.1× eye_dist
+                faceHeight * 1, // radius ≈ half face height → diam ≈ face height
+                eyeDistance * 1.5, // depth: front surface behind nose bridge
+              );
+              headOccluder.visible = true;
+              // Debug: render the occluder as a green wireframe.
+              const mat = headOccluder.material as THREE.MeshBasicMaterial;
+              const debugOn = showOccluderDebugRef.current;
+              if (mat.colorWrite !== debugOn) {
+                mat.colorWrite = debugOn;
+                mat.wireframe = debugOn;
+                if (debugOn) mat.color.set(0x00ff00);
+                mat.needsUpdate = true;
+              }
+            }
+
             const keyPoints2D = {
               leftEye: { x: leftEye.x * width, y: leftEye.y * height },
               rightEye: { x: rightEye.x * width, y: rightEye.y * height },
@@ -480,9 +516,11 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
             }
           } else {
             glassesAnchor.visible = false;
+            if (headOccluder) headOccluder.visible = false;
           }
         } else {
           glassesAnchor.visible = false;
+          if (headOccluder) headOccluder.visible = false;
           drawDebugOverlay(null, width, height);
         }
       }
@@ -548,6 +586,20 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
       glassesAnchor.visible = false;
       scene.add(glassesAnchor);
 
+      // Invisible head sphere that writes only to the depth buffer.
+      // Rendered first (renderOrder -1) so temple arms depth-test against
+      // the head surface and vanish when they pass behind the ears/head.
+      const headOccluderGeo = new THREE.SphereGeometry(1, 24, 16);
+      const headOccluderMat = new THREE.MeshBasicMaterial({
+        colorWrite: false,
+        depthWrite: true,
+        side: THREE.FrontSide,
+      });
+      headOccluder = new THREE.Mesh(headOccluderGeo, headOccluderMat);
+      headOccluder.renderOrder = -1;
+      headOccluder.visible = false;
+      scene.add(headOccluder);
+
       const loader = new GLTFLoader();
       const gltf = await loader.loadAsync(modelUrl);
       loadedModel = gltf.scene;
@@ -562,6 +614,10 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
       loadedModel.scale.setScalar(baseNorm);
 
       glassesAnchor.add(loadedModel);
+      // Ensure all glasses meshes render after the depth occluder.
+      loadedModel.traverse((obj) => {
+        obj.renderOrder = 1;
+      });
 
       const modelBox = new THREE.Box3().setFromObject(loadedModel);
       const modelSize = modelBox.getSize(new THREE.Vector3());
@@ -589,7 +645,8 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
         await setupThree();
 
         console.error = (...args: unknown[]) => {
-          if (typeof args[0] === "string" && args[0].startsWith("INFO:")) return;
+          if (typeof args[0] === "string" && args[0].startsWith("INFO:"))
+            return;
           origConsoleError(...args);
         };
 
@@ -687,6 +744,19 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
           className="rounded bg-black/60 px-3 py-1 text-xs text-white hover:bg-black/75"
         >
           {showTrackingDebug ? "Ẩn Mesh" : "Hiện Mesh"}
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setShowOccluderDebug((prev) => {
+              const next = !prev;
+              showOccluderDebugRef.current = next;
+              return next;
+            });
+          }}
+          className={`rounded px-3 py-1 text-xs text-white hover:bg-black/75 ${showOccluderDebug ? "bg-green-700/80" : "bg-black/60"}`}
+        >
+          {showOccluderDebug ? "Ẩn Occluder" : "Occluder"}
         </button>
       </div>
 
