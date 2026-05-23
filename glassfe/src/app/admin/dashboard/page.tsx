@@ -24,6 +24,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { analyticsApi, ApiError } from "@/lib/api";
+import { formatVND } from "@/lib/utils";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   ChartContainer,
@@ -136,7 +137,7 @@ export default function AdminDashboardPage() {
   const metrics = [
     {
       title: "Tổng doanh thu",
-      value: `$${data.summary.total_revenue?.value?.toLocaleString() || "0"}`,
+      value: formatVND(data.summary.total_revenue?.value ?? 0),
       icon: DollarSign,
       growth: data.summary.total_revenue?.growth_rate || 0,
       color: "text-primary",
@@ -294,7 +295,7 @@ export default function AdminDashboardPage() {
                   <YAxis
                     tickLine={false}
                     axisLine={false}
-                    tickFormatter={(value) => `$${Number(value).toLocaleString()}`}
+                    tickFormatter={(value) => formatVND(Number(value))}
                     tick={{ fill: "#bfc3c9", fontSize: 12 }}
                     width={64}
                   />
@@ -309,7 +310,7 @@ export default function AdminDashboardPage() {
                               {name === "trend" ? "Xu hướng" : "Doanh thu"}
                             </span>
                             <span className="font-mono font-medium text-foreground">
-                              ${Number(value).toLocaleString()}
+                              {formatVND(Number(value))}
                             </span>
                           </div>
                         )}
@@ -371,7 +372,7 @@ export default function AdminDashboardPage() {
                     </div>
                     <div className="text-right">
                       <p className="font-medium">
-                        ${product.revenue.toLocaleString()}
+                        {formatVND(product.revenue)}
                       </p>
                     </div>
                   </div>

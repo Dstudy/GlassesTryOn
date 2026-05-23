@@ -20,6 +20,7 @@ interface LensProps {
   lensColor?: string;
   ariaLabel?: string;
   lensBorderColor?: string;
+  hideBaseOnHover?: boolean;
 }
 
 export function Lens({
@@ -33,6 +34,7 @@ export function Lens({
   lensColor = "black",
   ariaLabel = "Zoom Area",
   lensBorderColor = "border-primary",
+  hideBaseOnHover = false,
 }: LensProps) {
   if (zoomFactor < 1) {
     throw new Error("zoomFactor must be greater than 1");
@@ -133,7 +135,9 @@ export function Lens({
       aria-label={ariaLabel}
       tabIndex={0}
     >
-      {children}
+      <div className={hideBaseOnHover && isHovering ? "invisible" : undefined}>
+        {children}
+      </div>
       {isStatic || defaultPosition ? (
         // CHANGE: Replace Fragment with div
         <div>

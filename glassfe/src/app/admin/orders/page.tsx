@@ -185,7 +185,9 @@ export default function AdminOrdersPage() {
   const formatAmount = (amount: number | string) => {
     const numAmount =
       typeof amount === "string" ? parseFloat(amount) : Number(amount);
-    return Number.isNaN(numAmount) ? "0.00" : numAmount.toFixed(2);
+    return Number.isNaN(numAmount)
+      ? "0đ"
+      : numAmount.toLocaleString("vi-VN", { maximumFractionDigits: 0 }) + "đ";
   };
 
   if (loading) {
@@ -303,7 +305,7 @@ export default function AdminOrdersPage() {
                       <td className="px-4 py-4 align-top">
                         <div className="inline-flex items-center gap-1 rounded-full border border-[#ff9b53]/20 bg-[rgba(255,155,83,0.08)] px-3 py-1 text-[#fff1e3]">
                           <span className="font-medium text-white">
-                            ${formatAmount(order.total_amount)}
+                            {formatAmount(order.total_amount)}
                           </span>
                         </div>
                       </td>

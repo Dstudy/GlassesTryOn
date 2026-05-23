@@ -8,7 +8,7 @@ import type { Product } from "@/lib/types";
 import { productApi } from "@/lib/api";
 import { Heart, ShoppingCart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { cn } from "@/lib/utils";
+import { cn, formatVND } from "@/lib/utils";
 import "./ProductCard.css";
 
 const optimizeImageUrl = (url: string): string => {
@@ -148,7 +148,7 @@ export default function ProductCard({
         <div className="card__footer">
           <div className="card__price-block">
             <div className="card__price">
-              ${Number(product.price ?? 0).toFixed(2)}
+              {formatVND(Number(product.price ?? 0))}
             </div>
           </div>
 

@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ShoppingCart, Heart, Loader2, Camera } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { cn } from "@/lib/utils";
+import { cn, formatVND } from "@/lib/utils";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -362,6 +362,7 @@ export default function ProductDetailPage() {
                       lensSize={150}
                       isStatic={false}
                       ariaLabel="Khu vực phóng to"
+                      hideBaseOnHover
                     >
                       <div className="flex h-full w-full items-center justify-center p-0">
                         <Image
@@ -590,7 +591,7 @@ export default function ProductDetailPage() {
                     Giá bán
                   </p>
                   <p className="mt-2 text-4xl font-bold tracking-[-0.03em] text-[#ffb56d] drop-shadow-[0_0_24px_rgba(255,130,32,0.2)] sm:text-5xl">
-                    ${Number(product.price ?? 0).toFixed(2)}
+                    {formatVND(Number(product.price ?? 0))}
                   </p>
                 </div>
                 <div className="mt-3 space-y-1 rounded-[1.1rem] border border-white/10 bg-black/25 p-2.5 sm:p-3">

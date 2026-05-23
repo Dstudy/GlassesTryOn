@@ -315,10 +315,14 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
 
               const fitQ = new THREE.Quaternion().setFromEuler(new THREE.Euler(frX, frY, frZ));
 
-              // Orientation: earring hangs downward, facing outward
+                      // Orientation: world-stable so earring doesn't rotate with head movement
               const basisForEar = (out: THREE.Vector3) => {
-                const negUp = up.clone().negate(); // earring hangs down
-                m.makeBasis(out, negUp, fwd);
+                const worldY = new THREE.Vector3(0, 1, 0);
+                const xAxis = out.clone().normalize();
+                let zAxis = new THREE.Vector3().crossVectors(xAxis, worldY).normalize();
+                if (zAxis.lengthSq() < 0.001) zAxis.set(0, 0, 1);
+                const yAxis = new THREE.Vector3().crossVectors(zAxis, xAxis).normalize();
+                m.makeBasis(xAxis, yAxis, zAxis);
                 const qq = new THREE.Quaternion().setFromRotationMatrix(m);
                 qq.multiply(fitQ);
                 return qq;
@@ -441,12 +445,40 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(mw, mh);
       renderer.setClearColor(0x000000, 0);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 2;
       mount.appendChild(renderer.domElement);
 
-      scene.add(new THREE.AmbientLight(0xffffff, 1.8));
-      const dir = new THREE.DirectionalLight(0xffffff, 1.2);
+      scene.add(new THREE.AmbientLight(0xffffff, 5));
+
+      const hemi = new THREE.HemisphereLight(0xffffff, 0x888899, 3);
+      hemi.position.set(0, 1, 0);
+      scene.add(hemi);
+
+      const dir = new THREE.DirectionalLight(0xffffff, 5);
       dir.position.set(0, 0, 1);
       scene.add(dir);
+
+      const dirLeft = new THREE.DirectionalLight(0xffffff, 3);
+      dirLeft.position.set(-1, 0.5, 0.5);
+      scene.add(dirLeft);
+
+      const dirRight = new THREE.DirectionalLight(0xffffff, 3);
+      dirRight.position.set(1, 0.5, 0.5);
+      scene.add(dirRight);
+
+      const dirTop = new THREE.DirectionalLight(0xffffff, 3);
+      dirTop.position.set(0, 1, 0.5);
+      scene.add(dirTop);
+
+      const dirBottom = new THREE.DirectionalLight(0xffffff, 2);
+      dirBottom.position.set(0, -1, 0.5);
+      scene.add(dirBottom);
+
+      const dirBack = new THREE.DirectionalLight(0xffffff, 2);
+      dirBack.position.set(0, 0, -1);
+      scene.add(dirBack);
 
       leftAnchor = new THREE.Group();
       rightAnchor = new THREE.Group();

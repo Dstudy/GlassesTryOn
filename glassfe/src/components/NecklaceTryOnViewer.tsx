@@ -1,30 +1,28 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
+import { PoseLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/Addons.js";
 import { Loader2, CameraOff } from "lucide-react";
 import type { ArModelFitMetadata } from "@/lib/types";
-import { drawFaceMeshOverlay } from "@/utils/faceMeshOverlay";
 
 type Props = {
   modelUrl: string;
   fitMetadata?: ArModelFitMetadata;
 };
 
-const LEFT_EAR_TRAGUS = 234;
-const RIGHT_EAR_TRAGUS = 454;
-const CHIN = 152;
-const FOREHEAD = 10;
-const LEFT_EYE_OUTER = 33;
-const RIGHT_EYE_OUTER = 263;
+// MediaPipe Pose landmark indices
+const LEFT_SHOULDER = 11;
+const RIGHT_SHOULDER = 12;
+const LEFT_EAR = 7;
+const RIGHT_EAR = 8;
 
 type CalibState = {
   offsetX: number;
   offsetY: number;
   offsetZ: number;
-  dropAmount: number; // % of face height to drop below chin (0–100 maps to 0–1)
+  neckRise: number; // 0–100: interpolation from shoulder midpoint (0) to ear midpoint (100)
   rotX: number;
   rotY: number;
   rotZ: number;
@@ -36,7 +34,7 @@ const defaultCalib: CalibState = {
   offsetX: 0,
   offsetY: 0,
   offsetZ: 0,
-  dropAmount: 40,
+  neckRise: 15,
   rotX: 0,
   rotY: 0,
   rotZ: 0,
@@ -106,7 +104,7 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
 
   useEffect(() => {
     let active = true;
-    let landmarker: FaceLandmarker | null = null;
+    let landmarker: PoseLandmarker | null = null;
     let stream: MediaStream | null = null;
     let renderer: THREE.WebGLRenderer | null = null;
     let scene: THREE.Scene | null = null;
@@ -120,10 +118,9 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
       quat: new THREE.Quaternion(),
     };
     let hasPose = false;
-    let baseScaleByEarSpan = 0.012;
+    let baseScaleByShoulderSpan = 0.012;
     let smoothing = 0.28;
     let predictErrorCount = 0;
-    const clipPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
 
     const merged = {
       offset: { ...DEFAULT_FIT.offset, ...(fitMetadata?.offset ?? {}) },
@@ -168,6 +165,26 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
       }
     };
 
+    const drawDebugDot = (
+      ctx: CanvasRenderingContext2D,
+      x: number,
+      y: number,
+      label: string,
+      color: string,
+    ) => {
+      if (!showMeshRef.current) return;
+      ctx.fillStyle = color;
+      ctx.strokeStyle = "#000";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(x, y, 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = "#fff";
+      ctx.font = "11px sans-serif";
+      ctx.fillText(label, x + 8, y - 4);
+    };
+
     const predict = () => {
       const video = videoRef.current;
       if (!video || !landmarker || !active || !renderer || !scene || !cam || !necklaceAnchor)
@@ -192,10 +209,10 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
           const frY = fry + c.rotY;
           const frZ = frz + c.rotZ;
           const scaleM = merged.scaleMultiplier * c.scaleMultiplier;
-          const dropFraction = c.dropAmount / 100;
+          const neckRiseFraction = c.neckRise / 100;
 
           const res = landmarker.detectForVideo(video, performance.now());
-          const lm = res.faceLandmarks?.[0];
+          const lm = res.landmarks?.[0];
 
           const dbg = debugCanvasRef.current?.getContext("2d");
           if (dbg) {
@@ -207,14 +224,12 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
           }
 
           if (lm) {
-            const le = lm[LEFT_EAR_TRAGUS];
-            const re = lm[RIGHT_EAR_TRAGUS];
-            const chin = lm[CHIN];
-            const fore = lm[FOREHEAD];
-            const eyeOL = lm[LEFT_EYE_OUTER];
-            const eyeOR = lm[RIGHT_EYE_OUTER];
+            const ls = lm[LEFT_SHOULDER];
+            const rs = lm[RIGHT_SHOULDER];
+            const le = lm[LEFT_EAR];
+            const re = lm[RIGHT_EAR];
 
-            if (le && re && chin && fore && eyeOL && eyeOR) {
+            if (ls && rs && le && re) {
               const mountEl = rendererMountRef.current;
               const mw = mountEl ? mountEl.clientWidth : w;
               const mh = mountEl ? mountEl.clientHeight : h;
@@ -224,23 +239,22 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
                 new THREE.Vector3(
                   (p.x - 0.5) * w * coverScale,
                   (0.5 - p.y) * h * coverScale,
-                  -p.z * w * coverScale * 1.2,
+                  -p.z * w * coverScale * 0.3,
                 );
 
+              const lsW = toW(ls);
+              const rsW = toW(rs);
               const leW = toW(le);
               const reW = toW(re);
-              const chinW = toW(chin);
-              const foreW = toW(fore);
-              const eyeLW = toW(eyeOL);
-              const eyeRW = toW(eyeOR);
 
-              const earSpan = Math.max(40, leW.distanceTo(reW));
-              const faceHeight = Math.max(60, foreW.distanceTo(chinW));
+              const shoulderMid = lsW.clone().add(rsW).multiplyScalar(0.5);
+              const earMid = leW.clone().add(reW).multiplyScalar(0.5);
+              const shoulderSpan = Math.max(40, lsW.distanceTo(rsW));
 
-              // Face basis vectors
-              const up = v1.subVectors(foreW, chinW).normalize();
-              const eyeAxis = v2.subVectors(eyeRW, eyeLW).normalize();
-              let fwd = v3.crossVectors(eyeAxis, up).normalize();
+              // Body basis vectors derived from pose landmarks
+              const upVec = v1.subVectors(earMid, shoulderMid).normalize();
+              const shoulderAxis = v2.subVectors(rsW, lsW).normalize();
+              let fwd = v3.crossVectors(shoulderAxis, upVec).normalize();
               fwd.negate();
 
               if (fwd.lengthSq() < 1e-6) {
@@ -250,24 +264,22 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
                 return;
               }
 
-              // Necklace anchor: chin, pushed downward by dropFraction of face height
-              const neckPos = chinW.clone();
-              neckPos.addScaledVector(up, -dropFraction * faceHeight);
+              // Necklace anchor: lerp from shoulder midpoint toward ear midpoint
+              const neckPos = shoulderMid.clone().lerp(earMid, neckRiseFraction);
 
-              // Apply fit and calibration offsets in face basis
-              neckPos.addScaledVector(eyeAxis, fx);
-              neckPos.addScaledVector(up, fy);
+              neckPos.addScaledVector(shoulderAxis, fx);
+              neckPos.addScaledVector(upVec, fy);
               neckPos.addScaledVector(fwd, fz);
               neckPos.z = clamp(neckPos.z, -260, 190);
 
-              // Face-aligned orientation
-              m.makeBasis(eyeAxis, up, fwd);
+              // Orientation aligned to shoulder/body plane
+              m.makeBasis(shoulderAxis, upVec, fwd);
               const targetQ = new THREE.Quaternion().setFromRotationMatrix(m);
               targetQ.multiply(
                 new THREE.Quaternion().setFromEuler(new THREE.Euler(frX, frY, frZ)),
               );
 
-              const targetScale = Math.max(0.15, earSpan * baseScaleByEarSpan) * scaleM;
+              const targetScale = Math.max(0.15, shoulderSpan * baseScaleByShoulderSpan) * scaleM;
 
               if (!hasPose) {
                 smooth.pos.copy(neckPos);
@@ -297,37 +309,32 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
                 );
               }
 
-              // Clip plane normal faces toward camera; clips the back half of the necklace.
-              // Plane sits at the smooth neck position so clipping follows with smoothing.
-              clipPlane.setFromNormalAndCoplanarPoint(fwd, smooth.pos);
-
               necklaceAnchor.visible = true;
               necklaceAnchor.position.copy(smooth.pos);
               necklaceAnchor.scale.copy(smooth.scale);
               necklaceAnchor.quaternion.copy(smooth.quat);
 
-              if (dbg && showMeshRef.current) {
-                drawFaceMeshOverlay(dbg, lm, w, h, {
-                  mirrorX: false,
-                  sampleStep: 2,
-                  pointRadius: 1,
-                  color: "#3b82f6",
-                });
-                dbg.fillStyle = "#fb923c";
-                dbg.strokeStyle = "#000";
-                dbg.lineWidth = 2;
-                dbg.beginPath();
-                dbg.arc(chin.x * w, chin.y * h, 6, 0, Math.PI * 2);
-                dbg.fill();
-                dbg.stroke();
-                dbg.fillStyle = "#fff";
-                dbg.font = "11px sans-serif";
-                dbg.fillText("C", chin.x * w + 8, chin.y * h - 4);
+              if (dbg) {
+                for (const [lmk, label, color] of [
+                  [ls, "LS", "#22d3ee"],
+                  [rs, "RS", "#22d3ee"],
+                  [le, "LE", "#a78bfa"],
+                  [re, "RE", "#a78bfa"],
+                ] as const) {
+                  drawDebugDot(dbg, lmk.x * w, lmk.y * h, label, color);
+                }
+                const smPx = { x: (ls.x + rs.x) / 2 * w, y: (ls.y + rs.y) / 2 * h };
+                const emPx = { x: (le.x + re.x) / 2 * w, y: (le.y + re.y) / 2 * h };
+                drawDebugDot(
+                  dbg,
+                  smPx.x + (emPx.x - smPx.x) * neckRiseFraction,
+                  smPx.y + (emPx.y - smPx.y) * neckRiseFraction,
+                  "N",
+                  "#fb923c",
+                );
               }
             } else {
               necklaceAnchor.visible = false;
-              if (dbg && lm && showMeshRef.current)
-                drawFaceMeshOverlay(dbg, lm, w, h, { mirrorX: false, sampleStep: 2, pointRadius: 1, color: "#3b82f6" });
             }
           } else {
             necklaceAnchor.visible = false;
@@ -339,7 +346,7 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
             console.warn("AR necklace frame error:", error);
           }
           if (predictErrorCount > 120) {
-            setCameraError("Theo dõi khuôn mặt bị gián đoạn. Vui lòng tải lại trang.");
+            setCameraError("Theo dõi tư thế bị gián đoạn. Vui lòng tải lại trang.");
             setIsLoading(false);
             stop();
             return;
@@ -370,13 +377,21 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(mw, mh);
       renderer.setClearColor(0x000000, 0);
-      renderer.clippingPlanes = [clipPlane];
       mount.appendChild(renderer.domElement);
 
-      scene.add(new THREE.AmbientLight(0xffffff, 1.8));
-      const dir = new THREE.DirectionalLight(0xffffff, 1.2);
+      scene.add(new THREE.AmbientLight(0xffffff, 2.5));
+      const dir = new THREE.DirectionalLight(0xffffff, 1.8);
       dir.position.set(0, 0, 1);
       scene.add(dir);
+      const dirLeft = new THREE.DirectionalLight(0xffffff, 1.0);
+      dirLeft.position.set(-1, 0.5, 0.5);
+      scene.add(dirLeft);
+      const dirRight = new THREE.DirectionalLight(0xffffff, 1.0);
+      dirRight.position.set(1, 0.5, 0.5);
+      scene.add(dirRight);
+      const dirTop = new THREE.DirectionalLight(0xfffaf0, 0.7);
+      dirTop.position.set(0, 1, 0.5);
+      scene.add(dirTop);
 
       necklaceAnchor = new THREE.Group();
       necklaceAnchor.visible = false;
@@ -395,7 +410,8 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
 
       const mb = new THREE.Box3().setFromObject(root);
       const ms = mb.getSize(new THREE.Vector3());
-      if (ms.x > 0) baseScaleByEarSpan = 1.2 / ms.x;
+      // necklace width ≈ 55% of shoulder span
+      if (ms.x > 0) baseScaleByShoulderSpan = 0.55 / ms.x;
 
       resizeObserver = new ResizeObserver(() => {
         if (!renderer || !cam || !rendererMountRef.current) return;
@@ -423,15 +439,17 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
         const vision = await FilesetResolver.forVisionTasks(
           "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm",
         );
-        landmarker = await FaceLandmarker.createFromOptions(vision, {
+        landmarker = await PoseLandmarker.createFromOptions(vision, {
           baseOptions: {
             modelAssetPath:
-              "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+              "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task",
             delegate: "GPU",
           },
           runningMode: "VIDEO",
-          numFaces: 1,
-          outputFaceBlendshapes: false,
+          numPoses: 1,
+          minPoseDetectionConfidence: 0.5,
+          minPosePresenceConfidence: 0.5,
+          minTrackingConfidence: 0.5,
         });
         console.error = origConsoleError;
 
@@ -511,7 +529,7 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
                 ["offsetX", "Offset X (trái/phải)", -150, 150, 1, calib.offsetX],
                 ["offsetY", "Offset Y (lên/xuống)", -150, 150, 1, calib.offsetY],
                 ["offsetZ", "Offset Z (trước/sau)", -200, 200, 1, calib.offsetZ],
-                ["dropAmount", "Thả xuống (%)", 0, 80, 1, calib.dropAmount],
+                ["neckRise", "Vị trí cổ (%)", 0, 100, 1, calib.neckRise],
                 ["scaleMultiplier", "Scale", 0.2, 3.0, 0.01, calib.scaleMultiplier],
                 ["rotX", "Rot X", -1.5, 3, 0.01, calib.rotX],
                 ["rotY", "Rot Y", -1.5, 1.5, 0.01, calib.rotY],

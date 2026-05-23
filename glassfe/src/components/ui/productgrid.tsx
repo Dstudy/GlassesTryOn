@@ -1,7 +1,8 @@
 "use client";
 
 // 1. Update React import
-import React from "react"; // Remove useState, useEffect, useMemo
+import React from "react";
+import { formatVND } from "@/lib/utils";
 
 // 2. Import your Select component
 import {
@@ -50,7 +51,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
         <p className="mt-2 text-xl font-bold text-gray-900">
-          ${displayPrice.toFixed(2)}
+          {formatVND(displayPrice)}
         </p>
         <p className="text-sm text-gray-500">
           Rating: {displayRating ? displayRating.toFixed(1) : "N/A"} / 5.0

@@ -10,6 +10,7 @@ import { productApi } from "@/lib/api";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { AppContext } from "@/context/AppContext";
+import { formatVND } from "@/lib/utils";
 
 interface OrderItemView {
   id: number;
@@ -31,7 +32,7 @@ function formatOrderTotal(total?: string) {
   if (!total) return "—";
   const numeric = Number(String(total).replace(/[^0-9.-]/g, ""));
   if (!Number.isNaN(numeric) && String(total).trim() !== "") {
-    return `$${numeric.toFixed(2)}`;
+    return numeric.toLocaleString("vi-VN", { maximumFractionDigits: 0 }) + "đ";
   }
   return total;
 }
@@ -230,12 +231,12 @@ export default function OrderDetailPage() {
 
                         <div className="text-left sm:text-right">
                           <div className="text-xl font-semibold text-[#ffb56d]">
-                            ${it.price.toFixed(2)}
+                            {formatVND(it.price)}
                           </div>
                           {typeof it.currentPrice === "number" &&
                             it.currentPrice !== it.price && (
                               <div className="mt-1 text-sm text-muted-foreground">
-                                Giá hiện tại: ${it.currentPrice.toFixed(2)}
+                                Giá hiện tại: {formatVND(it.currentPrice)}
                               </div>
                             )}
                         </div>

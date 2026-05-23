@@ -114,7 +114,9 @@ export default function AdminOrderDetailPage() {
   const formatAmount = (amount: any) => {
     const numAmount =
       typeof amount === "string" ? parseFloat(amount) : Number(amount);
-    return isNaN(numAmount) ? "0.00" : numAmount.toFixed(2);
+    return isNaN(numAmount)
+      ? "0đ"
+      : numAmount.toLocaleString("vi-VN", { maximumFractionDigits: 0 }) + "đ";
   };
 
   if (loading) {
@@ -229,7 +231,7 @@ export default function AdminOrderDetailPage() {
                   Tổng tiền
                 </label>
                 <p className="text-lg font-semibold">
-                  ${formatAmount(order.total_amount)}
+                  {formatAmount(order.total_amount)}
                 </p>
               </div>
               {order.shipping_cost && (
@@ -238,7 +240,7 @@ export default function AdminOrderDetailPage() {
                     Phí vận chuyển
                   </label>
                   <p className="text-lg">
-                    ${formatAmount(order.shipping_cost)}
+                    {formatAmount(order.shipping_cost)}
                   </p>
                 </div>
               )}
@@ -308,11 +310,10 @@ export default function AdminOrderDetailPage() {
                     </div>
                     <div className="text-right">
                       <p className="font-medium">
-                        ${formatAmount(item.price_at_purchase)}
+                        {formatAmount(item.price_at_purchase)}
                       </p>
                       <p className="text-sm text-gray-600">
-                        Tổng: $
-                        {formatAmount(item.price_at_purchase * item.quantity)}
+                        Tổng: {formatAmount(item.price_at_purchase * item.quantity)}
                       </p>
                     </div>
                   </div>

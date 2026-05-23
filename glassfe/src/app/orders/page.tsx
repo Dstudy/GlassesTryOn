@@ -21,7 +21,7 @@ function formatOrderTotal(total?: string) {
   if (!total) return "—";
   const numeric = Number(String(total).replace(/[^0-9.-]/g, ""));
   if (!Number.isNaN(numeric) && String(total).trim() !== "") {
-    return `$${numeric.toFixed(2)}`;
+    return numeric.toLocaleString("vi-VN", { maximumFractionDigits: 0 }) + "đ";
   }
   return total;
 }

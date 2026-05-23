@@ -38,6 +38,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { CreditCard } from "lucide-react";
+import { formatVND } from "@/lib/utils";
 
 const checkoutSchema = z.object({
   email: z.string().email({ message: "Vui lòng nhập email hợp lệ." }),
@@ -47,7 +48,12 @@ const checkoutSchema = z.object({
   district: z.string().min(1, "Vui lòng nhập quận/huyện."),
   ward: z.string().min(1, "Vui lòng nhập phường/xã."),
   address: z.string().min(1, "Vui lòng nhập địa chỉ."),
-  deliveryDate: z.date({ required_error: "Vui lòng chọn ngày giao hàng." }),
+  deliveryDate: z
+    .date({ required_error: "Vui lòng chọn ngày giao hàng." })
+    .refine(
+      (date) => date >= new Date(new Date().setHours(0, 0, 0, 0)),
+      { message: "Ngày giao hàng không được là ngày trong quá khứ." }
+    ),
   paymentMethod: z.literal("Thanh toán khi nhận hàng"),
 });
 
@@ -267,6 +273,9 @@ export default function CheckoutPage() {
                                           setIsDateOpen(false);
                                         }
                                       }}
+                                      disabled={(date) =>
+                                        date < new Date(new Date().setHours(0, 0, 0, 0))
+                                      }
                                       initialFocus
                                     />
                                   </div>
@@ -321,7 +330,7 @@ export default function CheckoutPage() {
                         {item.product.name} x {item.quantity}
                       </span>
                       <span className="shrink-0 text-white">
-                        ${(item.product.price * item.quantity).toFixed(2)}
+                        {formatVND(item.product.price * item.quantity)}
                       </span>
                     </div>
                   ))}
@@ -329,12 +338,12 @@ export default function CheckoutPage() {
                   <div className="flex justify-between text-sm text-muted-foreground">
                     <span>Tạm tính</span>
                     <span className="text-white">
-                      ${getCartTotal().toFixed(2)}
+                      {formatVND(getCartTotal())}
                     </span>
                   </div>
                   <div className="flex justify-between text-sm text-muted-foreground">
                     <span>Vận chuyển</span>
-                    <span className="text-white">$0.00</span>
+                    <span className="text-white">Miễn phí</span>
                   </div>
                   <div className="rounded-2xl border border-[#ff9b53]/30 bg-[rgba(255,130,32,0.1)] px-4 py-4">
                     <div className="flex items-center justify-between gap-4">
@@ -342,7 +351,7 @@ export default function CheckoutPage() {
                         Tổng cộng
                       </span>
                       <span className="text-2xl font-semibold tracking-tight text-[#ffb56d] sm:text-3xl">
-                        ${getCartTotal().toFixed(2)}
+                        {formatVND(getCartTotal())}
                       </span>
                     </div>
                   </div>
@@ -356,7 +365,7 @@ export default function CheckoutPage() {
                 className="h-12 w-full text-base font-semibold shadow-[0_18px_34px_-20px_rgba(255,106,0,0.72)]"
               >
                 <CreditCard className="h-5 w-5" />
-                Thanh toán ${getCartTotal().toFixed(2)}
+                Thanh toán {formatVND(getCartTotal())}
               </Button>
             </div>
           </div>

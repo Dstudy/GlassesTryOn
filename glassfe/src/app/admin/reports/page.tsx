@@ -19,6 +19,7 @@ import {
   BarChart3,
   PieChart,
 } from "lucide-react";
+import { formatVND } from "@/lib/utils";
 
 export default function AdminReportsPage() {
   const [selectedPeriod, setSelectedPeriod] = useState("30");
@@ -103,7 +104,7 @@ export default function AdminReportsPage() {
                         Tổng doanh thu
                       </p>
                       <p className="text-2xl font-bold">
-                        ${realData.sales.totalRevenue.toLocaleString()}
+                        {formatVND(realData.sales.totalRevenue)}
                       </p>
                     </div>
                   </div>
@@ -133,7 +134,7 @@ export default function AdminReportsPage() {
                         Giá trị đơn hàng TB
                       </p>
                       <p className="text-2xl font-bold">
-                        ${realData.sales.averageOrderValue}
+                        {formatVND(realData.sales.averageOrderValue)}
                       </p>
                     </div>
                   </div>
@@ -164,7 +165,7 @@ export default function AdminReportsPage() {
                       </div>
                       <div className="text-right">
                         <p className="font-medium">
-                          ${product.revenue.toLocaleString()}
+                          {formatVND(product.revenue)}
                         </p>
                       </div>
                     </div>
@@ -249,7 +250,7 @@ export default function AdminReportsPage() {
                       </div>
                       <div className="text-right">
                         <p className="font-medium">
-                          ${product.revenue.toLocaleString()}
+                          {formatVND(product.revenue)}
                         </p>
                       </div>
                     </div>

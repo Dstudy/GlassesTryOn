@@ -63,13 +63,35 @@ export default function ThreeViewer({ modelUrl }: Props) {
     mountRef.current.appendChild(renderer.domElement);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1;
+    renderer.toneMappingExposure = 2;
 
     /* Lights */
-    scene.add(new THREE.AmbientLight(0xffffff, 3));
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
-    dirLight.position.set(5, 5, 5);
-    scene.add(dirLight);
+    scene.add(new THREE.AmbientLight(0xffffff, 4));
+
+    // Hemisphere light for natural sky/ground gradient
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x8888aa, 3);
+    hemiLight.position.set(0, 20, 0);
+    scene.add(hemiLight);
+
+    // Key light (main front-top)
+    const keyLight = new THREE.DirectionalLight(0xffffff, 5);
+    keyLight.position.set(5, 8, 5);
+    scene.add(keyLight);
+
+    // Fill light (left side, softer)
+    const fillLight = new THREE.DirectionalLight(0xffffff, 3);
+    fillLight.position.set(-5, 3, 2);
+    scene.add(fillLight);
+
+    // Rim light (back highlight)
+    const rimLight = new THREE.DirectionalLight(0xffffff, 3);
+    rimLight.position.set(0, 5, -6);
+    scene.add(rimLight);
+
+    // Bottom fill to reduce harsh shadows
+    const bottomLight = new THREE.DirectionalLight(0xffffff, 2);
+    bottomLight.position.set(0, -5, 2);
+    scene.add(bottomLight);
 
     /* Controls (rotate only) */
     const controls = new (OrbitControls as any)(camera, renderer.domElement);

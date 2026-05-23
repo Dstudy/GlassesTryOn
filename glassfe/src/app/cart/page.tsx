@@ -21,6 +21,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { formatVND } from "@/lib/utils";
 
 export default function CartPage() {
   const { cart, updateQuantity, removeFromCart, getCartTotal, user } = useContext(AppContext);
@@ -115,7 +116,7 @@ export default function CartPage() {
                                 </p>
                               </div>
                               <p className="text-lg font-semibold text-white">
-                                ${item.product.price.toFixed(2)}
+                                {formatVND(item.product.price)}
                               </p>
                             </div>
 
@@ -151,7 +152,7 @@ export default function CartPage() {
                     <div className="space-y-4 text-sm text-muted-foreground">
                       <div className="flex justify-between">
                         <span>Tạm tính</span>
-                        <span className="text-white">${getCartTotal().toFixed(2)}</span>
+                        <span className="text-white">{formatVND(getCartTotal())}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Vận chuyển</span>
@@ -160,7 +161,7 @@ export default function CartPage() {
                       <Separator />
                       <div className="flex justify-between text-base font-semibold text-white">
                         <span>Tổng cộng</span>
-                        <span>${getCartTotal().toFixed(2)}</span>
+                        <span>{formatVND(getCartTotal())}</span>
                       </div>
                     </div>
                     <Button size="lg" className="mt-6 w-full" onClick={handleCheckoutClick} disabled={isLoading}>

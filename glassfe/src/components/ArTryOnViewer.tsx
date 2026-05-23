@@ -522,10 +522,27 @@ export default function ArTryOnViewer({ modelUrl, fitMetadata }: Props) {
       renderer.setClearColor(0x000000, 0);
       mount.appendChild(renderer.domElement);
 
-      scene.add(new THREE.AmbientLight(0xffffff, 1.8));
-      const dir = new THREE.DirectionalLight(0xffffff, 1.2);
-      dir.position.set(0, 0, 1);
-      scene.add(dir);
+      // Soft sky/ground fill
+      const hemi = new THREE.HemisphereLight(0xffffff, 0x8899aa, 0.8);
+      scene.add(hemi);
+
+      // Ambient fill to avoid pure-black shadows
+      scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+
+      // Key light — front-top-left
+      const key = new THREE.DirectionalLight(0xffffff, 1.4);
+      key.position.set(-1, 2, 2);
+      scene.add(key);
+
+      // Fill light — front-right, softer
+      const fill = new THREE.DirectionalLight(0xd0e8ff, 0.7);
+      fill.position.set(2, 0.5, 1.5);
+      scene.add(fill);
+
+      // Rim / back light for edge definition
+      const rim = new THREE.DirectionalLight(0xffffff, 0.5);
+      rim.position.set(0, -1, -2);
+      scene.add(rim);
 
       glassesAnchor = new THREE.Group();
       glassesAnchor.visible = false;
