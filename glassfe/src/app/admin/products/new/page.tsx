@@ -22,6 +22,8 @@ export default function AdminNewProductPage() {
     subtitle: "",
     price: "",
     description: "",
+    url3d: "",
+    tryOnUrl: "",
   });
   const [size, setSize] = useState("");
   const [brand_id, setBrandId] = useState("");
@@ -80,6 +82,8 @@ export default function AdminNewProductPage() {
         shape_id,
         material_id,
         features,
+        url3d: form.url3d || null,
+        tryOnUrl: form.tryOnUrl || null,
       };
       await productApi.adminCreateProduct(payload);
       setSuccess("Tạo sản phẩm thành công!");
@@ -169,6 +173,28 @@ export default function AdminNewProductPage() {
                 placeholder="Nhập mô tả sản phẩm"
                 rows={4}
               />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="url3d">URL 3D</Label>
+                <Input
+                  id="url3d"
+                  value={form.url3d}
+                  onChange={(e) => setForm({ ...form, url3d: e.target.value })}
+                  placeholder="https://..."
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="tryOnUrl">URL thử kính (Try-On)</Label>
+                <Input
+                  id="tryOnUrl"
+                  value={form.tryOnUrl}
+                  onChange={(e) =>
+                    setForm({ ...form, tryOnUrl: e.target.value })
+                  }
+                  placeholder="https://..."
+                />
+              </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">

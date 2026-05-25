@@ -414,3 +414,11 @@
   border-radius: 9999px;
 }
 
+#next-dev-overlay,
+next-portal,
+[data-nextjs-toast],
+[data-nextjs-dialog-overlay] {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}

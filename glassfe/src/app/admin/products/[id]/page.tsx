@@ -31,6 +31,8 @@ export default function AdminEditProductPage() {
     brand_id: "",
     shape_id: "",
     material_id: "",
+    url3d: "",
+    tryOnUrl: "",
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -73,6 +75,8 @@ export default function AdminEditProductPage() {
         brand_id: data?.Brand?.id ? String(data.Brand.id) : "",
         shape_id: data?.Shape?.id ? String(data.Shape.id) : "",
         material_id: data?.Material?.id ? String(data.Material.id) : "",
+        url3d: data?.url3d ?? "",
+        tryOnUrl: data?.tryOnUrl ?? "",
       });
 
     } catch {
@@ -97,6 +101,8 @@ export default function AdminEditProductPage() {
         brand_id: form.brand_id ? Number(form.brand_id) : null,
         shape_id: form.shape_id ? Number(form.shape_id) : null,
         material_id: form.material_id ? Number(form.material_id) : null,
+        url3d: form.url3d || null,
+        tryOnUrl: form.tryOnUrl || null,
       });
 
       setSuccess("Cap nhat san pham thanh cong.");
@@ -201,6 +207,31 @@ export default function AdminEditProductPage() {
                       placeholder="Nhập mô tả sản phẩm"
                       rows={4}
                     />
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div className="space-y-2">
+                      <Label htmlFor="url3d">URL 3D</Label>
+                      <Input
+                        id="url3d"
+                        value={form.url3d}
+                        onChange={(e) =>
+                          setForm({ ...form, url3d: e.target.value })
+                        }
+                        placeholder="https://..."
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="tryOnUrl">URL thử kính (Try-On)</Label>
+                      <Input
+                        id="tryOnUrl"
+                        value={form.tryOnUrl}
+                        onChange={(e) =>
+                          setForm({ ...form, tryOnUrl: e.target.value })
+                        }
+                        placeholder="https://..."
+                      />
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-3">

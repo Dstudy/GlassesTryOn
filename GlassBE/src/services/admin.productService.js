@@ -61,7 +61,13 @@ const getProductById = (id) => {
           },
         ],
       });
-      resolve(product);
+      if (product) {
+        const plain = product.toJSON();
+        plain.url3d = plain.url ?? null;
+        resolve(plain);
+      } else {
+        resolve(product);
+      }
     } catch (error) {
       reject(error);
     }
@@ -73,7 +79,8 @@ const createProduct = (productData) => {
     try {
       const t = await sequelize.transaction();
       try {
-        const { variations, features, ...productFields } = productData;
+        const { variations, features, url3d, ...productFields } = productData;
+        if (url3d !== undefined) productFields.url = url3d;
         const product = await db.Product.create(productFields, {
           transaction: t,
         });
@@ -149,7 +156,8 @@ const updateProduct = (id, updateData) => {
     try {
       const t = await sequelize.transaction();
       try {
-        const { variations, features, ...productFields } = updateData;
+        const { variations, features, url3d, ...productFields } = updateData;
+        if (url3d !== undefined) productFields.url = url3d;
         const [updatedRowsCount] = await db.Product.update(productFields, {
           where: { id },
           transaction: t,

@@ -29,8 +29,14 @@ module.exports = {
       const toPrice = (p) => {
         if (typeof p === "number") return p;
         if (!p) return 0;
-        const m = String(p).match(/([0-9]+(?:\.[0-9]+)?)/);
-        return m ? parseFloat(m[1]) : 0;
+
+        // 1. Remove all dots (thousands separators)
+        // 2. Remove any other non-numeric characters (like '₫' or spaces)
+        const cleanString = String(p)
+          .replace(/\./g, "")
+          .replace(/[^0-9]/g, "");
+
+        return cleanString ? parseInt(cleanString, 10) : 0;
       };
       const normalizeMaterial = (m) => {
         if (!m) return null;

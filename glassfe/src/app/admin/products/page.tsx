@@ -293,11 +293,13 @@ export default function AdminProductsPage() {
                         </td>
                         <td className="px-3 py-4 align-top">
                           <div className="inline-flex items-center gap-1 rounded-full border border-[#ff9b53]/20 bg-[rgba(255,155,83,0.08)] px-3 py-1 text-[#fff1e3]">
-                            <DollarSign className="h-3 w-3 text-[#ffb57a]" />
                             <span className="font-medium text-white">
                               {Number.isFinite(Number(product.price))
-                                ? Number(product.price).toFixed(2)
-                                : "0.00"}
+                                ? Number(product.price).toLocaleString("vi-VN")
+                                : "0"}
+                            </span>
+                            <span className="text-xs ml-0.5 text-[#ffb57a] font-medium">
+                              đ
                             </span>
                           </div>
                         </td>
@@ -321,12 +323,22 @@ export default function AdminProductsPage() {
                         </td>
                         <td className="px-3 py-4 align-top">
                           <div className="flex items-center justify-center gap-1">
-                            <Button asChild size="sm" variant="outline" className="h-9 w-9 px-0">
+                            <Button
+                              asChild
+                              size="sm"
+                              variant="outline"
+                              className="h-9 w-9 px-0"
+                            >
                               <Link href={`/shop/${product.id}`}>
                                 <Eye className="h-4 w-4" />
                               </Link>
                             </Button>
-                            <Button asChild size="sm" variant="outline" className="h-9 w-9 px-0">
+                            <Button
+                              asChild
+                              size="sm"
+                              variant="outline"
+                              className="h-9 w-9 px-0"
+                            >
                               <Link href={`/admin/products/${product.id}`}>
                                 <Pencil className="h-4 w-4" />
                               </Link>
