@@ -31,7 +31,7 @@ type CalibState = {
 };
 
 const defaultCalib: CalibState = {
-  offsetX: 0,
+  offsetX: 18,
   offsetY: 0,
   offsetZ: 0,
   neckRise: 15,
@@ -353,6 +353,7 @@ export default function NecklaceTryOnViewer({ modelUrl, fitMetadata }: Props) {
                 const neckR = Math.max(8, shoulderSpan * 0.13);
                 neckOccluder.position.lerpVectors(shoulderMid, earMid, 0.25);
                 neckOccluder.position.z -= 0.5 * neckH;
+                neckOccluder.position.x -= fx;
                 neckOccluder.scale.set(neckR, neckH, neckR);
                 neckQ.setFromUnitVectors(yAxis, upVec);
                 neckOccluder.quaternion.copy(neckQ);

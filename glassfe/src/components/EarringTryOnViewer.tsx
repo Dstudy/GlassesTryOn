@@ -345,8 +345,9 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
               faceBasisMat.makeBasis(eyeAxis, up, fwd.clone().negate());
               faceBaseQuaternion.setFromRotationMatrix(faceBasisMat);
 
-              const targetScale =
-                Math.max(0.15, earSpan * baseScaleByEarSpan) * scaleM;
+              // const targetScale =
+              //   Math.max(0.15, earSpan * baseScaleByEarSpan) * scaleM;
+              const targetScale = scaleM;
 
               lobL.z = clamp(lobL.z, -260, 190);
               lobR.z = clamp(lobR.z, -260, 190);
@@ -546,6 +547,7 @@ export default function EarringTryOnViewer({ modelUrl, fitMetadata }: Props) {
       const root = gltf.scene;
       const box = new THREE.Box3().setFromObject(root);
       const size = box.getSize(new THREE.Vector3());
+
       const center = box.getCenter(new THREE.Vector3());
       root.position.sub(center);
       const maxS = Math.max(size.x, size.y, size.z);

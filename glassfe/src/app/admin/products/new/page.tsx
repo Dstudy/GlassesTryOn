@@ -12,6 +12,11 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, Package, Plus } from "lucide-react";
 
+interface CategoryItem {
+  id: number | string;
+  name: string;
+}
+
 const ADMIN_NATIVE_SELECT_CLASS =
   "w-full rounded-lg border border-white/15 bg-black px-3 py-2 text-white";
 
@@ -29,9 +34,9 @@ export default function AdminNewProductPage() {
   const [brand_id, setBrandId] = useState("");
   const [shape_id, setShapeId] = useState("");
   const [material_id, setMaterialId] = useState("");
-  const [brands, setBrands] = useState<string[]>([]);
-  const [shapes, setShapes] = useState<string[]>([]);
-  const [materials, setMaterials] = useState<string[]>([]);
+  const [brands, setBrands] = useState<CategoryItem[]>([]);
+  const [shapes, setShapes] = useState<CategoryItem[]>([]);
+  const [materials, setMaterials] = useState<CategoryItem[]>([]);
   const [features, setFeatures] = useState<any[]>([]);
   const [availableFeatures, setAvailableFeatures] = useState<any[]>([]);
   const [saving, setSaving] = useState(false);
@@ -46,9 +51,11 @@ export default function AdminNewProductPage() {
           productApi.getShapes(),
           productApi.getMaterials(),
         ]);
-        setBrands(brandsList);
-        setShapes(shapesList);
-        setMaterials(materialsList);
+        setBrands(brandsList.map((name, index) => ({ id: index + 1, name })));
+        setShapes(shapesList.map((name, index) => ({ id: index + 1, name })));
+        setMaterials(
+          materialsList.map((name, index) => ({ id: index + 1, name })),
+        );
       } catch {
         // ignore load errors for now
       }
@@ -78,9 +85,9 @@ export default function AdminNewProductPage() {
         price: Number(form.price),
         description: form.description || null,
         size,
-        brand_id,
-        shape_id,
-        material_id,
+        brand_id: brand_id ? Number(brand_id) : null, // Chuyển string từ select thành số
+        shape_id: shape_id ? Number(shape_id) : null, // Chuyển string từ select thành số
+        material_id: material_id ? Number(material_id) : null, // Chuyển string từ select thành số
         features,
         url3d: form.url3d || null,
         tryOnUrl: form.tryOnUrl || null,
@@ -216,8 +223,8 @@ export default function AdminNewProductPage() {
                 >
                   <option value="">Chọn thương hiệu</option>
                   {brands.map((b) => (
-                    <option key={b} value={b}>
-                      {b}
+                    <option key={b.id} value={b.id}>
+                      {b.name}
                     </option>
                   ))}
                 </select>
@@ -232,8 +239,8 @@ export default function AdminNewProductPage() {
                 >
                   <option value="">Chọn dáng</option>
                   {shapes.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
+                    <option key={s.id} value={s.id}>
+                      {s.name}
                     </option>
                   ))}
                 </select>
@@ -248,8 +255,8 @@ export default function AdminNewProductPage() {
                 >
                   <option value="">Chọn chất liệu</option>
                   {materials.map((m) => (
-                    <option key={m} value={m}>
-                      {m}
+                    <option key={m.id} value={m.id}>
+                      {m.name}
                     </option>
                   ))}
                 </select>

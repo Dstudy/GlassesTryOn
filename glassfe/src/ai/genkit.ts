@@ -1,9 +1,8 @@
 import { genkit } from 'genkit';
-import { googleAI } from '@genkit-ai/googleai'; // Import the constant
+import { groq } from 'genkitx-groq'; // Notice the change here
 
 export const ai = genkit({
   plugins: [
-    googleAI({ apiKey: process.env.GEMINI_API_KEY }),
+    groq({ apiKey: process.env.GROQ_API_KEY })
   ],
-  model: 'googleai/gemini-2.0-flash',
 });
